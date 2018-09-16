@@ -26,16 +26,18 @@
 
     
     $is_submit="";
-    $data = "";$has_data = "";$ordery=0;
+    $data = "";$has_data = "";$sum=0;
+    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";
     if($day!="" && $typeid!="" && $day_time!="" && $time_type!=""){
         $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";
         for($i=0;$i<$day;$i++){
-            $sql = "select * from activity where  ac_timetype in($time_type) ";
+            $sql = "select ac_id,ac_hours,ac_name,(select name from activity_types where type_id = ac_type) as ac_type,
+            ac_weather,ac_drive,ac_carry,ac_spend from activity where  ac_timetype in($time_type) ";
         if(count($typeid)>0){
             $sql = $sql . "and ac_type in (";
-            foreach($typeid as $key => $id){
-                $sql = $sql . $id . ",";
-                $type_count = $type_count . $id . ",";
+            foreach($typeid as $key => $query_typeid){
+                $sql = $sql . $query_typeid . ",";
+                $type_count = $type_count . $query_typeid . ",";
             }
             $sql = substr($sql,0,-1) . ")";
         }
@@ -67,8 +69,6 @@
             $rand_count = array_rand($ac_id,1);  
             $hour=$day_time;$min_hour=3;$previous="";
             include("rand_acid.php");
-            $ordery = $ordery + 1;
-
             // $rand_active = array_rand($active_array['ac_id'],1);
 
             $has_data = "true";
@@ -119,6 +119,7 @@
     <input type="hidden" name="post_acspend" value="<?=$spend?>"/>
     <input type="hidden" name="post_achours" value="<?=$hours?>"/>
     <input type="hidden" name="post_acid" value="<?=$id?>"/>
+    <input type="hidden" name="post_pnorderby" value="<?=$orderby?>"/>
     <input type="hidden" name="is_query" value="<?=$is_submit?>" />
 </form>
 <script language="JavaScript">

@@ -15,6 +15,7 @@
         $spend = $spend . $ac_spend[$count] . ",";
         $hours = $hours . $ac_hours[$count] . ",";
         $id = $id . $ac_id[$count] . ",";
+        $orderby = $orderby . ((Int)$i+1) . ",";
 
         array_splice($ac_hours,$count,1);
         array_splice($ac_name,$count,1);

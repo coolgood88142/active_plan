@@ -130,6 +130,7 @@
     $us_name = "";
     $ad_acname = "";
     $ad_hours = "";
+    $ad_pnorderby = "";
 
     if(isset($_POST['us_id'])){
         $us_id = $_POST['us_id'];
@@ -147,6 +148,11 @@
     if(isset($_POST['ad_hours'])){
         $ad_hours = $_POST['ad_hours'];
         $ad_hours = explode(",", $ad_hours);
+    }
+
+    if(isset($_POST['ad_pnorderby'])){
+        $ad_pnorderby = $_POST['ad_pnorderby'];
+        $ad_pnorderby = explode(",", $ad_pnorderby);
     }
 
     $newplan = "";
@@ -186,6 +192,7 @@
             $acid = $ad_acid[$i];
             $acname = $ad_acname[$i];
             $achours = $ad_hours[$i];
+            $pn_orderby = $ad_pnorderby[$i];
 
             $sql = "SELECT * FROM plan_trip WHERE pt_name = '$plan_name' and pt_date = '$plan_date' and pt_usid = $pt_usid and pt_status = 1 ";
             $query = $conn->query($sql);
@@ -193,8 +200,8 @@
             $pt_id = $data['pt_id'];
 
             if($acid!="" && $acid!=null && $acname!="" && $acname!=null && $achours!="" && $achours!=null){
-                $sql = "INSERT INTO plan_acname (pn_ptid, pn_acid, pn_acname, pn_achours)
-                VALUES ($pt_id, $acid, '$acname', $achours)";
+                $sql = "INSERT INTO plan_acname (pn_ptid, pn_acid, pn_acname, pn_achours ,pn_orderby)
+                VALUES ($pt_id, $acid, '$acname', $achours, $pn_orderby)";
                 $conn->exec($sql);
             }
         }

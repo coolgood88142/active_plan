@@ -96,6 +96,13 @@
         $post_acid = explode(",", $post_acid);
     }
 
+    $post_pnorderby = "";
+    if(isset($_POST['post_pnorderby']) && $_POST['post_pnorderby']!=""){
+        $post_pnorderby =  $_POST['post_pnorderby'];
+        $post_pnorderby =substr($post_pnorderby,0,-1);
+        $post_pnorderby = explode(",", $post_pnorderby);
+    }
+
     $is_query = "";
     if(isset($_POST['is_query'])){
         $is_query =  $_POST['is_query'];    
@@ -176,6 +183,7 @@
         <table id="example1">
 	        <thead>
                 <tr>
+                <td bgcolor="#00FFFF">天數排序</td>
                     <td bgcolor="#00FFFF">活動項目</td>
                     <td bgcolor="#00FFFF">類型</td>
                     <td bgcolor="#00FFFF">天氣</td>
@@ -183,7 +191,7 @@
                     <td bgcolor="#00FFFF">攜帶物品</td>
                     <td bgcolor="#00FFFF">花費</td>
                     <td bgcolor="#00FFFF">時間(小時)</td>
-                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>                  
                 </tr>
 	        </thead>
 	        <tbody>
@@ -192,6 +200,9 @@
                         for($i=0 ; $i<$count ; $i++) {
                 ?>
                     <tr>
+                        <td class="pn_orderby">
+                            第<?php echo $post_pnorderby[$i]?>天
+                        </td>
                         <td class="ac_name">
                             <?php echo $post_acname[$i]?>
                         </td>
@@ -238,6 +249,7 @@
         <input type="hidden" name="ad_achours" />
         <input type="hidden" name="ad_hours" />
         <input type="hidden" name="ad_acid" />
+        <input type="hidden" name="ad_pnorderby" />
 
         <input type="hidden" name="plan_name" /> 
         <input type="hidden" name="plan_date" />
@@ -300,7 +312,7 @@
 
     function go_plan(){
         if($('#example1_wrapper').is(':visible')){
-            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="";
+            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="",ad_pnorderby="";
             var from = $("form[name='updateForm']");
             var row = $("#example1 .ac_id");
             if(row.length>0){
@@ -311,6 +323,7 @@
                 ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
                 ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
                 ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
+                ad_pnorderby = ad_pnorderby + obj.find(".pn_orderby").text().trim() + ",";
 
                 var spend = obj.find(".ac_spend").text().trim();
                 spend = parseInt(spend.substring(0, spend.length-1));
@@ -331,7 +344,7 @@
             ad_accarry = ad_accarry.substring(0, ad_accarry.length-1);
             ad_hours = ad_hours.substring(0, ad_hours.length-1);
             ad_acid = ad_acid.substring(0, ad_acid.length-1);
-            
+            ad_pnorderby = ad_pnorderby.substring(0, ad_pnorderby.length-1);
 
             $(from).find("input[name='ad_acname']").val(ad_acname);
             $(from).find("input[name='ad_typename']").val(ad_typename);
@@ -342,6 +355,7 @@
             $(from).find("input[name='ad_achours']").val(ad_achours);
             $(from).find("input[name='ad_hours']").val(ad_hours);
             $(from).find("input[name='ad_acid']").val(ad_acid);
+            $(from).find("input[name='ad_pnorderby']").val(ad_pnorderby);
 
 
             var plan_name = $("input[name='plan_name']").val().trim();
