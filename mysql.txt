@@ -1,0 +1,11 @@
+mysqli extension(improved)
+
+新增extension -> php.ini 寫套件名稱(.dll)
+
+PDO php data object 
+
+mysql資料庫連線
+新增資料庫、資料表
+CURD資料
+Transaction的應用
+將資料用array顯示出來
