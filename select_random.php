@@ -15,7 +15,7 @@
 
     $day_time = "";
     if(isset($_POST['day_time'])){
-        $day_time = $_POST['day_time'];
+        $day_time = $_POST['day_time'];  
     }
 
     $typeid = "";
@@ -45,31 +45,22 @@
         $query = $conn->query($sql);
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $ac_id=array();$ac_hours=array();$ac_name=array();$ac_type=array();$ac_weather=array();$ac_drive=array();$ac_carry=array();$ac_spend=array();
-        // $active_array = [];
-        // $active_field = ['ac_id','ac_hours'];
-        foreach($data as $key => $value){
-            // foreach ($active_field as $key2 => $value2) {
-            //      $active_array[$value2] = $value[$value2];
-            // }
-           
-            array_push($ac_id,$value['ac_id']);
-            array_push($ac_hours,$value['ac_hours']);
-            array_push($ac_name,$value['ac_name']);
-            array_push($ac_type,$value['ac_type']);
-            array_push($ac_weather,$value['ac_weather']);
-            array_push($ac_drive,$value['ac_drive']);
-            array_push($ac_carry,$value['ac_carry']);
-            array_push($ac_spend,$value['ac_spend']);
+        $active_array = [];
+        $active_field = ['ac_id','ac_hours','ac_name','ac_type','ac_weather','ac_drive','ac_carry','ac_spend'];
+        $field_count = 0;
+        foreach($data as $key => $value){        
+            foreach ($active_field as $field) {
+                 $active_array[$field][$field_count] = $value[$field];
+            }
+            $field_count++;
         }
 
         $hour = "";
         
-        if(count($ac_id)>0){
-            $rand_count = array_rand($ac_id,1);  
+        if(count($active_array['ac_id'])>0){
+            $rand_count = array_rand($active_array['ac_id'],1);  
             $hour=$day_time;$min_hour=3;$previous="";
             include("rand_acid.php");
-            // $rand_active = array_rand($active_array['ac_id'],1);
 
             $has_data = "true";
         }else{
@@ -93,7 +84,8 @@
         $query = $conn->query($sql);
         $time = $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    // array_splice($active_array,$count,1);
+    // echo var_dump($active_array['ac_name']);
 
 ?>
 <script src="jquery-3.3.1.js"></script>
