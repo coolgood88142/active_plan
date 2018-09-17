@@ -170,7 +170,7 @@
     }
 
     function show(page){
-      if($("input[name='admin']").val()=="Y" && page!="activity" && page!="sign_out"){
+      if($("input[name='admin']").val()=="Y" && page=="setting"){
             page = page + "_admin";
       }
       document.showForm.action=page+".php"; 
