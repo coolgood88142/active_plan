@@ -192,18 +192,7 @@
             $acid = $ad_acid[$i];
             $acname = $ad_acname[$i];
             $achours = $ad_hours[$i];
-            $pn_orderby = 1;
-            if($ad_pnorderby!=""){
-                $pn_orderby = $ad_pnorderby[$i];
-            }
-            
-            if($plan_name==""){
-                $plan_name = $pt_name;
-            }
-
-            if($plan_date==""){
-                $plan_date = $pt_date;
-            }
+            $pn_orderby = $ad_pnorderby[$i];
 
             $sql = "SELECT * FROM plan_trip WHERE pt_name = '$plan_name' and pt_date = '$plan_date' and pt_usid = $pt_usid and pt_status = 1 ";
             $query = $conn->query($sql);
@@ -218,5 +207,10 @@
         }
     }
 
-    echo '<meta http-equiv=REFRESH CONTENT=0;url=plan.php>';
+    $us_admin = $_SESSION['us_admin'];
+    if($us_admin=='Y'){
+        echo '<meta http-equiv=REFRESH CONTENT=0;url=plan_admin.php>';
+    }else{
+        echo '<meta http-equiv=REFRESH CONTENT=0;url=plan.php>';
+    }
 ?>

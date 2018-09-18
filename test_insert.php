@@ -60,12 +60,12 @@
     //      aw_updatedate TIMESTAMP
     //      )";
 
-    // $sql = "INSERT INTO activity_weather (aw_type, aw_name)
-    // VALUES (1, '晴天')
-    // ,(2, '陰天')
-    // ,(3, '雨天')
-    // ,(4, '不拘')
-    // ,(5, '晴天、陰天')";
+    $sql = "INSERT INTO activity_weather (aw_type, aw_name)
+    VALUES (1, '晴天')
+    ,(2, '陰天')
+    ,(3, '雨天')
+    ,(4, '不拘')
+    ,(5, '晴天、陰天')";
 
 
     $conn->exec($sql);
