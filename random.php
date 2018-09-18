@@ -125,6 +125,10 @@
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
         <input type="hidden" id="is_query" value="<?=$is_query?>"/>
+        <input type="hidden" id="post_day" value="<?=$post_day?>"/>
+        <input type="hidden" id="post_typeid" value="<?=$post_typeid?>"/>
+        <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
+        <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
         <div id="button"></div>
         <H2>隨機行程</H2>
         <br/><br/>
@@ -146,10 +150,9 @@
         </select>
         </p>
 
-        天數: <input type="text" name="day" value="<?=$post_day?>" size="2"/>天<br/><br/>
+        天數: <input type="text" name="day" value="" size="2"/>天<br/><br/>
 
         類型: 
-        <input type="hidden" name="type" value="<?=$post_typeid?>">
         <?php
             foreach($types as $key => $value){
                 $type_id = $value['type_id'];
@@ -161,11 +164,11 @@
         ?>
         <br/><br/>
 
-        天數小時:<input type="text" name="day_time" value="<?=$post_daytime?>" size="2">小時<br/><br/>
+        天數小時:<input type="text" name="day_time" value="" size="2"/>小時<br/><br/>
 
         <p class="time">時段選項:
-            <input type="hidden" name="time" value="<?=$post_timetype?>">
             <select name="time_type">
+            <option value="*">全部</option>
         <?php
             foreach($time as $key => $value){
                 $ty_type = $value['ty_type'];
@@ -282,7 +285,12 @@
             $(".userlist").show();
         }
 
-        var post_typeid = $("input[name='type']").val();
+        var post_day = $("#post_day").val();
+        var post_daytime = $("#post_daytime").val();
+        $("input[name='day']").val(post_day);
+        $("input[name='day_time']").val(post_daytime);
+
+        var post_typeid = $("#post_typeid").val();
         post_typeid = post_typeid.split(",");
         for(var i=0;i<post_typeid.length;i++){
             $("input[name='typeid[]']").each(function() {
@@ -292,22 +300,57 @@
             });
         }
 
-        var time = $("input[name='time']").val();
-        $("select[name='time_type'] option[value="+ time +"]").attr("selected",true);
-        if(time<8){
+        var post_timetype = $("#post_timetype").val();
+        $("select[name='time_type'] option[value="+ post_timetype +"]").attr("selected",true);
+        if(parseInt(post_daytime)<8){
             $(".time").show();
         }else{
             $(".time").hide();
         }
     } );
 
-    $("input[name='day_time']").on('keyup', function() {
-        var time = parseInt($(this).val());
-        if(time<8){
+    $("input[name='day']").on('keyup', function() {
+        if(this.value == "0"){
+            this.value = "";
+            alert("請天數輸入0以上!");
+        }
+        if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+            alert("請天數輸入數字!");
+        }
+    });
+
+     $("input[name='day_time']").on('keyup', function() {
+        if(this.value == "0"){
+            this.value = "";
+            alert("請天數小時輸入0以上!");
+        }
+        if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+            alert("請天數小時輸入數字!");
+        }
+
+        var day = $("input[name='day']").val();
+        var day_time = parseInt(this.value);
+        var max_dayhours = 0;
+
+        if(day>0){
+            for(var i=0; i<day; i++){
+            max_dayhours = max_dayhours + 24;
+            }
+
+            if(day_time>max_dayhours){
+                this.value = "";
+                alert("請輸入天數適當的小時!");
+            }
+        }
+
+        if(day_time<8){
             $(".time").show();
         }else{
             $(".time").hide();
         }
+
     });
 
     function go_plan(){
@@ -323,7 +366,10 @@
                 ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
                 ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
                 ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
-                ad_pnorderby = ad_pnorderby + obj.find(".pn_orderby").text().trim() + ",";
+
+                var pnorderby = obj.find(".pn_orderby").text().trim();
+                pnorderby = pnorderby.substring(1, pnorderby.length-1);
+                ad_pnorderby = ad_pnorderby + pnorderby + ",";
 
                 var spend = obj.find(".ac_spend").text().trim();
                 spend = parseInt(spend.substring(0, spend.length-1));
@@ -368,6 +414,27 @@
             }else if(!plan_date.match("^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02/(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$")){
                 return alert("出發日期格式錯誤!");
             }
+
+            var day = $("input[name='day']").val().trim();
+            var day_time = $("input[name='day_time']").val().trim();
+            var max_dayhours = 0;
+
+            if(day>0){
+                for(var i=0; i<day; i++){
+                    max_dayhours = max_dayhours + 24;
+                }
+
+                if(day_time>max_dayhours){
+                    this.value = "";
+                    alert("請輸入天數適當的小時!");
+                }
+            }
+
+            if(day_time<8){
+                $(".time").show();
+            }else{
+                $(".time").hide();
+            }
             
             $(from).find("input[name='plan_name']").val(plan_name);
             $(from).find("input[name='plan_date']").val(plan_date); 
@@ -394,7 +461,7 @@
     }
 
     function show(page){
-        if($("input[name='admin']").val()=="Y" && page!="activity" && page!="sign_out"){
+        if($("input[name='admin']").val()=="Y" && page=="setting"){
             page = page + "_admin";
         }
         document.showForm.action=page+".php"; 
@@ -404,4 +471,3 @@
    
   </script>
 </html>
-
