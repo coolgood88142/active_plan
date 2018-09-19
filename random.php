@@ -301,7 +301,7 @@
         }
 
         var post_timetype = $("#post_timetype").val();
-        $("select[name='time_type'] option[value="+ post_timetype +"]").attr("selected",true);
+        $("select[name='time_type']").find("option[value='"+ post_timetype +"']").attr("selected",true);
         if(parseInt(post_daytime)<8){
             $(".time").show();
         }else{
