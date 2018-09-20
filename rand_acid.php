@@ -35,7 +35,7 @@
             $rand_count = array_rand($active_array['ac_id'],1);
             
             if($active_array['ac_hours'][$rand_count]>$previous || $active_array['ac_hours'][$rand_count]==$previous){
-                $hour = (int)$hour + 1;              
+                $hour = (int)$hour + 2;              
                 return;
             }
         }
