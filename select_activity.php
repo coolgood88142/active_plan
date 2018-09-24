@@ -60,4 +60,9 @@
         $time_array['time_count'][$field_count] = $activity_time['time_count'];
         $field_count++;
     }
+
+    // $ss =  json_encode($time_array);
+
+    // print_r ($time_array["time_name"]);
+    // var_dump($ss["time_name"]);
 ?>

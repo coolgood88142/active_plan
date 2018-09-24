@@ -63,7 +63,6 @@
     }
 
     function acivity_name(){
-      $("#ac_name").show();
       $("#ac_type").hide();
       $("#ty_type").hide();
       var text = $("#activity_text").val();
@@ -88,7 +87,7 @@
         series: [{
           type: 'wordcloud',
           data: data,
-          name: 'Occurrences'
+          name: '數量'
         }],
         title: {
           text: '活動項目統計表'
@@ -160,6 +159,8 @@
     }
 
     function time_type(){
+      var time_array = <?php echo json_encode($time_array); ?>;
+      console.log(time_array);
       $("#ac_name").hide();
       $("#ac_type").hide();
       $("#ty_type").show();
