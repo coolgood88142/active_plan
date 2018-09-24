@@ -49,7 +49,7 @@
         $sql = "INSERT INTO user (us_account, us_password, us_name, us_gender, us_admin, us_status, us_email, us_last_login)
         VALUES ('$us_account', '$us_password', '$us_name', '$us_gender', 'N', $us_status, '$us_email', '$datetime')";
         $conn->exec($sql);
-    }else if(isset($_POST['add_activitys'])){
+    }else if(isset($_POST['add_activitys']) && $_POST['add_activitys']=='Y'){
         $add_acname = $_POST['add_acname'];
         $add_actype = $_POST['add_actype'];
         $add_acweather = $_POST['add_acweather'];
@@ -61,8 +61,19 @@
         $sql = "INSERT INTO activity (ac_type, ac_name, ac_weather, ac_drive, ac_carry, ac_spend, ac_hours)
         VALUES ($add_actype, '$add_acname', '$add_acweather', $add_acdrive, '$add_accarry', $add_acspend, $add_achours)";
         $conn->exec($sql);
-    }
+    }else if(isset($_POST['add_timetypes']) && $_POST['add_timetypes']=='Y'){
+        $add_typename = $_POST['add_typename'];
+        
+        $sql = "select count(id) as id_count activity_types ";
+        $query = $conn->query($sql);
+        $count = $query->fetch(PDO::FETCH_ASSOC);
+        $id_count = $count['id_count'];
 
+        $sql = "INSERT INTO activity_types (type_id, name)
+        VALUES ($id_count, $add_typename)";
+        $conn->exec($sql);
+    
+    }
 
     $conn=null;
 ?>

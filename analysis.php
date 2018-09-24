@@ -159,12 +159,11 @@
     }
 
     function time_type(){
-      var time_array = <?php echo json_encode($time_array); ?>;
-      console.log(time_array);
       $("#ac_name").hide();
       $("#ac_type").hide();
       $("#ty_type").show();
       Highcharts.chart('ty_type', {
+       
   chart: {
     type: 'pie',
     options3d: {
@@ -194,22 +193,27 @@
     type: 'pie',
     name: 'Browser share',
     data: [
-      ['Firefox', 45.0],
-      ['IE', 26.8],
-      {
-        name: 'Chrome',
-        y: 12.8,
-        sliced: true,
-        selected: true
-      },
-      ['Safari', 8.5],
-      ['Opera', 6.2],
-      ['Others', 0.7]
+      <?php 
+          $count = count($time_array['time_name']);
+          for($i=0;$i<$count;$i++){
+        ?>
+          ['<?=$time_array['time_name'][$i]?>', <?=$time_array['time_count'][$i]?>],
+      <?php
+            
+          }
+        ?>
     ]
   }]
 });
     }
 
+    function data_array(time_array){
+      var data="";
+      for(var i=0;i<time_array['time_name'].length;i++){
+        data = data + ["'"+time_array['time_name'][i]+"','"+time_array['time_count'][i]+"'"]+",";
+      }
+      return data.substring(0,data.length-1);
+    }
 
     function show(page){
         if($("input[name='admin']").val()=="Y" && page=="setting"){

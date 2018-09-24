@@ -23,6 +23,7 @@
         <H2>活動列表</H2>
         <br/><br/>
         <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
+        <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
         <table id="example">
 	<thead>
         <tr>
@@ -135,10 +136,15 @@
         </select>小時
         <br/><br/>
     </p>
+    <input type="button" style="display:none;" name="backtype" value="回上一頁" onClick="back_timetype()"/>
+    <p class="timetypes" style="display:none;">活動類型:
+          <input type="text" name="add_typename" value="" ><br/><br/>
+    </p>
     <input type="hidden" name="add_acid" value=""/>
     <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
     <input type="button" style="display:none;" name="upactivity" value="送出" onClick="update()" />
-    <input type="hidden" name="add_activitys"/>
+    <input type="hidden" name="add_activitys" />
+    <input type="hidden" name="add_timetypes" />
     </form>  
   </body>
   <script language="JavaScript">
@@ -147,6 +153,7 @@
         $('#example').DataTable();
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
+            $("input[name='add_type']").show();
         }
     } );
 
@@ -185,6 +192,7 @@
     function add_activity(){
         $('#example_wrapper').hide()
         $("input[name='add']").hide();
+        $("input[name='add_type']").hide();
         $("input[name='backpage']").show();
         $(".activity").show();
         $(".type").show();
@@ -199,7 +207,9 @@
     function back_activity(){
         $('#example_wrapper').show()
         $("input[name='add']").show();
+        $("input[name='add_type']").show();
         $("input[name='backpage']").hide();
+        $("input[name='backtype']").hide();
         $(".activity").hide();
         $(".type").hide();
         $(".weather").hide();
@@ -211,17 +221,48 @@
         $("input[name='upactivity']").hide();
     }
 
+    function add_timetype(){
+        $('#example_wrapper').hide()
+        $("input[name='add']").hide();
+        $("input[name='add_type']").hide();
+        $("input[name='backtype']").show();
+        $(".timetypes").show();
+        $("input[name='add_typename']").show();
+        $("input[name='addactivity']").show();
+    }
+
+    function back_timetype(){
+        $('#example_wrapper').show()
+        $("input[name='add']").show();
+        $("input[name='add_type']").show();
+        $("input[name='backpage']").hide();
+        $("input[name='backtype']").hide();
+        $(".timetypes").hide();
+        $("input[name='addactivity']").hide();
+        $("input[name='upactivity']").hide();
+    }
+
     function insert(){
         var add_acname = $("input[name='add_acname']").val();
         var carry = $("input[name='carry']").val();
+        var add_typename = $("input[name='add_typename']").val();
 
-        if(add_acname==""){
-            return alert("請輸入活動項目!");
-        }
+        if($(".activity").is(":visible")){
+            if(add_acname==""){
+                return alert("請輸入活動項目!");
+            }
 
-        if(carry==""){
-            return alert("請輸入攜帶物品!");
+            if(carry==""){
+                return alert("請輸入攜帶物品!");
+            }
+            $("input[name='add_activitys']").val('Y');
+        }else if($(".timetypes").is(":visible")){
+            if(add_typename==""){
+                return alert("請輸入活動類型!");
+            }
+            $("input[name='add_timetypes']").val('Y');
         }
+       
 
         document.showForm.action="insert.php"; 
         document.showForm.submit();
