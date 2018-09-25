@@ -24,20 +24,50 @@
         $typeid = $_POST['typeid'];
     }
 
+    $istime_type = "";
+    if(isset($_POST['istime_type'])){
+        $istime_type = $_POST['istime_type'];
+    }
     
     $is_submit="";
     $data = "";$has_data = "";$sum=0;
-    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";
+    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";$time_sql="";
     if($day!="" && $typeid!="" && $day_time!="" && $time_type!=""){
+        if($istime_type=='Y' && $time_type!="*"){
+            $sql = "select MAX(ac_hours) as max_hours from activity where ac_timetype like '%$time_type%'";
+            $query = $conn->query($sql);
+            $achours = $query->fetch(PDO::FETCH_ASSOC);
+            $max = $achours['max_hours'];
+
+            $count=0;$a=$max;
+            for($i=0;$i<$a;$i++){
+                $time_sql = $time_sql . ++$count . ","; 
+                if($i==$a-1){
+                    $time_sql = substr($time_sql,0,-1);
+                }
+        
+            }
+            $time_sql = $time_sql . "','" . $time_type; 
+            if($time_type!=$max){
+                $time = $time_type+1;
+                $time_sql = $time_sql . "','" . $time; 
+            }
+        }     
+
         $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";
         for($i=0;$i<$day;$i++){
             $sql = "select ac_id,ac_hours,ac_name,(select name from activity_types where type_id = ac_type) as ac_type,
             ac_weather,ac_drive,ac_carry,ac_spend from activity where ";
-        if($time_type!="*"){
-            $sql = $sql . " ac_timetype like '%$time_type%' ";
+        if($time_sql==""){
+            if($time_type!="*"){
+                $sql = $sql . " ac_timetype like '%$time_type%' ";
+            }else{
+                $sql = $sql . " ac_timetype !='' ";
+            }
         }else{
-            $sql = $sql . " ac_timetype !='' ";
+            $sql = $sql . " ac_timetype in ('" . $time_sql . "')";
         }
+        
         if(count($typeid)>0){
             $sql = $sql . " and ac_type in (";
             foreach($typeid as $key => $query_typeid){

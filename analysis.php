@@ -123,23 +123,32 @@
             label: {
               connectorAllowed: false
             },
-            enableMouseTracking:false
+            pointStart: 0
           }
         },
 
-        series: [{
-          name: 'Installation',
-          data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-        }, {
-          name: 'Manufacturing',
-          data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-        }, {
-          name: 'Sales & Distribution',
-          data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-        }, {
-          name: 'Project Development',
-          data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-        }],
+        series: [
+          <?php 
+            $namecount = count($name_array);
+            
+            for($i=0;$i<$namecount;$i++){
+          ?>
+            { name: '<?=$name_array[$i]?>',
+              data: [
+              <?php 
+                $monthcount = count($month_array[$name_array[$i]]);
+                for($j=0;$j<$monthcount;$j++){
+              ?>
+                <?=$month_array[$name_array[$i]][$j]?>,
+              <?php
+                }
+              ?>
+              ]
+            },
+          <?php
+            }
+          ?>
+        ],
 
         responsive: {
           rules: [{

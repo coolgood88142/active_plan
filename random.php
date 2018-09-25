@@ -165,6 +165,7 @@
         <br/><br/>
 
         天數小時:<input type="text" name="day_time" value="" size="2"/>小時<br/><br/>
+        <input type="hidden" name="istime_type" value="" size="2"/>
 
         <p class="time">時段選項:
             <select name="time_type">
@@ -304,6 +305,7 @@
         $("select[name='time_type']").find("option[value='"+ post_timetype +"']").attr("selected",true);
         if(parseInt(post_daytime)<8){
             $(".time").show();
+            $("input[name='istime_type']").val('Y');
         }else{
             $(".time").hide();
         }
@@ -347,6 +349,7 @@
 
         if(day_time<8){
             $(".time").show();
+            $("input[name='istime_type']").val('Y');
         }else{
             $(".time").hide();
         }
@@ -432,6 +435,7 @@
 
             if(day_time<8){
                 $(".time").show();
+                $("input[name='istime_type']").val('Y');
             }else{
                 $(".time").hide();
             }

@@ -21,25 +21,46 @@
 
     // $type_array=[$month1,$month2,$month3,$month4,$month5,$month6,$month7,$month8,$month9,$month10,$month11,$month12];
     if(isset($today_year)){
-        $month_array=['01','02','03','04','05','06','07','08','09','10','11','12'];
-        $month1="";$month2="";
-        $month_count=count($month_array);
+        $sql = "SELECT name FROM activity_types";
+        $query = $conn->query($sql);
+        $name = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $name_array=[];$count=0;
+        foreach($name as $key => $value){
+            $name_array[$count] = $value['name'];
+            $count++;
+        }
+
+        $month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+        $month_array=[];
+        $month_count = count($month);
         for($i=0;$i<$month_count;$i++){
-            $year_month_01 = $today_year . "-". $month_array[$i] . "-01";
-            $year_month_31 = $today_year . "-". $month_array[$i] . "-31";
+            $year_month_01 = $today_year . "-". $month[$i] . "-01";
+            $year_month_31 = $today_year . "-". $month[$i] . "-31";
 
             $sql = "SELECT name,(select count(ac_type) from plan_acname,activity,plan_trip where pn_acid = ac_id and ac_type = type_id and pn_ptid = pt_id 
                 and pt_date BETWEEN '$year_month_01' AND '$year_month_31') as count FROM activity_types order by type_id";
             $query = $conn->query($sql);
             $type_count = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            // $month.$i['name'][$i]=$type_count['name'];
-            // $month.$i['count'][$i]=$type_count['count'];
+            
+            $name_count = count($name_array);
+            for($j=0;$j<$name_count;$j++){
+                foreach($type_count as $key => $type){
+                    if($name_array[$j]==$type['name']){
+                        $type_name = $type['name'];
+                        $month_typecount = $type['count'];
+                        $month_array[$type_name][$i] = $type['count'];
+                        break;
+                    }
+                }
+                
+            }
         }
         
     }
 
-    // echo var_dump($type_array);
+    // echo var_dump($month_array);
 
 
     $sql = "SELECT * FROM time_types ";
