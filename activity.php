@@ -21,79 +21,123 @@
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
         <H2>活動列表</H2>
-        <br/><br/>
-        <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
+        <br/><br/>      
+        <input type="button" style="display:none;" name="show_addtype" value="顯示活動類型" onClick="show_timetype()"/>
+        <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>    
+        <input type="button" style="display:none;" name="show_add" value="顯示活動項目" onClick="show_activity()"/>
         <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
-        <table id="example">
-	<thead>
-        <tr>
-            <td bgcolor="#00FFFF">活動項目</td>
-            <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
-            <td bgcolor="#00FFFF">類型</td>
-            <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
-            <td bgcolor="#00FFFF">天氣</td>
-            <td bgcolor="#00FFFF">車程(小時)</td>
-            <td bgcolor="#00FFFF">攜帶物品</td>
-            <td bgcolor="#00FFFF">花費</td>
-            <td bgcolor="#00FFFF">時間(小時)</td>
-            <?php
-                if($us_admin=='Y'){                
-            ?>
-                <td bgcolor="#00FFFF">編輯設定</td>
-            <?php
-                }
-            ?>
-        </tr>
-	</thead>
-	<tbody>
-        <?php
-            foreach ($active as $key => $value) {
-        ?>
-         <tr>
-            <td class="ac_name">
-                    <?php echo $value["ac_name"]?>
-            </td>
-            <td class="ac_id" style="display:none;">
-                    <?php echo $value["ac_id"]?>
-            </td>
-            <td class="type_name">
-                    <?php echo $value["type_name"]?>
-            </td>
-            <td class="ac_type" style="display:none;">
-                    <?php echo $value["ac_type"]?>
-            </td>
-            <td class="ac_weather">
-                    <?php echo $value["ac_weather"]?>
-            </td>
-            <td class="ac_drive">
-                    <?php echo $value["ac_drive"]?>
-            </td>
-            <td class="ac_carry">
-                    <?php echo $value["ac_carry"]?>
-            </td>
-            <td class="ac_spend">
-                    <?php echo $value["ac_spend"]?>元
-            </td>
-            <td class="ac_hours">
-                    <?php echo $value["ac_hours"]?>
-            </td>
-            <?php
-                if($us_admin=='Y'){                
-            ?>
-            <td class="ac_edit">
-                <input type="button" value="編輯項目" onClick="edit(this)"/>
-            </td>
-            <?php
-                }
-            ?>
-        </tr>
-        <?php 
-            }
-        ?>
-	</tbody>
-  <tfoot>
-  </tfoot>
-</table>
+        <table id="example1">
+	        <thead>
+                <tr>
+                    <td bgcolor="#00FFFF">活動項目</td>
+                    <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
+                    <td bgcolor="#00FFFF">類型</td>
+                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+                    <td bgcolor="#00FFFF">天氣</td>
+                    <td bgcolor="#00FFFF">車程(小時)</td>
+                    <td bgcolor="#00FFFF">攜帶物品</td>
+                    <td bgcolor="#00FFFF">花費</td>
+                    <td bgcolor="#00FFFF">時間(小時)</td>
+                    <?php
+                        if($us_admin=='Y'){                
+                    ?>
+                        <td bgcolor="#00FFFF">編輯設定</td>
+                    <?php
+                        }
+                    ?>
+                </tr>
+	        </thead>
+	        <tbody>
+                <?php
+                    foreach ($active as $key => $value) {
+                ?>
+                <tr>
+                    <td class="ac_name">
+                        <?php echo $value["ac_name"]?>
+                    </td>
+                    <td class="ac_id" style="display:none;">
+                        <?php echo $value["ac_id"]?>
+                    </td>
+                    <td class="type_name">
+                        <?php echo $value["type_name"]?>
+                    </td>
+                    <td class="ac_type" style="display:none;">
+                        <?php echo $value["ac_type"]?>
+                    </td>
+                    <td class="ac_weather">
+                        <?php echo $value["ac_weather"]?>
+                    </td>
+                    <td class="ac_drive">
+                        <?php echo $value["ac_drive"]?>
+                    </td>
+                    <td class="ac_carry">
+                        <?php echo $value["ac_carry"]?>
+                    </td>
+                    <td class="ac_spend">
+                        <?php echo $value["ac_spend"]?>元
+                    </td>
+                    <td class="ac_hours">
+                        <?php echo $value["ac_hours"]?>
+                    </td>
+                    <?php
+                        if($us_admin=='Y'){                
+                    ?>
+                        <td class="ac_edit">
+                            <input type="button" value="編輯項目" onClick="edit(this)"/>
+                        </td>
+                    <?php
+                        }
+                    ?>
+                </tr>
+                <?php 
+                    }
+                ?>
+	        </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <table id="example2">
+	        <thead>
+                <tr>
+                    <td bgcolor="#00FFFF">序號</td>
+                    <td bgcolor="#00FFFF">活動類型</td>
+                    <?php
+                        if($us_admin=='Y'){                
+                    ?>
+                        <td bgcolor="#00FFFF">編輯設定</td>
+                    <?php
+                        }
+                    ?>
+                </tr>
+	        </thead>
+	        <tbody>
+                <?php
+                    foreach ($active_type as $key => $type) {
+                ?>
+                <tr>
+                    <td class="type_id" >
+                        <?php echo $type["type_id"]?>
+                    </td>
+                    <td class="name" >
+                        <?php echo $type["name"]?>
+                    </td>
+                    <?php
+                        if($us_admin=='Y'){                
+                    ?>
+                        <td class="type_edit">
+                            <input type="button" value="編輯類型" onClick="edit(this)"/>
+                        </td>
+                    <?php
+                        }
+                    ?>
+                </tr>
+                <?php 
+                    }
+                ?>
+	        </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
     <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
     <p class="activity" style="display:none;">活動項目:
           <input type="text" name="add_acname" value="" ><br/><br/>
@@ -136,26 +180,73 @@
         </select>小時
         <br/><br/>
     </p>
+    <p class="timetype" style="display:none;">時段:
+    <?php
+        foreach ($active_type as $key => $type) {
+        $type_id = $type['type_id'];
+        $name = $type['name'];
+    ?>
+        <input type="checkbox" name="typeid[]" value="<?=$type_id?>"><?php echo $name ?></input>
+    <?php
+        }
+    ?>
+        <br/><br/>
+    </p>
     <input type="button" style="display:none;" name="backtype" value="回上一頁" onClick="back_timetype()"/>
     <p class="timetypes" style="display:none;">活動類型:
           <input type="text" name="add_typename" value="" ><br/><br/>
+          <input type="hidden" name="add_typeid" value="" >
     </p>
     <input type="hidden" name="add_acid" value=""/>
     <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-    <input type="button" style="display:none;" name="upactivity" value="送出" onClick="update()" />
+    <input type="button" style="display:none;" name="up_submit" value="送出" onClick="update()" />
     <input type="hidden" name="add_activitys" />
     <input type="hidden" name="add_timetypes" />
+    <input type="hidden" name="up_activitys" />
+    <input type="hidden" name="up_timetypes" />
     </form>  
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        $('#example').DataTable();
+        $('#example1').DataTable();
+        $('#example2').DataTable();
+        $('#example2_wrapper').hide();
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
-            $("input[name='add_type']").show();
+            $("input[name='show_addtype']").show();
+        }else{
+            $("input[name='show_addtype']").show();
         }
     } );
+
+    function show_timetype(){
+        $('#example1_wrapper').hide();
+        $('#example2_wrapper').show();
+        $("input[name='add']").hide();
+        $("input[name='show_addtype']").hide();   
+        $("input[name='show_add']").show();
+
+        if($("input[name='admin']").val()=="Y"){
+            $("input[name='add_type']").show();
+        }else{
+            $("input[name='add_type']").hide();
+        }
+    }
+
+    function show_activity(){
+        $('#example1_wrapper').show();
+        $('#example2_wrapper').hide();
+        $("input[name='show_addtype']").show();
+        $("input[name='add_type']").hide();
+        $("input[name='show_add']").hide();
+
+        if($("input[name='admin']").val()=="Y"){
+            $("input[name='add']").show();
+        }else{
+            $("input[name='add']").hide();
+        }
+    }
 
     function show(page){
         if($("input[name='admin']").val()=="Y" && page=="setting"){
@@ -167,7 +258,7 @@
 
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
-        var trs=$("table#example tr");
+        var trs=$("table#example1 tr");
         $("input[name='add']:checked").each(function(){
             var obj = $(this).closest("tr");
             objName = objName + obj.find(".ac_name").text().trim() + ",";
@@ -190,9 +281,11 @@
     }
 
     function add_activity(){
-        $('#example_wrapper').hide()
+        $('#example1_wrapper').hide()
         $("input[name='add']").hide();
+        $("input[name='show_addtype']").hide();
         $("input[name='add_type']").hide();
+        $("input[name='show_add']").hide();
         $("input[name='backpage']").show();
         $(".activity").show();
         $(".type").show();
@@ -201,13 +294,14 @@
         $(".carry").show();
         $(".spend").show();
         $(".hours").show();
+        $(".timetype").show();
         $("input[name='addactivity']").show();
     }
 
     function back_activity(){
-        $('#example_wrapper').show()
+        $('#example1_wrapper').show()
         $("input[name='add']").show();
-        $("input[name='add_type']").show();
+        $("input[name='show_addtype']").show();
         $("input[name='backpage']").hide();
         $("input[name='backtype']").hide();
         $(".activity").hide();
@@ -217,14 +311,17 @@
         $(".carry").hide();
         $(".spend").hide();
         $(".hours").hide();
+        $(".timetype").hide();
         $("input[name='addactivity']").hide();
-        $("input[name='upactivity']").hide();
+        $("input[name='up_submit']").hide();
     }
 
     function add_timetype(){
-        $('#example_wrapper').hide()
+        $('#example2_wrapper').hide()
         $("input[name='add']").hide();
+        $("input[name='show_addtype']").hide();
         $("input[name='add_type']").hide();
+        $("input[name='show_add']").hide();
         $("input[name='backtype']").show();
         $(".timetypes").show();
         $("input[name='add_typename']").show();
@@ -232,14 +329,14 @@
     }
 
     function back_timetype(){
-        $('#example_wrapper').show()
-        $("input[name='add']").show();
+        $('#example2_wrapper').show()
         $("input[name='add_type']").show();
+        $("input[name='show_add']").show();
         $("input[name='backpage']").hide();
         $("input[name='backtype']").hide();
         $(".timetypes").hide();
         $("input[name='addactivity']").hide();
-        $("input[name='upactivity']").hide();
+        $("input[name='up_submit']").hide();
     }
 
     function insert(){
@@ -255,6 +352,12 @@
             if(carry==""){
                 return alert("請輸入攜帶物品!");
             }
+
+            var istype_id = $("input[name='typeid[]']").is(":checked");
+            if(istype_id==false){
+                return alert("請至少勾選一項時段!");
+            }
+
             $("input[name='add_activitys']").val('Y');
         }else if($(".timetypes").is(":visible")){
             if(add_typename==""){
@@ -269,42 +372,74 @@
     }
 
     function edit(obj){
-        var tr = $(obj).closest('tr');
-        var ac_id = $(tr).find(".ac_id").text().trim();
-        var ac_name = $(tr).find(".ac_name").text().trim();
-        var ac_type = $(tr).find(".ac_type").text().trim();  
-        var ac_weather = $(tr).find(".ac_weather").text().trim();
-        var ac_drive = $(tr).find(".ac_drive").text().trim();
-        var ac_carry = $(tr).find(".ac_carry").text().trim();
-        var ac_spend = $(tr).find(".ac_spend").text().trim();
-        ac_spend = ac_spend.substring(0, ac_spend.length-1);
-        var ac_hours = $(tr).find(".ac_hours").text().trim();
-        
-        $("input[name='add_acid']").val(ac_id);
-        $("input[name='add_acname']").val(ac_name);
-        $("select[name='add_actype'] option[value="+ac_type+"]").attr("selected",true); 
-        $("select[name='add_acweather'] option[value="+ac_weather+"]").attr("selected",true); 
-        $("select[name='add_acdrive'] option[value="+ac_drive+"]").attr("selected",true); 
-        $("input[name='add_accarry']").val(ac_carry);
-        $("input[name='add_acspend']").val(ac_spend);
-        $("select[name='add_achours'] option[value="+ac_hours+"]").attr("selected",true); 
+        if($('#example1_wrapper').is(':visible')){
+            var tr = $(obj).closest('tr');
+            var ac_id = $(tr).find(".ac_id").text().trim();
+            var ac_name = $(tr).find(".ac_name").text().trim();
+            var ac_type = $(tr).find(".ac_type").text().trim();  
+            var ac_weather = $(tr).find(".ac_weather").text().trim();
+            var ac_drive = $(tr).find(".ac_drive").text().trim();
+            var ac_carry = $(tr).find(".ac_carry").text().trim();
+            var ac_spend = $(tr).find(".ac_spend").text().trim();
+            ac_spend = ac_spend.substring(0, ac_spend.length-1);
+            var ac_hours = $(tr).find(".ac_hours").text().trim();
+            
+            $("input[name='add_acid']").val(ac_id);
+            $("input[name='add_acname']").val(ac_name);
+            $("select[name='add_actype'] option[value="+ac_type+"]").attr("selected",true); 
+            $("select[name='add_acweather'] option[value="+ac_weather+"]").attr("selected",true); 
+            $("select[name='add_acdrive'] option[value="+ac_drive+"]").attr("selected",true); 
+            $("input[name='add_accarry']").val(ac_carry);
+            $("input[name='add_acspend']").val(ac_spend);
+            $("select[name='add_achours'] option[value="+ac_hours+"]").attr("selected",true); 
 
-        add_activity();
-        $("input[name='addactivity']").hide();
-        $("input[name='upactivity']").show();
+            add_activity();
+            $("input[name='up_activitys']").val('Y');
+            $("input[name='addactivity']").hide();
+            $("input[name='up_submit']").show();
+        }
+
+        if($('#example2_wrapper').is(':visible')){
+            var tr = $(obj).closest('tr');
+            var type_id = $(tr).find(".type_id").text().trim();
+            var name = $(tr).find(".name").text().trim();
+            
+            $("input[name='add_typeid']").val(type_id);
+            $("input[name='add_typename']").val(name);
+
+            add_timetype();
+            $("input[name='up_timetypes']").val('Y');
+            $("input[name='addactivity']").hide();
+            $("input[name='up_submit']").show();
+        }
     }
 
     function update(){
         var add_acname = $("input[name='add_acname']").val();
         var carry = $("input[name='carry']").val();
+        var add_typename = $("input[name='add_typename']");
 
-        if(add_acname==""){
+        if($("input[name='up_activitys']").val()=='Y'){
+            if(add_acname==""){
             return alert("請輸入活動項目!");
-        }
+            }
 
-        if(carry==""){
-            return alert("請輸入攜帶物品!");
+            if(carry==""){
+                return alert("請輸入攜帶物品!");
+            }
+
+            var istype_id = $("input[name='typeid[]']").is(":checked");
+            if(istype_id==false){
+                return alert("請至少勾選一項時段!");
+            }
+        }else if($("input[name='up_timetypes']").val()=='Y'){
+            if(add_typename==""){
+                return alert("請輸入活動類型!");
+            }
         }
+        
+
+
 
         document.showForm.action="update_activity.php"; 
         document.showForm.submit();

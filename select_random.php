@@ -31,7 +31,7 @@
     
     $is_submit="";
     $data = "";$has_data = "";$sum=0;
-    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";$time_sql="";
+    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";$time="";$time_sql="";
     if($day!="" && $typeid!="" && $day_time!="" && $time_type!=""){
         if($istime_type=='Y' && $time_type!="*"){
             $sql = "select MAX(ac_hours) as max_hours from activity where ac_timetype like '%$time_type%'";
@@ -49,15 +49,15 @@
             }
             $time_sql = $time_sql . "','" . $time_type; 
             if($time_type!=$max){
-                $time = $time_type+1;
-                $time_sql = $time_sql . "','" . $time; 
+                $timetype1 = $time_type+1;
+                $time_sql = $time_sql . "','" . $timetype1; 
             }
         }     
 
-        $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";
+        $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$time="";
         for($i=0;$i<$day;$i++){
             $sql = "select ac_id,ac_hours,ac_name,(select name from activity_types where type_id = ac_type) as ac_type,
-            ac_weather,ac_drive,ac_carry,ac_spend from activity where ";
+            ac_weather,ac_drive,ac_carry,ac_spend,ac_timetype from activity where ";
         if($time_sql==""){
             if($time_type!="*"){
                 $sql = $sql . " ac_timetype like '%$time_type%' ";
@@ -81,7 +81,7 @@
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $active_array = [];
-        $active_field = ['ac_id','ac_hours','ac_name','ac_type','ac_weather','ac_drive','ac_carry','ac_spend'];
+        $active_field = ['ac_id','ac_hours','ac_name','ac_type','ac_weather','ac_drive','ac_carry','ac_spend','ac_timetype'];
         $field_count = 0;
         foreach($data as $key => $value){        
             foreach ($active_field as $field) {

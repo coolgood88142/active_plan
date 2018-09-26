@@ -15,6 +15,13 @@
         $id = $id . $active_array['ac_id'][$count] . ",";
         $orderby = $orderby . ((Int)$i+1) . ",";
 
+        if($time_sql!=""){
+            if($active_array['ac_timetype'][$count]){
+
+            }
+        }
+        
+
         array_splice($active_array['ac_name'],$count,1);
         array_splice($active_array['ac_type'],$count,1);
         array_splice($active_array['ac_weather'],$count,1);

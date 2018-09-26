@@ -6,6 +6,11 @@
     $query = $conn->query($sql);
     $active = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = "select * from activity_types";
+
+    $query = $conn->query($sql);
+    $active_type = $query->fetchAll(PDO::FETCH_ASSOC);
+
     $sql = "SELECT ac_name,(select count(pn_id) from plan_acname where pn_acid = ac_id) as ac_count FROM activity order by ac_id";
     $query = $conn->query($sql);
     $activity_count = $query->fetchAll(PDO::FETCH_ASSOC);

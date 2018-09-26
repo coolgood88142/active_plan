@@ -1,8 +1,17 @@
 <?php
 
-class duck{
+class duck implements fly{
     public $duck_name = ['白鴨子','黃色小鴨'];
-    public $duck_color = ['red','blue'];
+    public $duck_fly = ['Y','N'];
+    public function flywithwings(){
+        return "會飛";
+    }
+
+    public function flynoway(){
+        return "不會飛";
+    }
+
+    
     function __construct(){
         print "start";
         echo "<br/>";
@@ -20,50 +29,56 @@ class duck{
         // echo "鴨子陣列:" . $duck_array;
 
         foreach($color_array as $key => $color){
-            foreach($swim_array as $key => $swim){
+            
                 if($name==$color){
-                    $name = $name . "是鴨子" . $swim;
+                    $name = $name . "是鴨子" . $swim_array[0];
                     echo $name;
                     echo "<br/>";
                     break;
                 }else{
-                    $name = $name . "不是鴨子" . $swim;
+                    $name = $name . "不是鴨子" . $swim_array[1];
                     echo $name;
                     echo "<br/>";
-                }
             }
         }
-        $fly = new fly();
-        $fly->isfly($name);
+
+        if($name=="red"){
+            isfly($name,$duck_fly[0]);
+        }else{
+            isfly($name,$duck_fly[1]);
+        }
+
+    }
+
+    function isfly($name,$duck_fly){
+        $can_fly="";
+        if($duck_fly=='Y'){
+            $can_fly = $this->flywithwings();
+        }else{
+            $can_fly = $this->flynoway();
+        }
+        echo $name . "鴨子" . $can_fly;
     }
 
 }
 
 class swim extends duck{
+    public $duck_color = ['red','blue'];
     public $duck_swim = ['會游泳','不會游泳'];
     function __construct() {
         parent::__construct();
-        strat();
     }
 }
 
-class fly implements duck{
-    public $duck_fly = ['Y','N'];
-    function isfly($name) {
-        $fly_array = $this->duck_fly;
-        foreach($fly_array as $key => $fly){
-            if($name=="red"){
-                echo "red鴨子會飛";
-                break;
-            }
-        }
-    }
+interface fly{
+    public function flywithwings();
+    public function flynoway();
 }
 
-$red = new duck();
+$red = new swim();
 $red->strat("red");
 
-$yellow = new duck();
+$yellow = new swim();
 $yellow->strat("yellow");
 
 ?>

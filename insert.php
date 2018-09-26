@@ -64,13 +64,14 @@
     }else if(isset($_POST['add_timetypes']) && $_POST['add_timetypes']=='Y'){
         $add_typename = $_POST['add_typename'];
         
-        $sql = "select count(id) as id_count activity_types ";
+        $sql = "select MAX(id) as max_id from activity_types ";
         $query = $conn->query($sql);
         $count = $query->fetch(PDO::FETCH_ASSOC);
-        $id_count = $count['id_count'];
+        $max_id = (int)$count['max_id']+1;
+
 
         $sql = "INSERT INTO activity_types (type_id, name)
-        VALUES ($id_count, $add_typename)";
+        VALUES ($max_id, '$add_typename')";
         $conn->exec($sql);
     
     }
