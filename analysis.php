@@ -63,6 +63,7 @@
     }
 
     function acivity_name(){
+      $("#ac_name").show();
       $("#ac_type").hide();
       $("#ty_type").hide();
       var text = $("#activity_text").val();
@@ -109,7 +110,7 @@
         },
         yAxis: {
           title: {
-            text: 'Number of Employees'
+            text: '數量'
           }
         },
         legend: {
@@ -200,7 +201,7 @@
   },
   series: [{
     type: 'pie',
-    name: 'Browser share',
+    name: '時段',
     data: [
       <?php 
           $count = count($time_array['time_name']);

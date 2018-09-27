@@ -22,10 +22,7 @@
         <div id="button"></div>
         <H2>活動列表</H2>
         <br/><br/>      
-        <input type="button" style="display:none;" name="show_addtype" value="顯示活動類型" onClick="show_timetype()"/>
-        <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>    
-        <input type="button" style="display:none;" name="show_add" value="顯示活動項目" onClick="show_activity()"/>
-        <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
+        <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
         <table id="example1">
 	        <thead>
                 <tr>
@@ -96,57 +93,21 @@
             <tfoot>
             </tfoot>
         </table>
-        <table id="example2">
-	        <thead>
-                <tr>
-                    <td bgcolor="#00FFFF">序號</td>
-                    <td bgcolor="#00FFFF">活動類型</td>
-                    <?php
-                        if($us_admin=='Y'){                
-                    ?>
-                        <td bgcolor="#00FFFF">編輯設定</td>
-                    <?php
-                        }
-                    ?>
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                    foreach ($active_type as $key => $type) {
-                ?>
-                <tr>
-                    <td class="type_id" >
-                        <?php echo $type["type_id"]?>
-                    </td>
-                    <td class="name" >
-                        <?php echo $type["name"]?>
-                    </td>
-                    <?php
-                        if($us_admin=='Y'){                
-                    ?>
-                        <td class="type_edit">
-                            <input type="button" value="編輯類型" onClick="edit(this)"/>
-                        </td>
-                    <?php
-                        }
-                    ?>
-                </tr>
-                <?php 
-                    }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
     <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
     <p class="activity" style="display:none;">活動項目:
           <input type="text" name="add_acname" value="" ><br/><br/>
     </p>
     <p class="type" style="display:none;">類型:
         <select name="add_actype">
-            <option value="1">運動</option>
-            <option value="2">輕鬆</option>
-            <option value="3">景點</option>
+        <?php
+            foreach ($active_type as $key => $type) {
+            $type_id = $type['type_id'];
+            $name = $type['name'];
+        ?>
+            <option value="<?=$type_id?>"><?php echo $name ?></option>
+        <?php
+            }
+        ?>
         </select>
         <br/><br/>
     </p>
@@ -159,12 +120,7 @@
         <br/><br/>
     </p>
     <p class="drive" style="display:none;">車程(小時):
-        <select name="add_acdrive">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>小時
-        <br/><br/>
+        <input type="text" name="add_acdrive" value="" size="2">小時<br/><br/>
     </p>
     <p class="carry" style="display:none;">攜帶物品:
           <input type="text" name="add_accarry" value="無" ><br/><br/>
@@ -173,80 +129,23 @@
           <input type="text" name="add_acspend" value="0" >元<br/><br/>
     </p>
     <p class="hours" style="display:none;">時間(小時):
-        <select name="add_achours">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>小時
-        <br/><br/>
-    </p>
-    <p class="timetype" style="display:none;">時段:
-    <?php
-        foreach ($active_type as $key => $type) {
-        $type_id = $type['type_id'];
-        $name = $type['name'];
-    ?>
-        <input type="checkbox" name="typeid[]" value="<?=$type_id?>"><?php echo $name ?></input>
-    <?php
-        }
-    ?>
-        <br/><br/>
-    </p>
-    <input type="button" style="display:none;" name="backtype" value="回上一頁" onClick="back_timetype()"/>
-    <p class="timetypes" style="display:none;">活動類型:
-          <input type="text" name="add_typename" value="" ><br/><br/>
-          <input type="hidden" name="add_typeid" value="" >
+        <input type="text" name="add_achours" value="" size="2">小時<br/><br/>
     </p>
     <input type="hidden" name="add_acid" value=""/>
     <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-    <input type="button" style="display:none;" name="up_submit" value="送出" onClick="update()" />
+    <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
     <input type="hidden" name="add_activitys" />
-    <input type="hidden" name="add_timetypes" />
     <input type="hidden" name="up_activitys" />
-    <input type="hidden" name="up_timetypes" />
     </form>  
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
         $('#example1').DataTable();
-        $('#example2').DataTable();
-        $('#example2_wrapper').hide();
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
-            $("input[name='show_addtype']").show();
-        }else{
-            $("input[name='show_addtype']").show();
         }
     } );
-
-    function show_timetype(){
-        $('#example1_wrapper').hide();
-        $('#example2_wrapper').show();
-        $("input[name='add']").hide();
-        $("input[name='show_addtype']").hide();   
-        $("input[name='show_add']").show();
-
-        if($("input[name='admin']").val()=="Y"){
-            $("input[name='add_type']").show();
-        }else{
-            $("input[name='add_type']").hide();
-        }
-    }
-
-    function show_activity(){
-        $('#example1_wrapper').show();
-        $('#example2_wrapper').hide();
-        $("input[name='show_addtype']").show();
-        $("input[name='add_type']").hide();
-        $("input[name='show_add']").hide();
-
-        if($("input[name='admin']").val()=="Y"){
-            $("input[name='add']").show();
-        }else{
-            $("input[name='add']").hide();
-        }
-    }
 
     function show(page){
         if($("input[name='admin']").val()=="Y" && page=="setting"){
@@ -283,9 +182,6 @@
     function add_activity(){
         $('#example1_wrapper').hide()
         $("input[name='add']").hide();
-        $("input[name='show_addtype']").hide();
-        $("input[name='add_type']").hide();
-        $("input[name='show_add']").hide();
         $("input[name='backpage']").show();
         $(".activity").show();
         $(".type").show();
@@ -301,9 +197,7 @@
     function back_activity(){
         $('#example1_wrapper').show()
         $("input[name='add']").show();
-        $("input[name='show_addtype']").show();
         $("input[name='backpage']").hide();
-        $("input[name='backtype']").hide();
         $(".activity").hide();
         $(".type").hide();
         $(".weather").hide();
@@ -316,33 +210,9 @@
         $("input[name='up_submit']").hide();
     }
 
-    function add_timetype(){
-        $('#example2_wrapper').hide()
-        $("input[name='add']").hide();
-        $("input[name='show_addtype']").hide();
-        $("input[name='add_type']").hide();
-        $("input[name='show_add']").hide();
-        $("input[name='backtype']").show();
-        $(".timetypes").show();
-        $("input[name='add_typename']").show();
-        $("input[name='addactivity']").show();
-    }
-
-    function back_timetype(){
-        $('#example2_wrapper').show()
-        $("input[name='add_type']").show();
-        $("input[name='show_add']").show();
-        $("input[name='backpage']").hide();
-        $("input[name='backtype']").hide();
-        $(".timetypes").hide();
-        $("input[name='addactivity']").hide();
-        $("input[name='up_submit']").hide();
-    }
-
     function insert(){
         var add_acname = $("input[name='add_acname']").val();
         var carry = $("input[name='carry']").val();
-        var add_typename = $("input[name='add_typename']").val();
 
         if($(".activity").is(":visible")){
             if(add_acname==""){
@@ -353,19 +223,8 @@
                 return alert("請輸入攜帶物品!");
             }
 
-            var istype_id = $("input[name='typeid[]']").is(":checked");
-            if(istype_id==false){
-                return alert("請至少勾選一項時段!");
-            }
-
             $("input[name='add_activitys']").val('Y');
-        }else if($(".timetypes").is(":visible")){
-            if(add_typename==""){
-                return alert("請輸入活動類型!");
-            }
-            $("input[name='add_timetypes']").val('Y');
-        }
-       
+        }    
 
         document.showForm.action="insert.php"; 
         document.showForm.submit();
@@ -388,27 +247,13 @@
             $("input[name='add_acname']").val(ac_name);
             $("select[name='add_actype'] option[value="+ac_type+"]").attr("selected",true); 
             $("select[name='add_acweather'] option[value="+ac_weather+"]").attr("selected",true); 
-            $("select[name='add_acdrive'] option[value="+ac_drive+"]").attr("selected",true); 
+            $("input[name='add_acdrive']").val(ac_drive);
             $("input[name='add_accarry']").val(ac_carry);
             $("input[name='add_acspend']").val(ac_spend);
-            $("select[name='add_achours'] option[value="+ac_hours+"]").attr("selected",true); 
+            $("input[name='add_achours']").val(ac_hours);
 
             add_activity();
             $("input[name='up_activitys']").val('Y');
-            $("input[name='addactivity']").hide();
-            $("input[name='up_submit']").show();
-        }
-
-        if($('#example2_wrapper').is(':visible')){
-            var tr = $(obj).closest('tr');
-            var type_id = $(tr).find(".type_id").text().trim();
-            var name = $(tr).find(".name").text().trim();
-            
-            $("input[name='add_typeid']").val(type_id);
-            $("input[name='add_typename']").val(name);
-
-            add_timetype();
-            $("input[name='up_timetypes']").val('Y');
             $("input[name='addactivity']").hide();
             $("input[name='up_submit']").show();
         }
@@ -417,7 +262,6 @@
     function update(){
         var add_acname = $("input[name='add_acname']").val();
         var carry = $("input[name='carry']").val();
-        var add_typename = $("input[name='add_typename']");
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
@@ -427,19 +271,7 @@
             if(carry==""){
                 return alert("請輸入攜帶物品!");
             }
-
-            var istype_id = $("input[name='typeid[]']").is(":checked");
-            if(istype_id==false){
-                return alert("請至少勾選一項時段!");
-            }
-        }else if($("input[name='up_timetypes']").val()=='Y'){
-            if(add_typename==""){
-                return alert("請輸入活動類型!");
-            }
         }
-        
-
-
 
         document.showForm.action="update_activity.php"; 
         document.showForm.submit();

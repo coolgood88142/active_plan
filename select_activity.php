@@ -11,7 +11,16 @@
     $query = $conn->query($sql);
     $active_type = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT ac_name,(select count(pn_id) from plan_acname where pn_acid = ac_id) as ac_count FROM activity order by ac_id";
+    $us_id = $_SESSION['us_id'];
+    $sql = "SELECT ac_name, ";
+
+    if($us_admin!='Y' && $us_id!=""){
+        $sql = $sql . " (select count(pn_id) from plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id and pt_usid = $us_id)"; 
+    }else{
+        $sql = $sql . " (select count(pn_id) from plan_acname where pn_acid = ac_id)";
+    }
+    $sql = $sql . " as ac_count FROM activity order by ac_id";
+    
     $query = $conn->query($sql);
     $activity_count = $query->fetchAll(PDO::FETCH_ASSOC);
     $activity_text="";
@@ -42,9 +51,17 @@
         for($i=0;$i<$month_count;$i++){
             $year_month_01 = $today_year . "-". $month[$i] . "-01";
             $year_month_31 = $today_year . "-". $month[$i] . "-31";
+            $sql = "SELECT name, ";
 
-            $sql = "SELECT name,(select count(ac_type) from plan_acname,activity,plan_trip where pn_acid = ac_id and ac_type = type_id and pn_ptid = pt_id 
-                and pt_date BETWEEN '$year_month_01' AND '$year_month_31') as count FROM activity_types order by type_id";
+            if($us_admin!='Y' && $us_id!=""){
+                $sql = $sql . " (select count(ac_type) from plan_acname,activity,plan_trip where pn_acid = ac_id and ac_type = type_id and pn_ptid = pt_id 
+                and pt_usid = $us_id and pt_date BETWEEN '$year_month_01' AND '$year_month_31') " ;
+            }else{
+                $sql = $sql . " (select count(ac_type) from plan_acname,activity,plan_trip where pn_acid = ac_id and ac_type = type_id and pn_ptid = pt_id 
+                and pt_date BETWEEN '$year_month_01' AND '$year_month_31') " ;
+            }
+            $sql = $sql . " as count FROM activity_types order by type_id";
+
             $query = $conn->query($sql);
             $type_count = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -77,8 +94,14 @@
     foreach ($timetypes as $key => $value){
         $ty_type = $value['ty_type'];
         $ty_name = $value['ty_name'];
-        $sql = "SELECT count(ac_timetype) as time_count  FROM activity 
-            where ac_timetype like '%$ty_type%'";
+        $sql = "SELECT count(ac_timetype) as time_count FROM activity ";
+
+        if($us_admin!='Y' && $us_id!=""){
+            $sql = $sql . ",plan_trip,plan_acname where ac_timetype like '%$ty_type%' and pn_acid = ac_id and  pn_ptid = pt_id and pt_usid = $us_id";
+        }else{
+            $sql = $sql . " where ac_timetype like '%$ty_type%'";
+        }
+
         $query = $conn->query($sql);
         $activity_time = $query->fetch(PDO::FETCH_ASSOC);
         

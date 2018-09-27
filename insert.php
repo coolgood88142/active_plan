@@ -91,6 +91,10 @@
     ?>
         location.href = "activity.php";
     <?php
+    }else if(isset($_POST['add_timetypes'])){
+    ?>
+        location.href = "activity_type.php";
+    <?php
     }
     ?>
 </script>
