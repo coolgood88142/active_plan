@@ -31,13 +31,13 @@
     
     $is_submit="";
     $data = "";$has_data = "";$sum=0;
-    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";$time="";$time_sql="";
+    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";;$timetype="";$time_sql="";
     if($day!="" && $typeid!="" && $day_time!="" && $time_type!=""){
         if($istime_type=='Y' && $time_type!="*"){
-            $sql = "select MAX(ac_hours) as max_hours from activity where ac_timetype like '%$time_type%'";
+            $sql = "select MAX(ty_type) as max_type from time_types ";
             $query = $conn->query($sql);
             $achours = $query->fetch(PDO::FETCH_ASSOC);
-            $max = $achours['max_hours'];
+            $max = $achours['max_type'];
 
             $count=0;$a=$max;
             for($i=0;$i<$a;$i++){
@@ -47,66 +47,72 @@
                 }
         
             }
-            $time_sql = $time_sql . "','" . $time_type; 
-            if($time_type!=$max){
-                $timetype1 = $time_type+1;
-                $time_sql = $time_sql . "','" . $timetype1; 
+            $count=0;
+            $time_sql = $time_sql . "','";
+
+            for($j=$a;$j>0;$j--){
+                if($j==$time_type+1){
+                    if($j<$time_type){
+                        $time_sql = $time_sql . $j . "," . $time_type . "','";
+                    }else{
+                        $time_sql = $time_sql . $time_type . "," . $j . "','";
+                    }
+                }           
             }
+            $time_sql = $time_sql . $time_type;
         }     
 
-        $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$time="";
+        $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$timetype="";
         for($i=0;$i<$day;$i++){
             $sql = "select ac_id,ac_hours,ac_name,(select name from activity_types where type_id = ac_type) as ac_type,
             ac_weather,ac_drive,ac_carry,ac_spend,ac_timetype from activity where ";
-        if($time_sql==""){
-            if($time_type!="*"){
-                $sql = $sql . " ac_timetype like '%$time_type%' ";
+            if($time_sql==""){
+                if($time_type!="*"){
+                    $sql = $sql . " ac_timetype like '%$time_type%' ";
+                }else{
+                    $sql = $sql . " ac_timetype !='' ";
+                }
             }else{
-                $sql = $sql . " ac_timetype !='' ";
+                $sql = $sql . " ac_timetype in ('" . $time_sql . "')";
             }
-        }else{
-            $sql = $sql . " ac_timetype in ('" . $time_sql . "')";
-        }
-        
-        if(count($typeid)>0){
-            $sql = $sql . " and ac_type in (";
-            foreach($typeid as $key => $query_typeid){
-                $sql = $sql . $query_typeid . ",";
-                $type_count = $type_count . $query_typeid . ",";
+            
+            if(count($typeid)>0){
+                $sql = $sql . " and ac_type in (";
+                foreach($typeid as $key => $query_typeid){
+                    $sql = $sql . $query_typeid . ",";
+                    $type_count = $type_count . $query_typeid . ",";
+                }
+                $sql = substr($sql,0,-1) . ")";
             }
-            $sql = substr($sql,0,-1) . ")";
-        }
 
-        $query = $conn->query($sql);
-        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            $query = $conn->query($sql);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $active_array = [];
-        $active_field = ['ac_id','ac_hours','ac_name','ac_type','ac_weather','ac_drive','ac_carry','ac_spend','ac_timetype'];
-        $field_count = 0;
-        foreach($data as $key => $value){        
-            foreach ($active_field as $field) {
-                 $active_array[$field][$field_count] = $value[$field];
+            $active_array = [];
+            $active_field = ['ac_id','ac_hours','ac_name','ac_type','ac_weather','ac_drive','ac_carry','ac_spend','ac_timetype'];
+            $field_count = 0;
+            foreach($data as $key => $value){        
+                foreach ($active_field as $field) {
+                    $active_array[$field][$field_count] = $value[$field];
+                }
+                $field_count++;
             }
-            $field_count++;
+
+            $hour = "";
+            
+            if(count($active_array['ac_id'])>0){
+                $rand_count = array_rand($active_array['ac_id'],1);  
+                $hour=$day_time;$min_hour=3;$previous="";
+                include("rand_acid.php");
+
+                $has_data = "true";
+            }else{
+                //沒資料不要組
+                break;
+            }
         }
 
-        $hour = "";
-        
-        if(count($active_array['ac_id'])>0){
-            $rand_count = array_rand($active_array['ac_id'],1);  
-            $hour=$day_time;$min_hour=3;$previous="";
-            include("rand_acid.php");
-
-            $has_data = "true";
-        }else{
-            //沒資料不要組
-            break;
-        }
-        }
-        
-        
-        $is_submit = "true";
-        
+        $is_submit = "true";      
     }else{
         $sql = "select * from activity_types";
 
@@ -144,6 +150,7 @@
     <input type="hidden" name="post_acspend" value="<?=$spend?>"/>
     <input type="hidden" name="post_achours" value="<?=$hours?>"/>
     <input type="hidden" name="post_acid" value="<?=$id?>"/>
+    <input type="hidden" name="post_actimetype" value="<?=$timetype?>"/>
     <input type="hidden" name="post_pnorderby" value="<?=$orderby?>"/>
     <input type="hidden" name="is_query" value="<?=$is_submit?>" />
 </form>

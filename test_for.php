@@ -1,7 +1,7 @@
 <?php
     $type="";
     $count=0;
-    $a=4;
+    $a=3;
     for($i=0;$i<$a;$i++){
         for($j=$a;$j>$i;$j--){
             if($i!=$a-1){

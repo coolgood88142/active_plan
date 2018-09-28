@@ -123,13 +123,11 @@
     $ad_acspend = (int)$_POST['ad_acspend'];
     $ad_achours = (int)$_POST['ad_achours'];
 
-    $ad_acid = $_POST['ad_acid'];
-    $ad_acid = explode(",", $ad_acid);
-
     $us_id = "";
     $us_name = "";
     $ad_acname = "";
     $ad_hours = "";
+    $ad_acid = "";
     $ad_pnorderby = "";
 
     if(isset($_POST['us_id'])){
@@ -148,6 +146,11 @@
     if(isset($_POST['ad_hours'])){
         $ad_hours = $_POST['ad_hours'];
         $ad_hours = explode(",", $ad_hours);
+    }
+
+    if(isset($_POST['ad_acid'])){
+        $ad_acid = $_POST['ad_acid'];
+        $ad_acid = explode(",", $ad_acid);
     }
 
     if(isset($_POST['ad_pnorderby'])){
@@ -188,10 +191,10 @@
             $conn->exec($sql);
         }
 
-        for($i=0 ; $i<$count ; $i++){
-            $acid = $ad_acid[$i];
+        for($i=0 ; $i<$count ; $i++){       
             $acname = $ad_acname[$i];
             $achours = $ad_hours[$i];
+            $acid = $ad_acid[$i];
             $pn_orderby = 1;
             if($ad_pnorderby!=""){
                 $pn_orderby = $ad_pnorderby[$i];

@@ -96,6 +96,13 @@
         $post_acid = explode(",", $post_acid);
     }
 
+    $post_actimetype = "";
+    if(isset($_POST['post_actimetype']) && $_POST['post_actimetype']!=""){
+        $post_actimetype =  $_POST['post_actimetype'];
+        $post_actimetype =substr($post_actimetype,0,-1);
+        $post_actimetype = explode(",", $post_actimetype);
+    }
+
     $post_pnorderby = "";
     if(isset($_POST['post_pnorderby']) && $_POST['post_pnorderby']!=""){
         $post_pnorderby =  $_POST['post_pnorderby'];
@@ -195,7 +202,8 @@
                     <td bgcolor="#00FFFF">攜帶物品</td>
                     <td bgcolor="#00FFFF">花費</td>
                     <td bgcolor="#00FFFF">時間(小時)</td>
-                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>                  
+                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+                    <td bgcolor="#00FFFF">時段</td>   
                 </tr>
 	        </thead>
 	        <tbody>
@@ -230,6 +238,9 @@
                         </td>
                         <td class="ac_id" style="display:none;">
                             <?php echo $post_acid[$i]?>
+                        </td>
+                        <td class="ac_timetype">
+                            <?php echo $post_actimetype[$i]?>
                         </td>
                     </tr>
                 <?php
