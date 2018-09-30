@@ -329,6 +329,8 @@
     function update(){
         var add_acname = $("input[name='add_acname']").val();
         var add_accarry = $("input[name='add_accarry']").val();
+        var add_acweather = $("input[name='add_acweather[]']").is(":checked");
+        var add_actimetype = $("input[name='add_actimetype[]']").is(":checked");
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
@@ -337,6 +339,14 @@
 
             if(add_accarry==""){
                 return alert("請輸入攜帶物品!");
+            }
+
+            if(add_acweather==false){
+                return alert("請至少打勾一項天氣!");
+            }
+
+            if(add_actimetype==false){
+                return alert("請至少打勾一項時段!");
             }
         }
 

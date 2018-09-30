@@ -22,8 +22,10 @@
             $sql = "select ty_name from time_types where ty_type = " . $ac_timetypes[$i];
             $query = $conn->query($sql);
             $ty_name = $query->fetch(PDO::FETCH_ASSOC); 
-            $timetype = $timetype . $ty_name['ty_name'];
+            $timetype = $timetype . $ty_name['ty_name'] . "、";
         }
+
+        $timetype = substr($timetype,0,-3);
         $timetype = $timetype . ",";
 
         array_splice($active_array['ac_name'],$count,1);

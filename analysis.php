@@ -31,6 +31,9 @@
             min-width: 310px;
             margin: 0 auto
         }
+        tspan{
+          font-size:20px;
+        }
     </style>
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>

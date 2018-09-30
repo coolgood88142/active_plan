@@ -8,12 +8,13 @@
 <link href="jquery.dataTables.min.css" rel="stylesheet" />
 <script src="jquery.dataTables.min.js"></script>
 <style>
-    .login{
+    .login,.setup{
         position: relative;
     top:50%;
     left:50%;
     transform:translateY(-50%);
     }
+
 </style>
   <body background="background.png">
   <?php
@@ -30,7 +31,11 @@
       $errorMessage = $_GET['errorMessage'];
     }
   ?>
+    <input type="hidden" name="error" value="<?php echo $error ?>"/>
+    <input type="hidden" name="errorMessage" value="<?php echo $errorMessage ?>"/>
+
     <div class="login">
+      <input type="button" style="background-color:#00FFFF;" value="登入" onClick="sign_in()"/>
     <form name="loginForm" method="post" >
         帳號: <input type="text" name="us_account" /><br/><br/>
 
@@ -38,11 +43,18 @@
 
         <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
 
-　      <input type="button" style="background-color:#00FFFF;" value="登入" onClick="sign_in()"/>
-        <input type="button" value="建立" onClick="setup()"/>
-        <input type="hidden" name="error" value="<?php echo $error ?>"/>
-        <input type="hidden" name="errorMessage" value="<?php echo $errorMessage ?>"/>
     </form>
+    </div>
+
+     <div class="setup">
+      <input type="button" value="建立" onClick="setup()"/>
+    <form action="<?php echo "insert.php" ?>" name="setupForm" method="post">
+        請輸入帳號: <input type="text" name="us_account" /><br/><br/>
+
+        請輸入密碼: <input type="password" name="us_password" /><br/><br/>
+
+        <input type="hidden" name="setup_user"/>       
+    </form> 
     </div>
  
 

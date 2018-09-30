@@ -171,7 +171,7 @@
         ?>
         <br/><br/>
 
-        天數小時:<input type="text" name="day_time" value="" size="2"/>小時<br/><br/>
+        天數小時:<input type="text" name="day_time" value="" size="2"/>小時<br/>
         <input type="hidden" name="istime_type" value="" size="2"/>
 
         <p class="time">時段選項:
@@ -187,7 +187,7 @@
             }
         ?>
             </select>
-            </p>
+            </p><br/>
         <input type="submit" name="gorandom" value="執行"/>  
             <br/><br/> 
         

@@ -31,7 +31,7 @@
     
     $is_submit="";
     $data = "";$has_data = "";$sum=0;
-    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";;$timetype="";$time_sql="";
+    $name="";$type="";$weather="";$drive="";$carry="";$spend="";$hours="";$id="";$orderby="";$timetype="";$time_sql="";
     if($day!="" && $typeid!="" && $day_time!="" && $time_type!=""){
         if($istime_type=='Y' && $time_type!="*"){
             $sql = "select MAX(ty_type) as max_type from time_types ";
