@@ -79,6 +79,7 @@
                     <td bgcolor="#00FFFF">活動項目</td>
                     <td bgcolor="#00FFFF">類型</td>
                     <td bgcolor="#00FFFF">天氣</td>
+                    <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
                     <td bgcolor="#00FFFF">車程(小時)</td>
                     <td bgcolor="#00FFFF">攜帶物品</td>
                     <td bgcolor="#00FFFF">花費</td>
@@ -99,7 +100,30 @@
                     <td class="ac_type">
                         <?php echo $ac_type[$i]?>
                     </td>
-                    <td class="ac_weather">
+                    <td class="weather_name" style="display:none;">
+                        <?php 
+                            // $acweather = $ac_weather[$i];
+                            // $wather_count = count($acweather);
+
+                            // $wather_name = "";
+                            // for($j=0;$j<$wather_count;$j++){
+                            //     $aw_type = $acweather[$j];
+                            //     $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                            //     $query = $conn->query($sql);
+                            //     $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                            //     foreach($awname as $key => $name){
+                            //         $wather_name = $wather_name . $name['aw_name'];                                  
+                            //     }
+
+                            //     if($j!=$wather_count-1){
+                            //         $wather_name = $wather_name . "、";
+                            //     }
+                            // }
+                            echo $ac_weather[$i];
+                        ?>
+                    </td>
+                    <td class="ac_weather" >
                         <?php echo $ac_weather[$i]?>
                     </td>
                     <td class="ac_drive">

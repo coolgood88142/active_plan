@@ -227,6 +227,7 @@
             <td bgcolor="#00FFFF">活動項目</td>
             <td bgcolor="#00FFFF">類型</td>
             <td bgcolor="#00FFFF">天氣</td>
+            <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
             <td bgcolor="#00FFFF">車程(小時)</td>
             <td bgcolor="#00FFFF">攜帶物品</td>
             <td bgcolor="#00FFFF">花費</td>
@@ -246,20 +247,44 @@
             <td class="type_name">
                     <?php echo $value["type_name"]?>
             </td>
-            <td class="ac_weather">
-                    <?php echo $value["ac_weather"]?>
+            <td class="weather_name">
+                <?php 
+                    $acweather = $value["ac_weather"];
+                    $acweather = explode(",", $acweather);
+                    $wather_count = count($acweather);
+
+                    $wather_name = "";
+                    for($j=0;$j<$wather_count;$j++){
+                        $aw_type = $acweather[$j];
+                        $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                        $query = $conn->query($sql);
+                        $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($awname as $key => $name){
+                            $wather_name = $wather_name . $name['aw_name'];                                  
+                        }
+
+                        if($j!=$wather_count-1){
+                            $wather_name = $wather_name . "、";
+                        }
+                    }
+                     echo $wather_name;
+                ?>
+            </td>
+            <td class="ac_weather" style="display:none;">
+                <?php echo $value["ac_weather"]?>
             </td>
             <td class="ac_drive">
-                    <?php echo $value["ac_drive"]?>
+                <?php echo $value["ac_drive"]?>
             </td>
             <td class="ac_carry">
-                    <?php echo $value["ac_carry"]?>
+                <?php echo $value["ac_carry"]?>
             </td>
             <td class="ac_spend">
-                    <?php echo $value["ac_spend"]?>元
+                 <?php echo $value["ac_spend"]?>元
             </td>
             <td class="ac_hours">
-                    <?php echo $value["ac_hours"]?>
+                <?php echo $value["ac_hours"]?>
             </td>
             <td>
                 <input type="checkbox" name="add" ></input>
@@ -281,6 +306,7 @@
             <td bgcolor="#00FFFF">活動項目</td>
             <td bgcolor="#00FFFF">類型</td>
             <td bgcolor="#00FFFF">天氣</td>
+            <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
             <td bgcolor="#00FFFF">車程(小時)</td>
             <td bgcolor="#00FFFF">攜帶物品</td>
             <td bgcolor="#00FFFF">花費</td>
@@ -486,7 +512,7 @@
                 var obj = $(this).closest("tr");
                 ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
                 ad_typename = ad_typename + obj.find(".type_name").text().trim() + ",";
-                ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
+                ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ";";
                 ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
                 ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
                 var spend = obj.find(".ac_spend").text().trim();
@@ -540,12 +566,13 @@
         }
         
         if($('#example2_wrapper').is(':visible')){
-            var ac_name="",type_name="",ac_weather="",ac_drive="",ac_carry="",ac_spend="",ac_hours="",ac_id="";
+            var ac_name="",type_name="",weather_name="";ac_weather="",ac_drive="",ac_carry="",ac_spend="",ac_hours="",ac_id="";
             $("input[name='add']:checked").each(function(){
                 var obj = $(this).closest("tr");
                 ac_name = ac_name + obj.find(".ac_name").text() + ",";
                 type_name = type_name + obj.find(".type_name").text() + ",";
-                ac_weather = ac_weather + obj.find(".ac_weather").text() + ",";
+                weather_name = weather_name + obj.find(".weather_name").text() + ",";
+                ac_weather = ac_weather + obj.find(".ac_weather").text() + ";";
                 ac_drive = ac_drive + obj.find(".ac_drive").text() + ",";
                 ac_carry = ac_carry + obj.find(".ac_carry").text() + ",";
                 ac_spend = ac_spend + obj.find(".ac_spend").text() + ",";
@@ -554,6 +581,7 @@
             });
             ac_name = ac_name.substring(0, ac_name.length-1);
             type_name = type_name.substring(0, type_name.length-1);
+            weather_name = weather_name.substring(0, weather_name.length-1);
             ac_weather = ac_weather.substring(0, ac_weather.length-1);
             ac_drive = ac_drive.substring(0, ac_drive.length-1);
             ac_carry = ac_carry.substring(0, ac_carry.length-1);
@@ -563,7 +591,8 @@
             
             var ac_names = ac_name.split(",");
             var type_names = type_name.split(",");
-            var ac_weathers = ac_weather.split(",");
+            var weather_names = weather_name.split(",");
+            var ac_weathers = ac_weather.split(";");
             var ac_drives = ac_drive.split(",");
             var ac_carrys = ac_carry.split(",");
             var ac_spends = ac_spend.split(",");
@@ -582,8 +611,14 @@
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","type_name");
                 td.innerHTML = type_names[i];
+
+                td = tr.insertCell(tr.cells.length);
+                td.setAttribute("class","weather_name");
+                td.innerHTML = weather_names[i];
+
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_weather");
+                td.setAttribute("style","display:none;");
                 td.innerHTML = ac_weathers[i];
                 
                 td = tr.insertCell(tr.cells.length);
@@ -601,10 +636,12 @@
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_hours");
                 td.innerHTML = ac_hourss[i];
+
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
                 td.setAttribute("style","display:none;");
                 td.innerHTML = ac_ids[i];
+
                 td = tr.insertCell(tr.cells.length);
                 td.innerHTML = '<input type="button" name="cancel" value="取消" onClick="Cancel(this)"/>';  
                     //預設有兩行，刪除文字行

@@ -67,6 +67,26 @@
     // ,(4, '不拘')
     // ,(5, '晴天、陰天')";
 
+    // $sql = "CREATE TABLE activity_carry(
+    //      acr_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      acr_type INT(6) NOT NULL,
+    //      acr_name NVARCHAR(30) NOT NULL,
+    //      acr_updatedate TIMESTAMP
+    //      )";
+
+    // $sql = "INSERT INTO activity_carry (acr_type, acr_name)
+    // VALUES (1, '錢包')
+    // ,(2, '筆記型電腦')
+    // ,(3, '雨傘')
+    // ,(4, '毛巾')
+    // ,(5, '水瓶')
+    // ,(6, '籃球')
+    // ,(7, '羽毛球')
+    // ,(8, '羽毛球拍')
+    // ,(9, '飲料')
+    // ,(10, '烤肉用具')
+    // ,(11, '食物蔬菜')";
+
 
     $conn->exec($sql);
     $conn=null;

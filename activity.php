@@ -30,11 +30,13 @@
                     <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
                     <td bgcolor="#00FFFF">類型</td>
                     <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
-                    <td bgcolor="#00FFFF">天氣</td>
+                    <td bgcolor="#00FFFF" >天氣</td>
+                    <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
                     <td bgcolor="#00FFFF">車程(小時)</td>
                     <td bgcolor="#00FFFF">攜帶物品</td>
                     <td bgcolor="#00FFFF">花費</td>
                     <td bgcolor="#00FFFF">時間(小時)</td>
+                    <td bgcolor="#00FFFF" style="display:none;">時段</td>
                     <?php
                         if($us_admin=='Y'){                
                     ?>
@@ -61,7 +63,31 @@
                     <td class="ac_type" style="display:none;">
                         <?php echo $value["ac_type"]?>
                     </td>
-                    <td class="ac_weather">
+                    <td class="weather_name">
+                        <?php 
+                            $acweather = $value["ac_weather"];
+                            $acweather = explode(",", $acweather);
+                            $wather_count = count($acweather);
+
+                            $wather_name = "";
+                            for($j=0;$j<$wather_count;$j++){
+                                $aw_type = $acweather[$j];
+                                $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                $query = $conn->query($sql);
+                                $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach($awname as $key => $name){
+                                    $wather_name = $wather_name . $name['aw_name'];                                  
+                                }
+
+                                if($j!=$wather_count-1){
+                                    $wather_name = $wather_name . "、";
+                                }
+                            }
+                            echo $wather_name;
+                        ?>
+                    </td>
+                    <td class="ac_weather" style="display:none;">
                         <?php echo $value["ac_weather"]?>
                     </td>
                     <td class="ac_drive">
@@ -75,6 +101,9 @@
                     </td>
                     <td class="ac_hours">
                         <?php echo $value["ac_hours"]?>
+                    </td>
+                    <td class="ac_timetype" style="display:none;">
+                        <?php echo $value["ac_timetype"]?>
                     </td>
                     <?php
                         if($us_admin=='Y'){                
@@ -101,10 +130,8 @@
         <select name="add_actype">
         <?php
             foreach ($active_type as $key => $type) {
-            $type_id = $type['type_id'];
-            $name = $type['name'];
         ?>
-            <option value="<?=$type_id?>"><?php echo $name ?></option>
+            <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
         <?php
             }
         ?>
@@ -112,11 +139,13 @@
         <br/><br/>
     </p>
     <p class="weather" style="display:none;">天氣:
-        <select name="add_acweather">
-            <option value="不拘">不拘</option>
-            <option value="晴天">晴天</option>
-            <option value="晴天、陰天">晴天、陰天</option>
-        </select>
+        <?php 
+            foreach($activity_weather as $key => $weather){
+        ?>
+            <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?></input>
+        <?php
+            }
+        ?>
         <br/><br/>
     </p>
     <p class="drive" style="display:none;">車程(小時):
@@ -130,6 +159,16 @@
     </p>
     <p class="hours" style="display:none;">時間(小時):
         <input type="text" name="add_achours" value="" size="2">小時<br/><br/>
+    </p>
+    <p class="timetype" style="display:none;">時段:
+        <?php
+            foreach ($timetypes as $key => $time) {
+        ?>
+            <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
+        <?php
+            }
+        ?>
+        <br/><br/>
     </p>
     <input type="hidden" name="add_acid" value=""/>
     <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
@@ -212,15 +251,25 @@
 
     function insert(){
         var add_acname = $("input[name='add_acname']").val();
-        var carry = $("input[name='carry']").val();
+        var add_accarry = $("input[name='add_accarry']").val();
+        var add_acweather = $("input[name='add_acweather[]']").is(":checked");
+        var add_actimetype = $("input[name='add_actimetype[]']").is(":checked");
 
         if($(".activity").is(":visible")){
             if(add_acname==""){
                 return alert("請輸入活動項目!");
             }
 
-            if(carry==""){
+            if(add_accarry==""){
                 return alert("請輸入攜帶物品!");
+            }
+
+            if(add_acweather==false){
+                return alert("請至少打勾一項天氣!");
+            }
+
+            if(add_actimetype==false){
+                return alert("請至少打勾一項時段!");
             }
 
             $("input[name='add_activitys']").val('Y');
@@ -235,18 +284,36 @@
             var tr = $(obj).closest('tr');
             var ac_id = $(tr).find(".ac_id").text().trim();
             var ac_name = $(tr).find(".ac_name").text().trim();
-            var ac_type = $(tr).find(".ac_type").text().trim();  
-            var ac_weather = $(tr).find(".ac_weather").text().trim();
+            var ac_type = $(tr).find(".ac_type").text().trim();             
             var ac_drive = $(tr).find(".ac_drive").text().trim();
             var ac_carry = $(tr).find(".ac_carry").text().trim();
             var ac_spend = $(tr).find(".ac_spend").text().trim();
             ac_spend = ac_spend.substring(0, ac_spend.length-1);
             var ac_hours = $(tr).find(".ac_hours").text().trim();
+
+            var ac_weather = $(tr).find(".ac_weather").text().trim();
+            ac_weather = ac_weather.split(",");
+            for(var i=0;i<ac_weather.length;i++){
+                $("input[name='add_acweather[]']").each(function() {
+                    if($(this).val()==ac_weather[i]){
+                        $(this).prop("checked", true);
+                    }
+                });
+            }
+
+            var ac_timetype = $(tr).find(".ac_timetype").text().trim();
+            ac_timetype = ac_timetype.split(",");
+            for(var i=0;i<ac_timetype.length;i++){
+                $("input[name='add_actimetype[]']").each(function() {
+                    if($(this).val()==ac_timetype[i]){
+                        $(this).prop("checked", true);
+                    }
+                });
+            }
             
             $("input[name='add_acid']").val(ac_id);
             $("input[name='add_acname']").val(ac_name);
             $("select[name='add_actype'] option[value="+ac_type+"]").attr("selected",true); 
-            $("select[name='add_acweather'] option[value="+ac_weather+"]").attr("selected",true); 
             $("input[name='add_acdrive']").val(ac_drive);
             $("input[name='add_accarry']").val(ac_carry);
             $("input[name='add_acspend']").val(ac_spend);
@@ -261,14 +328,14 @@
 
     function update(){
         var add_acname = $("input[name='add_acname']").val();
-        var carry = $("input[name='carry']").val();
+        var add_accarry = $("input[name='add_accarry']").val();
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
             return alert("請輸入活動項目!");
             }
 
-            if(carry==""){
+            if(add_accarry==""){
                 return alert("請輸入攜帶物品!");
             }
         }

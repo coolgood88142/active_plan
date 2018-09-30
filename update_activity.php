@@ -17,6 +17,18 @@
     $add_typename = $_POST['add_typename'];
 
     if($up_activitys=='Y'){
+        if($add_acweather!="" && $add_acweather=="*"){
+            $add_acweather = "";
+            $sql = "SELECT aw_type FROM activity_weather ";
+            $query = $conn->query($sql);
+            $weather = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($weather as $key => $value){
+                $add_acweather = $add_acweather . $value['aw_type'] . ",";
+            }
+            $add_acweather = substr($add_acweather,0,-1);
+        }
+        
         $sql = "UPDATE activity SET ac_name='$add_acname', ac_type = $add_actype, ac_weather = '$add_acweather', ac_drive = $add_acdrive, ac_drive = $add_acdrive, ac_carry = '$add_accarry', ac_spend = $add_acspend, ac_hours = $add_achours WHERE ac_id =  $add_acid ";
         $conn->exec($sql);
     }else if($up_timetypes=='Y'){

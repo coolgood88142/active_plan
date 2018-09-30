@@ -57,9 +57,26 @@
         $add_accarry = $_POST['add_accarry'];
         $add_acspend = $_POST['add_acspend'];
         $add_achours = $_POST['add_achours'];
+        $add_actimetype = $_POST['add_actimetype'];
+
+        $add_weather="";
+        if(count($add_acweather)>0){
+            foreach($add_acweather as $key => $weather){
+                $add_weather = $add_weather . $weather . ",";
+            }
+            $add_weather = substr($add_weather,0,-1);
+        }
         
-        $sql = "INSERT INTO activity (ac_type, ac_name, ac_weather, ac_drive, ac_carry, ac_spend, ac_hours)
-        VALUES ($add_actype, '$add_acname', '$add_acweather', $add_acdrive, '$add_accarry', $add_acspend, $add_achours)";
+        $add_timetype="";
+        if(count($add_actimetype)>0){
+            foreach($add_actimetype as $key => $timetype){
+                $add_timetype = $add_timetype . $timetype . ",";
+            }
+            $add_timetype = substr($add_timetype,0,-1);
+        }     
+        
+        $sql = "INSERT INTO activity (ac_type, ac_name, ac_weather, ac_drive, ac_carry, ac_spend, ac_hours, ac_timetype)
+        VALUES ($add_actype, '$add_acname', '$add_weather', $add_acdrive, '$add_accarry', $add_acspend, $add_achours, '$add_timetype')";
         $conn->exec($sql);
     }else if(isset($_POST['add_timetypes']) && $_POST['add_timetypes']=='Y'){
         $add_typename = $_POST['add_typename'];
