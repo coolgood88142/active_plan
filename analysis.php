@@ -13,6 +13,8 @@
 <script src="exporting.js"></script>
 <script src="export-data.js"></script>
 <script src="wordcloud.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<script src="jquery-ui.js"></script>
 <?php session_start();
     include("mysql.php");
 
@@ -35,7 +37,7 @@
           font-size:20px;
         }
     </style>
-    <form name="showForm" method="post">
+    <form action="select_activity.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" id="activity_text" value="<?=$activity_text?>"/>
         <div id="button"></div>
@@ -44,6 +46,10 @@
         <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
         <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
         <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+        <br/><br/>
+        起始年月: <input type="text" name="begin_date" value="" size="8"/> ~ <input type="text" name="end_date" value="" size="8"/>&nbsp
+        <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
+        <input type="hidden" name="chart_type" value=""/>
         <div id="ac_name" style="display_none;"></div>
         <div id="ac_type" style="display_none;"></div>
         <div id="ty_type" style="display_none; height: 400px"></div>
@@ -53,7 +59,36 @@
     $(document).ready(function() {
         $('#button').load('button.php');
         acivity_name();
+
+        $("input[name='begin_date']").datepicker({
+            dateFormat: "yy-mm"
+        });
+
+        $("input[name='end_date']").datepicker({
+            dateFormat: "yy-mm"
+        });
     });
+    
+    function query_chart(){
+      var from = $("form[name='showForm']");
+      var begin_date = $("input[name='begin_date']").val();
+      var end_date = $("input[name='end_date']").val();
+
+      if(begin_date=="" || end_date==""){
+        return alert("請輸入起始年月!");
+      }
+
+      if($('#ac_name').is(':visible')){
+        $("input[name='chart_type']").val('1');
+      }else if($('#ac_type').is(':visible')){
+        $("input[name='chart_type']").val('2');
+      }else if($('#ac_type').is(':visible')){
+        $("input[name='chart_type']").val('3');
+      }
+      
+
+      $(from).submit();
+    }
 
     function show_chart(chart){
       if(chart=='1'){

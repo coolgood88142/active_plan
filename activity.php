@@ -149,16 +149,19 @@
         <br/><br/>
     </p>
     <p class="drive" style="display:none;">車程(小時):
-        <input type="text" name="add_acdrive" value="" size="2">小時<br/><br/>
+        <input type="text" name="add_acdrive" value="" size="2"  
+        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
     </p>
     <p class="carry" style="display:none;">攜帶物品:
           <input type="text" name="add_accarry" value="無" ><br/><br/>
     </p>
     <p class="spend" style="display:none;">花費:
-          <input type="text" name="add_acspend" value="0" >元<br/><br/>
+          <input type="text" name="add_acspend" value="0" 
+          onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
     </p>
     <p class="hours" style="display:none;">時間(小時):
-        <input type="text" name="add_achours" value="" size="2">小時<br/><br/>
+        <input type="text" name="add_achours" value="" size="2"
+        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
     </p>
     <p class="timetype" style="display:none;">時段:
         <?php
@@ -250,9 +253,12 @@
     }
 
     function insert(){
-        var add_acname = $("input[name='add_acname']").val();
-        var add_accarry = $("input[name='add_accarry']").val();
+        var add_acname = $("input[name='add_acname']").val();    
         var add_acweather = $("input[name='add_acweather[]']").is(":checked");
+        var add_acdrive = $("input[name='add_acdrive']").val();
+        var add_accarry = $("input[name='add_accarry']").val();
+        var add_acspend = $("input[name='add_acspend']").val();
+        var add_achours = $("input[name='add_achours']").val();
         var add_actimetype = $("input[name='add_actimetype[]']").is(":checked");
 
         if($(".activity").is(":visible")){
@@ -260,12 +266,28 @@
                 return alert("請輸入活動項目!");
             }
 
+            if(add_acweather==false){
+                return alert("請至少打勾一項天氣!");
+            }
+
+            if(add_acdrive==""){
+                return alert("請輸入車程欄位!");
+            }else if(add_acdrive=="0"){
+                return alert("請至少輸入1小時!");
+            }
+
             if(add_accarry==""){
                 return alert("請輸入攜帶物品!");
             }
 
-            if(add_acweather==false){
-                return alert("請至少打勾一項天氣!");
+            if(add_acspend==""){
+                return alert("請輸入花費欄位!");
+            }
+
+            if(add_achours==""){
+                return alert("請輸入時間欄位!");
+            }else if(add_achours=="0"){
+                return alert("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){
@@ -327,22 +349,41 @@
     }
 
     function update(){
-        var add_acname = $("input[name='add_acname']").val();
-        var add_accarry = $("input[name='add_accarry']").val();
+        var add_acname = $("input[name='add_acname']").val();    
         var add_acweather = $("input[name='add_acweather[]']").is(":checked");
+        var add_acdrive = $("input[name='add_acdrive']").val();
+        var add_accarry = $("input[name='add_accarry']").val();
+        var add_acspend = $("input[name='add_acspend']").val();
+        var add_achours = $("input[name='add_achours']").val();
         var add_actimetype = $("input[name='add_actimetype[]']").is(":checked");
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
-            return alert("請輸入活動項目!");
+                return alert("請輸入活動項目!");
+            }
+
+            if(add_acweather==false){
+                return alert("請至少打勾一項天氣!");
+            }
+
+            if(add_acdrive==""){
+                return alert("請輸入車程欄位!");
+            }else if(add_acdrive=="0"){
+                return alert("請至少輸入1小時!");
             }
 
             if(add_accarry==""){
                 return alert("請輸入攜帶物品!");
             }
 
-            if(add_acweather==false){
-                return alert("請至少打勾一項天氣!");
+            if(add_acspend==""){
+                return alert("請輸入花費欄位!");
+            }
+
+            if(add_achours==""){
+                return alert("請輸入時間欄位!");
+            }else if(add_achours=="0"){
+                return alert("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){

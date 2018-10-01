@@ -7,6 +7,9 @@
 <!-- DataTables v1.10.16 -->
 <link href="jquery.dataTables.min.css" rel="stylesheet" />
 <script src="jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="jquery-ui.js"></script>
 <?php session_start();
     include("mysql.php"); 
 
@@ -102,24 +105,24 @@
                     </td>
                     <td class="weather_name" style="display:none;">
                         <?php 
-                            // $acweather = $ac_weather[$i];
-                            // $wather_count = count($acweather);
+                            $acweather = $ac_weather[$i];
+                            $wather_count = count($acweather);
 
-                            // $wather_name = "";
-                            // for($j=0;$j<$wather_count;$j++){
-                            //     $aw_type = $acweather[$j];
-                            //     $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
-                            //     $query = $conn->query($sql);
-                            //     $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+                            $wather_name = "";
+                            for($j=0;$j<$wather_count;$j++){
+                                $aw_type = $acweather[$j];
+                                $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                $query = $conn->query($sql);
+                                $awname = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                            //     foreach($awname as $key => $name){
-                            //         $wather_name = $wather_name . $name['aw_name'];                                  
-                            //     }
+                                foreach($awname as $key => $name){
+                                    $wather_name = $wather_name . $name['aw_name'];                                  
+                                }
 
-                            //     if($j!=$wather_count-1){
-                            //         $wather_name = $wather_name . "、";
-                            //     }
-                            // }
+                                if($j!=$wather_count-1){
+                                    $wather_name = $wather_name . "、";
+                                }
+                            }
                             echo $ac_weather[$i];
                         ?>
                     </td>
@@ -241,7 +244,9 @@
         $('#example1').DataTable();
         $('#example2').DataTable();
         $('#example2_wrapper').hide();
-        
+        $("input[name='pt_date']").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
     } );
 
     function add_plan(){

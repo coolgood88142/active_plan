@@ -11,14 +11,30 @@
     $query = $conn->query($sql);
     $active_type = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    $begin_date = "";$end_date = "";
+    if(isset($_POST['begin_date']) && isset($_POST['end_date'])){
+        $begin_date = $_POST['begin_date'] . "-01";
+        $end_date = $_POST['end_date'] . "-31";
+    }
+
+    $chart_type = "";
+    if(isset($_POST['chart_type'])){
+        $chart_type = $_POST['chart_type'];
+    }
+
     $us_id = $_SESSION['us_id'];
-    $sql = "SELECT ac_name, ";
+    $sql = "SELECT ac_name,  (select count(pn_id) from plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id ";
 
     if($us_admin!='Y' && $us_id!=""){
-        $sql = $sql . " (select count(pn_id) from plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id and pt_usid = $us_id)"; 
-    }else{
-        $sql = $sql . " (select count(pn_id) from plan_acname where pn_acid = ac_id)";
+        $sql = $sql . "  and pt_usid = $us_id"; 
     }
+
+    if($chart_type=='1' && $begin_date!="" && $end_date!=""){
+        $sql = $sql . " and pt_date between '$begin_date' and '$end_date')";
+    }else{
+        $sql = $sql . ")";
+    }
+
     $sql = $sql . " as ac_count FROM activity order by ac_id";
     
     $query = $conn->query($sql);

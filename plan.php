@@ -7,6 +7,9 @@
 <!-- DataTables v1.10.16 -->
 <link href="jquery.dataTables.min.css" rel="stylesheet" />
 <script src="jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="jquery-ui.js"></script>
 <?php session_start();
     include("mysql.php");
     $us_admin = $_SESSION['us_admin'];
@@ -383,6 +386,10 @@
         $("input[name='back']").hide();
         $(".add_activityText").hide();
         $(".check_activity").hide();
+        $("input[name='plan_date']").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
         
         $('#example1').DataTable();
         $('#example1 tbody').on('click', 'td.details-control', function () {
