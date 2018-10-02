@@ -14,12 +14,14 @@
     $begin_date = "";$end_date = "";
     if(isset($_POST['begin_date']) && isset($_POST['end_date'])){
         $begin_date = $_POST['begin_date'] . "-01";
-        $end_date = $_POST['end_date'] . "-31";
+        $end_date = $_POST['end_date'] . "-31";   
     }
 
     $chart_type = "";
     if(isset($_POST['chart_type'])){
         $chart_type = $_POST['chart_type'];
+        session_start();
+        $us_admin = $_SESSION['us_admin'];
     }
 
     $us_id = $_SESSION['us_id'];
@@ -49,8 +51,12 @@
     }
     $activity_text = substr($activity_text,0,-1);
 
-    // $type_array=[$month1,$month2,$month3,$month4,$month5,$month6,$month7,$month8,$month9,$month10,$month11,$month12];
-    if(isset($today_year)){
+    $begin="";$end="";
+    if(isset($today_year) || isset($_POST['today_year'])){
+        if(isset($_POST['today_year']) && $_POST['today_year']=='Y'){
+            $today_year = date ("Y");
+        }
+
         $sql = "SELECT name FROM activity_types";
         $query = $conn->query($sql);
         $name = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -61,10 +67,17 @@
             $count++;
         }
 
+        $begin_month = "";$end_month = "";$begin_month=0;
         $month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+        if($chart_type=='2' && isset($_POST['begin_date']) && isset($_POST['end_date'])){
+            $begin = explode("-", $_POST['begin_date']);
+            $end = explode("-", $_POST['end_date']);
+            $month = [$begin[1],$end[1]];
+        }
+
         $month_array=[];
         $month_count = count($month);
-        for($i=0;$i<$month_count;$i++){
+        for($i=$begin_month;$i<$month_count;$i++){
             $year_month_01 = $today_year . "-". $month[$i] . "-01";
             $year_month_31 = $today_year . "-". $month[$i] . "-31";
             $sql = "SELECT name, ";
@@ -98,7 +111,6 @@
         
     }
 
-    // echo var_dump($month_array);
 
 
     $sql = "SELECT * FROM time_types ";
@@ -117,6 +129,8 @@
         }else{
             $sql = $sql . " where ac_timetype like '%$ty_type%'";
         }
+        
+        // SELECT count(ac_timetype) as time_count FROM activity,plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id and ac_timetype like '%1%' and pt_date BETWEEN '2018-09-01' AND '2018-09-31'
 
         $query = $conn->query($sql);
         $activity_time = $query->fetch(PDO::FETCH_ASSOC);

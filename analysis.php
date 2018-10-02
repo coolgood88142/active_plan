@@ -3,7 +3,7 @@
     <title>規劃行程系統</title>
   </head>
   <!-- jQuery v1.9.1 -->
-<script src="jquery-3.3.1.js"></script>
+<script src="jquery-1.12.4.js"></script>
 <!-- DataTables v1.10.16 -->
 <link href="jquery.dataTables.min.css" rel="stylesheet" />
 <script src="jquery.dataTables.min.js"></script>
@@ -36,6 +36,7 @@
         tspan{
           font-size:20px;
         }
+    }
     </style>
     <form action="select_activity.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
@@ -50,6 +51,7 @@
         起始年月: <input type="text" name="begin_date" value="" size="8"/> ~ <input type="text" name="end_date" value="" size="8"/>&nbsp
         <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
         <input type="hidden" name="chart_type" value=""/>
+        <input type="hidden" name="today_year" value="Y" />
         <div id="ac_name" style="display_none;"></div>
         <div id="ac_type" style="display_none;"></div>
         <div id="ty_type" style="display_none; height: 400px"></div>
@@ -59,15 +61,33 @@
     $(document).ready(function() {
         $('#button').load('button.php');
         acivity_name();
-
-        $("input[name='begin_date']").datepicker({
-            dateFormat: "yy-mm"
-        });
-
-        $("input[name='end_date']").datepicker({
-            dateFormat: "yy-mm"
-        });
+        openDate($("input[name='begin_date']"));
+        openDate($("input[name='end_date']"));
     });
+
+    function openDate(name){
+      $(name).datepicker({
+          dateFormat: "yy-mm",
+          changeMonth : true,
+          changeYear : true,
+          showMonthAfterYear : true,
+          monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+          onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month, 1)));
+          }
+      });
+
+      $(name).focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+      });
+    }
     
     function query_chart(){
       var from = $("form[name='showForm']");
