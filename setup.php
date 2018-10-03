@@ -2,11 +2,7 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-       <!-- jQuery v1.9.1 -->
-<script src="jquery-3.3.1.js"></script>
-<!-- DataTables v1.10.16 -->
-<link href="jquery.dataTables.min.css" rel="stylesheet" />
-<script src="jquery.dataTables.min.js"></script>
+  <?php include("link.php");?>
   <body>
     <form action="<?php echo "insert.php" ?>" name="setupForm" method="post">
         請輸入帳號: <input type="text" name="us_account" /><br/><br/>

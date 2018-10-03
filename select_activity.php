@@ -11,16 +11,17 @@
     $query = $conn->query($sql);
     $active_type = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    //起迄日期用年月日(yy-mm-dd)
     $begin_date = "";$end_date = "";
     if(isset($_POST['begin_date']) && isset($_POST['end_date'])){
-        $begin_date = $_POST['begin_date'] . "-01";
-        $end_date = $_POST['end_date'] . "-31";   
+        $begin_date = $_POST['begin_date'];
+        $end_date = $_POST['end_date'];   
     }
 
     $chart_type = "";
     if(isset($_POST['chart_type'])){
         $chart_type = $_POST['chart_type'];
-        session_start();
+        // session_start();
         $us_admin = $_SESSION['us_admin'];
     }
 
