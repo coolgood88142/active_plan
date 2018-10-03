@@ -2,14 +2,7 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-  <!-- jQuery v1.9.1 -->
-<script src="jquery-3.3.1.js"></script>
-<!-- DataTables v1.10.16 -->
-<link href="jquery.dataTables.min.css" rel="stylesheet" />
-<script src="jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="jquery-ui.js"></script>
+<?php include("link.php");?>
 <?php session_start();
     include("mysql.php");
     $us_admin = $_SESSION['us_admin'];
@@ -369,6 +362,7 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
+        $('#link').load('link.php');
         $('#example3').DataTable();
         $('#example3_wrapper').hide();
         $('#example2').DataTable();
@@ -386,10 +380,7 @@
         $("input[name='back']").hide();
         $(".add_activityText").hide();
         $(".check_activity").hide();
-        $("input[name='plan_date']").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
-
+        openDate($("input[name='plan_date']"));
         
         $('#example1').DataTable();
         $('#example1 tbody').on('click', 'td.details-control', function () {
@@ -471,6 +462,23 @@
         }
         
     } );
+
+    function openDate(name){
+      $(name).datepicker({
+          dateFormat: "yy-mm-dd",
+          changeMonth : true,
+          changeYear : true,
+          showMonthAfterYear : true,
+          dayNames : [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ],
+          dayNamesShort : [ "日", "一", "二", "三", "四", "五", "六" ],
+          dayNamesMin : [ "日", "一", "二", "三", "四", "五", "六" ],
+          monthNames : [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月","10月", "11月", "12月" ],
+          monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12" ],
+          nextText : "下個月",
+          prevText : "上個月"
+      });
+    }
+
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();

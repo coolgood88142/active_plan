@@ -2,30 +2,16 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-  <!-- jQuery v1.9.1 -->
-<script src="jquery-1.12.4.js"></script>
-<!-- DataTables v1.10.16 -->
-<link href="jquery.dataTables.min.css" rel="stylesheet" />
-<script src="jquery.dataTables.min.js"></script>
-<script src="highcharts.js"></script>
-<script src="highcharts-3d.js"></script>
-<script src="series-label.js"></script>
-<script src="exporting.js"></script>
-<script src="export-data.js"></script>
-<script src="wordcloud.js"></script>
-<link rel="stylesheet" href="jquery-ui.css">
-<script src="jquery-ui.js"></script>
+<?php include("link.php");?>
 <?php session_start();
     include("mysql.php");
-
-
+    
     $us_admin = $_SESSION['us_admin'];
     if(!empty($us_admin)){
         date_default_timezone_set('Asia/Taipei');
         $today_year = date ("Y");
         include("select_activity.php"); 
     }
-
  ?>
   <body>
     <style>
@@ -67,25 +53,17 @@
 
     function openDate(name){
       $(name).datepicker({
-          dateFormat: "yy-mm",
+          dateFormat: "yy-mm-dd",
           changeMonth : true,
           changeYear : true,
           showMonthAfterYear : true,
-          monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-          onClose: function(dateText, inst) {
-            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-            $(this).val($.datepicker.formatDate('yy-mm', new Date(year, month, 1)));
-          }
-      });
-
-      $(name).focus(function () {
-        $(".ui-datepicker-calendar").hide();
-        $("#ui-datepicker-div").position({
-            my: "center top",
-            at: "center bottom",
-            of: $(this)
-        });
+          dayNames : [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ],
+          dayNamesShort : [ "日", "一", "二", "三", "四", "五", "六" ],
+          dayNamesMin : [ "日", "一", "二", "三", "四", "五", "六" ],
+          monthNames : [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月","10月", "11月", "12月" ],
+          monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12" ],
+          nextText : "下個月",
+          prevText : "上個月"
       });
     }
     
