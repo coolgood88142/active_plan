@@ -29,7 +29,7 @@
       $name_array = $_POST['post_name_array'];
       $month_array = $_POST['post_month_array'];
     }else if($chart_type="3" && isset($_POST['post_time_array'])){
-      $time_array = (Array)json_decode($_POST['post_time_array'], false, 512, JSON_UNESCAPED_UNICODE);
+      $time_array = json_decode($_POST['post_time_array'], false, 512, JSON_UNESCAPED_UNICODE);
       echo var_dump($time_array);
     }
 

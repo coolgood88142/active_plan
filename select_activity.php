@@ -21,11 +21,11 @@
     $chart_type = "";
     if(isset($_POST['chart_type'])){
         $chart_type = $_POST['chart_type'];
-        session_start();
-        $us_admin = $_SESSION['us_admin'];
+        $us_admin = $_POST['admin'];
+    }else{
+        $us_id = $_SESSION['us_id'];
     }
 
-    $us_id = $_SESSION['us_id'];
     $sql = "SELECT ac_name,  (select count(pn_id) from plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id ";
 
     if($us_admin!='Y' && $us_id!=""){
@@ -155,7 +155,8 @@
         $field_count++;
     }
     $json_time_array = json_encode($time_array,JSON_UNESCAPED_UNICODE);
-
+    
+    // echo var_dump($json_time_array);
     $sql = "SELECT * FROM activity_weather ";
     $query = $conn->query($sql);
     $activity_weather = $query->fetchAll(PDO::FETCH_ASSOC);

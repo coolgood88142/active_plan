@@ -1,5 +1,5 @@
  <!-- jQuery v1.9.1 -->
-<script src="jquery-1.12.4.js"></script>
+<script src="jquery-3.3.1.js"></script>
 <!-- DataTables v1.10.16 -->
 <link href="jquery.dataTables.min.css" rel="stylesheet" />
 <script src="jquery.dataTables.min.js"></script>

@@ -16,6 +16,13 @@
     left:50%;
     transform:translateY(-50%);
     } */
+
+    .vertical-center {
+  position: relative;
+  top: 50%;
+  margin: 0 auto;
+  transform: translateY(-50%);
+}
 }
 
 </style>
@@ -38,50 +45,51 @@
     <input type="hidden" name="errorMessage" value="<?php echo $errorMessage ?>"/>
 
 
-  <div class="container" style="width: 500px;">
-  <div id="accordion">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" data-target="#login" aria-expanded="true" aria-controls="login">
-          登入
-        </button>
-      </h5>
-    </div>
+    <div class="container" style="width: 500px;">
+      <div class="row align-items-end">
+      <div id="accordion">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-primary btn-lg btn-block " data-toggle="collapse" data-target="#login" aria-expanded="true" aria-controls="login">
+                登入
+              </button>
+             </h5>
+        </div>
 
-    <div id="login" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <form name="loginForm" method="post" >
-          帳號: <input type="text" name="us_account" /><br/><br/>
+      <div id="login" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form name="loginForm" method="post" >
+            帳號: <input type="text" name="us_account" /><br/><br/>
 
-          密碼: <input type="password" name="us_password" /><br/><br/>
+            密碼: <input type="password" name="us_password" /><br/><br/>
 
-          <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
-         </form>
-    </div>
-  </div>
+            <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
+          </form>
+        </div>
+      </div>
+      <h3>-----------------------------------------</h3>
+      <div id="setup" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <form  name="setupForm" method="post">
+            請輸入帳號: <input type="text" name="us_account" /><br/><br/>
 
-    <div id="setup" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-      <form  name="setupForm" method="post">
-                  請輸入帳號: <input type="text" name="us_account" /><br/><br/>
+            請輸入密碼: <input type="password" name="us_password" /><br/><br/>
 
-                  請輸入密碼: <input type="password" name="us_password" /><br/><br/>
+            <input type="hidden" name="setup_user"/>       
+          </form>
+        </div>
+      </div>
 
-                  <input type="hidden" name="setup_user"/>       
-                </form>
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-warning btn-lg btn-block " data-toggle="collapse" data-target="#setup" aria-expanded="false" aria-controls="setup">
+             註冊
+          </button>
+        </h5>
       </div>
     </div>
-
-
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-warning btn-lg btn-block " data-toggle="collapse" data-target="#setup" aria-expanded="false" aria-controls="setup">
-          註冊
-        </button>
-      </h5>
-    </div>
-</div>
-    </div>
+  </div>
+  </div>
 
     <!-- <div class="container">
       <div class="row">
