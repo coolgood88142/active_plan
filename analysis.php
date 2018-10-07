@@ -2,16 +2,37 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-<?php include("link.php");?>
+  <?php include("link.php");?>
 <?php session_start();
     include("mysql.php");
-    
     $us_admin = $_SESSION['us_admin'];
-    if(!empty($us_admin)){
+    
+    $chart_type = "";$begin_date="";$end_date="";$activity_text="";
+    $name_array=[];$month_array=[];$time_array=[];
+    $namecount="";$monthcount="";$timecount="";
+    if(isset($_POST['post_chart_type'])){
+        $chart_type = $_POST['post_chart_type'];
+    }else if(!empty($us_admin)){
         date_default_timezone_set('Asia/Taipei');
         $today_year = date ("Y");
         include("select_activity.php"); 
     }
+
+    if(isset($_POST['post_begin_date']) && isset($_POST['post_end_date'])){
+      $begin_date = $_POST['post_begin_date'];
+      $end_date = $_POST['post_end_date'];
+    }
+
+    if($chart_type=='1' && isset($_POST['post_activity_text'])){
+      $activity_text = $_POST['post_activity_text'];
+    }else if($chart_type=='2' && isset($_POST['post_name_array']) && isset($_POST['post_month_array'])){
+      $name_array = $_POST['post_name_array'];
+      $month_array = $_POST['post_month_array'];
+    }else if($chart_type="3" && isset($_POST['post_time_array'])){
+      $time_array = (Array)json_decode($_POST['post_time_array'], false, 512, JSON_UNESCAPED_UNICODE);
+      echo var_dump($time_array);
+    }
+
  ?>
   <body>
     <style>
@@ -26,6 +47,9 @@
     </style>
     <form action="select_activity.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+        <input type="hidden" id="post_chart_type" value="<?=$chart_type?>"/>
+        <input type="hidden" id="post_begin_date" value="<?=$begin_date?>"/>
+        <input type="hidden" id="post_end_date" value="<?=$end_date?>"/>
         <input type="hidden" id="activity_text" value="<?=$activity_text?>"/>
         <div id="button"></div>
         <H2>分析表</H2>
@@ -49,6 +73,14 @@
         acivity_name();
         openDate($("input[name='begin_date']"));
         openDate($("input[name='end_date']"));
+        if($("input[name='post_chart_type']").val()!=""){
+          var begin_date = $("input[name='post_begin_date']").val();
+          var end_date = $("input[name='post_end_date']").val();
+
+          $("input[name='begin_date']").val(begin_date);
+          $("input[name='end_date']").val(end_date);
+          show_chart($("input[name='post_chart_type']").val());
+        }
     });
 
     function openDate(name){
@@ -80,7 +112,7 @@
         $("input[name='chart_type']").val('1');
       }else if($('#ac_type').is(':visible')){
         $("input[name='chart_type']").val('2');
-      }else if($('#ac_type').is(':visible')){
+      }else if($('#ty_type').is(':visible')){
         $("input[name='chart_type']").val('3');
       }
       
@@ -167,7 +199,6 @@
         series: [
           <?php 
             $namecount = count($name_array);
-            
             for($i=0;$i<$namecount;$i++){
           ?>
             { name: '<?=$name_array[$i]?>',
@@ -240,8 +271,8 @@
     name: '時段',
     data: [
       <?php 
-          $count = count($time_array['time_name']);
-          for($i=0;$i<$count;$i++){
+          $timecount = count($time_array['time_name']);
+          for($i=0;$i<$timecount;$i++){
         ?>
           ['<?=$time_array['time_name'][$i]?>', <?=$time_array['time_count'][$i]?>],
       <?php

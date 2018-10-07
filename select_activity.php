@@ -62,15 +62,17 @@
         $query = $conn->query($sql);
         $name = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $name_array=[];$count=0;
+        $name_array=[];$count=0;$json_name_array="";
         foreach($name as $key => $value){
             $name_array[$count] = $value['name'];
             $count++;
         }
+        $json_name_array = json_encode($name_array,JSON_UNESCAPED_UNICODE);
 
         $begin_month = "";$end_month = "";$defult_month=0;
         $month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
         if($chart_type=='2' && isset($_POST['begin_date']) && isset($_POST['end_date'])){
+            $month=[];
             $begin = explode("-", $_POST['begin_date']);
             $end = explode("-", $_POST['end_date']);
 
@@ -78,19 +80,14 @@
             $end_month = $end[0] . $end[1];
             $diff = $end_month - $begin_month;
 
+            $j=0;
             $last_month=$begin_month;$array_month="";
-            for($i=0;$i<$diff+1;$i++){
-                $last_month = $last_month + $i;
+            for($i=1;$i<$diff+2;$i++){
+                $last_month = $last_month + 1;
                 $count = substr($last_month,-2);
-                $array_month = $array_month  . $count  . ",";
-            }
-            $array_month = explode(",", $array_month);
-            echo count($array_month);
-            for($j=0;$j<count($array_month);$j++){
-                $month[$j] = $array_month [$j];
-            }
-
-            echo var_dump($month);
+                $month[$j] = $count;
+                $j++;
+            }  
         }
 
         $month_array=[];
@@ -113,7 +110,7 @@
             $type_count = $query->fetchAll(PDO::FETCH_ASSOC);
 
             
-            $name_count = count($name_array);
+            $name_count = count($name_array);$json_month_array="";
             for($j=0;$j<$name_count;$j++){
                 foreach($type_count as $key => $type){
                     if($name_array[$j]==$type['name']){
@@ -125,8 +122,8 @@
                 }
                 
             }
+            $json_month_array = json_encode($month_array,JSON_UNESCAPED_UNICODE);
         }
-        
     }
 
 
@@ -134,21 +131,21 @@
     $sql = "SELECT * FROM time_types ";
     $query = $conn->query($sql);
     $timetypes = $query->fetchAll(PDO::FETCH_ASSOC);
+    $time_array = [];$field_count=0;$json_time_array="";
 
-    $time_array = [];
-    $field_count=0;
     foreach ($timetypes as $key => $value){
         $ty_type = $value['ty_type'];
         $ty_name = $value['ty_name'];
-        $sql = "SELECT count(ac_timetype) as time_count FROM activity ";
+        $sql = "SELECT count(ac_timetype) as time_count FROM activity,plan_trip,plan_acname 
+        where ac_timetype like '%$ty_type%' and pn_acid = ac_id and pn_ptid = pt_id ";
 
         if($us_admin!='Y' && $us_id!=""){
-            $sql = $sql . ",plan_trip,plan_acname where ac_timetype like '%$ty_type%' and pn_acid = ac_id and  pn_ptid = pt_id and pt_usid = $us_id";
-        }else{
-            $sql = $sql . " where ac_timetype like '%$ty_type%'";
+            $sql = $sql . " and pt_usid = $us_id";
         }
-        
-        // SELECT count(ac_timetype) as time_count FROM activity,plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id and ac_timetype like '%1%' and pt_date BETWEEN '2018-09-01' AND '2018-09-31'
+
+        if($chart_type=='3' && $begin_date!="" && $end_date!=""){
+            $sql = $sql . " and pt_date BETWEEN '$begin_date' AND '$end_date'";
+        }
 
         $query = $conn->query($sql);
         $activity_time = $query->fetch(PDO::FETCH_ASSOC);
@@ -157,17 +154,27 @@
         $time_array['time_count'][$field_count] = $activity_time['time_count'];
         $field_count++;
     }
+    $json_time_array = json_encode($time_array,JSON_UNESCAPED_UNICODE);
 
     $sql = "SELECT * FROM activity_weather ";
     $query = $conn->query($sql);
     $activity_weather = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<!-- <script language="JavaScript">
+<form action="analysis.php" name="submitForm" method="post">
+    <input type="hidden" name="post_chart_type" value="<?=$chart_type?>"/>
+    <input type="hidden" name="post_begin_date" value="<?=$begin_date?>"/>
+    <input type="hidden" name="post_end_date" value="<?=$end_date?>"/>
+    <input type="hidden" name="post_activity_text" value="<?=$activity_text?>"/>
+    <input type="hidden" name="post_name_array" value="<?=$json_name_array?>"/>
+    <input type="hidden" name="post_month_array" value="<?=$json_month_array?>"/>
+    <input type="hidden" name="post_time_array" value="<?=$json_time_array?>"/>
+</form>
+<script language="JavaScript">
     <?php 
         if(isset($_POST['chart_type'])){
     ?>
-            location.href = "analysis.php";
+            document.submitForm.submit();
     <?php
         }
     ?>
-</script> -->
+</script>
