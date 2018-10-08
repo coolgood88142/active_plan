@@ -18,11 +18,17 @@
     } */
 
     .vertical-center {
-  position: relative;
-  top: 50%;
-  margin: 0 auto;
-  transform: translateY(-50%);
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center; 
 }
+
+.jumbotron{
+  background: url("background.jpg") no-repeat center center; 
+  height:100%;
+  width:100%;
 }
 
 </style>
@@ -44,7 +50,7 @@
     <input type="hidden" name="error" value="<?php echo $error ?>"/>
     <input type="hidden" name="errorMessage" value="<?php echo $errorMessage ?>"/>
 
-
+<div class="jumbotron vertical-center">
     <div class="container" style="width: 500px;">
       <div class="row align-items-end">
       <div id="accordion">
@@ -90,6 +96,7 @@
     </div>
   </div>
   </div>
+</div>
 
     <!-- <div class="container">
       <div class="row">

@@ -154,21 +154,39 @@
         $time_array['time_count'][$field_count] = $activity_time['time_count'];
         $field_count++;
     }
-    $json_time_array = json_encode($time_array,JSON_UNESCAPED_UNICODE);
+    $json_time_array = array_to_json($time_array);
     
-    // echo var_dump($json_time_array);
+    
+    var_dump(array_to_json($time_array)); 
+    
     $sql = "SELECT * FROM activity_weather ";
     $query = $conn->query($sql);
     $activity_weather = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    function array_to_json($sel_array){
+        foreach($sel_array as $key => $value){
+            
+         if(is_string($key) || is_string($value)) {
+            
+             foreach($value as $key2 => $value2){
+                $new_array[urlencode($key2)] = urlencode($value2);
+            }
+            $new_array2[urlencode($key)] =  $new_array;
+
+         }
+        }
+       
+        return urldecode(json_encode($new_array2));
+       }
 ?>
-<form action="analysis.php" name="submitForm" method="post">
+<!-- <form action="analysis.php" name="submitForm" method="post">
     <input type="hidden" name="post_chart_type" value="<?=$chart_type?>"/>
     <input type="hidden" name="post_begin_date" value="<?=$begin_date?>"/>
     <input type="hidden" name="post_end_date" value="<?=$end_date?>"/>
     <input type="hidden" name="post_activity_text" value="<?=$activity_text?>"/>
     <input type="hidden" name="post_name_array" value="<?=$json_name_array?>"/>
     <input type="hidden" name="post_month_array" value="<?=$json_month_array?>"/>
-    <input type="hidden" name="post_time_array" value="<?=$json_time_array?>"/>
+    <input type="hidden" name="post_time_array" value="<?php echo $json_time_array?>"/>
 </form>
 <script language="JavaScript">
     <?php 
@@ -178,4 +196,4 @@
     <?php
         }
     ?>
-</script>
+</script> -->

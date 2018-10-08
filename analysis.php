@@ -2,7 +2,20 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-  <?php include("link.php");?>
+  
+<?php include("link.php");?>
+<!---*** Start: JQuery 3.3.1 version. ***--->
+<script language="javascript" src="jquery.min.js"></script>
+<!---*** End: JQuery 3.3.1 version. ***--->
+<!---*** Start: Bootstrap 3.3.7 version files. ***--->
+<script language="javascript" src="bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!---*** End: Bootstrap 3.3.7 version files. ***--->
+
+<script language="javascript" src="moment.js"></script>
+<script language="javascript" src="bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
+<script src="zh-cn.js"></script>
 <?php session_start();
     include("mysql.php");
     $us_admin = $_SESSION['us_admin'];
@@ -30,9 +43,8 @@
       $month_array = $_POST['post_month_array'];
     }else if($chart_type="3" && isset($_POST['post_time_array'])){
       $time_array = json_decode($_POST['post_time_array'], false, 512, JSON_UNESCAPED_UNICODE);
-      echo var_dump($time_array);
-    }
-
+      var_dump($_POST['post_time_array']);
+    }  
  ?>
   <body>
     <style>
@@ -58,7 +70,15 @@
         <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
         <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
         <br/><br/>
-        起始年月: <input type="text" name="begin_date" value="" size="8"/> ~ <input type="text" name="end_date" value="" size="8"/>&nbsp
+        起始年月: 
+          <div class="input-group datepick">
+            <input type="text" class="form-control" name="begin_date" value="2018-08-01" size="16"  required readonly/>
+            <input type="text" class="form-control" name="end_date" value="2018-09-30" size="16"  required readonly/>
+            <div class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </div>
+          </div>
+          
         <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
         <input type="hidden" name="chart_type" value=""/>
         <input type="hidden" name="today_year" value="Y" />
@@ -71,8 +91,7 @@
     $(document).ready(function() {
         $('#button').load('button.php');
         acivity_name();
-        openDate($("input[name='begin_date']"));
-        openDate($("input[name='end_date']"));
+        
         if($("input[name='post_chart_type']").val()!=""){
           var begin_date = $("input[name='post_begin_date']").val();
           var end_date = $("input[name='post_end_date']").val();
@@ -81,21 +100,27 @@
           $("input[name='end_date']").val(end_date);
           show_chart($("input[name='post_chart_type']").val());
         }
+
+        $(".datepick").datetimepicker({
+        format: "YYYY-MM-DD",
+        ignoreReadonly: true,
+        locale: moment.locale('zh-cn')
+      });
     });
 
     function openDate(name){
-      $(name).datepicker({
-          dateFormat: "yy-mm-dd",
-          changeMonth : true,
-          changeYear : true,
-          showMonthAfterYear : true,
-          dayNames : [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ],
-          dayNamesShort : [ "日", "一", "二", "三", "四", "五", "六" ],
-          dayNamesMin : [ "日", "一", "二", "三", "四", "五", "六" ],
-          monthNames : [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月","10月", "11月", "12月" ],
-          monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12" ],
-          nextText : "下個月",
-          prevText : "上個月"
+      $(name).datetimepicker({
+          format: "yy-mm-dd",
+          ignoreReadonly: true,
+          language:  'zh-CN',  //日期
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+
       });
     }
     
@@ -270,15 +295,7 @@
     type: 'pie',
     name: '時段',
     data: [
-      <?php 
-          $timecount = count($time_array['time_name']);
-          for($i=0;$i<$timecount;$i++){
-        ?>
-          ['<?=$time_array['time_name'][$i]?>', <?=$time_array['time_count'][$i]?>],
-      <?php
-            
-          }
-        ?>
+
     ]
   }]
 });
