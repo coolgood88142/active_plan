@@ -72,21 +72,25 @@
             $count++;
         }
 
-        $begin_month = "";$end_month = "";$defult_month=0;
+        $begin_month = "";$end_month = "";$defult_month=0;$begin_day="";$end_day="";
         $month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
         if($chart_type=='2' && isset($_POST['begin_date']) && isset($_POST['end_date'])){
             $month=[];
+            $begin_day = $_POST['begin_date'];
+            $end_day = $_POST['end_date'];
             $begin = explode("-", $_POST['begin_date']);
             $end = explode("-", $_POST['end_date']);
 
             $begin_month = $begin[0] . $begin[1];
             $end_month = $end[0] . $end[1];
+
             $diff = $end_month - $begin_month;
 
             $j=0;
             $last_month=$begin_month;$array_month="";
-            for($i=1;$i<$diff+2;$i++){
-                $last_month = $last_month + 1;
+            //組月份陣列
+            for($i=0;$i<$diff+1;$i++){
+                $last_month = $last_month + $i;
                 $count = substr($last_month,-2);
                 $month[$j] = $count;
                 $j++;
@@ -98,6 +102,17 @@
         for($i=$defult_month;$i<$month_count;$i++){
             $year_month_01 = $today_year . "-". $month[$i] . "-01";
             $year_month_31 = $today_year . "-". $month[$i] . "-31";
+
+            //查詢日期條件
+            if($begin_month==$end_month && $begin_month!="" && $end_month!=""){
+                $year_month_01 = $begin_day;
+                $year_month_31 = $end_day;
+            }else if($i==0){
+                $year_month_01 = $begin_day;
+            }else if($i==$month_count-1){
+                $year_month_31 = $end_day;
+            }
+
             $sql = "SELECT name, ";
 
             if($us_admin!='Y' && $us_id!=""){
@@ -128,7 +143,7 @@
         }
 
         if($chart_type=='2'){
-            echo json_encode(array('name_array' => $name_array,'month_array' => $month_array),JSON_UNESCAPED_UNICODE);
+            echo json_encode(array('name_array' => $name_array,'month_array' => $month_array,'month' => $month),JSON_UNESCAPED_UNICODE);
         }
     }
 
