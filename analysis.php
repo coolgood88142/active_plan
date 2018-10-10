@@ -126,6 +126,7 @@
     
     function query_chart(){
       var from = $("form[name='showForm']");
+      var admin = $("input[name='admin']").val();
       var begin_date = $("input[name='begin_date']").val();
       var end_date = $("input[name='end_date']").val();
 
@@ -140,9 +141,31 @@
       }else if($('#ty_type').is(':visible')){
         $("input[name='chart_type']").val('3');
       }
-      
 
-      $(from).submit();
+      var chart_type = $("input[name='chart_type']").val();
+ 
+      var data = {
+          'admin': admin, 
+          'chart_type': chart_type,
+          'begin_date': begin_date,
+          'end_date': end_date
+        };
+      $.ajax({
+			  url: "select_activity.php",
+			  type: "POST",
+        async: true, 
+        dataType: "json",
+			  data: data, 
+			  success: function(info){
+          var test = "";
+          for(var key in info) {
+            test = test + info[key];
+          }
+          alert(test);
+			  }
+      });
+
+      // $(from).submit();
     }
 
     function show_chart(chart){
@@ -159,7 +182,7 @@
       $("#ac_name").show();
       $("#ac_type").hide();
       $("#ty_type").hide();
-      var text = $("#activity_text").val();
+      var text = "<?php echo $activity_text;?>";
       var lines = text.split(/[,. ]+/g),
         data = Highcharts.reduce(lines, function (arr, word) {
         var obj = Highcharts.find(arr, function (obj) {
@@ -295,7 +318,15 @@
     type: 'pie',
     name: '時段',
     data: [
-
+      <?php 
+          $timecount = count($time_array['time_name']);
+          for($i=0;$i<$timecount;$i++){
+        ?>
+          ['<?=$time_array['time_name'][$i]?>', <?=$time_array['time_count'][$i]?>],
+      <?php
+            
+          }
+        ?>
     ]
   }]
 });
