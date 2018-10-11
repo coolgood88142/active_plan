@@ -51,7 +51,7 @@
         }
     }
     $activity_text = substr($activity_text,0,-1);
-
+    
     if($chart_type=='1'){
         echo json_encode(array('activity_text' => $activity_text),JSON_UNESCAPED_UNICODE);
     }
@@ -72,7 +72,7 @@
             $count++;
         }
 
-        $begin_month = "";$end_month = "";$defult_month=0;$begin_day="";$end_day="";
+        $begin_month = "";$end_month = "";$defult_month=0;$begin_day="";$end_day="";$diff_year=0;
         $month = ['01','02','03','04','05','06','07','08','09','10','11','12'];
         if($chart_type=='2' && isset($_POST['begin_date']) && isset($_POST['end_date'])){
             $month=[];
@@ -83,6 +83,12 @@
 
             $begin_month = $begin[0] . $begin[1];
             $end_month = $end[0] . $end[1];
+            $begin_year = $begin[0];
+            $end_year = $end[0];
+
+            if($begin_year!=$end_year){
+                $diff_year = $begin_year - $end_year;
+            }
 
             $diff = $end_month - $begin_month;
 

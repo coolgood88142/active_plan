@@ -5,15 +5,15 @@
   
 <?php include("link.php");?>
 <!---*** Start: JQuery 3.3.1 version. ***--->
-<script language="javascript" src="jquery.min.js"></script>
+<script language="javascript" src="./assets/js/jquery.min.js"></script>
 <!---*** End: JQuery 3.3.1 version. ***--->
 <!---*** Start: Bootstrap 3.3.7 version files. ***--->
-<script language="javascript" src="bootstrap.min.js"></script>
+<script language="javascript" src="./assets/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!---*** End: Bootstrap 3.3.7 version files. ***--->
 
-<script language="javascript" src="moment.js"></script>
-<script language="javascript" src="bootstrap-datetimepicker.min.js"></script>
+<script language="javascript" src="./assets/js/moment.js"></script>
+<script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
 <script src="zh-cn.js"></script>
 <?php session_start();
@@ -28,7 +28,7 @@
     }else if(!empty($us_admin)){
         date_default_timezone_set('Asia/Taipei');
         $today_year = date ("Y");
-        include("select_activity.php"); 
+        include("select_activity.php");
     }
 
     if(isset($_POST['post_begin_date']) && isset($_POST['post_end_date'])){
@@ -66,27 +66,40 @@
         <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
         <br/><br/>
 
-        <div id="select_date" style="hight: 150px;">
-          <div>起始年月:</div>
-          <div class="input-group datepick" style="width: 150px;">
-            <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
-            <div class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
+        <div class="container" id="select_date">
+          <div class="row">
+            <div class="col-md-3 mx-auto" style="width:110px;"><h4>起始日期:</h4></div>
+            <div class="col-md-3 mx-auto">
+              <div class="form-group">
+                <div class="input-group datepick">
+                  <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div> ~ 
-          <div class="input-group datepick" style="width: 150px;">
-            <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
-            <div class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
+            <div class="col-md-3 mx-auto" style="width:10px;"><h4>~</h4></div>
+            <div class="col-md-3 mx-auto">
+              <div class="form-group">
+                <div class="input-group datepick">
+                  <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
+                  <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mx-auto" style="font-size:18px;">
+              <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
             </div>
           </div>
-          <br/>
         </div>
-        
-        <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
+        <br/>
         <input type="hidden" name="chart_type" value=""/>
         <div id="ac_name" style="display_none;"></div>
         <div id="ac_type" style="display_none;"></div>
+        <!--  $("#ac_type").append("<div id="ac_type" style="display_none;"></div>"); -->
         <div id="ty_type" style="display_none; height: 400px"></div>
     </form>  
   </body>
@@ -133,9 +146,17 @@
       var admin = $("input[name='admin']").val();
       var begin_date = $("input[name='begin_date']").val();
       var end_date = $("input[name='end_date']").val();
+      var begin = begin_date.split(/[-. ]+/g);
+      var end = end_date.split(/[-. ]+/g);
+      var begin_day = parseInt(begin[0] + begin[1] + begin[2]);
+      var end_day = parseInt(end[0] + end[1] + end[2]);
 
       if(begin_date=="" || end_date==""){
         return alert("請輸入起始年月!");
+      }else if(parseInt(begin[0])!=parseInt(end[0])){
+        return alert("請輸入相同年份!");
+      }else if(begin_day>end_day){
+        return alert("起始日期不可大於結束日期!");
       }
 
       if($('#ac_name').is(':visible')){
@@ -168,9 +189,12 @@
               acivity_type(info);
             }else if(chart_type=='3'){
               time_type(info);
-            }
-               
-			  }
+            }            
+			  },
+        error:function(xhr, status, error){
+          var err = eval("(" + xhr.responseText + ")");
+          alert(err.Message);
+        }
       });
     }
 
@@ -193,6 +217,9 @@
       var activity_text = "";
       if(obj!="" && obj!=undefined){
         activity_text = obj.activity_text;
+        if(activity_text==false){
+          activity_text = "";
+        }
       }else{
         activity_text = "<?php echo $activity_text;?>";
       }
