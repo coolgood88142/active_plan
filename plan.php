@@ -363,11 +363,11 @@
     $(document).ready(function() {
         $('#button').load('button.php');
         $('#link').load('link.php');
-        $('#example3').DataTable();
+        $('#example3').DataTable(datatable_language());
         $('#example3_wrapper').hide();
-        $('#example2').DataTable();
+        $('#example2').DataTable(datatable_language());
         $('#example2_wrapper').hide();
-        $('#example4').DataTable();
+        $('#example4').DataTable(datatable_language());
         $('#example4_wrapper').hide();
         $("input[name='goplan']").hide();
         $("input[name='addactivity']").hide();
@@ -382,7 +382,7 @@
         $(".check_activity").hide();
         openDate($("input[name='plan_date']"));
         
-        $('#example1').DataTable();
+        $('#example1').DataTable(datatable_language());
         $('#example1 tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = $('#example1').DataTable().row( tr );
@@ -419,7 +419,7 @@
         if($("input[name='admin']").val()!='Y'){
             $('#example1_wrapper').hide();
             $('#example4_wrapper').show();
-            $('#example4').DataTable();
+            $('#example4').DataTable(datatable_language());
             $('#example4 tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = $('#example4').DataTable().row( tr );

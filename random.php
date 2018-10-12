@@ -273,7 +273,7 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        $('#example1').DataTable();
+        $('#example1').DataTable(datatable_language());
         $('#example1_wrapper').hide();
         $("input[name='goplan']").hide();
         $(".plan").hide();

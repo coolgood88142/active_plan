@@ -75,7 +75,7 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        $('#example2').DataTable();
+        $('#example2').DataTable(datatable_language());
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add_type']").show();
 

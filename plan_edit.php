@@ -234,8 +234,8 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        $('#example1').DataTable();
-        $('#example2').DataTable();
+        $('#example1').DataTable(datatable_language());
+        $('#example2').DataTable(datatable_language());
         $('#example2_wrapper').hide();
         $("input[name='pt_date']").datepicker({
             dateFormat: "yy-mm-dd"
@@ -366,7 +366,6 @@
             var ac_ids = ac_id.split(",");
 
 
-            var table = $('#example1').DataTable();
             if(ac_names!="" && ac_names!=null){
                 for(var i=0; i<ac_names.length; i++){
                 var num = document.getElementById("example1").rows.length;

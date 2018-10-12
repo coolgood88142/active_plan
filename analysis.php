@@ -99,7 +99,6 @@
         <input type="hidden" name="chart_type" value=""/>
         <div id="ac_name" style="display_none;"></div>
         <div id="ac_type" style="display_none;"></div>
-        <!--  $("#ac_type").append("<div id="ac_type" style="display_none;"></div>"); -->
         <div id="ty_type" style="display_none; height: 400px"></div>
     </form>  
   </body>

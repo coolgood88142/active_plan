@@ -77,7 +77,7 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        $('#example').DataTable();
+        $('#example').DataTable(datatable_language());
         $('#example tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = $('#example').DataTable().row( tr );

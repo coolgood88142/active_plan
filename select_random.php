@@ -127,9 +127,6 @@
     }
 
 ?>
-<script src="jquery-3.3.1.js"></script>
-<link href="jquery.dataTables.min.css" rel="stylesheet" />
-<script src="jquery.dataTables.min.js"></script>
 
 <input type="hidden" name="is_submit" value="<?=$is_submit?>" />
 <input type="hidden" name="day" value="<?=$day?>" />
@@ -154,6 +151,7 @@
     <input type="hidden" name="post_pnorderby" value="<?=$orderby?>"/>
     <input type="hidden" name="is_query" value="<?=$is_submit?>" />
 </form>
+<?php include("link.php");?>
 <script language="JavaScript">
     $(document).ready(function() {
         var from = $("form[name='submitForm']");
