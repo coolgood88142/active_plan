@@ -14,36 +14,12 @@
 
 <script language="javascript" src="./assets/js/moment.js"></script>
 <script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
-<link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
-<script src="zh-cn.js"></script>
+<link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
+<script src="./assets/js/zh-cn.js"></script>
 <?php session_start();
     include("mysql.php");
-    $us_admin = $_SESSION['us_admin'];
-    
-    $chart_type = "";$begin_date="";$end_date="";$activity_text="";
-    $name_array=[];$month_array=[];$time_array=[];
-    $namecount="";$monthcount="";$timecount="";
-    if(isset($_POST['post_chart_type'])){
-        $chart_type = $_POST['post_chart_type'];
-    }else if(!empty($us_admin)){
-        date_default_timezone_set('Asia/Taipei');
-        $today_year = date ("Y");
-        include("select_activity.php");
-    }
-
-    if(isset($_POST['post_begin_date']) && isset($_POST['post_end_date'])){
-      $begin_date = $_POST['post_begin_date'];
-      $end_date = $_POST['post_end_date'];
-    }
-
-    if($chart_type=='1' && isset($_POST['post_activity_text'])){
-      $activity_text = $_POST['post_activity_text'];
-    }else if($chart_type=='2' && isset($_POST['post_name_array']) && isset($_POST['post_month_array'])){
-      $name_array = $_POST['post_name_array'];
-      $month_array = $_POST['post_month_array'];
-    }else if($chart_type="3" && isset($_POST['post_time_array'])){
-      $time_array = $_POST['post_time_array'];
-    }  
+    $us_admin = $_SESSION['us_admin']; 
+    $_SESSION['analysis'] = true;
  ?>
   <body>
     <style>
@@ -105,17 +81,8 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
-        var chart_type = $("input[name='post_chart_type']").val();
-        if(chart_type!="" && chart_type!=undefined){
-          var begin_date = $("input[name='post_begin_date']").val();
-          var end_date = $("input[name='post_end_date']").val();
-
-          $("input[name='begin_date']").val(begin_date);
-          $("input[name='end_date']").val(end_date);
-          show_chart(chart_type);
-        }else{
-          acivity_name();
-        }
+        $("input[name='chart_type']").val('1');
+        select_chart(true,'1');
 
         $(".datepick").datetimepicker({
         format: "YYYY-MM-DD",
@@ -141,88 +108,41 @@
     }
     
     function query_chart(){
-      var from = $("form[name='showForm']");
-      var admin = $("input[name='admin']").val();
-      var begin_date = $("input[name='begin_date']").val();
-      var end_date = $("input[name='end_date']").val();
-      var begin = begin_date.split(/[-. ]+/g);
-      var end = end_date.split(/[-. ]+/g);
-      var begin_day = parseInt(begin[0] + begin[1] + begin[2]);
-      var end_day = parseInt(end[0] + end[1] + end[2]);
-
-      if(begin_date=="" || end_date==""){
-        return alert("請輸入起始年月!");
-      }else if(parseInt(begin[0])!=parseInt(end[0])){
-        return alert("請輸入相同年份!");
-      }else if(begin_day>end_day){
-        return alert("起始日期不可大於結束日期!");
-      }
-
-      if($('#ac_name').is(':visible')){
-        $("input[name='chart_type']").val('1');
-      }else if($('#ac_type').is(':visible')){
-        $("input[name='chart_type']").val('2');
-      }else if($('#ty_type').is(':visible')){
-        $("input[name='chart_type']").val('3');
-      }
-
       var chart_type = $("input[name='chart_type']").val();
- 
-      var data = {
-          'admin': admin, 
-          'chart_type': chart_type,
-          'begin_date': begin_date,
-          'end_date': end_date,
-          'today_year': 'Y'
-        };
-      $.ajax({
-			  url: "select_activity.php",
-			  type: "POST",
-        async: true, 
-        dataType: "json",
-			  data: data, 
-			  success: function(info){
-            if(chart_type=='1'){
-              acivity_name(info);
-            }else if(chart_type=='2'){
-              acivity_type(info);
-            }else if(chart_type=='3'){
-              time_type(info);
-            }            
-			  },
-        error:function(xhr, status, error){
-          var err = eval("(" + xhr.responseText + ")");
-          alert(err.Message);
-        }
-      });
+      select_chart(false,chart_type);
     }
 
-    function show_chart(chart){
+    function show_chart(chart_type){
       $("input[name='begin_date']").val("");
       $("input[name='end_date']").val("");
-      if(chart=='1'){
-        acivity_name();
-      }else if(chart=='2'){
-        acivity_type();
-      }else if(chart=='3'){
-        time_type();
+      $("input[name='chart_type']").val(chart_type);
+      
+      if(chart_type=='1'){
+        $("#ac_name").show();
+        $("#ac_type").hide();
+        $("#ty_type").hide();
+      }else if(chart_type=='2'){
+        $("#ac_name").hide();
+        $("#ac_type").show();
+        $("#ty_type").hide();
+      }else if(chart_type=='3'){
+        $("#ac_name").hide();
+        $("#ac_type").hide();
+        $("#ty_type").show();
       }
+
+      select_chart(true,chart_type);
     }
 
     function acivity_name(obj){
-      $("#ac_name").show();
-      $("#ac_type").hide();
-      $("#ty_type").hide();
       var activity_text = "";
       if(obj!="" && obj!=undefined){
         activity_text = obj.activity_text;
         if(activity_text==false){
           activity_text = "";
         }
-      }else{
-        activity_text = "<?php echo $activity_text;?>";
-      }
-      var lines = activity_text.split(/[,. ]+/g),
+
+        var lines = activity_text.split(/[,. ]+/g),
         data = Highcharts.reduce(lines, function (arr, word) {
         var obj = Highcharts.find(arr, function (obj) {
           return obj.name === word;
@@ -236,25 +156,23 @@
           };
           arr.push(obj);
         }
-        return arr;
-      }, []);
+          return arr;
+        }, []);
 
-      Highcharts.chart('ac_name', {
-        series: [{
-          type: 'wordcloud',
-          data: data,
-          name: '數量'
-        }],
-        title: {
-          text: '活動項目統計表'
-        }
-      }); 
+        Highcharts.chart('ac_name', {
+          series: [{
+            type: 'wordcloud',
+            data: data,
+            name: '數量'
+          }],
+          title: {
+            text: '活動項目統計表'
+          }
+        }); 
+      }
     }
 
     function acivity_type(obj){
-      $("#ac_name").hide();
-      $("#ac_type").show();
-      $("#ty_type").hide();
       var name_array ="";month_array ="";month=[];series_array="";month_data=[];month_count="";
       if(obj!="" && obj!=undefined){
         month_count = obj.month;
@@ -275,57 +193,35 @@
             month_data.push(arr);
         });
         series_array = month_data;
-      }else{
-        month = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-        series_array = [
-        <?php 
-            $namecount = count($name_array);
-            for($i=0;$i<$namecount;$i++){
-          ?>
-            { name: '<?=$name_array[$i]?>',
-              data: [
-              <?php 
-                $monthcount = count($month_array[$name_array[$i]]);
-                for($j=0;$j<$monthcount;$j++){
-              ?>
-                <?=$month_array[$name_array[$i]][$j]?>,
-              <?php
-                }
-              ?>
-              ]
-            },
-          <?php
-            }
-          ?>
-      ];
-      }
-      Highcharts.chart('ac_type', {
-        title: {
-          text: '活動類型統計表'
-        },
 
-        xAxis: {
-          categories: month
-        },
-        yAxis: {
+        Highcharts.chart('ac_type', {
           title: {
-            text: '數量'
-          }
-        },
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'middle'
-        },
+            text: '活動類型統計表'
+          },
 
-        plotOptions: {
-          series: {
-            label: {
-              connectorAllowed: false
-            },
-            pointStart: 0
-          }
-        },
+          xAxis: {
+            categories: month
+          },
+          yAxis: {
+            title: {
+              text: '數量'
+            }
+          },
+          
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+          },
+
+          plotOptions: {
+            series: {
+              label: {
+                connectorAllowed: false
+              },
+              pointStart: 0
+            }
+          },
 
         series: series_array,
 
@@ -344,12 +240,10 @@
           }]
         }
       });
+      }
     }
 
     function time_type(obj){
-      $("#ac_name").hide();
-      $("#ac_type").hide();
-      $("#ty_type").show();
       var data_array="";time_array="";time_name="";time_count="";
       if(obj!="" && obj!=undefined){
         time_array = obj.time_array;
@@ -370,51 +264,88 @@
             data_array[i] = [String(name_array[i]) ,  parseInt(count_array[i])];
           }
         }
-      }else{
-        data_array = [
-          <?php 
-            $timecount = count($time_array['time_name']);
-            for($i=0;$i<$timecount;$i++){
-          ?>
-              ['<?=$time_array['time_name'][$i]?>', <?=$time_array['time_count'][$i]?>],
-        <?php
+
+        Highcharts.chart('ty_type', {    
+          chart: {
+          type: 'pie',
+            options3d: {
+            enabled: true,
+            alpha: 45,
+            beta: 0
+          }
+         },
+        title: {
+          text: '時段統計表'
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            depth: 35,
+            dataLabels: {
+              enabled: true,
+              format: '{point.name}'
             }
-        ?>
-        ];
-      }
-      Highcharts.chart('ty_type', {
-       
-  chart: {
-    type: 'pie',
-    options3d: {
-      enabled: true,
-      alpha: 45,
-      beta: 0
-    }
-  },
-  title: {
-    text: '時段統計表'
-  },
-  tooltip: {
-    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-  },
-  plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: 'pointer',
-      depth: 35,
-      dataLabels: {
-        enabled: true,
-        format: '{point.name}'
+          }
+        },
+        series: [{
+          type: 'pie',
+          name: '時段',
+          data: data_array
+        }]
+        });
       }
     }
-  },
-  series: [{
-    type: 'pie',
-    name: '時段',
-    data: data_array
-  }]
-});
+
+    function select_chart(isPreset,chart_type){
+      var admin = $("input[name='admin']").val();
+      var begin_date = $("input[name='begin_date']").val();
+      var end_date = $("input[name='end_date']").val();
+      var begin = begin_date.split(/[-. ]+/g);
+      var end = end_date.split(/[-. ]+/g);
+      var begin_day = parseInt(begin[0] + begin[1] + begin[2]);
+      var end_day = parseInt(end[0] + end[1] + end[2]);
+
+      if(isPreset==false){
+        if(begin_date=="" || end_date==""){
+          return alert("請輸入起始年月!");
+        }else if(parseInt(begin[0])!=parseInt(end[0])){
+          return alert("請輸入相同年份!");
+        }else if(begin_day>end_day){
+          return alert("起始日期不可大於結束日期!");
+        }
+      }
+
+      var data = {
+          'admin': admin, 
+          'chart_type': chart_type,
+          'begin_date': begin_date,
+          'end_date': end_date,
+          'today_year': 'Y'
+        };
+      $.ajax({
+			  url: "select_activity.php",
+			  type: "POST",
+        async: true, 
+        dataType: "json",
+			  data: data, 
+			  success: function(info){
+            if(chart_type=='1'){
+              acivity_name(info);
+            }else if(chart_type=='2'){
+              acivity_type(info);
+            }else if(chart_type=='3'){
+              time_type(info);
+            }
+			  },
+        error:function(xhr, status, error){
+          var err = eval("(" + xhr.responseText + ")");
+          alert(err.Message);
+        }
+      });
     }
 
     function data_array(time_array){

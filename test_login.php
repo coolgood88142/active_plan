@@ -3,7 +3,7 @@
     <title>規劃行程系統</title>
   </head>
      <!-- jQuery v1.9.1 -->
-<script src="jquery-3.3.1.js"></script>
+<script src="./assets/js/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -31,6 +31,10 @@
   width:100%;
 }
 
+#title{
+  font-family:'微軟正黑體';
+}
+
 </style>
   <body background="background.png">
   <?php
@@ -52,7 +56,8 @@
 
 <div class="jumbotron vertical-center">
     <div class="container" style="width: 500px;">
-      <div class="row align-items-end">
+      <h2 id="title" class="text-center font-weight-bold">規劃行程系統</h2>
+      <div class="row align-items-center">
       <div id="accordion">
         <div class="card-header" id="headingOne">
             <h5 class="mb-0">
@@ -63,26 +68,41 @@
         </div>
 
       <div id="login" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body">
-          <form name="loginForm" method="post" >
-            帳號: <input type="text" name="us_account" /><br/><br/>
+        <div class="card bg-light">
+          <div class="card-body">
+            <form class="card-text" name="loginForm" method="post" >
+              帳號: <input type="text" name="us_account" /><br/><br/>
 
-            密碼: <input type="password" name="us_password" /><br/><br/>
+              密碼: <input type="password" name="us_password" /><br/><br/>
 
-            <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
-          </form>
+              <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
+            </form>
+          </div>
         </div>
       </div>
-      <h3>-----------------------------------------</h3>
+      
+      <div class="row justify-content-md-center">
+        <div class="col-sm-auto">
+          <h3>-----------------</h3>
+        </div>
+        <div class="col-sm-auto">
+          <img src="icons.png">
+        </div>
+        <div class="col-sm-auto">
+          <h3>------------------</h3>
+        </div>
+      </div>
       <div id="setup" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        <div class="card-body">
-          <form  name="setupForm" method="post">
-            請輸入帳號: <input type="text" name="us_account" /><br/><br/>
+        <div class="card bg-light">
+          <div class="card-body">
+            <form  class="card-text" name="setupForm" method="post">
+              請輸入帳號: <input type="text" name="us_account" /><br/><br/>
 
-            請輸入密碼: <input type="password" name="us_password" /><br/><br/>
+              請輸入密碼: <input type="password" name="us_password" /><br/><br/>
 
-            <input type="hidden" name="setup_user"/>       
-          </form>
+              <input type="hidden" name="setup_user"/>       
+            </form>
+          </div>
         </div>
       </div>
 
