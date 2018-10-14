@@ -19,7 +19,6 @@
 <?php session_start();
     include("mysql.php");
     $us_admin = $_SESSION['us_admin']; 
-    $_SESSION['analysis'] = true;
  ?>
   <body>
     <style>
@@ -308,14 +307,20 @@
       var end = end_date.split(/[-. ]+/g);
       var begin_day = parseInt(begin[0] + begin[1] + begin[2]);
       var end_day = parseInt(end[0] + end[1] + end[2]);
+      var begin_month = parseInt(begin[0] + begin[1]);
+      var end_month = parseInt(end[0] + end[1]);
+      var diff_momth = "";
+      if(end_month>begin_month){
+        diff_momth = end_month - begin_month;
+      }
 
       if(isPreset==false){
         if(begin_date=="" || end_date==""){
           return alert("請輸入起始年月!");
-        }else if(parseInt(begin[0])!=parseInt(end[0])){
-          return alert("請輸入相同年份!");
         }else if(begin_day>end_day){
           return alert("起始日期不可大於結束日期!");
+        }else if(diff_momth>10000){
+          return alert("查詢日期不可以超過1年!");
         }
       }
 
@@ -327,7 +332,7 @@
           'today_year': 'Y'
         };
       $.ajax({
-			  url: "select_activity.php",
+			  url: "select_analysis.php",
 			  type: "POST",
         async: true, 
         dataType: "json",
@@ -342,18 +347,9 @@
             }
 			  },
         error:function(xhr, status, error){
-          var err = eval("(" + xhr.responseText + ")");
-          alert(err.Message);
+          alert(xhr.statusText);
         }
       });
-    }
-
-    function data_array(time_array){
-      var data="";
-      for(var i=0;i<time_array['time_name'].length;i++){
-        data = data + ["'"+time_array['time_name'][i]+"','"+time_array['time_count'][i]+"'"]+",";
-      }
-      return data.substring(0,data.length-1);
     }
 
     function show(page){
