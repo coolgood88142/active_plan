@@ -155,6 +155,14 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
+      // $("#login").click(function(){
+      //   $("#sign").collapse('show');
+      //   $("#setup").collapse('hide');
+      // });
+      // $("#registered").click(function(){
+      //   $("#sign").collapse('hide');
+      //   $("#setup").collapse('show');
+      // });
       var error = $("input[name='error']").val();
       var errorMessage = $("input[name='errorMessage']").val();
       if(errorMessage!=""){
