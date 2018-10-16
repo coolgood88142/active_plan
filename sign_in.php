@@ -45,7 +45,7 @@
             echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true>';
         }
     }else{
-        $errorMessage = "該帳號已停用!";
+        $errorMessage = "沒有這組帳號";
         echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true&errorMessage='.$errorMessage.'>';
     }
     

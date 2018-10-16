@@ -80,7 +80,6 @@
           <input type="text" name="us_name" value=""/><br/><br/>
         <?php
           }else{
-            echo $us_account
         ?>
           <input type="text" name="us_name" value="<?php echo $us_name!="未填寫"?$us_name:"" ?>"/><br/><br/>
         <?php

@@ -178,10 +178,16 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
-        $('#example1').DataTable(datatable_language());
-        if($("input[name='admin']").val()=="Y"){
-            $("input[name='add']").show();
+        if($("input[name='admin']").val()==""){
+            alert("請輸入帳號密碼!");
+            document.showForm.action="login.php"; 
+            document.showForm.submit();
+        }else{
+            $('#button').load('button.php');
+            $('#example1').DataTable(datatable_language());
+            if($("input[name='admin']").val()=="Y"){
+                $("input[name='add']").show();
+            }
         }
     } );
 
