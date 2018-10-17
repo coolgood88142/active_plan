@@ -42,8 +42,8 @@
 
         <div class="container" id="select_date">
           <div class="row justify-content-center align-items-center">
-            <div class="col-sm-6 col-md-2"><h4 class="text-center">起始日期:</h4></div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
+            <div class="col-md-3">
               <div class="form-group">
                 <div class="input-group datepick">
                   <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
@@ -53,8 +53,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-1"><h4 class="text-center">~</h4></div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-1"><h4 class="text-center">~</h4></div>
+            <div class="col-md-3">
               <div class="form-group">
                 <div class="input-group datepick">
                   <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
@@ -64,8 +64,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-1" style="font-size:18px;">
-              <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
+            <div class="col-md-1">
+              <button name="query_data" class="btn btn-info btn-sm" onClick="query_chart()">
+                查詢
+              </button>
             </div>
           </div>
         </div>
@@ -310,7 +312,7 @@
       var end_month = parseInt(end[0] + end[1]);
       var diff_momth = "";
       if(end_month>begin_month){
-        diff_momth = end_month - begin_month;
+        diff_momth =  end_day - begin_day;
       }
 
       if(isPreset==false){

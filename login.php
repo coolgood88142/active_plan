@@ -34,6 +34,11 @@
   font-family:'微軟正黑體';
 }
 
+#login,#setup{
+  margin-top:10;
+  margin-bottom:10;
+}
+
 </style>
   <body background="background.png">
   <?php
@@ -55,20 +60,16 @@
 
 <div class="jumbotron vertical-center">
     <div class="container" style="width: 500px;">
-      <h2 id="title" class="text-center font-weight-bold">規劃行程系統</h2>
+      <h2 id="title" class="text-center text-white font-weight-bold">規劃行程系統</h2>
       <div class="row align-items-center">
-      <div id="accordion">
-        <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button id="sign_in" class="btn btn-primary btn-lg btn-block ">
-                登入
-              </button>
-             </h5>
-        </div>
+      <div id="accordion">       
+        <button id="sign_in" class="btn btn-primary btn-lg btn-block" style="margin-bottom:10px;">
+          登入
+        </button>      
 
-      <div id="login" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div id="login" class="collapse show">
         <div class="card bg-light">
-          <div class="card-body">
+          <div class="card-body text-secondary">
             <form class="card-text" name="loginForm" method="post" >
               帳號: <input type="text" name="us_account" /><br/><br/>
 
@@ -91,9 +92,10 @@
           <h3>------------------</h3>
         </div>
       </div>
-      <div id="setup" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+
+      <div id="setup" class="collapse">
         <div class="card bg-light">
-          <div class="card-body">
+          <div class="card-body text-secondary">
             <form  class="card-text" name="setupForm" method="post">
               請輸入帳號: <input type="text" name="us_account" /><br/><br/>
 
@@ -105,13 +107,9 @@
         </div>
       </div>
 
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button id="registered" class="btn btn-warning btn-lg btn-block " >
-             註冊
-          </button>
-        </h5>
-      </div>
+        <button id="registered" class="btn btn-warning btn-lg btn-block" style="margin-top:10px;">
+            註冊
+        </button>
     </div>
   </div>
   </div>
@@ -135,7 +133,7 @@
             alert("請輸入帳號!");
           }else if(us_password==""){
             alert("請輸入密碼!");
-          }else{
+          }else if(errorMessage==""){
             document.loginForm.action="sign_in.php"; 
 	          document.loginForm.submit();
           }
@@ -152,6 +150,8 @@
             alert("請輸入帳號!");
           }else if(us_password==""){
             alert("請輸入密碼!");
+          }else if(!us_password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)){
+            alert("請輸入8個以上數字或英文!");
           }else{
             document.setupForm.action="insert.php"; 
 	          document.setupForm.submit();

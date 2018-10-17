@@ -43,7 +43,7 @@
         }
         $activity_text = substr($activity_text,0,-1);
 
-        echo json_encode(array('activity_text' => $activity_text),JSON_UNESCAPED_UNICODE);
+        echo json_encode(array('activity_text' => $activity_text,'sql'=>$sql),JSON_UNESCAPED_UNICODE);
     }
 
     if($chart_type=='2'){
