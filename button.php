@@ -7,6 +7,7 @@
 <input type="button" value="隨機行程" onClick="show('random')"/>
 <input type="button" value="設定" onClick="show('setting')"/>
 <input type="button" value="分析表" onClick="show('analysis')"/>
+<input type="button" value="Q&A" onClick="show('question')"/>
 &nbsp&nbsp
 Hi!<?php echo $_SESSION['us_name'];?>
 <input type="button" value="登出" onClick="show('sign_out')"/>
