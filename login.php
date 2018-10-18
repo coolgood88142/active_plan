@@ -25,7 +25,7 @@
 }
 
 .jumbotron{
-  background: url("background.png") no-repeat center center; 
+  background: url("./assets/images/background.png") no-repeat center center; 
   height:100%;
   width:100%;
 }
@@ -40,7 +40,7 @@
 }
 
 </style>
-  <body background="background.png">
+  <body background="./assets/images/background.png">
   <?php
     if(!empty($_COOKIE['us_account'])&& !empty($_COOKIE['us_password'])){
       echo '<meta http-equiv=REFRESH CONTENT=0;url=sign_in.php>';
@@ -86,7 +86,7 @@
           <h3>-----------------</h3>
         </div>
         <div class="col-sm-auto">
-          <img src="icons.png">
+          <img src="./assets/images/icons.png">
         </div>
         <div class="col-sm-auto">
           <h3>------------------</h3>

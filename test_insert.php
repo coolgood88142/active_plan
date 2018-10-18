@@ -87,6 +87,18 @@
     // ,(10, '烤肉用具')
     // ,(11, '食物蔬菜')";
 
+    // $sql = "CREATE TABLE question(
+    //      qu_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      qu_question NVARCHAR(30) NOT NULL,
+    //      qu_answer NVARCHAR(30) NOT NULL,
+    //      qu_updatedate TIMESTAMP
+    //      )";
+
+    // $sql = "CREATE TABLE question_order(
+    //      qo_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      qo_type INT(6) NOT NULL,
+    //      qo_updatedate TIMESTAMP
+    //      )";
 
     $conn->exec($sql);
     $conn=null;

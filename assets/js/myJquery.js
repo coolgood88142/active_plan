@@ -24,3 +24,7 @@ function datatable_language(){
     };
     return language;
 }
+
+$(window).on('beforeunload',function(){
+    location.href = "freed.php";
+});
