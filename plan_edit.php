@@ -405,37 +405,19 @@
 
                 td = tr.insertCell(tr.cells.length);
                 td.innerHTML = '<input type="button" name="cancel" value="取消" onClick="Cancel(this)"/>';
-
-                // table.row.add( [ ac_names[i], ac_types[i], ac_weathers[i], ac_drives[i], ac_carrys[i], ac_spends[i], ac_hourss[i] ],
-                // '<input type="button" name="cancel" value="取消" onClick="Cancel(this)"/>')
-                // .draw()
-                // .node();
-
-
                 }
             }
             
 
             $("input[name='add']").each(function(){
-                $(this).prop("checked",false);//把所有的核方框的property都取消勾選
+                $(this).prop("checked",false);//所有的加入都取消勾選
             });
 
             $("input[name='addplan']").show();
             $('#example1_wrapper').show();
             $('#example2_wrapper').hide();
         }
-
-        
-
-
-
-        //$('#example1_wrapper').show();
-        
-        
-        // document.showForm.action="plan.php"; 
-        // document.showForm.submit();
     }
-
 
     function Cancel(obj){
         $(obj).parent().parent().remove();    

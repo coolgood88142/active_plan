@@ -9,14 +9,7 @@
   <script src="./assets/js/bootstrap.min.js"></script>
  
 <style>
-    /* .container{
-        position: relative;
-    top:50%;
-    left:50%;
-    transform:translateY(-50%);
-    } */
-
-    .vertical-center {
+  .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
 
@@ -162,16 +155,6 @@
         $("#login").collapse('hide');     
       });    
     });
-
-    function sign_in(){
-      document.loginForm.action="sign_in.php"; 
-	    document.loginForm.submit();
-    }
-
-    function setup(){
-      document.loginForm.action="setup.php"; 
-	    document.loginForm.submit();
-    }
   </script>
 </html>
 

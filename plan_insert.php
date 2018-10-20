@@ -24,18 +24,6 @@
         echo $_SESSION['us_account'];?>
         <input type="button" value="登出" onClick="show('sign_out')"/>
         <br/><br/>
-
-        <!-- <table  width="600" hight="300" >
-            <tr>
-                <td bgcolor="#00FFFF">活動行程</td>
-                <td bgcolor="#00FFFF">類型</td>
-                <td bgcolor="#00FFFF">時間(小時)</td>
-                <td bgcolor="#00FFFF">花費</td>
-                <td bgcolor="#00FFFF">動作</td>
-            </tr>
-            <tr>
-            </tr>
-        </table> -->
         <table id="example">
 	<thead>
         <tr>

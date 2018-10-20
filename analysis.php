@@ -4,14 +4,9 @@
   </head>
   
 <?php include("link.php");?>
-<!---*** Start: JQuery 3.3.1 version. ***--->
 <script language="javascript" src="./assets/js/jquery.min.js"></script>
-<!---*** End: JQuery 3.3.1 version. ***--->
-<!---*** Start: Bootstrap 3.3.7 version files. ***--->
 <script language="javascript" src="./assets/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!---*** End: Bootstrap 3.3.7 version files. ***--->
-
 <script language="javascript" src="./assets/js/moment.js"></script>
 <script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
