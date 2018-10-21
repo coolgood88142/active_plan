@@ -44,8 +44,8 @@
 
         <div class="container" id="select_date">
           <div class="row">
-            <div class="col-md-3 mx-auto" style="width:110px;"><h4>起始日期:</h4></div>
-            <div class="col-md-3 mx-auto">
+            <div class="col-md-3" style="width:110px;"><h4>起始日期:</h4></div>
+            <div class="col-md-3">
               <div class="form-group">
                 <div class="input-group datepick">
                   <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
@@ -55,8 +55,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 mx-auto" style="width:10px;"><h4>~</h4></div>
-            <div class="col-md-3 mx-auto">
+            <div class="col-md-1" style="width:10px;"><h4>~</h4></div>
+            <div class="col-md-3">
               <div class="form-group">
                 <div class="input-group datepick">
                   <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
@@ -66,7 +66,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3 mx-auto" style="font-size:18px;">
+            <div class="col-md-1" style="font-size:18px;">
               <input type="button" name="query_data" value="查詢" onClick="query_chart()"/>
             </div>
           </div>
@@ -342,8 +342,7 @@
             }
 			  },
         error:function(xhr, status, error){
-          var err = eval("(" + xhr.responseText + ")");
-          alert(err.Message);
+          alert(xhr.statusText);
         }
       });
     }

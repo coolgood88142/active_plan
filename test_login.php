@@ -56,7 +56,7 @@
 
 <div class="jumbotron vertical-center">
     <div class="container" style="width: 500px;">
-      <h2 id="title" class="text-center font-weight-bold">規劃行程系統</h2>
+      <h2 id="title" class="text-center text-white font-weight-bold">規劃行程系統</h2>
       <div class="row align-items-center">
       <div id="accordion">
         <div class="card-header" id="headingOne">
