@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include("mysql.php");
+    include("../mysql.php");
 
     // $sql = "CREATE TABLE user()
     //     us_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -87,6 +87,29 @@
     // ,(10, '烤肉用具')
     // ,(11, '食物蔬菜')";
 
+    // $sql = "CREATE TABLE question(
+    //      qu_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      qu_question NVARCHAR(30) NOT NULL,
+    //      qu_answer NVARCHAR(30) NOT NULL,
+    //      qu_updatedate TIMESTAMP
+    //      )";
+
+    // $sql = "CREATE TABLE question_order(
+    //      qo_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      qo_order INT(6) NOT NULL,
+    //      qo_quid INT(6) NOT NULL,
+    //      qo_updatedate TIMESTAMP
+    //      )";
+
+    // $sql = "INSERT INTO question (qu_question, qu_answer)
+    // VALUES ('我目前想不到可以幫我排定行程嗎?', '本系統的隨機行程功能可以隨機自己想要的行程。')
+    // ,('我想查出我這個月的行程裡有哪些項目呢?', '本系統的分析表只要輸入時間即時查出該月的行程有哪些項目。')
+    // ,('自己的自訂行程，我想要做變更要怎麼做?', '在自己的行程列表裡可以執行編輯做變更。')";
+
+    $sql = "INSERT INTO question_order (qo_order,qo_quid)
+    VALUES (1, 2)
+    ,(2, 1)
+    ,(3, 3)";
 
     $conn->exec($sql);
     $conn=null;

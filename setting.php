@@ -80,7 +80,6 @@
           <input type="text" name="us_name" value=""/><br/><br/>
         <?php
           }else{
-            echo $us_account
         ?>
           <input type="text" name="us_name" value="<?php echo $us_name!="未填寫"?$us_name:"" ?>"/><br/><br/>
         <?php
@@ -154,7 +153,7 @@
       //   return alert("請輸入電子信箱!");
       // }
       
-      if(us_email.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$")){
+      if(!us_email.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$")){
         return alert("電子信箱格式錯誤!");
       }
 

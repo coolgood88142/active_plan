@@ -419,7 +419,7 @@
         if($("input[name='admin']").val()!='Y'){
             $('#example1_wrapper').hide();
             $('#example4_wrapper').show();
-            $('#example4').DataTable(datatable_language());
+            $('#example4').DataTable();
             $('#example4 tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = $('#example4').DataTable().row( tr );

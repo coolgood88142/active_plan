@@ -16,26 +16,34 @@
     date_default_timezone_set('Asia/Taipei');
     $datetime = date ("Y-m-d H:i:s");
 
-    $sql = null;
+    $sql = null;$errorMessage="";
     if(isset($_POST['setup_user'])){
-        //剛建立，姓名暫時用帳號
-        $sql = "INSERT INTO user (us_account, us_password, us_name, us_gender, us_admin, us_status, us_email, us_last_login)
-        VALUES ('$us_account', '$us_password', '$us_account', '', 'N', 1, '', '$datetime')";
-
-        $conn->exec($sql);
-
-         //建立帳號後建立session物件
-        $sql = "select us_id,us_name,us_password,us_admin from user where us_account='" . $us_account  ."'";
-        
+        //先檢查帳號是否已建立
+        $sql = "SELECT count(us_account) as account FROM user WHERE us_account in ('$us_account')";
         $query = $conn->query($sql);
         $row = $query->fetch(PDO::FETCH_ASSOC);
+        if($row['account']==0){
+            //剛建立，姓名暫時用帳號
+            $sql = "INSERT INTO user (us_account, us_password, us_name, us_gender, us_admin, us_status, us_email, us_last_login)
+            VALUES ('$us_account', '$us_password', '$us_account', '', 'N', 1, '', '$datetime')";
 
+            $conn->exec($sql);
 
-        session_start();
-        $_SESSION['us_account'] = $us_account;      //帳號
-        $_SESSION['us_id'] = $row['us_id'];         //id
-        $_SESSION['us_name'] = $row['us_name'];     //使用者姓名   
-        $_SESSION['us_admin'] = $row['us_admin'];   //是否有權限
+            //建立帳號後建立session物件
+            $sql = "select us_id,us_name,us_password,us_admin from user where us_account='" . $us_account  ."'";
+        
+            $query = $conn->query($sql);
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION['us_account'] = $us_account;      //帳號
+            $_SESSION['us_id'] = $row['us_id'];         //id
+            $_SESSION['us_name'] = $row['us_name'];     //使用者姓名   
+            $_SESSION['us_admin'] = $row['us_admin'];   //是否有權限
+            $_POST['setup_user'] = 'Y';
+        }else{
+            $errorMessage = "這組帳號已存在了";
+            echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true&errorMessage='.$errorMessage.'>';
+        }
     }else if(isset($_POST['add_account'])){
         $us_name = $_POST['us_name'];
         $us_gender = $_POST['us_gender'];
@@ -96,9 +104,10 @@
     $conn=null;
 ?>
 <script language="JavaScript">
-    <?php if(isset($_POST['setup_user'])){
+    <?php 
+    if(isset($_POST['setup_user']) && $_POST['setup_user']=='Y'){
     ?>
-        location.href = "plan.php";
+        location.href = "activity.php";
     <?php   
     }else if(isset($_POST['add_account'])){
     ?>

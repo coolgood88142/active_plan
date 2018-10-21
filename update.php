@@ -29,9 +29,9 @@
         }
 
         if(!empty($us_email)){
-            $sql = $sql . "us_email = '$us_email' ";
+            $sql = $sql . "us_email = '$us_email',";
         }
-
+        $sql = substr($sql,0,-1);
         $sql = $sql . "WHERE us_account = '$us_account'";
 
        

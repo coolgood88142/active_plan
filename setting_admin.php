@@ -88,11 +88,9 @@
             var us_status = $(tr).find("td input[name='us_status']").val();
         
             if ( row.child.isShown() ) {
-                // This row is already open - close it
                 row.child.hide();
                 tr.removeClass('shown');
             } else {
-                // Open this row
                 row.child( format(us_account,us_gender,us_email,us_status) ).show();
                 tr.addClass('shown');
             }
