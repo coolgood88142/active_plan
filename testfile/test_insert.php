@@ -106,10 +106,10 @@
     // ,('我想查出我這個月的行程裡有哪些項目呢?', '本系統的分析表只要輸入時間即時查出該月的行程有哪些項目。')
     // ,('自己的自訂行程，我想要做變更要怎麼做?', '在自己的行程列表裡可以執行編輯做變更。')";
 
-    $sql = "INSERT INTO question_order (qo_order,qo_quid)
-    VALUES (1, 2)
-    ,(2, 1)
-    ,(3, 3)";
+    // $sql = "INSERT INTO question_order (qo_order,qo_quid)
+    // VALUES (1, 2)
+    // ,(2, 1)
+    // ,(3, 3)";
 
     $conn->exec($sql);
     $conn=null;

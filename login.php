@@ -64,6 +64,11 @@
         <div class="card bg-light">
           <div class="card-body text-secondary">
             <form class="card-text" name="loginForm" method="post" >
+              <div class="row">
+                <div class="col-sm-6">
+                  
+                </div>
+              </div>
               帳號: <input type="text" name="us_account" /><br/><br/>
 
               密碼: <input type="password" name="us_password" /><br/><br/>
