@@ -61,19 +61,30 @@
         </button>      
 
       <div id="login" class="collapse show">
-        <div class="card bg-light">
-          <div class="card-body text-secondary">
-            <form class="card-text" name="loginForm" method="post" >
-              <div class="row">
-                <div class="col-sm-6">
-                  
+        <div class="card bg-light text-secondary"  style="text-align:center;">
+          <div class="card-body">
+            <form name="loginForm" method="post" >
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">帳號:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="us_account">
                 </div>
               </div>
-              帳號: <input type="text" name="us_account" /><br/><br/>
-
-              密碼: <input type="password" name="us_password" /><br/><br/>
-
-              <input type="checkbox" name="us_remember" />&nbsp 記住我<br/><br/>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">密碼:</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" name="us_password">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="checkbox-inline">
+                    <label class="checkbox-inline" for="us_remember">
+                      <input type="checkbox" name="us_remember" />&nbsp 記住我
+                    </label>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -92,13 +103,21 @@
       </div>
 
       <div id="setup" class="collapse">
-        <div class="card bg-light">
-          <div class="card-body text-secondary">
-            <form  class="card-text" name="setupForm" method="post">
-              請輸入帳號: <input type="text" name="us_account" /><br/><br/>
-
-              請輸入密碼: <input type="password" name="us_password" /><br/><br/>
-
+        <div class="card bg-light text-secondary"  style="text-align:center;">
+          <div class="card-body">
+            <form name="setupForm" method="post">
+              <div class="form-group row">
+                <label for="us_account" class="col-sm-4 col-form-label">請輸入帳號:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="us_account" name="us_account">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="us_password" class="col-sm-4 col-form-label">請輸入密碼:</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="us_password" name="us_password">
+                </div>
+              </div>
               <input type="hidden" name="setup_user"/>       
             </form>
           </div>
