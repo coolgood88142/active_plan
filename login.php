@@ -32,6 +32,10 @@
   margin-bottom:10;
 }
 
+.checkbox-inline{
+  float: right;
+}
+
 </style>
   <body background="./assets/images/background.png">
   <?php

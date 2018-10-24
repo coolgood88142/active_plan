@@ -13,7 +13,13 @@
 <script src="./assets/js/zh-cn.js"></script>
 <?php session_start();
     include("mysql.php");
-    $us_admin = $_SESSION['us_admin']; 
+    
+    $us_admin = "";
+    if(isset($_SESSION["us_admin"])) {
+      $us_admin = $_SESSION['us_admin'];
+    }else{
+      echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+    }
  ?>
   <body>
     <style>

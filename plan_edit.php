@@ -6,10 +6,15 @@
 <?php session_start();
     include("mysql.php"); 
 
-    $us_admin = $_SESSION['us_admin'];
-    if(!empty($us_admin)){
+    $us_admin = "";
+    if(isset($_SESSION["us_admin"])) {
+      $us_admin = $_SESSION['us_admin'];
+      if(!empty($us_admin)){
         include("select_plan.php");
         include("select_activity.php"); 
+      }
+    }else{
+      echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
     }
     
     $pt_id = $_POST['pt_id'];
