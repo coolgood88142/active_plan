@@ -92,11 +92,6 @@
         $('#example').DataTable(datatable_language());
     } );
 
-    function show(page){
-        document.showForm.action=page+".php"; 
-        document.showForm.submit();
-    }
-
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
         var trs=$("table#example tr");
@@ -118,6 +113,14 @@
         $("input[name='objSpend']").val(objSpend);
 
         document.showForm.action="plan.php"; 
+        document.showForm.submit();
+    }
+
+    function show(page){
+        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
+            page = page + "_admin";
+        }
+        document.showForm.action=page+".php"; 
         document.showForm.submit();
     }
   </script>

@@ -160,19 +160,17 @@
         $(from).submit();
     }
 
+    function add_account(){
+        document.addForm.submit();
+    }
+
     function show(page){
-        if($("input[name='admin']").val()=="Y" && page=="setting"){
+        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
             page = page + "_admin";
         }
         document.showForm.action=page+".php"; 
         document.showForm.submit();
     }
-
-    function add_account(){
-        document.addForm.submit();
-    }
-
-   
   </script>
 </html>
 

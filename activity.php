@@ -196,14 +196,6 @@
         }
     } );
 
-    function show(page){
-        if($("input[name='admin']").val()=="Y" && page=="setting"){
-            page = page + "_admin";
-        }
-        document.showForm.action=page+".php"; 
-        document.showForm.submit();
-    }
-
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
         var trs=$("table#example1 tr");
@@ -399,6 +391,14 @@
         }
 
         document.showForm.action="update_activity.php"; 
+        document.showForm.submit();
+    }
+
+    function show(page){
+        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
+            page = page + "_admin";
+        }
+        document.showForm.action=page+".php"; 
         document.showForm.submit();
     }
   </script>

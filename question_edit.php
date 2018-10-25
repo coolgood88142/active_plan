@@ -27,24 +27,22 @@
         <H2>Q&A</H2>
         <br/><br/>
 
+        <button type="button" class="btn btn-primary">儲存</button><br/><br/>
         <div class="accordion" id="accordionExample">
           <?php foreach($quertsion as $key => $value){?>
-          <div class="card">
-            <div class="card-header" id="heading<?=$value['qo_order']?>">
-              <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                  <?=$value['qu_question']?>
-                </button>
-              </h5>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="qu_question">問題</span>
+                </div>
+                <input type="text" class="form-control" aria-label="quertsion" aria-describedby="qu_question" value="<?=$value['qu_question']?>">
             </div>
-
-            <div id="collapse<?=$value['qo_order']?>" class="collapse" aria-labelledby="heading<?=$value['qo_order']?>" data-parent="#accordionExample">
-              <div class="card-body">
-                <?=$value['qu_answer']?>
-              </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="qu_answer">答案</span>
+                </div>
+                <input type="text" class="form-control" aria-label="answer" aria-describedby="qu_answer" value="<?=$value['qu_answer']?>">
             </div>
-          </div>
-          <?php }?>
+        <?php }?>
         </div>      
     </form>  
   </body>
@@ -53,13 +51,6 @@
         $('#button').load('button.php');
     });
 
-    function show(page){
-        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
-            page = page + "_admin";
-        }
-        document.showForm.action=page+".php"; 
-        document.showForm.submit();
-    }
   </script>
 </html>
 
