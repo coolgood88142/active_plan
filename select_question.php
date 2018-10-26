@@ -1,26 +1,19 @@
 <?php
     include("mysql.php");
 
-    $question="";$answer="";$order="";$last_order="";$qu_count=0;$qo_count=0;
-    if(isset($_POST['question']) && isset($_POST['answer'])){
+    $question="";$answer="";$order="";$last_order="";
+    if(isset($_POST['question']) && isset($_POST['answer']) && $_POST['question']!="" && $_POST['answer']!=""){
         $question =  $_POST['question'];
-        $question = explode(",", $question);
-
         $answer =  $_POST['answer'];
-        $answer = explode(",", $answer);
-
-        $qu_count=count($question);
-        $qo_count=count($order);
     }
 
-    if(isset($_POST['order'])){
+    if(isset($_POST['order']) && $_POST['order']!=""){
         $order =  $_POST['order'];
         $order = explode(",", $order);
     }
 
-    if(isset($_POST['last_order'])){
+    if(isset($_POST['last_order']) && $_POST['last_order']!=""){
         $last_order =  $_POST['last_order'];
-        $last_order = explode(",", $last_order);
     }
         
     $success = false;
@@ -28,79 +21,52 @@
     if(isset($_POST['isStatus'])){
         $isStatus = $_POST['isStatus'];
     }
-    if($isStatus=="insert" && $question!="" && $answer!="" && $qu_count!=0){
-        if($qu_count>0 && $qu_count==count($answer)){
-            $question_array = "";$answer_array = "";
-            $sql="INSERT INTO question (qu_question, qu_answer) VALUES (";
-            for($i=0 ; $i<$qu_count ; $i++) {
-                $question_array = "'" . $question[$i] . "','";
-                $answer_array = "'" . $answer[$i] . "','";
-                $sql = $sql . "'" . $question[$i] . "','" .  $answer[$i] . "'),";
-            }
-            $question_array = substr($question_array,0,-1);
-            $answer_array = substr($answer_array,0,-1);
-            $sql = substr($sql,0,-1);
-            // $conn->exec($sql);
+    if($isStatus=="insert" && $question!="" && $answer!=""){
+        $sql="INSERT INTO question (qu_question, qu_answer) VALUES ('$question','$answer')";
+        $conn->exec($sql);
 
-            echo json_encode(array('question_array' => $question_array,'answer_array'=>$answer_array),JSON_UNESCAPED_UNICODE);
+        $sql="SELECT max(qo_order) as max_order FROM question_order";
+        $query = $conn->query($sql);
+        $max = $query->fetch(PDO::FETCH_ASSOC);
+        $max_order = $max['max_order'];
+        $max_order++;
 
-            if($question_array!="" && $answer_array!=""){
-                $sql="SELECT max(qo_order) FROM question_order";
-                $query = $conn->query($sql);
-                $max_order = $query->fetch(PDO::FETCH_ASSOC);
-
-                
-
-                $sql="SELECT qu_id FROM question WHERE qu_question IN ($question_array) AND qu_answer IN ($answer_array)";
-                $query = $conn->query($sql);
-                $qu_data = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                $sql="INSERT INTO question_order (qo_order,qo_quid) VALUES (";
-                $j=0;
-                foreach($qu_data as $key => $value){
-                    $sql = $sql . $max_order ."," . $value['qu_id'] . "),";
-                    $j++;
-                }
-                $sql = substr($sql,0,-1);
-                $conn->exec($sql);
-                $success = true;
-            }
+        $sql="SELECT qu_id FROM question WHERE qu_question IN ('$question') AND qu_answer IN ('$answer')";
+        $query = $conn->query($sql);
+        $qu_data = $query->fetch(PDO::FETCH_ASSOC);
+        $id = $qu_data['qu_id'];
+        
+        if($max_order>0 && $id>0){
+            $sql="INSERT INTO question_order (qo_order,qo_quid) VALUES ($max_order,$id)";
+            $conn->exec($sql);
+            $success = true;
         }
-    }else if($isStatus=="update" && (($question!="" && $answer!="" && $order!="") || ($order!="" && $last_order!=""))){
+    }else if($isStatus=="update" && $question!="" && $answer!="" && $order!=""){
         if($question!="" && $answer!="" && $order!=""){
-            if($qu_count>0 && $qu_count==count($answer)){
-                for($i=0 ; $i<$qu_count ; $i++) {
-                    $questions = $question[$i];
-                    $answers = $answer[$i];
-                    $orders = $order[$i];
-                    $sql = "UPDATE question SET qu_question = '$questions',qu_answer = '$answers' WHERE qu_id = $orders";
-                    // $conn->exec($sql);
-                    $success = true;
-                }
-            }
-        }
+            $qu_id = $order[0];
+            $sql = "UPDATE question SET qu_question = '$question',qu_answer = '$answer' WHERE qu_id = $qu_id";
+            $conn->exec($sql);
+            $success = true;
+        }      
+    }else if($isStatus=="order" && $order!="" && $last_order!=""){
+        if(count($order)==1){
+            $orders = $order[0];
+            $sql = "UPDATE question_order SET qo_order = $last_order WHERE qo_id = $orders";
+            $conn->exec($sql);
 
-        if($order!="" && $last_order!=""){
-            if(count($order)>0 && count($order)==count($last_order)){
-                for($i=0 ; $i<count($order) ; $i++) {
-                    $lasts = $last_order[$i];
-                    $orders = $order[$i];
-                    $sql = "UPDATE question_order SET qo_order = '$lasts' WHERE qo_quid = $orders";
-                    // $conn->exec($sql);
-                    $success = true;
-                }
-            }
-
+            $sql = "UPDATE question_order SET qo_order = $orders WHERE qo_id = $last_order";
+            $conn->exec($sql);
+            $success = true;
         }
     }else if($isStatus=="delete" && $order!=""){
         if(count($order)>0){
             for($i=0 ; $i<count($order) ; $i++) {
                 $orders = $order[$i];
-                $sql = "DELETE qu_question WHERE qu_id = $orders";
-                // $conn->exec($sql);
+                $sql = "DELETE FROM question WHERE qu_id = $orders";
+                $conn->exec($sql);
 
-                $sql = "DELETE qo_order WHERE qo_quid = $orders";
-                // $conn->exec($sql);
+                $sql = "DELETE FROM question_order WHERE qo_quid = $orders";
+                $conn->exec($sql);
                 $success = true;
             }
         }

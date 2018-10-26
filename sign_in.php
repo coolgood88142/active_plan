@@ -10,13 +10,13 @@
         $us_account = $_POST['us_account'];
         $us_password= $_POST['us_password'];
 
-        $year_hours = 1;
-        if(isset($_POST['us_remember'])){
-            $year_hours = 24*365;
+        if(isset($_POST['us_remember']) && $_POST['us_remember']=='on'){
+            setcookie("us_account",$us_account,time()+3600*24*365);
+            setcookie("us_password",$us_password,time()+3600*24*365);
+        }else{
+            setcookie("us_account",$us_account,time()+0);
+            setcookie("us_password",$us_password,time()+0);
         }
-        setcookie("us_account",$us_account,time()+3600*$year_hours);
-        setcookie("us_password",$us_password,time()+3600*$year_hours);
-        
     }
 
     $sql = "select us_id,us_name,us_password,us_admin from user where us_account='" . $us_account  ."' and us_status = 1 ";
