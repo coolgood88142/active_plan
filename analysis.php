@@ -6,17 +6,19 @@
 <?php include("link.php");?>
 <script language="javascript" src="./assets/js/jquery.min.js"></script>
 <script language="javascript" src="./assets/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script language="javascript" src="./assets/js/moment.js"></script>
 <script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
 <script src="./assets/js/zh-cn.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <?php session_start();
     include("mysql.php");
     
     $us_admin = "";
-    if(isset($_SESSION["us_admin"])) {
-      $us_admin = $_SESSION['us_admin'];
+    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {
+        if(isset($_SESSION["us_admin"])){
+          $us_admin = $_SESSION['us_admin'];
+        }
     }else{
       echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
     }

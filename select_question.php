@@ -1,7 +1,7 @@
 <?php
     include("mysql.php");
 
-    $question="";$answer="";$order="";$last_order="";
+    $question="";$answer="";$order="";$last_order="";$this_index="";$last_index="";
     if(isset($_POST['question']) && isset($_POST['answer']) && $_POST['question']!="" && $_POST['answer']!=""){
         $question =  $_POST['question'];
         $answer =  $_POST['answer'];
@@ -14,6 +14,11 @@
 
     if(isset($_POST['last_order']) && $_POST['last_order']!=""){
         $last_order =  $_POST['last_order'];
+    }
+
+    if(isset($_POST['this_index']) && $_POST['this_index']!="" && isset($_POST['last_index']) && $_POST['last_index']!=""){
+        $this_index = $_POST['this_index'];
+        $last_index = $_POST['last_index'];
     }
         
     $success = false;
@@ -48,13 +53,13 @@
             $conn->exec($sql);
             $success = true;
         }      
-    }else if($isStatus=="order" && $order!="" && $last_order!=""){
+    }else if($isStatus=="order" && $order!="" && $last_order!="" && $this_index!="" && $last_index!=""){
         if(count($order)==1){
             $orders = $order[0];
-            $sql = "UPDATE question_order SET qo_order = $last_order WHERE qo_id = $orders";
+            $sql = "UPDATE question_order SET qo_order = $last_index WHERE qo_quid = $orders";
             $conn->exec($sql);
 
-            $sql = "UPDATE question_order SET qo_order = $orders WHERE qo_id = $last_order";
+            $sql = "UPDATE question_order SET qo_order = $this_index WHERE qo_quid = $last_order";
             $conn->exec($sql);
             $success = true;
         }
@@ -71,7 +76,7 @@
             }
         }
     }else{
-        $sql = "SELECT (select qo_order from question_order  where qo_quid = qu_id) as qo_order,qu_question,qu_answer FROM question ";
+        $sql = "SELECT (select qo_order from question_order  where qo_quid = qu_id) as qo_order,qu_id,qu_question,qu_answer FROM question ";
 
         if(isset($_POST['qu_id'])){
             $sql = $sql . " WHERE qu_id =" .$_POST['qu_id'];

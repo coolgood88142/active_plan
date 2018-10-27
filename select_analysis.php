@@ -8,7 +8,7 @@
         $end_date = $_POST['end_date'];
     }
 
-    $chart_type = "";
+    $chart_type = "";$us_id = "";
     if(isset($_POST['chart_type'] )){
         $chart_type = $_POST['chart_type'];
         $us_admin = $_POST['admin'];

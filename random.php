@@ -3,16 +3,17 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <?php session_start();
     include("mysql.php"); 
 
     $us_admin = "";
-    if(isset($_SESSION["us_admin"])) {
-      $us_admin = $_SESSION['us_admin'];
-      if(!empty($us_admin)){
-        include("select_plan.php");
-        include("select_random.php");
-      }
+    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {
+        if(isset($_SESSION["us_admin"])){
+            $us_admin = $_SESSION['us_admin'];
+            include("select_plan.php");
+            include("select_random.php");
+        }
     }else{
       echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
     }

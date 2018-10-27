@@ -3,18 +3,18 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <script src="./assets/js/popper.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <?php session_start();
     include("mysql.php");
 
     $us_admin = "";
-    if(isset($_SESSION["us_admin"])) {
-      $us_admin = $_SESSION['us_admin'];
-      if(!empty($us_admin)){
-        include("select_question.php");
-      }
+    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {  
+        if(isset($_SESSION["us_admin"])){
+          $us_admin = $_SESSION['us_admin'];
+          include("select_question.php");
+        }
     }else{
       echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
     }
@@ -32,7 +32,7 @@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-              <th style="width:60px;"></th>
+              <th style="text-align:center; vertical-align:middle; width:50px;"></th>
               <th style="text-align:center; vertical-align:middle; width:50px;">刪除</th>
               <th style="text-align:center; vertical-align:middle; width:80px;">編輯</th>
               <th style="text-align:center; vertical-align:middle;">問題</th>
@@ -50,20 +50,20 @@
                 <td>
                   <div class="accordion" id="select_data">
                     <div class="card">
-                      <div class="card-header" id="heading<?=$value['qo_order']?>">
+                      <div class="card-header" id="heading<?=$value['qu_id']?>">
                         <h5 class="mb-0">
-                          <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                          <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
                             <?=$value['qu_question']?>
                           </button>
                         </h5>
                       </div>
-                      <div id="collapse<?=$value['qo_order']?>" class="collapse" aria-labelledby="heading<?=$value['qo_order']?>" data-parent="#select_data">
+                      <div id="collapse<?=$value['qu_id']?>" class="collapse" aria-labelledby="heading<?=$value['qu_id']?>" data-parent="#select_data">
                         <div class="card-body" id="answer_data">
                           <?=$value['qu_answer']?>
                         </div>
                       </div>
                     </div>
-                    <input type="hidden" id="order_data" value="<?=$value['qo_order']?>"> 
+                    <input type="hidden" id="order_data" value="<?=$value['qu_id']?>"> 
                   </div>
                   </td>
               </tr>
@@ -88,7 +88,9 @@
             <input type="text" id="answer" class="form-control" aria-label="answer" aria-describedby="qu_answer" value="">
           </div>
           <input type="hidden" id="order" value=""> 
-          <input type="hidden" id="last_order" value=""> 
+          <input type="hidden" id="last_order" value="">
+          <input type="hidden" id="this_index" value=""> 
+          <input type="hidden" id="last_index" value=""> 
         </div>   
     </form>
   </body>
@@ -108,6 +110,8 @@
       if(prev_order!="" && prev_order!=null && prev_order!=undefined){
         $("#order").val($(tr).find("#order_data").val());
         $("#last_order").val($(prev).find("#order_data").val());
+        $("#this_index").val($(tr).index()+1);
+        $("#last_index").val($(prev).index()+1);
         $("#isStatus").val('order');
         Data_Processing();
       }
@@ -120,6 +124,8 @@
       if(next_order!="" && next_order!=null &&next_order!=undefined){
         $("#order").val($(tr).find("#order_data").val());
         $("#last_order").val($(next).find("#order_data").val());
+        $("#this_index").val($(tr).index()+1);
+        $("#last_index").val($(next).index()+1);
         $("#isStatus").val('order');
         Data_Processing();
       }
@@ -167,6 +173,7 @@
     function getSelectData(){
       $("#insert").show();
       $('#example_wrapper').show();
+      $("#delete").show();
       $("#storage").hide();
       $("#return").hide();
       $("#edit_data").hide();
@@ -182,13 +189,17 @@
       var answer = $("#answer").val();
       var order = $("#order").val();
       var last_order = $("#last_order").val();
+      var this_index = $("#this_index").val();
+      var last_index = $("#last_index").val();
       
       var data = {
           'isStatus': isStatus, 
           'question': question,
           'answer': answer,
           'order': order,
-          'last_order': last_order
+          'last_order': last_order,
+          'this_index': this_index,
+          'last_index': last_index
         };
         
         $.ajax({
