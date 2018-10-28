@@ -27,26 +27,30 @@
         <H2>Q&A</H2>
         <br/><br/>
 
-        <button type="button" id="insert" class="btn btn-primary" onClick="edit('insert',null)">新增Q&A</button>
-        <button type="button" id="delete" class="btn btn-primary" onClick="edit('delete',null)">刪除</button><br/><br/>
+        <ul class="nav navbar-nav pull-right">
+          <li><button type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)">新增Q&A</button></li>
+          <li><button type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)">刪除</button></li>
+          <li><button type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()">排序</button></li>
+        </ul>
+        
+        <br/><br/>
         <table id="example" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-              <th style="text-align:center; vertical-align:middle; width:50px;"></th>
+              <th class="isorder" style="text-align:center; vertical-align:middle; width:50px;"></th>
               <th style="text-align:center; vertical-align:middle; width:50px;">刪除</th>
-              <th style="text-align:center; vertical-align:middle; width:80px;">編輯</th>
               <th style="text-align:center; vertical-align:middle;">問題</th>
+              <th style="text-align:center; vertical-align:middle; width:80px;">編輯</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach($quertsion as $key => $value){?>
               <tr>
-                <td style="text-align:center; vertical-align:middle;">
+                <td class="isorder" style="text-align:center; vertical-align:middle;">
                   <img id="order_up" src="./assets/images/icons-up.png" style="width:30px; height:30px;" onClick="change_up(this)">
                   <img id="order_down" src="./assets/images/icons-down.png" style="width:30px; height:30px;" onClick="change_down(this)">
                 </td>
                 <td style="text-align:center; vertical-align:middle;"><input type="checkbox" id="isDelete"></td>
-                <td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-primary" onClick="edit('update',this)">編輯</button></td>
                 <td>
                   <div class="accordion" id="select_data">
                     <div class="card">
@@ -66,6 +70,7 @@
                     <input type="hidden" id="order_data" value="<?=$value['qu_id']?>"> 
                   </div>
                   </td>
+                  <td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-primary" onClick="edit('update',this)">編輯</button></td>
               </tr>
             <?php }?>
           </tbody>
@@ -79,13 +84,13 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="qu_question">問題</span>
             </div>
-            <input type="text" id="question" class="form-control" aria-label="question" aria-describedby="qu_question" value="">
+            <textarea id="question"  class="form-control" aria-label="question" aria-describedby="qu_question" rows="3"></textarea>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="qu_answer">答案</span>
             </div>
-            <input type="text" id="answer" class="form-control" aria-label="answer" aria-describedby="qu_answer" value="">
+            <textarea id="answer" class="form-control"  aria-label="answer" aria-describedby="qu_answer" rows="3"></textarea>
           </div>
           <input type="hidden" id="order" value=""> 
           <input type="hidden" id="last_order" value="">
@@ -101,7 +106,16 @@
         $("#storage").hide();
         $("#return").hide();
         $("#edit_data").hide();
+        $(".isorder").hide();
     });
+
+    function isOrder(){
+      if($(".isorder").is(':visible')==true){
+        $(".isorder").hide();
+      }else{
+        $(".isorder").show();
+      }
+    }
 
     function change_up(obj){
       var tr = $(obj).closest("tr");
@@ -137,8 +151,9 @@
         $("#storage").show();
         $("#return").show();
         $("#edit_data").show();
-        $("#insert").hide();
-        $("#delete").hide();
+        $("#btn_insert").hide();
+        $("#btn_delete").hide();
+        $("#btn_order").hide();
         $('#example_wrapper').hide();
 
         if(status=="update"){
@@ -171,9 +186,10 @@
     }
 
     function getSelectData(){
-      $("#insert").show();
+      $("#btn_insert").show();
+      $("#btn_delete").show();
+      $("#btn_order").show();
       $('#example_wrapper').show();
-      $("#delete").show();
       $("#storage").hide();
       $("#return").hide();
       $("#edit_data").hide();

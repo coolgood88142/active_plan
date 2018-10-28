@@ -3,9 +3,9 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <script src="./assets/js/popper.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <?php session_start();
     include("mysql.php");
 
