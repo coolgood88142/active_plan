@@ -39,7 +39,10 @@
 </style>
   <body background="./assets/images/background.png">
   <?php
-    if(!empty($_COOKIE['us_account'])&& !empty($_COOKIE['us_password'])){
+    if(isset($_SESSION["us_admin"])){
+            $us_admin = $_SESSION['us_admin'];
+            include("select_activity.php"); 
+     }else if(!empty($_COOKIE['us_account'])&& !empty($_COOKIE['us_password'])){
       echo '<meta http-equiv=REFRESH CONTENT=0;url=sign_in.php>';
     }
     $error = false;
