@@ -7,10 +7,10 @@
         $us_account = $_POST['us_account'];
     }
 
-    $us_password = "";
+    $us_password = "";$cookie_password="";
     if(isset($_POST['us_password'])){
-        $us_password = $_POST['us_password'];
-        $us_password = password_hash($us_password, PASSWORD_DEFAULT);
+        $cookie_password = $_POST['us_password'];
+        $us_password = password_hash($cookie_password, PASSWORD_DEFAULT);
     }
 
     date_default_timezone_set('Asia/Taipei');
@@ -40,6 +40,10 @@
             $_SESSION['us_name'] = $row['us_name'];     //使用者姓名   
             $_SESSION['us_admin'] = $row['us_admin'];   //是否有權限
             $_POST['setup_user'] = 'Y';
+
+            //帳號建立時成功當沒記住我登入
+            setcookie("us_account",$us_account,time()+3600);
+            setcookie("us_password",$cookie_password,time()+3600);
         }else{
             $errorMessage = "這組帳號已存在了";
             echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true&errorMessage='.$errorMessage.'>';

@@ -10,17 +10,17 @@
 <script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
 <script src="./assets/js/zh-cn.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
+    $islogin=false;$us_admin = "";
+    include("checklogin.php");
     include("mysql.php");
-    
-    $us_admin = "";
-    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {
+    if($islogin){
         if(isset($_SESSION["us_admin"])){
-          $us_admin = $_SESSION['us_admin'];
+            $us_admin = $_SESSION['us_admin'];
         }
     }else{
-      echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+        exit;
     }
  ?>
   <body>

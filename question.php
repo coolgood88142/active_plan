@@ -5,20 +5,19 @@
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
+    $islogin=false;$us_admin = "";
+    include("checklogin.php");
     include("mysql.php");
-
-    $us_admin = "";
-    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) { 
+    if($islogin){
         if(isset($_SESSION["us_admin"])){
-          $us_admin = $_SESSION['us_admin'];
-          include("select_question.php");
+            $us_admin = $_SESSION['us_admin'];
+            include("select_question.php");
         }
     }else{
-      echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+        exit;
     }
-
  ?>
   <body>
     <form action="question.php" name="showForm" method="post">

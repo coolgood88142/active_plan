@@ -45,10 +45,14 @@
             $success = true;
             echo '<meta http-equiv=REFRESH CONTENT=0;url=activity.php>';
         }else{
+            setcookie("us_account",$us_account,time()+0);
+            setcookie("us_password",$us_password,time()+0);
             echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true>';
         }
     }else{
         $errorMessage = "沒有這組帳號";
+        setcookie("us_account",$us_account,time()+0);
+        setcookie("us_password",$us_password,time()+0);
         echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true&errorMessage='.$errorMessage.'>';
     }
     

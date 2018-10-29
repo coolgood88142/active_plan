@@ -5,16 +5,16 @@
   <?php include("link.php");?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <?php session_start();
+        $islogin=false;$us_admin = "";
+        include("checklogin.php");
         include("mysql.php");
-
-        $us_admin = "";
-        if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {
-          if(isset($_SESSION["us_admin"])){
-            $us_admin = $_SESSION['us_admin'];
-            include("select_setting.php"); 
-          }
+        if($islogin){
+            if(isset($_SESSION["us_admin"])){
+                $us_admin = $_SESSION['us_admin'];
+                include("select_setting.php");
+            }
         }else{
-          echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+            exit;
         }
 
         $us_account = $_SESSION['us_account'];

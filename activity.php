@@ -5,18 +5,18 @@
 <?php include("link.php");?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <?php session_start();
+    $islogin=false;$us_admin = "";
+    include("checklogin.php");
     include("mysql.php");
-
-    $us_admin = "";
-    if(!empty($_COOKIE['us_account'] ) && !empty($_COOKIE['us_password'])) {
+    if($islogin){
         if(isset($_SESSION["us_admin"])){
             $us_admin = $_SESSION['us_admin'];
             include("select_activity.php"); 
         }
     }else{
-        echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+        exit;
     }
-
+    
  ?>
   <body>
     <form name="showForm" method="post">
@@ -184,16 +184,10 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        if($("input[name='admin']").val()==""){
-            alert("請輸入帳號密碼!");
-            document.showForm.action="login.php"; 
-            document.showForm.submit();
-        }else{
-            $('#button').load('button.php');
-            $('#example1').DataTable(datatable_language());
-            if($("input[name='admin']").val()=="Y"){
-                $("input[name='add']").show();
-            }
+        $('#button').load('button.php');
+        $('#example1').DataTable(datatable_language());
+        if($("input[name='admin']").val()=="Y"){
+            $("input[name='add']").show();
         }
     } );
 

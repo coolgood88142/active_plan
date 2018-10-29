@@ -1,5 +1,9 @@
 <?php
     session_start();
+    $admin="";
+    if(isset($_SESSION["us_admin"]) && $_SESSION["us_admin"]=='Y'){
+      $admin = "_admin";
+    }
 ?>
 <!-- <input type="button" value="活動列表" onClick="show('activity')"/>
 <input type="button" value="活動類型" onClick="show('activity_type')"/>
@@ -16,18 +20,17 @@ Hi!<?php echo $_SESSION['us_name'];?>
 <div class="nav navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li><a data-toggle="tab" onClick="show('activity')">活動列表</a></li>
-            <li><a data-toggle="tab" onClick="show('activity_type')">活動類型</a></li>
-            <li><a data-toggle="tab" onClick="show('plan')">行程列表</a></li>
-            <li><a data-toggle="tab" onClick="show('random')">隨機行程</a></li>
-            <li><a data-toggle="tab" onClick="show('setting')">設定</a></li>
-            <li><a data-toggle="tab" onClick="show('analysis')">分析表</a></li>
-            <li><a data-toggle="tab" onClick="show('question')">Q&A</a></li>
-            <li><a data-toggle="tab" onClick="show('sign_out')">登出</a></li>
+            <li><a data-toggle="tab" href="activity.php">活動列表</a></li>
+            <li><a data-toggle="tab" href="activity_type.php">活動類型</a></li>
+            <li><a data-toggle="tab" href="plan.php">行程列表</a></li>
+            <li><a data-toggle="tab" href="random.php">隨機行程</a></li>
+            <li><a data-toggle="tab" href="setting<?=$admin;?>.php">設定</a></li>
+            <li><a data-toggle="tab" href="analysis.php">分析表</a></li>
+            <li><a data-toggle="tab" href="question<?=$admin;?>.php">Q&A</a></li>
             <li>Hi!<?php echo $_SESSION['us_name'];?></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="sign_out.php"><span class="glyphicon glyphicon-log-in"></span>登出</a></li>
         </ul>
     </div>
 </div><br/><br/>

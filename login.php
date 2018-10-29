@@ -38,13 +38,15 @@
 
 </style>
   <body background="./assets/images/background.png">
-  <?php
-    if(isset($_SESSION["us_admin"])){
-            $us_admin = $_SESSION['us_admin'];
-            include("select_activity.php"); 
-     }else if(!empty($_COOKIE['us_account'])&& !empty($_COOKIE['us_password'])){
-      echo '<meta http-equiv=REFRESH CONTENT=0;url=sign_in.php>';
-    }
+  <?php session_start();
+      $us_admin = "";
+      include("mysql.php");
+
+      if(isset($_SESSION["us_admin"])){
+        $us_admin = $_SESSION['us_admin'];
+        include("select_activity.php"); 
+      }
+
     $error = false;
     $errorMessage = "";
     if(isset($_GET['error'])){
@@ -157,7 +159,7 @@
             alert("請輸入帳號!");
           }else if(us_password==""){
             alert("請輸入密碼!");
-          }else if(errorMessage==""){
+          }else{
             document.loginForm.action="sign_in.php"; 
 	          document.loginForm.submit();
           }
@@ -183,7 +185,7 @@
         }else{
           $("#setup").collapse('show');
         }
-        $("#login").collapse('hide');     
+        $("#login").collapse('hide'); 
       });    
     });
   </script>
