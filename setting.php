@@ -3,7 +3,7 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <?php session_start();
         $islogin=false;$us_admin = "";
         include("checklogin.php");

@@ -15,3 +15,4 @@
 <script src="./assets/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="./assets/css/style.css">
 <script src="./assets/js/myJquery.js"></script>
+<link rel='stylesheet' href="./assets/css/all.css">
