@@ -4,8 +4,6 @@
   </head>
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
-  <script src="./assets/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -26,7 +24,7 @@
         <H2>Q&A</H2>
         <br/><br/>
 
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav justify-content-end">
           <li><button type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)">新增Q&A</button></li>
           <li><button type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)">刪除</button></li>
           <li><button type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()">排序</button></li>

@@ -3,7 +3,6 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -21,6 +20,9 @@
     if(isset($_SESSION["us_id"]) && isset($_SESSION["us_name"])){
         $pt_usid = $_SESSION['us_id'];
         $pt_usname = $_SESSION['us_name'];
+    }else if(!empty($_COOKIE['us_id']) && !empty($_COOKIE['us_name'])){
+        $pt_usid = $_COOKIE['us_id'];
+        $pt_usname = $_COOKIE['us_name'];
     }
  ?>
   <body>

@@ -3,7 +3,6 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
   <script src="./assets/js/popper.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>

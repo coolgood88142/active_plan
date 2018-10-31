@@ -1,8 +1,7 @@
 <?php
     include("mysql.php");
 
-    $us_account="";
-    $us_password="";
+    $us_account="";$us_password="";$year_hours = 1;
     if(!empty($_COOKIE['us_account'] )&& !empty($_COOKIE['us_password'])){
         $us_account = $_COOKIE['us_account'];
         $us_password = $_COOKIE['us_password'];
@@ -10,7 +9,6 @@
         $us_account = $_POST['us_account'];
         $us_password= $_POST['us_password'];
 
-        $year_hours = 1;
         if(isset($_POST['us_remember']) && $_POST['us_remember']=='on'){
             $year_hours = 24*365;
         }
@@ -37,7 +35,11 @@
             $_SESSION['us_id'] = $row['us_id'];         //id
             $_SESSION['us_name'] = $row['us_name'];     //使用者姓名   
             $_SESSION['us_admin'] = $row['us_admin'];   //是否有權限
-            
+
+            //記住session參數時cookie也記住，避免瀏覽器關閉時session參數
+            setcookie("us_id",$_SESSION['us_id'],time()+3600*$year_hours);
+            setcookie("us_name",$_SESSION['us_name'],time()+3600*$year_hours);
+            setcookie("us_admin",$_SESSION['us_admin'],time()+3600*$year_hours);
     
             $sql = "update user set us_last_login = '$datetime' where us_account='$us_account'"  ;
             $conn->exec($sql);

@@ -3,7 +3,6 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -18,8 +17,13 @@
         exit;
     }
 
-    $pt_usid = $_SESSION['us_id'];
-    $pt_usname = $_SESSION['us_name'];
+    if(isset($_SESSION["us_id"]) && isset($_SESSION["us_name"])){
+        $pt_usid = $_SESSION['us_id'];
+        $pt_usname = $_SESSION['us_name'];
+    }else if(!empty($_COOKIE['us_id']) && !empty($_COOKIE['us_name'])){
+        $pt_usid = $_COOKIE['us_id'];
+        $pt_usname = $_COOKIE['us_name'];
+    }
 
     $post_day = "";
     if(isset($_POST['post_day'])){
@@ -121,11 +125,11 @@
   <body>
     <style>
         td.details-control {
-            background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+            background: url('./assets/images/details_open.png') no-repeat center center;
             cursor: pointer;
         }
         tr.shown td.details-control {
-            background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+            background: url('./assets/images/details_close.png') no-repeat center center;
         }
     </style>
     

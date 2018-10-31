@@ -5,7 +5,6 @@
   
 <?php include("link.php");?>
 <script language="javascript" src="./assets/js/jquery.min.js"></script>
-<script language="javascript" src="./assets/js/bootstrap.min.js"></script>
 <script language="javascript" src="./assets/js/moment.js"></script>
 <script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">

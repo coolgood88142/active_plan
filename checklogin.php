@@ -11,6 +11,10 @@
             $islogin = true;
         }
     }else{
-        echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+        if(empty($_COOKIE['us_admin'])){
+            echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php>';
+        }else{
+            $_SESSION['us_admin'] = $_COOKIE['us_admin'];
+        }
     }
 ?>

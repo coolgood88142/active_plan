@@ -44,6 +44,9 @@
             //帳號建立時成功當沒記住我登入
             setcookie("us_account",$us_account,time()+3600);
             setcookie("us_password",$cookie_password,time()+3600);
+            setcookie("us_account",$_SESSION['us_id'],time()+3600);
+            setcookie("us_password",$_SESSION['us_name'],time()+3600);
+            setcookie("us_password",$_SESSION['us_admin'],time()+3600);
         }else{
             $errorMessage = "這組帳號已存在了";
             echo '<meta http-equiv=REFRESH CONTENT=0;url=login.php?error=true&errorMessage='.$errorMessage.'>';

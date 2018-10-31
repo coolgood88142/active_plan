@@ -13,7 +13,11 @@
         $chart_type = $_POST['chart_type'];
         $us_admin = $_POST['admin'];
     }else{
-        $us_id = $_SESSION['us_id'];
+        if(isset($_SESSION["us_id"])){
+            $us_id = $_SESSION['us_id'];
+        }else if(!empty($_COOKIE['us_id'])){
+            $us_id = $_COOKIE['us_id'];
+        }
     }
     
     if($chart_type=='1'){
