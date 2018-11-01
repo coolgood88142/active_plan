@@ -1,7 +1,20 @@
 <?php
     session_start();
-    $admin="";
-    if(isset($_SESSION["us_admin"]) && $_SESSION["us_admin"]=='Y'){
+    include("mysql.php");
+    $us_account="";$admin="";$headshot="";
+    if(isset($_SESSION["us_account"])){
+      $us_account = $_SESSION['us_account'];
+    }else if(empty($_COOKIE['us_account'])){
+      $us_account = $_COOKIE['us_account'];
+    }
+
+    if($us_account!=""){
+      $sql = "SELECT us_headshot_path FROM user WHERE us_account IN ('$us_account')";
+      $query = $conn->query($sql);
+      $headshot = $query->fetch(PDO::FETCH_ASSOC); 
+    }
+
+    if((isset($_SESSION["us_admin"]) && $_SESSION["us_admin"]=='Y') || (empty($_COOKIE['us_admin']) && $_COOKIE['us_admin']=='Y')){
       $admin = "_admin";
     }
 ?>
@@ -35,7 +48,7 @@ Hi!<?php echo $_SESSION['us_name'];?>
     </div>
 </div><br/><br/> -->
 <style>
-  .dropdown-menu li img.avatar{
+  .dropdown-menu li img.avatar,.nav-link img.avatar{
     height:40px;
     border-radius: 50em;
     -webkit-border-radius: 50em;
@@ -68,9 +81,15 @@ Hi!<?php echo $_SESSION['us_name'];?>
       <li class="nav-item ">
         <a class="nav-link" href="random.php">隨機行程</a>
       </li>
+      <?php
+        if($admin!=""){
+      ?>
       <li class="nav-item ">
         <a class="nav-link" href="setting<?=$admin;?>.php">設定</a>
       </li>
+      <?php
+        }
+      ?>
       <li class="nav-item ">
         <a class="nav-link" href="analysis.php">分析表</a>
       </li>
@@ -84,13 +103,15 @@ Hi!<?php echo $_SESSION['us_name'];?>
       <!-- <li><i class="fa fa-user" style="font-size:24px;color:blue"></i></li> -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user" style="font-size:24px;color:blue"></i>
+          <img class="avatar" src="<?=$headshot['us_headshot_path']!="" ? $headshot['us_headshot_path'] : "./assets/images/default.png";?>" alt="">
         </a>
         <ul class="dropdown-menu">
           <li class="avatar">
-            <img class="avatar" src="./assets/images/user.png" alt="">
+            <img class="avatar" src="<?=$headshot['us_headshot_path']!="" ? $headshot['us_headshot_path'] : "./assets/images/default.png";?>" alt="">
               <div><div class="point point-primary point-lg"></div><?php echo $_SESSION['us_name'];?></div>
+              <span><small><?php echo $_SESSION['us_account'];?></small></span>
               <span><small><a href="setting.php">帳號資料</a></small></span>
+              <span><small><a href="sign_out.php">登出</a></small></span>
           </li>
         </ul>
       </li>

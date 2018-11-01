@@ -13,7 +13,7 @@
             include("select_activity.php"); 
         }
     }else{
-        exit;
+        $us_admin = $_COOKIE['us_admin'];
     }
     
  ?>

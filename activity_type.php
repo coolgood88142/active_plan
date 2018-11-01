@@ -3,7 +3,6 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
