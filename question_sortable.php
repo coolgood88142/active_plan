@@ -74,16 +74,16 @@
         $("#sortable").disableSelection();
     });
 
-    $("#sortable").on('sortupdate', function() {
-      var data = $("#sortable").sortable('serialize');
+    function Save(){
       var orderid = "";
       $("input[name='orderid[]']").each(function() {
         orderid = orderid + $(this).val() + ",";
       });
       orderid = orderid.substring(0, orderid.length-1);
-      // var data = { 
-      //     'heading': heading
-      //   };
+      var data = { 
+          'isStatus': "all_update", 
+          'orderid': orderid
+        };
         
         $.ajax({
         url: "select_question.php",
@@ -93,14 +93,16 @@
         data: data, 
         success: function(info){
           if(info.success==true){
-            show('question');
+            back();
           }
         },
         error:function(xhr, status, error){
           alert(xhr.statusText);
         }
       });
-    });
+    }
+
+    
     function back(){
       document.showForm.action="question_admin.php"; 
       document.showForm.submit();
