@@ -4,7 +4,7 @@
     $us_account="";$admin="";$headshot="";
     if(isset($_SESSION["us_account"])){
       $us_account = $_SESSION['us_account'];
-    }else if(empty($_COOKIE['us_account'])){
+    }else if(!empty($_COOKIE['us_account'])){
       $us_account = $_COOKIE['us_account'];
     }
 
@@ -97,8 +97,9 @@ Hi!<?php echo $_SESSION['us_name'];?>
         <a class="nav-link" href="question<?=$admin;?>.php">Q&A</a>
       </li>
     </ul>
-
-    <ul class="nav justify-content-end">
+  </div>
+  <div class="mx-2">
+    <ul class="nav">
       <!-- <li><a href="sign_out.php"><span class="glyphicon glyphicon-log-out"></span>登出</a></li> -->
       <!-- <li><i class="fa fa-user" style="font-size:24px;color:blue"></i></li> -->
       <li class="nav-item dropdown">
@@ -116,5 +117,5 @@ Hi!<?php echo $_SESSION['us_name'];?>
         </ul>
       </li>
     </ul>
-  </div>
+</div>
 </nav>

@@ -1,7 +1,7 @@
 <?php
     include("mysql.php");
 
-    $us_account="";$us_password="";$year_hours = 1;
+    $us_account="";$us_password="";$year_hours = 3600;
     if(!empty($_COOKIE['us_account'] )&& !empty($_COOKIE['us_password'])){
         $us_account = $_COOKIE['us_account'];
         $us_password = $_COOKIE['us_password'];
@@ -10,11 +10,11 @@
         $us_password= $_POST['us_password'];
 
         if(isset($_POST['us_remember']) && $_POST['us_remember']=='on'){
-            $year_hours = 24*365;
+            $year_hours = 99999;
         }
         //測試沒記住我時，把3600改成1，登入後1秒就解析掉了
-        setcookie("us_account",$us_account,time()+3600*$year_hours);
-        setcookie("us_password",$us_password,time()+3600*$year_hours);
+        setcookie("us_account",$us_account,time()+$year_hours);
+        setcookie("us_password",$us_password,time()+$year_hours);
     }
 
     $sql = "select us_id,us_name,us_password,us_admin from user where us_account='" . $us_account  ."' and us_status = 1 ";
@@ -37,9 +37,10 @@
             $_SESSION['us_admin'] = $row['us_admin'];   //是否有權限
 
             //記住session參數時cookie也記住，避免瀏覽器關閉時session參數
-            setcookie("us_id",$_SESSION['us_id'],time()+3600*$year_hours);
-            setcookie("us_name",$_SESSION['us_name'],time()+3600*$year_hours);
-            setcookie("us_admin",$_SESSION['us_admin'],time()+3600*$year_hours);
+            setcookie("us_id",$_SESSION['us_id'],time()+$year_hours);
+            setcookie("us_name",$_SESSION['us_name'],time()+$year_hours);
+            setcookie("us_admin",$_SESSION['us_admin'],time()+$year_hours);
+            setcookie("us_admin",$_SESSION['us_account'],time()+$year_hours);
     
             $sql = "update user set us_last_login = '$datetime' where us_account='$us_account'"  ;
             $conn->exec($sql);
