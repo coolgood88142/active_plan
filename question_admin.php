@@ -107,11 +107,14 @@
     });
 
     function isOrder(){
-      if($(".isorder").is(':visible')==true){
-        $(".isorder").hide();
-      }else{
-        $(".isorder").show();
-      }
+      // if($(".isorder").is(':visible')==true){
+      //   $(".isorder").hide();
+      // }else{
+      //   $(".isorder").show();
+      // }
+
+      document.showForm.action="question_sortable.php"; 
+      document.showForm.submit();
     }
 
     function change_up(obj){

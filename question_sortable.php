@@ -31,32 +31,37 @@
 
         <ul class="nav justify-content-end">
           <li><button type="button" id="btn_save" class="btn btn-primary" onClick="Save()">儲存</button></li>
+          <li><button type="button" id="btn_save" class="btn btn-primary" onClick="back()">返回</button></li>
         </ul>
         
         <br/><br/>
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-            <tr>
-              <th style="text-align:center; vertical-align:middle;">問題</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-                <td>
-                    <ul id="sortable">
+        問題
+                    <div id="sortable">
                     <?php foreach($quertsion as $key => $value){?>
-                        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><?=$value['qu_question']?></li>
+                        <div class="accordion" id="select_data">
+                    <div class="card">
+                      <div class="card-header" id="heading-<?=$value['qu_id']?>">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                            <?=$value['qu_question']?>
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapse<?=$value['qu_id']?>" class="collapse" aria-labelledby="heading-<?=$value['qu_id']?>" data-parent="#select_data">
+                        <div class="card-body" id="answer_data">
+                          <?=$value['qu_answer']?>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" name="orderid[]" value="<?=$value['qu_id']?>"> 
+                  </div>
                     <?php }?>
-                    </ul>
-                </td>
-            </tr>
-          </tbody>
-        </table>   
+                    </div>
+                
     </form>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-      $('#example').DataTable();
         $('#button').load('button.php');
         $("#storage").hide();
         $("#return").hide();
@@ -68,6 +73,39 @@
         $("#sortable").sortable();
         $("#sortable").disableSelection();
     });
+
+    $("#sortable").on('sortupdate', function() {
+      var data = $("#sortable").sortable('serialize');
+      var orderid = "";
+      $("input[name='orderid[]']").each(function() {
+        orderid = orderid + $(this).val() + ",";
+      });
+      orderid = orderid.substring(0, orderid.length-1);
+      // var data = { 
+      //     'heading': heading
+      //   };
+        
+        $.ajax({
+        url: "select_question.php",
+        type: "POST",
+        async: true, 
+        dataType: "json",
+        data: data, 
+        success: function(info){
+          if(info.success==true){
+            show('question');
+          }
+        },
+        error:function(xhr, status, error){
+          alert(xhr.statusText);
+        }
+      });
+    });
+    function back(){
+      document.showForm.action="question_admin.php"; 
+      document.showForm.submit();
+    }
+
   </script>
 </html>
 

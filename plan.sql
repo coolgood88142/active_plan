@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018-10-19 13:55:16
+-- 產生時間： 2018-11-02 12:37:50
 -- 伺服器版本: 10.1.34-MariaDB
 -- PHP 版本： 7.2.7
 
@@ -240,6 +240,15 @@ CREATE TABLE `question` (
   `qu_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 資料表的匯出資料 `question`
+--
+
+INSERT INTO `question` (`qu_id`, `qu_question`, `qu_answer`, `qu_updatedate`) VALUES
+(1, '我目前想不到可以幫我排定行程嗎?', '本系統的隨機行程功能可以隨機自己想要的行程。', '2018-10-27 17:44:00'),
+(2, '我想查出我這個月的行程裡有哪些項目呢?', '本系統的分析表只要輸入時間即時查出該月的行程有哪些項目。', '2018-10-27 17:44:00'),
+(3, '自己的自訂行程，我想要做變更要怎麼做?', '在自己的行程列表裡可以執行編輯做變更。', '2018-10-27 17:44:00');
+
 -- --------------------------------------------------------
 
 --
@@ -248,9 +257,19 @@ CREATE TABLE `question` (
 
 CREATE TABLE `question_order` (
   `qo_id` int(6) UNSIGNED NOT NULL,
-  `qo_type` int(6) NOT NULL,
+  `qo_order` int(6) NOT NULL,
+  `qo_quid` int(6) NOT NULL,
   `qo_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `question_order`
+--
+
+INSERT INTO `question_order` (`qo_id`, `qo_order`, `qo_quid`, `qo_updatedate`) VALUES
+(1, 3, 2, '2018-10-31 13:27:01'),
+(2, 1, 1, '2018-10-31 16:20:52'),
+(3, 2, 3, '2018-10-31 16:20:52');
 
 -- --------------------------------------------------------
 
@@ -290,6 +309,7 @@ CREATE TABLE `user` (
   `us_status` int(11) NOT NULL,
   `us_email` varchar(30) CHARACTER SET utf8 NOT NULL,
   `us_last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `us_headshot_path` varchar(30) CHARACTER SET utf8 NOT NULL,
   `us_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -297,28 +317,25 @@ CREATE TABLE `user` (
 -- 資料表的匯出資料 `user`
 --
 
-INSERT INTO `user` (`us_id`, `us_account`, `us_password`, `us_name`, `us_gender`, `us_admin`, `us_status`, `us_email`, `us_last_login`, `us_updatedate`) VALUES
-(1, 'admin0000', '$2y$10$L7eoYt3kc0IEJ1OnCojiuOliijTd2JnI07IOr9lg7OXlUGa2J6rSm', '系統管理員', '', 'Y', 1, '', '2018-10-18 19:08:33', '2018-10-18 19:08:33'),
-(2, 'tset1234', '$2y$10$61w3T1WGXb5XuBZ6qsF8Te9Wy1b/Ea/3a/tjZbtIBRvdkKcve/PfK', 'test1234', '', 'N', 1, '', '0000-00-00 00:00:00', '2018-08-29 15:05:50'),
-(4, 'asd123', '$2y$10$p5FduvHXiZUWFcu9Bd0.seaMEhHCFI0lR3e29719Jf.Ty0K3U25uK', 'asd123', '', 'N', 1, '', '2018-08-21 16:45:49', '2018-08-29 15:06:18'),
-(5, 'testas123', '$2y$10$/i8wtXjE.gFU7R/sddVOleWyefQpAx/r03I9Ey9dC0EcMb9f1VSWW', 'testas123', 'R', 'N', 1, '', '2018-08-22 15:48:38', '2018-10-16 16:54:35'),
-(6, 'test0823', '$2y$10$ebQu3oY6QDpCSaoXJwqsGu0aSmLJBCIsxuryIRrGoLuuMSFV7mhmS', '王小明', 'R', 'N', 1, 'ming@yahoo.com.tw', '2018-08-23 15:39:51', '2018-10-12 18:17:09'),
-(7, 'test0000', '$2y$10$ZdSm7YNZn9XeyJ2ecC2cZOaduSUdcV/JPWRmGDEBa78hLIsEr6uwe', '測試人員', 'S', 'N', 1, 'test0110@yahoo.com.tw', '2018-10-16 15:05:38', '2018-10-16 15:05:38'),
-(8, 'user0000', '$2y$10$HHm/U3zjZQHjvtQayOaXrObmJagGNhAACZO/3eaPrx1SFupPNOWW6', '使用者', 'R', 'N', 1, 'abc23411324@gmail.com', '2018-10-18 18:45:15', '2018-10-18 18:45:15'),
-(9, 'test0831', '$2y$10$MjhumnQuKvXZFq1aQAknteJ6fNdpt/fnKasw3HC5Cd2u5nIxF4HPa', 'test0831', '', 'N', 1, '', '2018-08-31 13:17:12', '2018-08-31 13:17:13'),
-(10, 'user111222', '$2y$10$nX9S2I6cBcL5Xc7ttuRkf.Q7rlkDvM.T4kV7fzsgAaS4pngkXtQLe', '測試人員11', 'R', 'N', 1, 'work12@yahoo.com.tw', '2018-08-31 14:07:01', '2018-08-31 16:26:09'),
-(12, 'peter', '$2y$10$nThXAOkA.wkk8Ak/343u5.jiVm6XWwPsEr7lxMi8FFf9gdvO7sXS2', 'fuck', 'S', 'N', 1, 'peter@yahoo.com.ee', '2018-08-31 14:35:26', '2018-08-31 14:40:43'),
-(13, 'test123456', '$2y$10$koV6c1.un2vO9J.MdxIBVOkSiwGBnMsQT5azFfvPr/ik4Qd0z8bLq', 'test123456', 'R', 'N', 2, 'tset123456@yahoo.com.tw', '2018-08-31 16:16:21', '2018-09-06 17:52:47'),
-(16, 'eric123456', '$2y$10$pedpPLPdJCFLqPGNW3wpg.7BsJx6sjabvyP6YHCTtjtUi8bw7wJOC', '測試員', 'R', 'N', 1, 'eric123456@gmail.com', '2018-10-16 18:23:32', '2018-10-16 18:23:32'),
-(17, 'test0904', '$2y$10$IYpV.q0siF77IxpM4bSRgO16Yv9ALK8ZwashRHkt6Q185bnCPWi72', 'test0904', '', 'N', 1, '', '2018-09-03 16:37:50', '2018-09-03 16:37:51'),
-(18, 'test123', '$2y$10$IS7pnlvg1XpL03qZSCwXKORpKbgHv.25cTBVT9ziWFXO.qtJLyRrm', 'test123', '', 'N', 1, '', '2018-09-03 16:43:40', '2018-09-03 16:43:40'),
-(19, 'testadd123', '$2y$10$uKiAGzv6tLkF.d0/OKZf8OgUOuL7RjIQG2A7vgf18BzLKSbOjA5IC', '測試新增停用', 'S', 'N', 2, 'testadd123@yahoo.com.tw', '2018-09-04 13:50:44', '2018-09-04 13:50:44'),
-(20, 'teststop12', '$2y$10$zzazbzxzbsuPc0PIx1ikQeI853oWLSW6S7sha4NPkZHyEU8h1WVJS', '測試停用', 'R', 'N', 2, 'teststop12@yahoo.com.tw', '2018-09-04 13:52:03', '2018-09-04 13:52:03'),
-(21, 'qwer123', '$2y$10$ry0hweUeYlkXiKOXPmccfO.z4Si2KuTLrbSr/W.KNtcLN0QpRvJqy', '今天', 'R', 'N', 1, 'qwer123@gmail.com', '2018-09-06 14:00:23', '2018-09-06 14:02:09'),
-(25, 'test789456', '$2y$10$BKJma9LII3wq5CFEa9PR6e2CSH13nYUnSmDueg.4wGq4C7hyeEL0O', 'test789456', '', 'N', 1, '', '2018-10-17 18:11:05', '2018-10-17 18:11:05'),
-(26, 'dfrgdfg123', '$2y$10$liX0Hs7eotVrp7SDge.qgO6YyRiDGRa1Ivd.FiZNQyfZ9xY/T.2mm', 'dfrgdfg123', '', 'N', 1, '', '2018-10-17 18:17:11', '2018-10-17 18:17:11'),
-(27, 'rtert145263', '$2y$10$Uo9NsCK4X76.bJ.YYjFj1O2rrsO8YMKJn/57pmidKPO7dqDNDoLxu', 'rtert145263', '', 'N', 1, '', '2018-10-17 18:28:02', '2018-10-17 18:28:02'),
-(28, 'wer13156', '$2y$10$fKxGFp.ldYleMZ79g/DToOh92gW48EF2aFDRC3MOdyfV0rA2mZXU2', 'wer13156', '', 'N', 1, '', '2018-10-17 18:32:11', '2018-10-17 18:32:11');
+INSERT INTO `user` (`us_id`, `us_account`, `us_password`, `us_name`, `us_gender`, `us_admin`, `us_status`, `us_email`, `us_last_login`, `us_headshot_path`, `us_updatedate`) VALUES
+(1, 'admin0000', '$2y$10$L7eoYt3kc0IEJ1OnCojiuOliijTd2JnI07IOr9lg7OXlUGa2J6rSm', '系統管理員', '', 'Y', 1, '', '2018-11-01 19:13:03', './assets/images/admin0000.png', '2018-11-01 19:13:03'),
+(2, 'tset1234', '$2y$10$61w3T1WGXb5XuBZ6qsF8Te9Wy1b/Ea/3a/tjZbtIBRvdkKcve/PfK', 'test1234', '', 'N', 1, '', '0000-00-00 00:00:00', '', '2018-08-29 15:05:50'),
+(4, 'asd123', '$2y$10$p5FduvHXiZUWFcu9Bd0.seaMEhHCFI0lR3e29719Jf.Ty0K3U25uK', 'asd123', '', 'N', 1, '', '2018-08-21 16:45:49', '', '2018-08-29 15:06:18'),
+(5, 'testas123', '$2y$10$/i8wtXjE.gFU7R/sddVOleWyefQpAx/r03I9Ey9dC0EcMb9f1VSWW', 'testas123', 'R', 'N', 1, '', '2018-08-22 15:48:38', '', '2018-10-16 16:54:35'),
+(6, 'test0823', '$2y$10$ebQu3oY6QDpCSaoXJwqsGu0aSmLJBCIsxuryIRrGoLuuMSFV7mhmS', '王小明', 'R', 'N', 1, 'ming@yahoo.com.tw', '2018-08-23 15:39:51', '', '2018-10-12 18:17:09'),
+(7, 'test0000', '$2y$10$ZdSm7YNZn9XeyJ2ecC2cZOaduSUdcV/JPWRmGDEBa78hLIsEr6uwe', '測試人員', 'S', 'N', 1, 'test0110@yahoo.com.tw', '2018-10-16 15:05:38', '', '2018-10-16 15:05:38'),
+(8, 'user0000', '$2y$10$HHm/U3zjZQHjvtQayOaXrObmJagGNhAACZO/3eaPrx1SFupPNOWW6', '使用者', 'R', 'N', 1, 'abc23411324@gmail.com', '2018-11-01 18:30:36', './assets/images/user0000.png', '2018-11-01 18:30:36'),
+(9, 'test0831', '$2y$10$MjhumnQuKvXZFq1aQAknteJ6fNdpt/fnKasw3HC5Cd2u5nIxF4HPa', 'test0831', '', 'N', 1, '', '2018-08-31 13:17:12', '', '2018-08-31 13:17:13'),
+(10, 'user111222', '$2y$10$nX9S2I6cBcL5Xc7ttuRkf.Q7rlkDvM.T4kV7fzsgAaS4pngkXtQLe', '測試人員11', 'R', 'N', 1, 'work12@yahoo.com.tw', '2018-08-31 14:07:01', '', '2018-08-31 16:26:09'),
+(12, 'peter', '$2y$10$nThXAOkA.wkk8Ak/343u5.jiVm6XWwPsEr7lxMi8FFf9gdvO7sXS2', 'fuck', 'S', 'N', 1, 'peter@yahoo.com.ee', '2018-08-31 14:35:26', '', '2018-08-31 14:40:43'),
+(13, 'test123456', '$2y$10$koV6c1.un2vO9J.MdxIBVOkSiwGBnMsQT5azFfvPr/ik4Qd0z8bLq', 'test123456', 'R', 'N', 2, 'tset123456@yahoo.com.tw', '2018-08-31 16:16:21', '', '2018-09-06 17:52:47'),
+(16, 'eric123456', '$2y$10$nOAPiZAqwA4PMk2YR8rQ7OSXhxtYjZR7lggTcqwZqywXoLT3DDh.W', '測試員', 'R', 'N', 1, 'eric123456@gmail.com', '2018-11-01 18:28:33', '', '2018-11-01 18:28:33'),
+(17, 'test0904', '$2y$10$IYpV.q0siF77IxpM4bSRgO16Yv9ALK8ZwashRHkt6Q185bnCPWi72', 'test0904', '', 'N', 1, '', '2018-09-03 16:37:50', '', '2018-09-03 16:37:51'),
+(18, 'test123', '$2y$10$IS7pnlvg1XpL03qZSCwXKORpKbgHv.25cTBVT9ziWFXO.qtJLyRrm', 'test123', '', 'N', 1, '', '2018-09-03 16:43:40', '', '2018-09-03 16:43:40'),
+(19, 'testadd123', '$2y$10$uKiAGzv6tLkF.d0/OKZf8OgUOuL7RjIQG2A7vgf18BzLKSbOjA5IC', '測試新增停用', 'S', 'N', 2, 'testadd123@yahoo.com.tw', '2018-09-04 13:50:44', '', '2018-09-04 13:50:44'),
+(20, 'teststop12', '$2y$10$zzazbzxzbsuPc0PIx1ikQeI853oWLSW6S7sha4NPkZHyEU8h1WVJS', '測試停用', 'R', 'N', 2, 'teststop12@yahoo.com.tw', '2018-09-04 13:52:03', '', '2018-09-04 13:52:03'),
+(21, 'qwer123', '$2y$10$ry0hweUeYlkXiKOXPmccfO.z4Si2KuTLrbSr/W.KNtcLN0QpRvJqy', '今天', 'R', 'N', 1, 'qwer123@gmail.com', '2018-09-06 14:00:23', '', '2018-09-06 14:02:09'),
+(22, 'test1031', '$2y$10$qgP1JvWuwk6jwdCUdwXrdOWDHNKoZwej.opfgWnKHeeZkXtFOrih6', 'test1031', '', 'N', 1, '', '2018-10-31 14:16:38', '', '2018-10-31 14:16:38');
 
 --
 -- 已匯出資料表的索引
@@ -416,13 +433,13 @@ ALTER TABLE `plan_trip`
 -- 使用資料表 AUTO_INCREMENT `question`
 --
 ALTER TABLE `question`
-  MODIFY `qu_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `qu_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表 AUTO_INCREMENT `question_order`
 --
 ALTER TABLE `question_order`
-  MODIFY `qo_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `qo_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表 AUTO_INCREMENT `time_types`
@@ -434,7 +451,7 @@ ALTER TABLE `time_types`
 -- 使用資料表 AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `us_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `us_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

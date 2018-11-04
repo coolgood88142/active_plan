@@ -1,7 +1,7 @@
 <?php
     include("mysql.php");
 
-    $question="";$answer="";$order="";$last_order="";$this_index="";$last_index="";
+    $question="";$answer="";$order="";$last_order="";$this_index="";$last_index="";$heading="";
     if(isset($_POST['question']) && isset($_POST['answer']) && $_POST['question']!="" && $_POST['answer']!=""){
         $question =  $_POST['question'];
         $answer =  $_POST['answer'];
@@ -20,7 +20,11 @@
         $this_index = $_POST['this_index'];
         $last_index = $_POST['last_index'];
     }
-        
+
+    if(isset($_POST['heading']) && $_POST['heading']!=""){
+        $heading =  $_POST['heading'];
+    }
+    
     $success = false;
     $isStatus = "";
     if(isset($_POST['isStatus'])){
@@ -75,7 +79,10 @@
                 $success = true;
             }
         }
-    }else{
+    }else if($isStatus=="all_update" && $heading!=""){
+        // var_dump($_POST['item']);
+    }
+    else{
         $sql = "SELECT (select qo_order from question_order  where qo_quid = qu_id) as qo_order,qu_id,qu_question,qu_answer FROM question ";
 
         if(isset($_POST['qu_id'])){
