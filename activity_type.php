@@ -16,11 +16,29 @@
         exit;
     }
  ?>
+  <style>
+   .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center; 
+}
+
+.jumbotron{
+  background: url("./assets/images/background.png") no-repeat center center; 
+  height:100%;
+  width:100%;
+}
+
+ </style>
   <body>
+  <div class="jumbotron vertical-center">
+    <div class="container">
+    <h2 id="title" class="text-center text-white font-weight-bold">活動類型</h2>
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>活動類型</H2>
         <br/><br/>
         <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
         <table id="example2">
@@ -74,7 +92,9 @@
     <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
     <input type="hidden" name="add_timetypes" />
     <input type="hidden" name="up_timetypes" />
-    </form>  
+    </form> 
+    </div>
+  </div> 
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

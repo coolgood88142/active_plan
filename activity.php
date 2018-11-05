@@ -17,11 +17,28 @@
     }
     
  ?>
+ <style>
+   .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+
+  display: flex;
+  align-items: center; 
+}
+
+.jumbotron{
+  background: url("./assets/images/background.png") no-repeat center center; 
+  height:100%;
+  width:100%;
+}
+
+ </style>
   <body>
-    <form name="showForm" method="post">
+  <div class="jumbotron vertical-center">
+    <div class="container">
+    <h2 id="title" class="text-center text-white font-weight-bold">活動列表</h2>
+    <form id="showForm" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>活動列表</H2>
         <br/><br/>      
         <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
         <table id="example1">
@@ -179,7 +196,9 @@
     <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
     <input type="hidden" name="add_activitys" />
     <input type="hidden" name="up_activitys" />
-    </form>  
+    </form>
+    </div>
+  </div>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

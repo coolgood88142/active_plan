@@ -58,6 +58,7 @@
                         <input type="hidden" name="us_gender" value="<?=$value["us_gender"]?>"/>
                         <input type="hidden" name="us_email" value="<?=$value["us_email"]?>"/>
                         <input type="hidden" name="us_status" value="<?=$value["us_status"]?>"/>
+                        <input type="hidden" name="us_headshot_path" value="<?=$value["us_headshot_path"]?>"/>
                     </td>
                 </tr>
                 <?php 
@@ -73,7 +74,8 @@
         <input type="hidden" name="us_account" />
         <input type="hidden" name="us_gender" />
         <input type="hidden" name="us_email" />   
-        <input type="hidden" name="us_status" />        
+        <input type="hidden" name="us_status" />
+        <input type="hidden" name="us_headshot_path" />        
     </form>
     <form action="setting.php" name="addForm" method="post">
         <input type="hidden" name="add_account" value="true"/>   
@@ -91,18 +93,20 @@
             var us_gender = $(tr).find("td input[name='us_gender']").val();
             var us_email = $(tr).find("td input[name='us_email']").val();
             var us_status = $(tr).find("td input[name='us_status']").val();
-        
+            var us_headshot_path = $(tr).find("td input[name='us_headshot_path']").val();
+            us_headshot_path = us_headshot_path.replace("./assets/images/","");
+
             if ( row.child.isShown() ) {
                 row.child.hide();
                 tr.removeClass('shown');
             } else {
-                row.child( format(us_account,us_gender,us_email,us_status) ).show();
+                row.child( format(us_account,us_gender,us_email,us_status,us_headshot_path) ).show();
                 tr.addClass('shown');
             }
         } );
     } );
 
-    function format (us_account,us_gender,us_email,us_status) {
+    function format (us_account,us_gender,us_email,us_status,us_headshot_path) {
     var nodata="未填寫";
     if(us_gender==null || us_gender=="" || us_gender==undefined){
         us_gender=nodata;
@@ -140,6 +144,14 @@
             '<td>狀態</td>'+
             '<td>'+us_status+'</td>'+
         '</tr>'+
+        '<tr>'+
+            '<td>狀態</td>'+
+            '<td>'+us_status+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>大頭照檔名</td>'+
+            '<td>'+us_headshot_path+'</td>'+
+        '</tr>'+
     '</table>';
     }
 
@@ -150,6 +162,8 @@
         var us_gender = $(tr).find("td input[name='us_gender']").val();
         var us_email = $(tr).find("td input[name='us_email']").val();
         var us_status = $(tr).find("td input[name='us_status']").val();
+        var us_headshot_path = $(tr).find("td input[name='us_headshot_path']").val();
+        us_headshot_path = us_headshot_path.replace("./assets/images/","");
 
         var from = $("form[name='submitForm']");
         $(from).find("input[name='us_name']").val(us_name);
@@ -157,6 +171,7 @@
         $(from).find("input[name='us_gender']").val(us_gender);
         $(from).find("input[name='us_email']").val(us_email);
         $(from).find("input[name='us_status']").val(us_status);
+        $(from).find("input[name='us_headshot_path']").val(us_headshot_path);
         $(from).submit();
     }
 

@@ -22,20 +22,35 @@
         exit;
     }
  ?>
+<style>
+  #ac_name,#ac_type {
+  min-width: 310px;
+  margin: 0 auto
+  }
+  tspan{
+   font-size:20px;
+  }
+  .vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center; 
+  }
+
+.jumbotron{
+  background: url("./assets/images/background.png") no-repeat center center; 
+  height:100%;
+  width:100%;
+}
+</style>
   <body>
-    <style>
-        #ac_name,#ac_type {
-            min-width: 310px;
-            margin: 0 auto
-        }
-        tspan{
-          font-size:20px;
-        }
-    </style>
+  <div class="jumbotron vertical-center">
+    <div class="container">
+    <h2 id="title" class="text-center text-white font-weight-bold">分析表</h2>
     <form action="analysis.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>分析表</H2>
         <br/><br/>
         <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
         <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
@@ -79,6 +94,8 @@
         <div id="ac_type" style="display_none;"></div>
         <div id="ty_type" style="display_none; height: 400px"></div>
     </form>  
+    </div>
+  </div>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

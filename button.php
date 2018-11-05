@@ -48,7 +48,7 @@ Hi!<?php echo $_SESSION['us_name'];?>
     </div>
 </div><br/><br/> -->
 <style>
-  .dropdown-menu li img.avatar,.nav-link img.avatar{
+  .dropdown-menu li img.avatar{
     height:40px;
     border-radius: 50em;
     -webkit-border-radius: 50em;
@@ -64,6 +64,15 @@ Hi!<?php echo $_SESSION['us_name'];?>
     padding: 0px 15px;
     border-bottom: 1px solid #eeeeee;
 }
+  .nav-link img.avatar{
+    height:40px;
+    border-radius: 50em;
+    -webkit-border-radius: 50em;
+    -moz-border-radius: 50em;
+  }
+  .navbar{
+    position：fixed;
+  }
 
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -22,6 +22,7 @@
         $us_email = "";
         $us_status = "";
         $add_account = "";
+        $us_headshot_path = "";
 
         if($us_admin=="Y"){
           if(isset($_POST['us_account'])){
@@ -42,11 +43,16 @@
           if(isset($_POST['add_account'])){
             $add_account = $_POST['add_account'];
           }
+          if(isset($_POST['us_headshot_path'])){
+            $us_headshot_path = $_POST['us_headshot_path'];
+          }
         }else{
           foreach ($setting as $key => $value) {
             $us_gender = $value["us_gender"];
             $us_email = $value["us_email"];
+            $us_headshot_path = $value['us_headshot_path'];
           }
+          $us_headshot_path = str_replace("./assets/images/","",$us_headshot_path );
         }
         
 
@@ -96,6 +102,8 @@
         <input type="hidden" name="gender" value="<?php echo $us_gender!="未填寫"?$us_gender:"" ?>"/>
 
         電子信箱: <input type="text" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>"/><br/><br/>
+
+        大頭照檔名: <input type="text" name="us_headshot_path" value="<?= $us_headshot_path ?>"/><br/><br/>
 
         <p class="status" style="display:none;">狀態:
           <input type="radio" name="us_status" value=1 checked>正常&nbsp
