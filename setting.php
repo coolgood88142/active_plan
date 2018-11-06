@@ -23,6 +23,7 @@
         $us_status = "";
         $add_account = "";
         $us_headshot_path = "";
+        $headshot_path = "";
 
         if($us_admin=="Y"){
           if(isset($_POST['us_account'])){
@@ -44,21 +45,27 @@
             $add_account = $_POST['add_account'];
           }
           if(isset($_POST['us_headshot_path'])){
-            $us_headshot_path = $_POST['us_headshot_path'];
+            $headshot_path = $_POST['us_headshot_path'];
           }
         }else{
           foreach ($setting as $key => $value) {
             $us_gender = $value["us_gender"];
             $us_email = $value["us_email"];
-            $us_headshot_path = $value['us_headshot_path'];
+            $headshot_path = $value['us_headshot_path'];
           }
-          $us_headshot_path = str_replace("./assets/images/","",$us_headshot_path );
         }
-        
+        if($headshot_path!=""){
+          $us_headshot_path = str_replace("./assets/images/","",$headshot_path );
+        }
 
   ?>
+  <style>
+  .img-thumbnail{
+    width:150px;
+    height:150px;
+  }
+  </style>
   <body>
-
     <form action="<?php echo "update.php" ?>" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="add_account" value="<?=$add_account?>"/>
@@ -103,7 +110,13 @@
 
         電子信箱: <input type="text" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>"/><br/><br/>
 
-        大頭照檔名: <input type="text" name="us_headshot_path" value="<?= $us_headshot_path ?>"/><br/><br/>
+        大頭照檔名: <?= $us_headshot_path ?><br/><br/>
+        <img src="<?=$headshot_path?>" alt="" class="img-thumbnail"><p id="sizetext" calss="text-capitalize"></p>
+        <p><strong>圖片格式為長寬相同，副檔名為gif,jpg,png</strong></p>
+
+        <input type="file" name="headshot_img" accept="image/gif, image/jpg, image/png">
+        <button name="upload_img" class="btn btn-info btn-sm" onClick="upload_headshot()">確認</button>
+        <br/><br/>
 
         <p class="status" style="display:none;">狀態:
           <input type="radio" name="us_status" value=1 checked>正常&nbsp
@@ -129,7 +142,46 @@
 
       var gender = $("input[name='gender']").val();
       $("input[name='us_gender'][value='" + gender + "']").prop("checked", true); 
+
+      //上傳圖片即時更換
+      $("input[name='headshot_img']").change(function(){
+        if(this.files && this.files[0]){
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $(".img-thumbnail").attr('src', e.target.result);
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
     });
+
+    function upload_headshot(){
+      var a = $("input[name='headshot_img']").val();
+      var data = {
+          'isStatus': 'update_headshot', 
+          'question':a
+        };
+
+      // $.ajax({
+      //   url: "select_setting.php",
+      //   type: "POST",
+      //   async: true, 
+      //   dataType: "json",
+      //   data: data, 
+      //   success: function(info){
+      //       if(chart_type=='1'){
+      //         acivity_name(info);
+      //       }else if(chart_type=='2'){
+      //         acivity_type(info);
+      //       }else if(chart_type=='3'){
+      //         time_type(info);
+      //       }
+      //   },
+      //   error:function(xhr, status, error){
+      //     alert(xhr.statusText);
+      //   }
+      // });
+    }
 
     function check(){
       var us_account = $("input[name='us_account']").val();
@@ -166,9 +218,9 @@
       //   return alert("請輸入電子信箱!");
       // }
       
-      if(!us_email.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$")){
-        return alert("電子信箱格式錯誤!");
-      }
+      // if(!us_email.match("^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$")){
+      //   return alert("電子信箱格式錯誤!");
+      // }
 
       var add_account = $("input[name='add_account']").val();
       if(add_account!=""){

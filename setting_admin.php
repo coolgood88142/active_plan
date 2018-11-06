@@ -163,7 +163,6 @@
         var us_email = $(tr).find("td input[name='us_email']").val();
         var us_status = $(tr).find("td input[name='us_status']").val();
         var us_headshot_path = $(tr).find("td input[name='us_headshot_path']").val();
-        us_headshot_path = us_headshot_path.replace("./assets/images/","");
 
         var from = $("form[name='submitForm']");
         $(from).find("input[name='us_name']").val(us_name);
