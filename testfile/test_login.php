@@ -1,6 +1,6 @@
 <html>
 <head></head>
-<script src="./assets/js/jquery-3.3.1.js"></script>
+<script src="jquery-3.3.1.js"></script>
   <body>
     <form name="loginForm" method="post">
         帳號: <input type="text" name="us_account" /><br/><br/>
@@ -30,7 +30,7 @@
           }
         },
         error:function(xhr, status, error){
-          alert(xhr.statusText);
+          alert(xhr.responseText);
         }
       });
     }

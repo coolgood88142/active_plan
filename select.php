@@ -8,13 +8,17 @@
         $us_password= $_POST['us_password'];
     }
 
-    $sql = "select * from user where us_account='" . $us_account  ."' and us_passwords = " . $us_password;
+    $sql = "select * from user where us_account='" . $us_account . "'";
         
     $query = $conn->query($sql);
     $row = $query->fetch(PDO::FETCH_ASSOC);
 
     if($row!=""){
-        echo json_encode(array('success' => true));
+        if(password_verify($us_password,$row['us_password'])){
+            echo json_encode(array('success' => true));
+        }else{
+            echo json_encode(array('success' => false));
+        }
     }else{
         echo json_encode(array('success' => false));
     }

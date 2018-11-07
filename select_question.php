@@ -102,6 +102,7 @@
     }
 
     if($success==true){
-        echo json_encode(array('success' => true));
+        $array = array('success' => true);
+        echo json_encode($array);
     }
 ?>

@@ -4,7 +4,7 @@
   </head>
   <?php include("link.php");?>
   <?php session_start();
-        $islogin=false;$us_admin = "";
+        $islogin=false;$us_admin = "";$setting = "";
         include("checklogin.php");
         include("mysql.php");
         if($islogin){
@@ -156,31 +156,27 @@
     });
 
     function upload_headshot(){
-      var a = $("input[name='headshot_img']").val();
+      var img = $("input[name='headshot_img']").val();
+      img = img.substring(img.lastIndexOf("\\")+1);
       var data = {
-          'isStatus': 'update_headshot', 
-          'question':a
+          'isStatus': "update_headshot",
+          'img':img
         };
 
-      // $.ajax({
-      //   url: "select_setting.php",
-      //   type: "POST",
-      //   async: true, 
-      //   dataType: "json",
-      //   data: data, 
-      //   success: function(info){
-      //       if(chart_type=='1'){
-      //         acivity_name(info);
-      //       }else if(chart_type=='2'){
-      //         acivity_type(info);
-      //       }else if(chart_type=='3'){
-      //         time_type(info);
-      //       }
-      //   },
-      //   error:function(xhr, status, error){
-      //     alert(xhr.statusText);
-      //   }
-      // });
+      $.ajax({
+        url: "select_setting.php",
+        type: "POST",
+        async: true, 
+        dataType: "json",
+        data: data, 
+        success: function(info){
+          document.showForm.action="setting.php"; 
+          document.showForm.submit();
+        },
+        error:function(xhr, status, error){
+          alert(xhr.statusText);
+        }
+      });
     }
 
     function check(){

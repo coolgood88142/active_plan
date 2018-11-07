@@ -35,7 +35,7 @@
   <body>
   <div class="jumbotron vertical-center">
     <div class="container">
-    <h2 id="title" class="text-center text-white font-weight-bold">活動列表</h2>
+    <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
     <form id="showForm" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
