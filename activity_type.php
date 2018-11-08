@@ -26,16 +26,15 @@
 }
 
 .jumbotron{
-  background: url("./assets/images/background.png") no-repeat center center; 
   height:100%;
   width:100%;
 }
 
  </style>
   <body>
-  <div class="jumbotron vertical-center">
+  <div class="jumbotron vertical-center bg-Light">
     <div class="container">
-    <h2 id="title" class="text-center text-white font-weight-bold">活動類型</h2>
+    <h2 id="title" class="text-center text-dark font-weight-bold">活動類型</h2>
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>

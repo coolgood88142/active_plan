@@ -42,8 +42,7 @@
       include("mysql.php");
 
       if(isset($_SESSION["us_admin"])){
-        $us_admin = $_SESSION['us_admin'];
-        include("select_activity.php"); 
+        echo '<meta http-equiv=REFRESH CONTENT=0;url=activity.php>';
       }
 
     $error = false;

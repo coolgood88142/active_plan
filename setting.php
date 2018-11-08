@@ -66,7 +66,7 @@
   }
   </style>
   <body>
-    <form action="<?php echo "update.php" ?>" name="showForm" method="post">
+    <form action="<?php echo "update.php" ?>" name="showForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="add_account" value="<?=$add_account?>"/>
         <div id="button"></div>
@@ -110,12 +110,12 @@
 
         電子信箱: <input type="text" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>"/><br/><br/>
 
-        大頭照檔名: <?= $us_headshot_path ?><br/><br/>
-        <img src="<?=$headshot_path?>" alt="" class="img-thumbnail"><p id="sizetext" calss="text-capitalize"></p>
-        <p><strong>圖片格式為長寬相同，副檔名為gif,jpg,png</strong></p>
+        大頭照檔名: <p id="headshot_file"><?= $us_headshot_path ?></p>
+        <img src="<?=$headshot_path?>" alt="" class="img-thumbnail">
+        <p><strong>建議圖片格式為長寬相同，副檔名為gif,jpg,png</strong></p>
 
         <input type="file" name="headshot_img" accept="image/gif, image/jpg, image/png">
-        <button name="upload_img" class="btn btn-info btn-sm" onClick="upload_headshot()">確認</button>
+        <input type="submit" name="upload_img" class="btn btn-info btn-sm" value="上傳" />
         <br/><br/>
 
         <p class="status" style="display:none;">狀態:
@@ -153,31 +153,40 @@
           reader.readAsDataURL(this.files[0]);
         }
       });
-    });
 
-    function upload_headshot(){
-      var img = $("input[name='headshot_img']").val();
-      img = img.substring(img.lastIndexOf("\\")+1);
-      var data = {
+      $("form[name='showForm']").on('submit',(function(e){
+        var img = $("input[name='headshot_img']").val();
+        img = img.substring(img.lastIndexOf("\\")+1);
+        var data = {
           'isStatus': "update_headshot",
-          'img':img
-        };
-
-      $.ajax({
-        url: "select_setting.php",
-        type: "POST",
-        async: true, 
-        dataType: "json",
-        data: data, 
-        success: function(info){
-          document.showForm.action="setting.php"; 
-          document.showForm.submit();
-        },
-        error:function(xhr, status, error){
+          'img':img,
+          'file':new FormData(this)
+        }
+        e.preventDefault();
+        $.ajax({
+          url: "select_setting.php",
+          type: "POST",
+          async: true, 
+          dataType: "json",
+          data:  new FormData(this),
+          contentType: false,
+          cache: false,
+          processData:false,
+          success: function(info){
+            if(info.success==true){
+              $("#headshot_file").text(info.file_name);
+              $(".img-thumbnail").attr('src', info.datetime_file);
+              if($("input[name='admin']").val()!='Y'){
+                $('#button').load('button.php');
+              }
+            }
+          },
+          error:function(xhr, status, error){
           alert(xhr.statusText);
         }
       });
-    }
+      }));
+    });
 
     function check(){
       var us_account = $("input[name='us_account']").val();

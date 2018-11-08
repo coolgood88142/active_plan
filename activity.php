@@ -26,14 +26,13 @@
 }
 
 .jumbotron{
-  background: url("./assets/images/background.png") no-repeat center center; 
   height:100%;
   width:100%;
 }
 
  </style>
   <body>
-  <div class="jumbotron vertical-center">
+  <div class="jumbotron vertical-center bg-Light">
     <div class="container">
     <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
     <form id="showForm" name="showForm" method="post">
