@@ -64,13 +64,24 @@
     width:150px;
     height:150px;
   }
+  .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center; 
+  }
+  .jumbotron{
+    height:100%;
+    width:100%;
+  }
   </style>
   <body>
+  <div class="jumbotron vertical-center bg-Light">
+    <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">帳號資料</h2>
     <form action="<?php echo "update.php" ?>" name="showForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="add_account" value="<?=$add_account?>"/>
         <div id="button"></div>
-        <H2>設定</H2>
 
         帳號: 
         <?php
@@ -127,6 +138,8 @@
         <input type="button" value="確定" onClick="check()"/>
         <input type="hidden" name="update_user"/>
     </form>
+    </div>
+  </div> 
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

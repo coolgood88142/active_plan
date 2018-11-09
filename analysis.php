@@ -39,7 +39,6 @@
   }
 
 .jumbotron{
-  background: url("./assets/images/background.png") no-repeat center center; 
   height:100%;
   width:100%;
 }
@@ -47,7 +46,7 @@
   <body>
   <div class="jumbotron vertical-center">
     <div class="container">
-    <h2 id="title" class="text-center text-white font-weight-bold">分析表</h2>
+    <h2 id="title" class="text-center text-dark font-weight-bold">分析表</h2>
     <form action="analysis.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>

@@ -34,12 +34,22 @@
         tr.shown td.details-control {
             background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
         }
+        .vertical-center {
+            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+            display: flex;
+            align-items: center; 
+        }
+        .jumbotron{
+            height:100%;
+            width:100%;
+        }
     </style>
-    
+   <div class="jumbotron vertical-center bg-Light">
+    <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div> 
-        <H2>行程列表</H2>  
         <br/><br/>
         <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
         <input type="button" name="addplan" value="新增行程" onClick="add_plan()"/>
@@ -370,6 +380,8 @@
         <input type="hidden" name="ac_hours" />
         <input type="hidden" name="ac_id" />           
     </form>
+    </div>
+  </div>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

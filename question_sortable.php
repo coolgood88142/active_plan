@@ -21,21 +21,30 @@
   #sortable { list-style-type: none; margin: 0; padding: 0;}
   #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 14px; height: 18px; }
   #sortable li span { position: absolute; margin-left: -1.3em; }
+  .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center; 
+  }
+  .jumbotron{
+    height:100%;
+    width:100%;
+  }
   </style>
   <body>
+  <div class="jumbotron vertical-center bg-Light">
+    <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">Q&A排序</h2>
     <form action="question.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>Q&A</H2>
         <br/><br/>
 
         <ul class="nav justify-content-end">
           <li><button type="button" id="btn_save" class="btn btn-primary" onClick="Save()">儲存</button></li>
           <li><button type="button" id="btn_save" class="btn btn-primary" onClick="back()">返回</button></li>
         </ul>
-        
         <br/><br/>
-        問題
                     <div id="sortable">
                     <?php foreach($quertsion as $key => $value){?>
                         <div class="accordion" id="select_data">
@@ -59,6 +68,8 @@
                     </div>
                 
     </form>
+    </div>
+  </div>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

@@ -26,12 +26,22 @@
         tr.shown td.details-control {
             background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
         }
+        .vertical-center {
+            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+            display: flex;
+            align-items: center; 
+        }
+        .jumbotron{
+            height:100%;
+            width:100%;
+        }
     </style>
-    
+   <div class="jumbotron vertical-center bg-Light">
+   <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">設定</h2>      
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>設定</H2>
         <br/><br/>
         <input type="button" name="addplans" value="新增帳號" onClick="add_account()"/>
         <table id="example">
@@ -69,6 +79,8 @@
             </tfoot>
         </table>   
     </form>
+    </div>
+  </div>
     <form action="setting.php" name="submitForm" method="post">
         <input type="hidden" name="us_name" />            
         <input type="hidden" name="us_account" />

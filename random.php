@@ -131,8 +131,19 @@
         tr.shown td.details-control {
             background: url('./assets/images/details_close.png') no-repeat center center;
         }
+        .vertical-center {
+            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+            display: flex;
+            align-items: center; 
+        }
+        .jumbotron{
+            height:100%;
+            width:100%;
+        }
     </style>
-    
+  <div class="jumbotron vertical-center bg-Light">
+   <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">隨機行程</h2>   
     <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
@@ -143,7 +154,6 @@
         <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
         <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
         <div id="button"></div>
-        <H2>隨機行程</H2>
         <br/><br/>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
         <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>
@@ -259,6 +269,8 @@
         </table>
         <input type="button" name="goplan" value="送出" onClick="go_plan()"/> 
     </form>
+   </div>
+  </div>
     <form action="update_plan.php" name="updateForm" method="post"> 
 
         <input type="hidden" name="ad_acname" />            

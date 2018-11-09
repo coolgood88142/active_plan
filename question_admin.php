@@ -17,11 +17,24 @@
         exit;
     }
  ?>
+  <style>
+  .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center; 
+  }
+  .jumbotron{
+    height:100%;
+    width:100%;
+  }
+ </style>
   <body>
+  <div class="jumbotron vertical-center bg-Light">
+    <div class="container">
+    <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
     <form action="question.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="button"></div>
-        <H2>Q&A</H2>
         <br/><br/>
 
         <ul class="nav justify-content-end">
@@ -95,6 +108,8 @@
           <input type="hidden" id="last_index" value=""> 
         </div>   
     </form>
+    </div>
+  </div> 
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
