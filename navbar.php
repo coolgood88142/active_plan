@@ -11,7 +11,7 @@
     if($us_account!=""){
       $sql = "SELECT us_headshot_path FROM user WHERE us_account IN ('$us_account')";
       $query = $conn->query($sql);
-      $headshot = $query->fetch(PDO::FETCH_ASSOC); 
+      $headshot = $query->fetch(PDO::FETCH_ASSOC);
     }
 
     if((isset($_SESSION["us_admin"]) && $_SESSION["us_admin"]=='Y') || (empty($_COOKIE['us_admin']) && $_COOKIE['us_admin']=='Y')){

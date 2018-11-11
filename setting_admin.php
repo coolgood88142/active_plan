@@ -38,10 +38,10 @@
     </style>
    <div class="jumbotron vertical-center bg-Light">
    <div class="container">
+   <div id="navbar"></div>
     <h2 id="title" class="text-center text-dark font-weight-bold">設定</h2>      
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
         <br/><br/>
         <input type="button" name="addplans" value="新增帳號" onClick="add_account()"/>
         <table id="example" class="table table-striped table-bordered">
@@ -95,7 +95,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#example').DataTable(datatable_language());
         $('#example tbody').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -106,7 +106,7 @@
             var us_email = $(tr).find("td input[name='us_email']").val();
             var us_status = $(tr).find("td input[name='us_status']").val();
             var us_headshot_path = $(tr).find("td input[name='us_headshot_path']").val();
-            us_headshot_path = us_headshot_path.replace("./assets/images/","");
+            us_headshot_path = us_headshot_path.replace("/assets/images/upload_file/","");
 
             if ( row.child.isShown() ) {
                 row.child.hide();

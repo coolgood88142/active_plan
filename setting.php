@@ -46,16 +46,18 @@
           }
           if(isset($_POST['us_headshot_path'])){
             $headshot_path = $_POST['us_headshot_path'];
+            $headshot_path = ".".$headshot_path;
           }
         }else{
           foreach ($setting as $key => $value) {
             $us_gender = $value["us_gender"];
             $us_email = $value["us_email"];
             $headshot_path = $value['us_headshot_path'];
+            $headshot_path = ".".$headshot_path;
           }
         }
         if($headshot_path!=""){
-          $us_headshot_path = str_replace("./assets/images/","",$headshot_path );
+          $us_headshot_path = str_replace("./assets/images/upload_file/","",$headshot_path );
         }
 
   ?>
@@ -77,11 +79,11 @@
   <body>
   <div class="jumbotron vertical-center bg-Light">
     <div class="container">
+    <div id="navbar"></div>
     <h2 id="title" class="text-center text-dark font-weight-bold">帳號資料</h2>
     <form action="<?php echo "update.php" ?>" name="showForm" method="post" enctype="multipart/form-data">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="add_account" value="<?=$add_account?>"/>
-        <div id="button"></div>
 
         帳號: 
         <?php
@@ -143,7 +145,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-      $('#button').load('button.php');
+      $('#navbar').load('navbar.php');
       var admin = $("input[name='admin']").val();
       var status = $("input[name='status']").val();
       if(admin=='Y'){
@@ -190,7 +192,7 @@
               $("#headshot_file").text(info.file_name);
               $(".img-thumbnail").attr('src', info.datetime_file);
               if($("input[name='admin']").val()!='Y'){
-                $('#button').load('button.php');
+                $('#navbar').load('navbar.php');
               }
             }
           },

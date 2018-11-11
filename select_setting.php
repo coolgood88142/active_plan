@@ -18,7 +18,7 @@
 
         date_default_timezone_set('Asia/Taipei');
         $datetime = date ("YmdHis");
-        $datetime_file = "./assets/images/" . $datetime . $file_type;
+        $datetime_file = "/assets/images/upload_file/" . $datetime . $file_type;
         $file_name = $datetime . $file_type;
 
         $tmp_file = $_FILES['headshot_img']["tmp_name"];
@@ -35,7 +35,7 @@
                 // echo $headshot;
                 // exit;
             }
-
+            
             $sql = "UPDATE user SET us_headshot_path = '$datetime_file' WHERE us_account IN ('$us_account')";
             $conn->exec($sql);
             $success = true;
