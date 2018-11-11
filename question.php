@@ -62,7 +62,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
     });
 
     function show(page){

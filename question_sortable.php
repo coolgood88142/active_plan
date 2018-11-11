@@ -34,10 +34,10 @@
   <body>
   <div class="jumbotron vertical-center bg-Light">
     <div class="container">
+    <div id="navbar"></div>
     <h2 id="title" class="text-center text-dark font-weight-bold">Q&A排序</h2>
     <form action="question.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
         <br/><br/>
 
         <ul class="nav justify-content-end">
@@ -73,7 +73,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $("#storage").hide();
         $("#return").hide();
         $("#edit_data").hide();

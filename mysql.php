@@ -2,7 +2,7 @@
     //建立mysql連線
     $servername = "localhost";
     $username = "root";
-    $password = "1234";
+    $password = "";
     $dbname= "plan";
 
     try {

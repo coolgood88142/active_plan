@@ -55,7 +55,7 @@
     <h2 id="title" class="text-center text-dark font-weight-bold">分析表</h2>
     <form action="analysis.php" name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
+        <div id="navbar"></div>
         <br/><br/>
         <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
         <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
@@ -104,7 +104,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $("#ac_name").show();
         $("input[name='chart_type']").val('1');
         select_chart(true,'1');

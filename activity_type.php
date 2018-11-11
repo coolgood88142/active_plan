@@ -37,7 +37,7 @@
     <h2 id="title" class="text-center text-dark font-weight-bold">活動類型</h2>
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
+        <div id="navbar"></div>
         <br/><br/>
         <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
         <table id="example2" class="table table-striped table-bordered">
@@ -97,7 +97,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#example2').DataTable(datatable_language());
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add_type']").show();

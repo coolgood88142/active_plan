@@ -77,7 +77,7 @@
     <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div> 
+        <div id="navbar"></div> 
         <H2>行程列表</H2>
         <br/><br/>
         行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/><br/><br/>
@@ -251,7 +251,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#example1').DataTable(datatable_language());
         $('#example2').DataTable(datatable_language());
         $('#example2_wrapper').hide();

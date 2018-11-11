@@ -32,176 +32,178 @@
 
  </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light">
-    <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
-    <form id="showForm" name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
-        <br/><br/>      
-        <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
-        <table id="example1" class="table table-striped table-bordered">
-	        <thead>
-                <tr>
-                    <td bgcolor="#00FFFF">活動項目</td>
-                    <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
-                    <td bgcolor="#00FFFF">類型</td>
-                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
-                    <td bgcolor="#00FFFF" >天氣</td>
-                    <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
-                    <td bgcolor="#00FFFF">車程(小時)</td>
-                    <td bgcolor="#00FFFF">攜帶物品</td>
-                    <td bgcolor="#00FFFF">花費</td>
-                    <td bgcolor="#00FFFF">時間(小時)</td>
-                    <td bgcolor="#00FFFF" style="display:none;">時段</td>
+    <div class="jumbotron vertical-center bg-Light">
+        <div class="container">
+            <div id="navbar"></div>
+            <div>   
+                <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
+                <form id="showForm" name="showForm" method="post">
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    <br/><br/>      
+                    <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
+                    <table id="example1" class="table table-striped table-bordered">
+            	        <thead>
+                            <tr>
+                                <td bgcolor="#00FFFF">活動項目</td>
+                                <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
+                                <td bgcolor="#00FFFF">類型</td>
+                                <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+                                <td bgcolor="#00FFFF" >天氣</td>
+                                <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
+                                <td bgcolor="#00FFFF">車程(小時)</td>
+                                <td bgcolor="#00FFFF">攜帶物品</td>
+                                <td bgcolor="#00FFFF">花費</td>
+                                <td bgcolor="#00FFFF">時間(小時)</td>
+                                <td bgcolor="#00FFFF" style="display:none;">時段</td>
+                                <?php
+                                    if($us_admin=='Y'){                
+                                ?>
+                                    <td bgcolor="#00FFFF">編輯設定</td>
+                                <?php
+                                    }
+                                ?>
+                            </tr>
+            	        </thead>
+            	        <tbody>
+                            <?php
+                                foreach ($active as $key => $value) {
+                            ?>
+                            <tr>
+                                <td class="ac_name">
+                                    <?php echo $value["ac_name"]?>
+                                </td>
+                                <td class="ac_id" style="display:none;">
+                                    <?php echo $value["ac_id"]?>
+                                </td>
+                                <td class="type_name">
+                                    <?php echo $value["type_name"]?>
+                                </td>
+                                <td class="ac_type" style="display:none;">
+                                    <?php echo $value["ac_type"]?>
+                                </td>
+                                <td class="weather_name">
+                                    <?php 
+                                        $acweather = $value["ac_weather"];
+                                        $acweather = explode(",", $acweather);
+                                        $wather_count = count($acweather);
+
+                                        $wather_name = "";
+                                        for($j=0;$j<$wather_count;$j++){
+                                            $aw_type = $acweather[$j];
+                                            $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                            $query = $conn->query($sql);
+                                            $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                            foreach($awname as $key => $name){
+                                                $wather_name = $wather_name . $name['aw_name'];                                  
+                                            }
+
+                                            if($j!=$wather_count-1){
+                                                $wather_name = $wather_name . "、";
+                                            }
+                                        }
+                                        echo $wather_name;
+                                    ?>
+                                </td>
+                                <td class="ac_weather" style="display:none;">
+                                    <?php echo $value["ac_weather"]?>
+                                </td>
+                                <td class="ac_drive">
+                                    <?php echo $value["ac_drive"]?>
+                                </td>
+                                <td class="ac_carry">
+                                    <?php echo $value["ac_carry"]?>
+                                </td>
+                                <td class="ac_spend">
+                                    <?php echo $value["ac_spend"]?>元
+                                </td>
+                                <td class="ac_hours">
+                                    <?php echo $value["ac_hours"]?>
+                                </td>
+                                <td class="ac_timetype" style="display:none;">
+                                    <?php echo $value["ac_timetype"]?>
+                                </td>
+                                <?php
+                                    if($us_admin=='Y'){                
+                                ?>
+                                    <td class="ac_edit">
+                                        <input type="button" value="編輯項目" onClick="edit(this)"/>
+                                    </td>
+                                <?php
+                                    }
+                                ?>
+                            </tr>
+                            <?php 
+                                }
+                            ?>
+            	        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
+                <p class="activity" style="display:none;">活動項目:
+                      <input type="text" name="add_acname" value="" ><br/><br/>
+                </p>
+                <p class="type" style="display:none;">類型:
+                    <select name="add_actype">
                     <?php
-                        if($us_admin=='Y'){                
+                        foreach ($active_type as $key => $type) {
                     ?>
-                        <td bgcolor="#00FFFF">編輯設定</td>
+                        <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
                     <?php
                         }
                     ?>
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                    foreach ($active as $key => $value) {
-                ?>
-                <tr>
-                    <td class="ac_name">
-                        <?php echo $value["ac_name"]?>
-                    </td>
-                    <td class="ac_id" style="display:none;">
-                        <?php echo $value["ac_id"]?>
-                    </td>
-                    <td class="type_name">
-                        <?php echo $value["type_name"]?>
-                    </td>
-                    <td class="ac_type" style="display:none;">
-                        <?php echo $value["ac_type"]?>
-                    </td>
-                    <td class="weather_name">
-                        <?php 
-                            $acweather = $value["ac_weather"];
-                            $acweather = explode(",", $acweather);
-                            $wather_count = count($acweather);
-
-                            $wather_name = "";
-                            for($j=0;$j<$wather_count;$j++){
-                                $aw_type = $acweather[$j];
-                                $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
-                                $query = $conn->query($sql);
-                                $awname = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                                foreach($awname as $key => $name){
-                                    $wather_name = $wather_name . $name['aw_name'];                                  
-                                }
-
-                                if($j!=$wather_count-1){
-                                    $wather_name = $wather_name . "、";
-                                }
-                            }
-                            echo $wather_name;
-                        ?>
-                    </td>
-                    <td class="ac_weather" style="display:none;">
-                        <?php echo $value["ac_weather"]?>
-                    </td>
-                    <td class="ac_drive">
-                        <?php echo $value["ac_drive"]?>
-                    </td>
-                    <td class="ac_carry">
-                        <?php echo $value["ac_carry"]?>
-                    </td>
-                    <td class="ac_spend">
-                        <?php echo $value["ac_spend"]?>元
-                    </td>
-                    <td class="ac_hours">
-                        <?php echo $value["ac_hours"]?>
-                    </td>
-                    <td class="ac_timetype" style="display:none;">
-                        <?php echo $value["ac_timetype"]?>
-                    </td>
-                    <?php
-                        if($us_admin=='Y'){                
+                    </select>
+                    <br/><br/>
+                </p>
+                <p class="weather" style="display:none;">天氣:
+                    <?php 
+                        foreach($activity_weather as $key => $weather){
                     ?>
-                        <td class="ac_edit">
-                            <input type="button" value="編輯項目" onClick="edit(this)"/>
-                        </td>
+                        <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?></input>
                     <?php
                         }
                     ?>
-                </tr>
-                <?php 
-                    }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-    <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
-    <p class="activity" style="display:none;">活動項目:
-          <input type="text" name="add_acname" value="" ><br/><br/>
-    </p>
-    <p class="type" style="display:none;">類型:
-        <select name="add_actype">
-        <?php
-            foreach ($active_type as $key => $type) {
-        ?>
-            <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
-        <?php
-            }
-        ?>
-        </select>
-        <br/><br/>
-    </p>
-    <p class="weather" style="display:none;">天氣:
-        <?php 
-            foreach($activity_weather as $key => $weather){
-        ?>
-            <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?></input>
-        <?php
-            }
-        ?>
-        <br/><br/>
-    </p>
-    <p class="drive" style="display:none;">車程(小時):
-        <input type="text" name="add_acdrive" value="" size="2"  
-        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-    </p>
-    <p class="carry" style="display:none;">攜帶物品:
-          <input type="text" name="add_accarry" value="無" ><br/><br/>
-    </p>
-    <p class="spend" style="display:none;">花費:
-          <input type="text" name="add_acspend" value="0" 
-          onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
-    </p>
-    <p class="hours" style="display:none;">時間(小時):
-        <input type="text" name="add_achours" value="" size="2"
-        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-    </p>
-    <p class="timetype" style="display:none;">時段:
-        <?php
-            foreach ($timetypes as $key => $time) {
-        ?>
-            <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
-        <?php
-            }
-        ?>
-        <br/><br/>
-    </p>
-    <input type="hidden" name="add_acid" value=""/>
-    <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-    <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
-    <input type="hidden" name="add_activitys" />
-    <input type="hidden" name="up_activitys" />
-    </form>
+                    <br/><br/>
+                </p>
+                <p class="drive" style="display:none;">車程(小時):
+                    <input type="text" name="add_acdrive" value="" size="2"  
+                    onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
+                </p>
+                <p class="carry" style="display:none;">攜帶物品:
+                      <input type="text" name="add_accarry" value="無" ><br/><br/>
+                </p>
+                <p class="spend" style="display:none;">花費:
+                      <input type="text" name="add_acspend" value="0" 
+                      onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
+                </p>
+                <p class="hours" style="display:none;">時間(小時):
+                    <input type="text" name="add_achours" value="" size="2"
+                    onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
+                </p>
+                <p class="timetype" style="display:none;">時段:
+                    <?php
+                        foreach ($timetypes as $key => $time) {
+                    ?>
+                        <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
+                    <?php
+                        }
+                    ?>
+                    <br/><br/>
+                </p>
+                <input type="hidden" name="add_acid" value=""/>
+                <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
+                <input type="hidden" name="add_activitys" />
+                <input type="hidden" name="up_activitys" />
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-  </body>
+</body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#example1').DataTable(datatable_language());
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();

@@ -32,12 +32,14 @@
 
             if(file_exists($headshot)){
                 unlink($headshot);
+                // echo $headshot;
+                // exit;
             }
 
             $sql = "UPDATE user SET us_headshot_path = '$datetime_file' WHERE us_account IN ('$us_account')";
             $conn->exec($sql);
             $success = true;
-            $array = array('success' => $success,'file_name' => $file_name,'datetime_file' => $datetime_file);
+            $array = array('success' => $success,'file_name' => $file_name,'datetime_file' => $datetime_file,'headshot' => $headshot);
         }
     }else{
         $sql = "SELECT us_account,us_password,us_name,us_gender,us_email,us_status,us_headshot_path FROM user WHERE us_admin NOT IN ('Y') ";

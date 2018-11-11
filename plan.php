@@ -49,7 +49,7 @@
     <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div> 
+        <div id="navbar"></div> 
         <br/><br/>
         <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
         <input type="button" name="addplan" value="新增行程" onClick="add_plan()"/>
@@ -385,7 +385,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#link').load('link.php');
         $('#example3').DataTable(datatable_language());
         $('#example3_wrapper').hide();

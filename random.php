@@ -153,7 +153,7 @@
         <input type="hidden" id="post_typeid" value="<?=$post_typeid?>"/>
         <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
         <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
-        <div id="button"></div>
+        <div id="navbar"></div>
         <br/><br/>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
         <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>
@@ -295,7 +295,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-        $('#button').load('button.php');
+        $('#navbar').load('navbar.php');
         $('#example1').DataTable(datatable_language());
         $('#example1_wrapper').hide();
         $("input[name='goplan']").hide();
