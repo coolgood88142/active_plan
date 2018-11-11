@@ -40,7 +40,7 @@
         <div id="button"></div>
         <br/><br/>
         <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
-        <table id="example2">
+        <table id="example2" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
                     <td bgcolor="#00FFFF">序號</td>

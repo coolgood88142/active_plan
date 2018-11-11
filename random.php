@@ -187,8 +187,9 @@
         ?>
         <br/><br/>
 
-        天數小時:<input type="text" name="day_time" value="" size="2"/>小時<br/>
+        天數小時:<input type="text" name="day_time" value="" size="2"/>小時
         <input type="hidden" name="istime_type" value="" size="2"/>
+        <br/><br/>
 
         <p class="time">時段選項:
             <select name="time_type">
@@ -207,7 +208,7 @@
         <input type="submit" name="gorandom" value="執行"/>  
             <br/><br/> 
         
-        <table id="example1">
+        <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
                 <td bgcolor="#00FFFF">天數排序</td>

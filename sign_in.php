@@ -10,9 +10,9 @@
         $us_password= $_POST['us_password'];
 
         if(isset($_POST['us_remember']) && $_POST['us_remember']=='on'){
-            $year_hours = 99999;
+            $year_hours = 3600*24*365;
         }
-        //測試沒記住我時，把3600改成1，登入後1秒就解析掉了
+        //測試沒記住我時，把year_hours改成1，登入後1秒就解析掉了
         setcookie("us_account",$us_account,time()+$year_hours);
         setcookie("us_password",$us_password,time()+$year_hours);
     }

@@ -76,7 +76,7 @@
         <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
 
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
-        <table id="example1">
+        <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
                     <td bgcolor="#00FFFF"></td>
@@ -148,7 +148,7 @@
             <tfoot>
             </tfoot>
         </table>
-        <table id="example4">
+        <table id="example4" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <?php
@@ -239,7 +239,7 @@
             <tfoot>
             </tfoot>
         </table>
-        <table id="example2">
+        <table id="example2" class="table table-striped table-bordered">
 	<thead>
         <tr>
             <td bgcolor="#00FFFF">活動項目</td>
@@ -318,7 +318,7 @@
   <tfoot>
   </tfoot>
 </table>
-<table id="example3">
+<table id="example3" class="table table-striped table-bordered">
     <thead>
         <tr>
             <td bgcolor="#00FFFF">活動項目</td>

@@ -84,7 +84,7 @@
         出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
-        <table id="example1">
+        <table id="example1" class="table table-striped table-bordered">
 
 	        <thead>
                 <tr>
@@ -166,7 +166,7 @@
             <tfoot>
             </tfoot>
         </table>
-        <table id="example2">
+        <table id="example2" class="table table-striped table-bordered">
 	<thead>
         <tr>
             <td bgcolor="#00FFFF">活動項目</td>

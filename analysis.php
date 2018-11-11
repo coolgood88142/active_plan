@@ -10,6 +10,12 @@
 <link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
 <script src="./assets/js/zh-cn.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+<script src="./assets/js/highcharts.js"></script>
+<script src="./assets/js/highcharts-3d.js"></script>
+<script src="./assets/js/series-label.js"></script>
+<script src="./assets/js/exporting.js"></script>
+<script src="./assets/js/export-data.js"></script>
+<script src="./assets/js/wordcloud.js"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -91,7 +97,7 @@
         <input type="hidden" name="chart_type" value=""/>
         <div id="ac_name" style="display_none;"></div>
         <div id="ac_type" style="display_none;"></div>
-        <div id="ty_type" style="display_none; height: 400px"></div>
+        <div id="ty_type" style="display_none;"></div>
     </form>  
     </div>
   </div>
@@ -99,6 +105,7 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#button').load('button.php');
+        $("#ac_name").show();
         $("input[name='chart_type']").val('1');
         select_chart(true,'1');
         $(".datepick").datetimepicker({

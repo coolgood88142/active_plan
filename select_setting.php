@@ -43,7 +43,7 @@
         $sql = "SELECT us_account,us_password,us_name,us_gender,us_email,us_status,us_headshot_path FROM user WHERE us_admin NOT IN ('Y') ";
     
         if(!empty($us_account) && !empty($us_admin) && $us_admin!='Y'){
-            $sql = $sql . " us_account='$us_account'";
+            $sql = $sql . " and us_account='$us_account'";
         }
         $sql = $sql . " order by us_id";
     

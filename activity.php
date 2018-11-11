@@ -40,7 +40,7 @@
         <div id="button"></div>
         <br/><br/>      
         <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
-        <table id="example1">
+        <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
                     <td bgcolor="#00FFFF">活動項目</td>
@@ -139,7 +139,7 @@
             <tfoot>
             </tfoot>
         </table>
-    <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
+    <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
     <p class="activity" style="display:none;">活動項目:
           <input type="text" name="add_acname" value="" ><br/><br/>
     </p>

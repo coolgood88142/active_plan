@@ -44,7 +44,7 @@
         <div id="button"></div>
         <br/><br/>
         <input type="button" name="addplans" value="新增帳號" onClick="add_account()"/>
-        <table id="example">
+        <table id="example" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
                     <td bgcolor="#00FFFF"></td>
@@ -136,6 +136,10 @@
         us_status = "正常";
     }else if(us_status=="2"){
         us_status = "停用";
+    }
+
+    if(us_headshot_path==null || us_headshot_path==""){
+        us_headshot_path = "無大頭照";
     }
 
     // `d` is the original data object for the row
