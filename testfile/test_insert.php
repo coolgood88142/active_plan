@@ -111,6 +111,20 @@
     // ,(2, 1)
     // ,(3, 3)";
 
+    // $sql = "CREATE TABLE test_score(
+    //      ts_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    //      ts_no NVARCHAR(30) NOT NULL,
+    //      ts_name NVARCHAR(30) NOT NULL,
+    //      ts_grade INT(6) NOT NULL,
+    //      ts_updatedate TIMESTAMP
+    //      )";
+
+    // $sql = "INSERT INTO test_score (ts_no,ts_name,ts_grade)
+    // VALUES ('A0001','王小明', 80)
+    // ,('A0002','张曉琪', 96)
+    // ,('A0003','黃志銘', 93)
+    // ,('A0004','李四', 100)";
+
     $conn->exec($sql);
     $conn=null;
     echo "建立成功";
