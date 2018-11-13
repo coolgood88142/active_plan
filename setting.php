@@ -46,18 +46,18 @@
           }
           if(isset($_POST['us_headshot_path'])){
             $headshot_path = $_POST['us_headshot_path'];
-            $headshot_path = ".".$headshot_path;
+            $headshot_path = $headshot_path;
           }
         }else{
           foreach ($setting as $key => $value) {
             $us_gender = $value["us_gender"];
             $us_email = $value["us_email"];
             $headshot_path = $value['us_headshot_path'];
-            $headshot_path = ".".$headshot_path;
+            $headshot_path = $headshot_path;
           }
         }
         if($headshot_path!=""){
-          $us_headshot_path = str_replace("./assets/images/upload_file/","",$headshot_path );
+          $us_headshot_path = str_replace("assets/images/upload_file/","",$headshot_path );
         }
 
   ?>
@@ -128,7 +128,6 @@
         <p><strong>建議圖片格式為長寬相同，副檔名為gif,jpg,png</strong></p>
 
         <input type="file" name="headshot_img" accept="image/gif, image/jpg, image/png">
-        <input type="submit" name="upload_img" class="btn btn-info btn-sm" value="上傳" />
         <br/><br/>
 
         <p class="status" style="display:none;">狀態:
@@ -166,24 +165,23 @@
             $(".img-thumbnail").attr('src', e.target.result);
           }
           reader.readAsDataURL(this.files[0]);
+
+          var fronData = new FormData();
+          fronData.append('headshot_img',this.files[0]);
+          fronData.append('us_account',$("input[name='us_account']").val());
+          fronData.append('admin',$("input[name='admin']").val());
+          update_img(fronData);
+          
         }
       });
-
-      $("form[name='showForm']").on('submit',(function(e){
-        var img = $("input[name='headshot_img']").val();
-        img = img.substring(img.lastIndexOf("\\")+1);
-        var data = {
-          'isStatus': "update_headshot",
-          'img':img,
-          'file':new FormData(this)
-        }
-        e.preventDefault();
+      
+      function update_img(fronData){
         $.ajax({
           url: "select_setting.php",
           type: "POST",
           async: true, 
           dataType: "json",
-          data:  new FormData(this),
+          data:  fronData,
           contentType: false,
           cache: false,
           processData:false,
@@ -197,10 +195,10 @@
             }
           },
           error:function(xhr, status, error){
-          alert(xhr.statusText);
-        }
-      });
-      }));
+            alert(xhr.statusText);
+          }
+        });
+      }
     });
 
     function check(){

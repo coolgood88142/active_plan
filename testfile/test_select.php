@@ -36,8 +36,7 @@
             $acid = $pt_acid[$i];
             $date = $pt_date[$i];
             $sql = "UPDATE plan_trip SET pt_status = 2 WHERE pt_date = '$date' and pt_usid = $usid and pt_acid = $acid ";
-            echo $sql;
-            // $conn->exec($sql);
+            $conn->exec($sql);
         }
     }
 

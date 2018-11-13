@@ -12,13 +12,15 @@
         $ts_grade =  $_POST['ts_grade'];
         $ts_grade = explode(",", $ts_grade);
 
+        // $sleep = sleep(3);
+
         if(count($ts_no)>0){
             for($i=0 ; $i<count($ts_no) ; $i++) {
                 $no = $ts_no[$i];
                 $name = $ts_name[$i];
                 $grade = $ts_grade[$i];
 
-                $sql = "UPDATE test_score SET ts_name = '$name' AND ts_grade = $grade WHERE ts_no = '$ts_no'";
+                $sql = "UPDATE test_score SET ts_name = '$name',ts_grade = $grade WHERE ts_no = '$no'";
                 $conn->exec($sql);
                 $success = true;
             }

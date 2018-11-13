@@ -52,6 +52,7 @@
         async: true, 
         dataType: "json",
         data: data, 
+        timeout:1,
         success: function(msg){
           if(msg.success==true){
             alert("修改成功!")
@@ -61,7 +62,47 @@
           alert(xhr.responseText);
         }
       });
-    }
+
+//        var currentRequest = null;    
+
+// currentRequest = $.ajax({
+//     type: 'POST',
+//     data: data,
+//     url: 'test_score.php',
+//     beforeSend : function()    {           
+//         if(currentRequest != null) {
+//             currentRequest.abort();
+//         }
+//     },
+//     success: function(data) {
+//         // Success
+//     },
+//     error:function(e){
+//       // Error
+//     }
+// });
+
+// var currentAjax = null;
+// 	//方法就是将XHR对象指向currentAjax，再调用currentAjax的.abort()来中止请求
+// 	currentAjax = $.ajax({
+// 		   type:'POST',
+// 		   beforeSend:function(){},
+// 		   url:'test_score.php',
+// 		   data:data,
+// 		   dataType:'JSON',
+// 		   error:function(xhr, status, error){
+//           alert(xhr.responseText);
+//         },
+// 		   success:function(data){alert(data)}
+// 	});
+
+
+// 	//如若上一次AJAX请求未完成，则中止请求
+// 	if(currentAjax) {currentAjax.abort();}
+
+
+
+//     }
   </script>
 </html>
 

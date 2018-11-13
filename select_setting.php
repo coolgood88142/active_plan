@@ -18,8 +18,8 @@
 
         date_default_timezone_set('Asia/Taipei');
         $datetime = date ("YmdHis");
-        $datetime_file = "/assets/images/upload_file/" . $datetime . $file_type;
-        $file_name = $datetime . $file_type;
+        $now_file = $datetime . $file_type;
+        $datetime_file =  "assets/images/upload_file/" . $now_file;     
 
         $tmp_file = $_FILES['headshot_img']["tmp_name"];
 
@@ -28,18 +28,17 @@
             $sql = "SELECT us_headshot_path FROM user WHERE us_account IN ('$us_account') ";
             $query = $conn->query($sql);
             $headshot_path = $query->fetch(PDO::FETCH_ASSOC);
-            $headshot =  $headshot_path['us_headshot_path'];
+            $headshot =   $headshot_path['us_headshot_path'];
 
             if(file_exists($headshot)){
                 unlink($headshot);
-                // echo $headshot;
-                // exit;
+
+                //刪除後更新資料
+                $sql = "UPDATE user SET us_headshot_path = '$datetime_file' WHERE us_account IN ('$us_account')";
+                $conn->exec($sql);
+                $success = true;
+                $array = array('success' => $success);
             }
-            
-            $sql = "UPDATE user SET us_headshot_path = '$datetime_file' WHERE us_account IN ('$us_account')";
-            $conn->exec($sql);
-            $success = true;
-            $array = array('success' => $success,'file_name' => $file_name,'datetime_file' => $datetime_file,'headshot' => $headshot);
         }
     }else{
         $sql = "SELECT us_account,us_password,us_name,us_gender,us_email,us_status,us_headshot_path FROM user WHERE us_admin NOT IN ('Y') ";
