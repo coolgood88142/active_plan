@@ -26,6 +26,7 @@
   .jumbotron{
     height:100%;
     width:100%;
+    font-family:'微軟正黑體';
   }
  </style>
   <body>

@@ -70,6 +70,7 @@
         .jumbotron{
             height:100%;
             width:100%;
+            font-family:'微軟正黑體';
         }
     </style>
   <div class="jumbotron vertical-center bg-Light">
@@ -78,7 +79,6 @@
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="navbar"></div> 
-        <H2>行程列表</H2>
         <br/><br/>
         行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/><br/><br/>
         出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/>
