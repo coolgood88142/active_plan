@@ -31,69 +31,74 @@
   font-family:'微軟正黑體';
 }
 
+/* #title_div{
+  position: fixed;
+  top: 100px;
+} */
  </style>
   <body>
   <div class="jumbotron vertical-center bg-Light">
     <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">活動類型</h2>
-    <form name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="navbar"></div>
-        <br/><br/>
-        <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
-        <table id="example2" class="table table-striped table-bordered">
-	        <thead>
-                <tr>
-                    <td bgcolor="#00FFFF">序號</td>
-                    <td bgcolor="#00FFFF">活動類型</td>
-                    <?php
-                        if($us_admin=='Y'){                
-                    ?>
-                        <td bgcolor="#00FFFF">編輯設定</td>
-                    <?php
-                        }
-                    ?>
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                    foreach ($active_type as $key => $type) {
-                ?>
-                <tr>
-                    <td class="type_id" >
-                        <?php echo $type["type_id"]?>
-                    </td>
-                    <td class="name" >
-                        <?php echo $type["name"]?>
-                    </td>
-                    <?php
-                        if($us_admin=='Y'){                
-                    ?>
-                        <td class="type_edit">
-                            <input type="button" value="編輯類型" onClick="edit(this)"/>
-                        </td>
-                    <?php
-                        }
-                    ?>
-                </tr>
-                <?php 
-                    }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-    <input type="button" style="display:none;" name="backtype" value="回上一頁" onClick="back_timetype()"/>
-    <p class="timetypes" style="display:none;">活動類型:
-          <input type="text" name="add_typename" value="" ><br/><br/>
-          <input type="hidden" name="add_typeid" value="" >
-    </p>
-    <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-    <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
-    <input type="hidden" name="add_timetypes" />
-    <input type="hidden" name="up_timetypes" />
-    </form> 
-    </div>
+        <div id="title_div">
+            <form name="showForm" method="post">
+                <p class="h2 text-center text-dark font-weight-bold">活動類型</p>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                <div id="navbar"></div>
+                <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
+                <table id="example2" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <td bgcolor="#00FFFF">序號</td>
+                            <td bgcolor="#00FFFF">活動類型</td>
+                            <?php
+                                if($us_admin=='Y'){                
+                            ?>
+                                <td bgcolor="#00FFFF">編輯設定</td>
+                            <?php
+                                }
+                            ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            foreach ($active_type as $key => $type) {
+                        ?>
+                        <tr>
+                            <td class="type_id" >
+                                <?php echo $type["type_id"]?>
+                            </td>
+                            <td class="name" >
+                                <?php echo $type["name"]?>
+                            </td>
+                            <?php
+                                if($us_admin=='Y'){                
+                            ?>
+                                <td class="type_edit">
+                                    <input type="button" value="編輯類型" onClick="edit(this)"/>
+                                </td>
+                            <?php
+                                }
+                            ?>
+                        </tr>
+                        <?php 
+                            }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <input type="button" style="display:none;" name="backtype" value="回上一頁" onClick="back_timetype()"/>
+                <p class="timetypes" style="display:none;">活動類型:
+                    <input type="text" name="add_typename" value="" ><br/><br/>
+                    <input type="hidden" name="add_typeid" value="" >
+                </p>
+                <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
+                <input type="hidden" name="add_timetypes" />
+                <input type="hidden" name="up_timetypes" />
+            </form> 
+        </div>
   </div> 
   </body>
   <script language="JavaScript">

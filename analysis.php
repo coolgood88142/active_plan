@@ -49,57 +49,64 @@
   width:100%;
   font-family:'微軟正黑體';
 }
+
+/* #title_div{
+  position: fixed;
+  top: 100px;
+} */
 </style>
   <body>
   <div class="jumbotron vertical-center">
     <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">分析表</h2>
-    <form action="analysis.php" name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="navbar"></div>
-        <br/><br/>
-        <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
-        <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
-        <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
-        <br/><br/>
+      <div id="navbar"></div>
+      <div id="title_div">
+        <form action="analysis.php" name="showForm" method="post">
+            <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
+            <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+            
+            <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
+            <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
+            <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+            <br/><br/>
 
-        <div class="container" id="select_date">
-          <div class="row justify-content-center align-items-center">
-            <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <div class="input-group datepick">
-                  <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
-                  <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
+            <div class="container" id="select_date">
+              <div class="row justify-content-center align-items-center">
+                <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <div class="input-group datepick">
+                      <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
+                      <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div class="col-md-1"><h4 class="text-center">~</h4></div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <div class="input-group datepick">
+                      <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
+                      <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <button name="query_data" class="btn btn-info btn-sm" onClick="query_chart()">
+                    查詢
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="col-md-1"><h4 class="text-center">~</h4></div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <div class="input-group datepick">
-                  <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
-                  <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-1">
-              <button name="query_data" class="btn btn-info btn-sm" onClick="query_chart()">
-                查詢
-              </button>
-            </div>
-          </div>
-        </div>
-        <br/>
-        <input type="hidden" name="chart_type" value=""/>
-        <div id="ac_name" style="display_none;"></div>
-        <div id="ac_type" style="display_none;"></div>
-        <div id="ty_type" style="display_none;"></div>
-    </form>  
+            <br/>
+            <input type="hidden" name="chart_type" value=""/>
+            <div id="ac_name" style="display_none;"></div>
+            <div id="ac_type" style="display_none;"></div>
+            <div id="ty_type" style="display_none;"></div>
+        </form>
+      </div>
     </div>
   </div>
   </body>

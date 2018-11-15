@@ -30,16 +30,20 @@
   width:100%;
   font-family:'微軟正黑體';
 }
+
+/* #title_div{
+  position: fixed;
+  top: 100px;
+} */
  </style>
   <body>
     <div class="jumbotron vertical-center bg-Light">
         <div class="container">
             <div id="navbar"></div>
-            <div>   
-                <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
+            <div id="title_div">
                 <form id="showForm" name="showForm" method="post">
-                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                    <br/><br/>      
+                    <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>   
                     <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
                     <table id="example1" class="table table-striped table-bordered">
             	        <thead>
@@ -140,62 +144,62 @@
                         <tfoot>
                         </tfoot>
                     </table>
-                <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
-                <p class="activity" style="display:none;">活動項目:
-                      <input type="text" name="add_acname" value="" ><br/><br/>
-                </p>
-                <p class="type" style="display:none;">類型:
-                    <select name="add_actype">
-                    <?php
-                        foreach ($active_type as $key => $type) {
-                    ?>
-                        <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
-                    <?php
-                        }
-                    ?>
-                    </select>
-                    <br/><br/>
-                </p>
-                <p class="weather" style="display:none;">天氣:
-                    <?php 
-                        foreach($activity_weather as $key => $weather){
-                    ?>
-                        <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?></input>
-                    <?php
-                        }
-                    ?>
-                    <br/><br/>
-                </p>
-                <p class="drive" style="display:none;">車程(小時):
-                    <input type="text" name="add_acdrive" value="" size="2"  
-                    onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-                </p>
-                <p class="carry" style="display:none;">攜帶物品:
-                      <input type="text" name="add_accarry" value="無" ><br/><br/>
-                </p>
-                <p class="spend" style="display:none;">花費:
-                      <input type="text" name="add_acspend" value="0" 
-                      onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
-                </p>
-                <p class="hours" style="display:none;">時間(小時):
-                    <input type="text" name="add_achours" value="" size="2"
-                    onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-                </p>
-                <p class="timetype" style="display:none;">時段:
-                    <?php
-                        foreach ($timetypes as $key => $time) {
-                    ?>
-                        <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
-                    <?php
-                        }
-                    ?>
-                    <br/><br/>
-                </p>
-                <input type="hidden" name="add_acid" value=""/>
-                <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-                <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
-                <input type="hidden" name="add_activitys" />
-                <input type="hidden" name="up_activitys" />
+                    <input type="button" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
+                    <p class="activity" style="display:none;">活動項目:
+                        <input type="text" name="add_acname" value="" ><br/><br/>
+                    </p>
+                    <p class="type" style="display:none;">類型:
+                        <select name="add_actype">
+                        <?php
+                            foreach ($active_type as $key => $type) {
+                        ?>
+                            <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                        <br/><br/>
+                    </p>
+                    <p class="weather" style="display:none;">天氣:
+                        <?php 
+                            foreach($activity_weather as $key => $weather){
+                        ?>
+                            <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?></input>
+                        <?php
+                            }
+                        ?>
+                        <br/><br/>
+                    </p>
+                    <p class="drive" style="display:none;">車程(小時):
+                        <input type="text" name="add_acdrive" value="" size="2"  
+                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
+                    </p>
+                    <p class="carry" style="display:none;">攜帶物品:
+                        <input type="text" name="add_accarry" value="無" ><br/><br/>
+                    </p>
+                    <p class="spend" style="display:none;">花費:
+                        <input type="text" name="add_acspend" value="0" 
+                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
+                    </p>
+                    <p class="hours" style="display:none;">時間(小時):
+                        <input type="text" name="add_achours" value="" size="2"
+                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
+                    </p>
+                    <p class="timetype" style="display:none;">時段:
+                        <?php
+                            foreach ($timetypes as $key => $time) {
+                        ?>
+                            <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
+                        <?php
+                            }
+                        ?>
+                        <br/><br/>
+                    </p>
+                    <input type="hidden" name="add_acid" value=""/>
+                    <input type="button" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                    <input type="button" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
+                    <input type="hidden" name="add_activitys" />
+                    <input type="hidden" name="up_activitys" />
                 </form>
             </div>
         </div>
@@ -208,6 +212,9 @@
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
         }
+        //可以重新定義datatable目前解析度縮放
+        // $('#example1').fnAdjustColumnSizing();
+        // $('#example1').fnDraw();
     } );
 
     function go_plan(){
