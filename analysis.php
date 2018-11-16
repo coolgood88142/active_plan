@@ -74,18 +74,17 @@
                 <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <div class="input-group datepick">
-                      <input type="text" class="form-control" name="begin_date" value="" size="16"  required readonly/>
-                      <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                      </div>
+                    <div class="input-group date">
+                      <input type="text" class="form-control" name="begin_date" >
+                        <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-th"></i></span>  
                     </div>
                   </div>
                 </div>
                 <div class="col-md-1"><h4 class="text-center">~</h4></div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <div class="input-group datepick">
+                    <div class="input-group date">
                       <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
                       <div class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -116,11 +115,7 @@
         $("#ac_name").show();
         $("input[name='chart_type']").val('1');
         select_chart(true,'1');
-        $(".datepick").datetimepicker({
-        format: "YYYY-MM-DD",
-        ignoreReadonly: true,
-        locale: moment.locale('zh-cn')
-      });
+        $(".input-group.date").datepicker();
     });
     function openDate(name){
       $(name).datetimepicker({
