@@ -137,7 +137,7 @@
           <input type="hidden" name="status" value="<?php echo $us_status ?>"/>
         </p>
 
-        <input type="button" value="確定" onClick="check()"/>
+        <input type="button" class="btn btn-primary" value="確定" onClick="check()"/>
         <input type="hidden" name="update_user"/>
     </form>
     </div>

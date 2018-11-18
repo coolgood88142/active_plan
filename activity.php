@@ -44,7 +44,7 @@
                 <form id="showForm" name="showForm" method="post">
                     <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>   
-                    <input type="button" style="display:none;" name="add" value="新增活動項目" onClick="add_activity()"/>
+                    <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
                     <table id="example1" class="table table-striped table-bordered">
             	        <thead>
                             <tr>
@@ -131,7 +131,7 @@
                                     if($us_admin=='Y'){                
                                 ?>
                                     <td class="ac_edit">
-                                        <input type="button" value="編輯項目" onClick="edit(this)"/>
+                                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                                     </td>
                                 <?php
                                     }

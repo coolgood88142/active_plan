@@ -53,7 +53,7 @@
         <div id="navbar"></div> 
         <br/><br/>
         <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
-        <input type="button" name="addplan" value="新增行程" onClick="add_plan()"/>
+        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
         <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>  
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
@@ -101,7 +101,7 @@
                         <?php echo $count["pt_count"]?>
                     </td>
                     <td class="pt_plan">
-                        <input type="button" value="編輯行程" onClick="edit_plan(this)"/>
+                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit_plan(this)"/>
                     <?php
                         foreach ($plan as $key => $value) {
                             if($value["pt_usid"]==$count["us_id"]){
@@ -207,7 +207,7 @@
                     </td>
                     
                     <td>
-                        <input type="button" value="編輯" onClick="edit(this)"/>
+                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                     <?php
                         foreach ($plan_trip as $key => $trip) {
                             if($trip["pt_id"]==$value["pt_id"]){
@@ -339,8 +339,8 @@
     <tfoot>
     </tfoot>
 </table>
-        <input type="button" name="addactivity" value="新增活動項目" onClick="add_activity()"/>
-        <input type="button" name="goplan" value="送出" onClick="go_plan()"/>
+        <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
+        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
     </form>
     <form action="update_plan.php" name="updateForm" method="post">
         <input type="hidden" name="type" />
@@ -683,7 +683,7 @@
                 td.innerHTML = ac_ids[i];
 
                 td = tr.insertCell(tr.cells.length);
-                td.innerHTML = '<input type="button" name="cancel" value="取消" onClick="Cancel(this)"/>';  
+                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>';  
                     //預設有兩行，刪除文字行
                     if(num==2){
                         $("#example3").find(".odd").remove();
@@ -915,7 +915,7 @@
             }
                 
             td = tr.insertCell(tr.cells.length);
-            var plan_td = "<input type='button' value='編輯' onClick='edit(this)'/>" +
+            var plan_td = "<input type='button' class='btn btn-primary' value='編輯' onClick='edit(this)'/>" +
             "<input type='hidden' name='pt_id' value='"+pt_id[i]+"'/>" + 
             "<input type='hidden' name='pt_usid' value='"+pt_usid[i]+"'/>" + 
             "<input type='hidden' name='pt_usname' value='"+pt_usname[i]+"'/>" + 

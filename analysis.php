@@ -2,14 +2,16 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-  
-<?php include("link.php");?>
-<script language="javascript" src="./assets/js/jquery.min.js"></script>
-<script language="javascript" src="./assets/js/moment.js"></script>
-<script language="javascript" src="./assets/js/bootstrap-datetimepicker.min.js"></script>
-<link rel="stylesheet" href="./assets/css/bootstrap-datetimepicker.min.css">
-<script src="./assets/js/zh-cn.js"></script>
-<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+
+<script src="./assets/js/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="./assets/css/bootstrap.css">
+<!-- <script src="./assets/js/jquery-3.3.1.min.js"></script> -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <script type="text/javascript" src="./assets/js/gijgo.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <!-- <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script> -->
+
+    
 <script src="./assets/js/highcharts.js"></script>
 <script src="./assets/js/highcharts-3d.js"></script>
 <script src="./assets/js/series-label.js"></script>
@@ -64,18 +66,18 @@
             <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             
-            <input type="button" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
-            <input type="button" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
-            <input type="button" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+            <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
+            <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
+            <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
             <br/><br/>
 
-            <div class="container" id="select_date">
+            <div id="select_date">
               <div class="row justify-content-center align-items-center">
                 <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <div class="input-group date">
-                      <input type="text" class="form-control" name="begin_date" >
+                      <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         <span class="input-group-addon">
                           <i class="glyphicon glyphicon-th"></i></span>  
                     </div>
@@ -85,10 +87,9 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <div class="input-group date">
-                      <input type="text" class="form-control" name="end_date" value="" size="16"  required readonly/>
-                      <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                      </div>
+                      <input type="text" class="form-control" name="end_date" data-provide="datepicker">
+                        <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-th"></i></span>  
                     </div>
                   </div>
                 </div>
@@ -115,13 +116,14 @@
         $("#ac_name").show();
         $("input[name='chart_type']").val('1');
         select_chart(true,'1');
-        $(".input-group.date").datepicker();
+        openDate($("input[name='begin_date']"));
+        openDate($("input[name='end_date']"));
     });
     function openDate(name){
-      $(name).datetimepicker({
-          format: "yy-mm-dd",
-          ignoreReadonly: true,
-          language:  'zh-CN',  //日期
+      $(name).datepicker({
+        uiLibrary: 'bootstrap4',
+          format: "yyyy-mm-dd",
+          language:'zh-CN',
         weekStart: 1,
         todayBtn:  1,
         autoclose: 1,

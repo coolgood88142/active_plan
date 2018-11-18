@@ -206,7 +206,7 @@
         ?>
             </select>
             </p><br/>
-        <input type="submit" name="gorandom" value="執行"/>  
+        <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>  
             <br/><br/> 
         
         <table id="example1" class="table table-striped table-bordered">
@@ -269,7 +269,7 @@
             <tfoot>
             </tfoot>
         </table>
-        <input type="button" name="goplan" value="送出" onClick="go_plan()"/> 
+        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
     </form>
    </div>
   </div>

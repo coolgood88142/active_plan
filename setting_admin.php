@@ -44,7 +44,7 @@
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <br/><br/>
-        <input type="button" name="addplans" value="新增帳號" onClick="add_account()"/>
+        <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
         <table id="example" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
@@ -63,7 +63,7 @@
                         <?php echo $value["us_name"]?>
                     </td>
                     <td>
-                        <input type="button" value="編輯" onClick="edit(this)"/>
+                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                         <input type="hidden" name="us_name" value="<?=$value["us_name"]?>"/>
                         <input type="hidden" name="us_account" value="<?=$value["us_account"]?>"/>
                         <input type="hidden" name="us_gender" value="<?=$value["us_gender"]?>"/>

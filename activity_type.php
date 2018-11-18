@@ -45,7 +45,7 @@
                 <p class="h2 text-center text-dark font-weight-bold">活動類型</p>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div id="navbar"></div>
-                <input type="button" style="display:none;" name="add_type" value="新增活動類型" onClick="add_timetype()"/>
+                <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
                 <table id="example2" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -75,7 +75,7 @@
                                 if($us_admin=='Y'){                
                             ?>
                                 <td class="type_edit">
-                                    <input type="button" value="編輯類型" onClick="edit(this)"/>
+                                    <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                                 </td>
                             <?php
                                 }

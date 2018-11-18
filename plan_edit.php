@@ -220,8 +220,8 @@
   <tfoot>
   </tfoot>
 </table>    
-        <input type="button" name="addplan" value="新增" onClick="add_plan()"/>
-        <input type="button" name="goplan" value="送出" onClick="go_plan()"/> 
+        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
     </form>
     </div>
   </div>
