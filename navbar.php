@@ -47,7 +47,65 @@
   }
 
 </style>
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-inverse easy-sidebar">
+  <div class="container-fluid"> 
+    <ul class="nav navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="activity.php">活動列表</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="activity_type.php">活動類型</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="plan.php">行程列表</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="random.php">隨機行程</a>
+      </li>
+      <?php
+        if($admin!=""){
+      ?>
+      <li class="nav-item ">
+        <a class="nav-link" href="setting<?= $admin;?>.php">設定</a>
+      </li>
+      <?php
+        }
+      ?>
+      <li class="nav-item ">
+        <a class="nav-link" href="analysis.php">分析表</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="question<?= $admin;?>.php">Q&A</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <button type="button" class="btn btn-danger easy-sidebar-toggle">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- <div class="mx-2">
+    <ul class="nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class="avatar" src="<?=$headshot['us_headshot_path']!="" ? $headshot['us_headshot_path'] : "./assets/images/default.png";?>" alt="">
+        </a>
+        <ul class="dropdown-menu" style="right: 0; left: auto;">
+          <li class="avatar">
+            <img class="avatar" src="<?=$headshot['us_headshot_path']!="" ? $headshot['us_headshot_path'] : "./assets/images/default.png";?>" alt="">
+              <div><div class="point point-primary point-lg"></div><?php echo $_SESSION['us_name'];?></div>
+              <span><small><?php echo $_SESSION['us_account'];?></small></span>
+              <span><small><a href="setting.php">帳號資料</a></small></span>
+              <span><small><a href="sign_out.php">登出</a></small></span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div> -->
+</div>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -66,26 +124,24 @@
         <a class="nav-link" href="random.php">隨機行程</a>
       </li>
       <?php
-        if($admin!=""){
+        //if($admin!=""){
       ?>
       <li class="nav-item ">
-        <a class="nav-link" href="setting<?=$admin;?>.php">設定</a>
+        <a class="nav-link" href="setting<?php //$admin;?>.php">設定</a>
       </li>
       <?php
-        }
+        //}
       ?>
       <li class="nav-item ">
         <a class="nav-link" href="analysis.php">分析表</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="question<?=$admin;?>.php">Q&A</a>
+        <a class="nav-link" href="question<?php //$admin;?>.php">Q&A</a>
       </li>
     </ul>
   </div>
   <div class="mx-2">
     <ul class="nav">
-      <!-- <li><a href="sign_out.php"><span class="glyphicon glyphicon-log-out"></span>登出</a></li> -->
-      <!-- <li><i class="fa fa-user" style="font-size:24px;color:blue"></i></li> -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class="avatar" src="<?=$headshot['us_headshot_path']!="" ? $headshot['us_headshot_path'] : "./assets/images/default.png";?>" alt="">
@@ -101,5 +157,16 @@
         </ul>
       </li>
     </ul>
-</div>
-</nav>
+  </div>
+</nav> -->
+
+<script>
+//easy-sidebar-toggle-right
+$('.easy-sidebar-toggle').click(function(e) {
+    e.preventDefault();
+   //$('body').toggleClass('toggled-right');
+    $('body').toggleClass('toggled');
+   //$('.navbar.easy-sidebar-right').removeClass('toggled-right');
+    $('.navbar.easy-sidebar').removeClass('toggled');
+});
+</script>

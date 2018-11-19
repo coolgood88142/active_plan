@@ -14,6 +14,7 @@
 <link rel='stylesheet' href="./assets/css/all.css">
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <script src="./assets/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./assets/css/easy-sidebar.css">
 <!-- <script src="./assets/js/dataTables.bootstrap4.min.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap.css">
 <link rel="stylesheet" href="./assets/css/dataTables.bootstrap4.min.css -->

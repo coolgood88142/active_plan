@@ -1,4 +1,4 @@
-<html>
+<html class="easy-sidebar-active">
   <head>
     <title>規劃行程系統</title>
   </head>
