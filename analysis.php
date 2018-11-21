@@ -6,10 +6,13 @@
 <script src="./assets/js/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="./assets/css/bootstrap.css">
 <!-- <script src="./assets/js/jquery-3.3.1.min.js"></script> -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <script type="text/javascript" src="./assets/js/gijgo.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <!-- <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" /> -->
+<link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<script src="./assets/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 
     
 <script src="./assets/js/highcharts.js"></script>
@@ -123,14 +126,11 @@
       $(name).datepicker({
         uiLibrary: 'bootstrap4',
           format: "yyyy-mm-dd",
-          language:'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
+          language:"zh-TW",
+          weekStart: 1,
+          daysOfWeekHighlighted: "6,0",
+          autoclose: true,
+          todayHighlight: true,
       });
     }
     
