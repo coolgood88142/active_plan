@@ -31,6 +31,11 @@
   font-family:'微軟正黑體';
 }
 
+#example2 thead td {
+  background: url("./assets/images/background.png");
+  color: white;
+}
+
 /* #title_div{
   position: fixed;
   top: 100px;
@@ -45,16 +50,18 @@
                 <p class="h2 text-center text-dark font-weight-bold">活動類型</p>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div id="navbar"></div>
-                <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
+                <div style="text-align:right">
+                    <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
+                </div>
                 <table id="example2" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <td bgcolor="#00FFFF">序號</td>
-                            <td bgcolor="#00FFFF">活動類型</td>
+                            <td>序號</td>
+                            <td>活動類型</td>
                             <?php
                                 if($us_admin=='Y'){                
                             ?>
-                                <td bgcolor="#00FFFF">編輯設定</td>
+                                <td>編輯設定</td>
                             <?php
                                 }
                             ?>

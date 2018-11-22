@@ -36,6 +36,10 @@
             width:100%;
             font-family:'微軟正黑體';
         }
+        #example thead td{
+            background: url("./assets/images/background.png");
+            color: white;
+        }
     </style>
    <div class="jumbotron vertical-center bg-Light">
    <div class="container">
@@ -44,13 +48,15 @@
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <br/><br/>
-        <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
+        <div style="text-align:right">
+            <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
+        </div>
         <table id="example" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
-                    <td bgcolor="#00FFFF"></td>
-                    <td bgcolor="#00FFFF">使用者名稱</td>
-                    <td bgcolor="#00FFFF">編輯設定</td>
+                    <td></td>
+                    <td>使用者名稱</td>
+                    <td>編輯設定</td>
                 </tr>
 	        </thead>
 	        <tbody>

@@ -31,6 +31,11 @@
   font-family:'微軟正黑體';
 }
 
+#example1 thead td {
+  background: url("./assets/images/background.png");
+  color: white;
+}
+
 /* #title_div{
   position: fixed;
   top: 100px;
@@ -43,26 +48,28 @@
             <div id="title_div">
                 <form id="showForm" name="showForm" method="post">
                     <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
-                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>   
-                    <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    <div style="text-align:right">
+                        <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
+                    </div>
                     <table id="example1" class="table table-striped table-bordered">
             	        <thead>
                             <tr>
-                                <td bgcolor="#00FFFF">活動項目</td>
-                                <td bgcolor="#00FFFF" style="display:none;">活動項目ID</td>
-                                <td bgcolor="#00FFFF">類型</td>
-                                <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
-                                <td bgcolor="#00FFFF" >天氣</td>
-                                <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
-                                <td bgcolor="#00FFFF">車程(小時)</td>
-                                <td bgcolor="#00FFFF">攜帶物品</td>
-                                <td bgcolor="#00FFFF">花費</td>
-                                <td bgcolor="#00FFFF">時間(小時)</td>
-                                <td bgcolor="#00FFFF" style="display:none;">時段</td>
+                                <td>活動項目</td>
+                                <td style="display:none;">活動項目ID</td>
+                                <td>類型</td>
+                                <td style="display:none;">類型ID</td>
+                                <td>天氣</td>
+                                <td style="display:none;">天氣ID</td>
+                                <td>車程(小時)</td>
+                                <td>攜帶物品</td>
+                                <td>花費</td>
+                                <td>時間(小時)</td>
+                                <td style="display:none;">時段</td>
                                 <?php
                                     if($us_admin=='Y'){                
                                 ?>
-                                    <td bgcolor="#00FFFF">編輯設定</td>
+                                    <td>編輯設定</td>
                                 <?php
                                     }
                                 ?>

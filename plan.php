@@ -44,6 +44,10 @@
             width:100%;
             font-family:'微軟正黑體';
         }
+        #example1 thead td,#example2 thead td,#example3 thead td,#example4 thead td {
+            background: url("./assets/images/background.png");
+            color: white;
+        }
     </style>
    <div class="jumbotron vertical-center bg-Light">
     <div class="container">
@@ -53,7 +57,9 @@
         <div id="navbar"></div> 
         <br/><br/>
         <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
-        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+        <div style="text-align:right">
+            <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+        </div>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
         <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>  
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
@@ -80,10 +86,10 @@
         <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
-                    <td bgcolor="#00FFFF"></td>
-                    <td bgcolor="#00FFFF">姓名</td>
-                    <td bgcolor="#00FFFF">行程數量</td>
-                    <td bgcolor="#00FFFF">編輯設定</td>
+                    <td></td>
+                    <td>姓名</td>
+                    <td>行程數量</td>
+                    <td>編輯設定</td>
                 </tr>
 	        </thead>
 	        <tbody>
@@ -155,19 +161,19 @@
                     <?php
                         if($us_admin!='Y'){
                     ?>
-                        <td bgcolor="#00FFFF"></td>
-                        <td bgcolor="#00FFFF" style="display:none;">user_id</td>
-                        <td bgcolor="#00FFFF" style="display:none;">user_name</td>
+                        <td></td>
+                        <td style="display:none;">user_id</td>
+                        <td style="display:none;">user_name</td>
                     <?php
                         }
                     ?>
-                    <td bgcolor="#00FFFF" style="display:none;">行程ID</td>
-                    <td bgcolor="#00FFFF">行程名稱</td>
-                    <td bgcolor="#00FFFF">出發日期</td>
-                    <td bgcolor="#00FFFF">時間(小時)</td>
-                    <td bgcolor="#00FFFF">花費</td>
-                    <td bgcolor="#00FFFF">已完成</td>
-                    <td bgcolor="#00FFFF">編輯設定</td>
+                    <td style="display:none;">行程ID</td>
+                    <td>行程名稱</td>
+                    <td>出發日期</td>
+                    <td>時間(小時)</td>
+                    <td>花費</td>
+                    <td>已完成</td>
+                    <td>編輯設定</td>
                 </tr>  
             </thead>
             <tbody>
@@ -243,16 +249,16 @@
         <table id="example2" class="table table-striped table-bordered">
 	<thead>
         <tr>
-            <td bgcolor="#00FFFF">活動項目</td>
-            <td bgcolor="#00FFFF">類型</td>
-            <td bgcolor="#00FFFF">天氣</td>
-            <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
-            <td bgcolor="#00FFFF">車程(小時)</td>
-            <td bgcolor="#00FFFF">攜帶物品</td>
-            <td bgcolor="#00FFFF">花費</td>
-            <td bgcolor="#00FFFF">時間(小時)</td>
-            <td bgcolor="#00FFFF">加入</td>
-            <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+            <td>活動項目</td>
+            <td>類型</td>
+            <td>天氣</td>
+            <td style="display:none;">天氣ID</td>
+            <td>車程(小時)</td>
+            <td>攜帶物品</td>
+            <td>花費</td>
+            <td>時間(小時)</td>
+            <td>加入</td>
+            <td style="display:none;">類型ID</td>
         </tr>
 	</thead>
 	<tbody>
@@ -322,16 +328,16 @@
 <table id="example3" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <td bgcolor="#00FFFF">活動項目</td>
-            <td bgcolor="#00FFFF">類型</td>
-            <td bgcolor="#00FFFF">天氣</td>
-            <td bgcolor="#00FFFF" style="display:none;">天氣ID</td>
-            <td bgcolor="#00FFFF">車程(小時)</td>
-            <td bgcolor="#00FFFF">攜帶物品</td>
-            <td bgcolor="#00FFFF">花費</td>
-            <td bgcolor="#00FFFF">時間(小時)</td>
-            <td bgcolor="#00FFFF">動作</td>
-            <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
+            <td>活動項目</td>
+            <td>類型</td>
+            <td>天氣</td>
+            <td style="display:none;">天氣ID</td>
+            <td >車程(小時)</td>
+            <td>攜帶物品</td>
+            <td>花費</td>
+            <td>時間(小時)</td>
+            <td>動作</td>
+            <td style="display:none;">類型ID</td>
         </tr>
 	</thead>
     <tbody>

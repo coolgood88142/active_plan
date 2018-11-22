@@ -141,6 +141,10 @@
             width:100%;
             font-family:'微軟正黑體';
         }
+        #example1 thead td{
+            background: url("./assets/images/background.png");
+            color: white;
+        }
     </style>
   <div class="jumbotron vertical-center bg-Light">
    <div class="container">
@@ -212,16 +216,16 @@
         <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
-                <td bgcolor="#00FFFF">天數排序</td>
-                    <td bgcolor="#00FFFF">活動項目</td>
-                    <td bgcolor="#00FFFF">類型</td>
-                    <td bgcolor="#00FFFF">天氣</td>
-                    <td bgcolor="#00FFFF">車程(小時)</td>
-                    <td bgcolor="#00FFFF">攜帶物品</td>
-                    <td bgcolor="#00FFFF">花費</td>
-                    <td bgcolor="#00FFFF">時間(小時)</td>
-                    <td bgcolor="#00FFFF" style="display:none;">類型ID</td>
-                    <td bgcolor="#00FFFF">時段</td>   
+                    <td>天數排序</td>
+                    <td>活動項目</td>
+                    <td>類型</td>
+                    <td>天氣</td>
+                    <td>車程(小時)</td>
+                    <td>攜帶物品</td>
+                    <td>花費</td>
+                    <td>時間(小時)</td>
+                    <td style="display:none;">類型ID</td>
+                    <td>時段</td>   
                 </tr>
 	        </thead>
 	        <tbody>

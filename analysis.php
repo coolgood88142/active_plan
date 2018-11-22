@@ -68,10 +68,11 @@
         <form action="analysis.php" name="showForm" method="post">
             <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-            
-            <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
-            <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
-            <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+            <div style="text-align:right">
+              <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
+              <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
+              <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+            </div>
             <br/><br/>
 
             <div id="select_date">

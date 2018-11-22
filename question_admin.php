@@ -28,6 +28,10 @@
     width:100%;
     font-family:'微軟正黑體';
   }
+  #example thead td{
+    background: url("./assets/images/background.png");
+    color: white;
+  }
  </style>
   <body>
   <div class="jumbotron vertical-center bg-Light">
@@ -39,20 +43,20 @@
         
         <br/><br/>
 
-        <ul class="nav justify-content-end">
-          <li><button type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)">新增Q&A</button></li>
-          <li><button type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)">刪除</button></li>
-          <li><button type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()">排序</button></li>
-        </ul>
+        <div style="text-align:right">
+              <input type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)" value="新增Q&A"/>
+              <input type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)" value="刪除"/>
+              <input type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()" value="排序"/>
+        </div>
         
         <br/><br/>
         <table id="example" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-              <th class="isorder" style="text-align:center; vertical-align:middle; width:50px;"></th>
-              <th style="text-align:center; vertical-align:middle; width:50px;">刪除</th>
-              <th style="text-align:center; vertical-align:middle;">問題</th>
-              <th style="text-align:center; vertical-align:middle; width:80px;">編輯</th>
+              <td class="isorder" style="text-align:center; vertical-align:middle; width:50px;"></td>
+              <td style="text-align:center; vertical-align:middle; width:50px;">刪除</td>
+              <td style="text-align:center; vertical-align:middle;">問題</td>
+              <td style="text-align:center; vertical-align:middle; width:80px;">編輯</td>
             </tr>
           </thead>
           <tbody>
