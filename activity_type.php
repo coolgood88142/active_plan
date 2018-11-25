@@ -111,7 +111,11 @@
   <script language="JavaScript">
     $(document).ready(function() {
         $('#navbar').load('navbar.php');
-        $('#example2').DataTable(datatable_language());
+        $('#example2').DataTable({
+                responsive:true
+            },
+            datatable_language()
+        );
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add_type']").show();
 

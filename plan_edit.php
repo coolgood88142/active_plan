@@ -86,6 +86,8 @@
         <br/><br/>
         行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/><br/><br/>
         出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/>
+        <input type="button" style="text-align:right" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+        <br/>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
         <table id="example1" class="table table-striped table-bordered">
@@ -223,9 +225,10 @@
 	</tbody>
   <tfoot>
   </tfoot>
-</table>    
-        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
-        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
+</table> 
+        <div style="text-align:right">
+            <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
+        </div>
     </form>
     </div>
   </div>

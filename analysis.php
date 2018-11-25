@@ -98,9 +98,7 @@
                   </div>
                 </div>
                 <div class="col-md-1">
-                  <button name="query_data" class="btn btn-info btn-sm" onClick="query_chart()">
-                    查詢
-                  </button>
+                  <input type="button" name="query_data" class="btn btn-info btn-sm" value="查詢" onClick="query_chart()">
                 </div>
               </div>
             </div>
@@ -360,14 +358,6 @@
           alert(xhr.statusText);
         }
       });
-    }
-    
-    function show(page){
-        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
-            page = page + "_admin";
-        }
-        document.showForm.action=page+".php"; 
-        document.showForm.submit();
     }
   </script>
 </html>

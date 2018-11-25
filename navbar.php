@@ -81,18 +81,17 @@
         background-color: #00BBFF;
         border-radius-color: #00BBFF;
       }*/
-      .navbar ul li a {
-        color:#fff;}
-      .navbar ul li a:hover {
-        color:#000;}
     }
+      .navbar-light .navbar-nav .nav-link{
+        color:#fff;
+      }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top navbar-inverse">
   <button  class="navbar-toggler pull-left" type="button" data-toggle="collapse-side" data-target-sidebar=".side-collapse-left" data-target-content=".side-collapse-container-left" >
       <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-inverse bg-dark side-collapse-left in" id="navbarNav">
+  <div class="navbar-inverse bg-dark side-collapse-left in test-color" id="navbarNav">
     <nav role="navigation" class="navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
         <li class="nav-item">
