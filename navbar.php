@@ -54,7 +54,7 @@
       transition:left .4s;
     }
     .side-collapse-container-left.out{
-      left:70%
+      left:70%;
     }
     .side-collapse-left {
        top:50px;
@@ -82,12 +82,21 @@
         border-radius-color: #00BBFF;
       }*/
     }
+    /* @media (max-width: 768px) and (max-width: 1024px) {
+      .navbar-toggler .pull-left{
+        display:none;
+      }
+      .side-collapse-left .in{
+
+      }
+
+    } */
       .navbar-light .navbar-nav .nav-link{
         color:#fff;
       }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top navbar-inverse">
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark fixed-top navbar-inverse">
   <button  class="navbar-toggler pull-left" type="button" data-toggle="collapse-side" data-target-sidebar=".side-collapse-left" data-target-content=".side-collapse-container-left" >
       <span class="navbar-toggler-icon"></span>
   </button>

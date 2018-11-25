@@ -83,10 +83,12 @@
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <div id="navbar"></div> 
-        <br/><br/>
-        行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/><br/><br/>
-        出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/>
-        <input type="button" style="text-align:right" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+        <div class="row justify-content-center align-items-center">
+            <div class="col col-md-12">行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/></div>
+            <div class="col col-md-11">出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/></div>
+            <div class="col align-self-end"><input type="button" style="text-align:right" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/></div>
+        </div>
+        
         <br/>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>

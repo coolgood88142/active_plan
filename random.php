@@ -273,7 +273,9 @@
             <tfoot>
             </tfoot>
         </table>
-        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
+        <div style="text-align:right">
+            <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+        </div>
     </form>
    </div>
   </div>
