@@ -146,7 +146,7 @@
             color: white;
         }
     </style>
-  <div class="jumbotron vertical-center bg-Light">
+  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
    <div class="container">
     <h2 id="title" class="text-center text-dark font-weight-bold">隨機行程</h2>   
     <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
@@ -194,7 +194,7 @@
 
         天數小時:<input type="text" name="day_time" value="" size="2"/>小時
         <input type="hidden" name="istime_type" value="" size="2"/>
-        <br/><br/>
+        <br/>
 
         <p class="time">時段選項:
             <select name="time_type">

@@ -61,7 +61,7 @@
 } */
 </style>
   <body>
-  <div class="jumbotron vertical-center">
+  <div class="jumbotron vertical-center side-collapse-container-left">
     <div class="container">
       <div id="navbar"></div>
       <div id="title_div">

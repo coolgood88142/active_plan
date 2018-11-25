@@ -33,7 +33,7 @@
   }
   </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light">
+  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
     <div class="container">
     <div id="navbar"></div>
     <h2 id="title" class="text-center text-dark font-weight-bold">Q&A排序</h2>

@@ -30,7 +30,7 @@
   }
  </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light">
+  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
     <div class="container">
     <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
     <form action="question.php" name="showForm" method="post">

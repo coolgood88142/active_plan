@@ -14,7 +14,7 @@
        width:70%;
        position:fixed;
        overflow:hidden;
-       ransition:width .4s;
+       transition:width .4s;
      }
      .side-collapse-left.in {
         width:0;

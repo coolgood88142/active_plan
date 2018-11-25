@@ -12,14 +12,14 @@
     if(isset($_POST['chart_type'] )){
         $chart_type = $_POST['chart_type'];
         $us_admin = $_POST['admin'];
-    }else{
-        if(isset($_SESSION["us_id"])){
-            $us_id = $_SESSION['us_id'];
-        }else if(!empty($_COOKIE['us_id'])){
-            $us_id = $_COOKIE['us_id'];
-        }
     }
-    
+
+    if(isset($_SESSION["us_id"])){
+        $us_id = $_SESSION['us_id'];
+    }else if(!empty($_COOKIE['us_id'])){
+        $us_id = $_COOKIE['us_id'];
+    }
+
     if($chart_type=='1'){
         $sql = "SELECT ac_name,  (select count(pn_id) from plan_acname,plan_trip where pn_acid = ac_id and pn_ptid = pt_id ";
 

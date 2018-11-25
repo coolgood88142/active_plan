@@ -49,7 +49,7 @@
             color: white;
         }
     </style>
-   <div class="jumbotron vertical-center bg-Light">
+   <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
     <div class="container">
     <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
     <form name="showForm" method="post">
