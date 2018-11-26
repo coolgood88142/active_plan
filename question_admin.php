@@ -119,7 +119,7 @@
   </body>
   <script language="JavaScript">
     $(document).ready(function() {
-      $('#example').DataTable();
+      $('#example').DataTable(datatable_language());
         $('#navbar').load('navbar.php');
         $("#storage").hide();
         $("#return").hide();

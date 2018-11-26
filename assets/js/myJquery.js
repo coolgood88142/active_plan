@@ -20,7 +20,8 @@ function datatable_language(){
                 "sortAscending":  ": 升冪排列",
                 "sortDescending": ": 降冪排列"
             }
-        }
+        },
+        "autoWidth": false
     };
     return language;
 }
