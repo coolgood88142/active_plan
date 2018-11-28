@@ -96,7 +96,7 @@
       }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark fixed-top navbar-inverse">
+<nav class="navbar navbar-expand-md navbar-light navbar-dark bg-dark fixed-top navbar-inverse">
   <button  class="navbar-toggler pull-left" type="button" data-toggle="collapse-side" data-target-sidebar=".side-collapse-left" data-target-content=".side-collapse-container-left" >
       <span class="navbar-toggler-icon"></span>
   </button>

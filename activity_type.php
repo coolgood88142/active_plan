@@ -49,7 +49,6 @@
             <form name="showForm" method="post">
                 <p class="h2 text-center text-dark font-weight-bold">活動類型</p>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                <div id="navbar"></div>
                 <div style="text-align:right">
                     <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
                 </div>
