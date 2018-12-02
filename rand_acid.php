@@ -13,7 +13,7 @@
         $spend = $spend . $active_array['ac_spend'][$count] . ",";
         $hours = $hours . $active_array['ac_hours'][$count] . ",";
         $id = $id . $active_array['ac_id'][$count] . ",";
-        $orderby = $orderby . ((Int)$i+1) . ",";
+        $orderby = $orderby . $random_count . ",";
 
         $ac_timetypes = $active_array['ac_timetype'][$count];
         $ac_timetypes = explode(",", $ac_timetypes);
@@ -49,7 +49,8 @@
             $rand_count = array_rand($active_array['ac_id'],1);
             
             if($active_array['ac_hours'][$rand_count]>$previous || $active_array['ac_hours'][$rand_count]==$previous){
-                $hour = (int)$hour + 2;              
+                $hour = (int)$hour + 2;
+                ++$random_count;
                 return;
             }
         }

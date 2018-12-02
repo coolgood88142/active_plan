@@ -3,6 +3,9 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -60,8 +63,8 @@
         <div style="text-align:right">
             <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
         </div>
-        <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
-        <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>  
+        <p class="plan">行程名稱:<input type="text" class="form-control col-md-3 mb-3" name="plan_name" value=""/></p>
+        <p class="date">出發日期:<input type="text" class="form-control col-md-3 mb-3" name="plan_date" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>  
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
         <p class="userlist">使用者名稱: 
@@ -495,21 +498,17 @@
     } );
 
     function openDate(name){
-      $(name).datepicker({
-          dateFormat: "yy-mm-dd",
-          changeMonth : true,
-          changeYear : true,
-          showMonthAfterYear : true,
-          dayNames : [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ],
-          dayNamesShort : [ "日", "一", "二", "三", "四", "五", "六" ],
-          dayNamesMin : [ "日", "一", "二", "三", "四", "五", "六" ],
-          monthNames : [ "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月","10月", "11月", "12月" ],
-          monthNamesShort : [ "1", "2", "3", "4", "5", "6", "7", "8", "9","10", "11", "12" ],
-          nextText : "下個月",
-          prevText : "上個月"
-      });
-    }
-
+    $(name).datepicker({
+      uiLibrary: 'bootstrap4',
+        format: "yyyy-mm-dd",
+        language:"zh-TW",
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+  }
+  
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();

@@ -3,6 +3,9 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -161,9 +164,9 @@
         <div id="navbar"></div>
         <br/><br/>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
-        <p class="date">出發日期:<input type="text" name="plan_date" value=""/>(yyyy-mm-dd)</p>
+        <p class="date">出發日期:<input type="text" name="plan_date" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>
         <p class="userlist">使用者名稱: 
-        <select name="pt_userlist">
+        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
         <?php 
         if($us_admin=="Y"){
             foreach($user as $key => $value){
@@ -178,7 +181,11 @@
         </select>
         </p>
 
-        天數: <input type="text" name="day" value="" size="2"/>天<br/><br/>
+        <div class="row">
+            <label for="day" class="h6 col-sm-1">天數:</label>
+            <input type="text" class="form-control col-sm-1" id="day" name="day" value="" size="2"/>
+            <label class="h6 col-sm-1">天</label>
+        </div><br/><br/>
 
         類型: 
         <?php
@@ -186,13 +193,16 @@
                 $type_id = $value['type_id'];
                 $name = $value['name'];
         ?>
-            <input type="checkbox" name="typeid[]" value="<?=$type_id?>"><?php echo $name ?></input>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="typeid[]" name="typeid[]" value="<?=$type_id?>">
+                <label class="form-check-label" for="typeid[]"><?php echo $name ?></label>
+            </div>
         <?php
             }
         ?>
         <br/><br/>
 
-        天數小時:<input type="text" name="day_time" value="" size="2"/>小時
+        天數小時:<input type="text" class="form-control" name="day_time" value="" size="2"/>小時
         <input type="hidden" name="istime_type" value="" size="2"/>
         <br/>
 
@@ -310,6 +320,7 @@
         $(".date").hide();
         $(".time").hide();
         $(".userlist").hide();
+        openDate($("input[name='plan_date']"));
 
         if($("#is_query").val()=="true"){
             $('#example1_wrapper').show();
@@ -392,6 +403,18 @@
         }
 
     });
+
+    function openDate(name){
+        $(name).datepicker({
+        uiLibrary: 'bootstrap4',
+            format: "yyyy-mm-dd",
+            language:"zh-TW",
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            utoclose: true,
+            todayHighlight: true,
+        });
+    }
 
     function go_plan(){
         if($('#example1_wrapper').is(':visible')){

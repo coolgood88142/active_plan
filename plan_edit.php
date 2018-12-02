@@ -3,6 +3,9 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -85,7 +88,7 @@
         <div id="navbar"></div> 
         <div class="row justify-content-center align-items-center">
             <div class="col col-md-12">行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/></div>
-            <div class="col col-md-11">出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>"/></div>
+            <div class="col col-md-11">出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker"/></div>
             <div class="col align-self-end"><input type="button" style="text-align:right" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/></div>
         </div>
         
@@ -264,10 +267,20 @@
         $('#example1').DataTable(datatable_language());
         $('#example2').DataTable(datatable_language());
         $('#example2_wrapper').hide();
-        $("input[name='pt_date']").datepicker({
-            dateFormat: "yy-mm-dd"
-        });
+        openDate($("input[name='pt_date']"));
     } );
+
+    function openDate(name){
+    $(name).datepicker({
+      uiLibrary: 'bootstrap4',
+        format: "yyyy-mm-dd",
+        language:"zh-TW",
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+  }
 
     function add_plan(){
         $('#example1_wrapper').hide();

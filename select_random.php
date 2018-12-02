@@ -99,7 +99,7 @@
             }
 
             $hour = "";
-            
+            $random_count=1;
             if(count($active_array['ac_id'])>0){
                 $rand_count = array_rand($active_array['ac_id'],1);  
                 $hour=$day_time;$min_hour=3;$previous="";
