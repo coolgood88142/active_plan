@@ -3,9 +3,6 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<link rel="stylesheet" href="./assets/css/datepicker3.css"/>
-<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -125,6 +122,9 @@
     }
 
  ?>
+ <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
   <body>
     <style>
         td.details-control {
@@ -162,67 +162,86 @@
         <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
         <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
         <div id="navbar"></div>
-        <br/><br/>
-        <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
-        <p class="date">出發日期:<input type="text" name="plan_date1" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>
-        <p class="userlist">使用者名稱: 
-        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
-        <?php 
-        if($us_admin=="Y"){
-            foreach($user as $key => $value){
-        ?>
-            
-                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-            
-        <?php      
-            }
-        }
-        ?>
-        </select>
-        </p>
-
-        <div class="row">
-            <label for="day" class="h6 col-sm-1">天數:</label>
-            <input type="text" class="form-control col-sm-1" id="day" name="day" value="" size="2"/>
-            <label class="h6 col-sm-1">天</label>
-        </div><br/><br/>
-
-        類型: 
-        <?php
-            foreach($types as $key => $value){
-                $type_id = $value['type_id'];
-                $name = $value['name'];
-        ?>
-            <div class="form-check form-check-inline">
-                <input type="checkbox" class="form-check-input" id="typeid[]" name="typeid[]" value="<?=$type_id?>">
-                <label class="form-check-label" for="typeid[]"><?php echo $name ?></label>
+        <div class="form-group row plan">
+            <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="plan_name" value="">
             </div>
-        <?php
+        </div>
+        <div class="form-group row date">
+            <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="plan_date" value="" data-provide="datepicker"/>
+            </div>
+            <div class="col">
+                (yyyy-mm-dd)
+            </div>
+        </div>
+        <div class="form-group row userlist" style="display:none;">
+            <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
+            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
+            <?php 
+            if($us_admin=="Y"){
+                foreach($user as $key => $value){
+            ?>
+                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+            <?php
+                }
             }
-        ?>
-        <br/><br/>
-
-        天數小時:<input type="text" class="form-control" name="day_time" value="" size="2"/>小時
-        <input type="hidden" name="istime_type" value="" size="2"/>
-        <br/>
-
-        <p class="time">時段選項:
-            <select name="time_type">
-            <option value="*">全部</option>
-        <?php
-            foreach($time as $key => $value){
-                $ty_type = $value['ty_type'];
-                $ty_name = $value['ty_name'];
-        ?>
-            <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
-        <?php
-            }
-        ?>
+           ?>
             </select>
-            </p><br/>
+        </div>
+        <div class="form-group row day">
+            <label class="col-sm-2 control-label" for="day">天數:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="day" value="" size="2">
+            </div>
+            <div class="col">
+                天
+            </div>
+        </div>
+        <div class="form-group row weather">
+            <label class="col-sm-2 control-label" for="typeid[]">類型:</label>
+            <?php 
+                foreach($types as $key => $value){
+                    $type_id = $value['type_id'];
+                    $name = $value['name'];
+            ?>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
+                    <label class="form-check-label"><?php echo $name ?></label>
+                </div>
+            <?php
+                }
+            ?>
+        </div>
+        <div class="form-group row day_time">
+            <label class="col-sm-2 control-label" for="day_time">天數小時:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="day_time" value="">
+                <input type="hidden" name="istime_type" value="" size="2"/>
+            </div>
+            <div class="col">
+                小時
+            </div>
+        </div>
+        <div class="form-group row time" style="display:none;">
+            <label class="col-sm-2 control-label" for="time_type">時段選項:</label>
+            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="time_type">
+            <option value="*">全部</option>
+            <?php 
+                foreach($time as $key => $value){
+                    $ty_type = $value['ty_type'];
+                    $ty_name = $value['ty_name'];
+            ?>
+                <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+            <?php
+                }
+           ?>
+            </select>
+        </div>
         <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>  
-            <br/><br/> 
-        
+        <br/><br/> 
         <table id="example1" class="table table-striped table-bordered">
 	        <thead>
                 <tr>
@@ -320,7 +339,7 @@
         $(".date").hide();
         $(".time").hide();
         $(".userlist").hide();
-        openDate($("input[name='plan_date1']"));
+        openDate($("input[name='plan_date']"));
 
         if($("#is_query").val()=="true"){
             $('#example1_wrapper').show();

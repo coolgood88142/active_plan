@@ -85,13 +85,21 @@
     <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
     <form name="showForm" method="post">
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="navbar"></div> 
-        <div class="row justify-content-center align-items-center">
-            <div class="col col-md-12">行程名稱:<input type="text" name="pt_name" value="<?=$pt_name?>"/></div>
-            <div class="col col-md-11">出發日期:<input type="text" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker"/></div>
+        <div id="navbar"></div>
+        <div class="form-group row">
+            <label class="col-sm-2 control-label" for="pt_name">行程名稱:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="pt_name" value="<?=$pt_name?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 control-label" for="pt_date">出發日期:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker">
+            </div>
             <div class="col align-self-end"><input type="button" style="text-align:right" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/></div>
         </div>
-        
+            
         <br/>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>

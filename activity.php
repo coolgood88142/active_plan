@@ -152,14 +152,14 @@
                         </tfoot>
                     </table>
                     <input type="button" class="btn btn-primary" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
-                    <div class="form-group form-group-md row activity" style="display:none;">
-                        <label class="col-md-1 control-label" for="add_acname">活動項目:</label>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="add_acname" name="add_acname" value="">
+                    <div class="form-group row activity" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_acname">活動項目:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="add_acname" value="">
                         </div>
                     </div>
                     <div class="form-group row type" style="display:none;">
-                        <label>類型:</label>
+                        <label class="col-sm-2 control-label" for="add_actype">類型:</label>
                         <select class="custom-select mr-sm-2 col-md-2 mb-3" name="add_actype">
                         <?php
                             foreach ($active_type as $key => $type) {
@@ -171,7 +171,7 @@
                         </select>
                     </div>
                     <div class="form-group row weather" style="display:none;">
-                        <label for="add_acname">天氣:</label>
+                        <label class="col-sm-2 control-label" for="add_acweather[]">天氣:</label>
                         <?php 
                             foreach($activity_weather as $key => $weather){
                         ?>
@@ -182,31 +182,54 @@
                             }
                         ?>
                     </div>
-                    <p class="drive" style="display:none;">車程(小時):
-                        <input type="text" name="add_acdrive" value="" size="2"  
-                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-                    </p>
-                    <p class="carry" style="display:none;">攜帶物品:
-                        <input type="text" name="add_accarry" value="無" ><br/><br/>
-                    </p>
-                    <p class="spend" style="display:none;">花費:
-                        <input type="text" name="add_acspend" value="0" 
-                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">元<br/><br/>
-                    </p>
-                    <p class="hours" style="display:none;">時間(小時):
-                        <input type="text" name="add_achours" value="" size="2"
-                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
-                    </p>
-                    <p class="timetype" style="display:none;">時段:
-                        <?php
-                            foreach ($timetypes as $key => $time) {
+                    <div class="form-group row drive" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_acdrive">活動項目:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        </div>
+                        <div class="col">
+                            小時
+                        </div>
+                    </div>
+                    <div class="form-group row carry" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_accarry">攜帶物品:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="add_accarry" value="無">
+                        </div>
+                    </div>
+                    <div class="form-group row spend" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_acspend">花費:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="add_acspend" value="0" 
+                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        </div>
+                        <div class="col">
+                            元
+                        </div>
+                    </div>
+                    <div class="form-group row hours" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_achours">時間:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="add_achours" value="" size="2"
+                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        </div>
+                        <div class="col">
+                            小時
+                        </div>
+                    </div>
+                    <div class="form-group row timetype" style="display:none;">
+                        <label class="col-sm-2 control-label" for="add_actimetype[]">天氣:</label>
+                        <?php 
+                            foreach($timetypes as $key => $time){
                         ?>
-                            <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?></input>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?>
+                            </div>
                         <?php
                             }
                         ?>
-                        <br/><br/>
-                    </p>
+                    </div>
                     <input type="hidden" name="add_acid" value=""/>
                     <input type="button" class="btn btn-primary" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
                     <input type="button"class="btn btn-primary"  style="display:none;" name="up_submit" value="儲存" onClick="update()" />

@@ -63,25 +63,37 @@
         <div style="text-align:right">
             <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
         </div>
-        <p class="plan">行程名稱:<input type="text" class="form-control col-md-3 mb-3" name="plan_name" value=""/></p>
-        <p class="date">出發日期:<input type="text" class="form-control col-md-3 mb-3" name="plan_date" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>  
+        <div class="form-group row plan" style="display:none;">
+            <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="plan_name" value="">
+            </div>
+        </div>
+        <div class="form-group row date" style="display:none;">
+            <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="plan_date" value="">
+            </div>
+            <div class="col">
+                (yyyy-mm-dd)
+            </div>
+        </div>
         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
         <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-        <p class="userlist">使用者名稱: 
-        <select name="pt_userlist">
-        <?php 
-        if($us_admin=='Y'){
-            foreach($user as $key => $value){
-        ?>
-            
-                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-            
-        <?php      
-            }
-        }
-        ?>
-        </select>
-        </p>
+        <div class="form-group row userlist" style="display:none;">
+            <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
+            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
+                <?php
+                if($us_admin=='Y'){
+                    foreach($user as $key => $value){
+                ?>
+                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                <?php
+                    }
+                }
+                ?>
+            </select>
+        </div>
         <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
         <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
 
@@ -315,10 +327,10 @@
                 <?php echo $value["ac_hours"]?>
             </td>
             <td>
-                <input type="checkbox" name="add" ></input>
+                <input type="checkbox" name="add" >
             </td>
             <td class="ac_id" style="display:none;">
-                    <?php echo $value["ac_id"]?>
+                <?php echo $value["ac_id"]?>
             </td>
         </tr>
         <?php 
@@ -508,7 +520,7 @@
         todayHighlight: true,
     });
   }
-  
+
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();

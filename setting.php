@@ -86,56 +86,99 @@
         <input type="hidden" name="admin" value="<?=$us_admin?>"/>
         <input type="hidden" name="add_account" value="<?=$add_account?>"/>
 
-        帳號: 
-        <?php
-          if(!empty($add_account)){           
-        ?>
-          <input type="text" name="us_account" value=""/><br/><br/>
-        <?php
-          }else{
-            echo $us_account
-        ?>
-          <br/><br/>
-          <input type="hidden" name="us_account" value="<?= $us_account ?>"/>
-        <?php
-          }
+        <div class="form-group row us_account">
+          <label class="col-sm-2 control-label" for="us_account">帳號:</label>
+          <div class="col-sm-3">
+          <?php
+            if(!empty($add_account)){           
           ?>
-
-        密碼: <input type="password" name="us_password" value=""/>(請輸入8-15數字和英文)<br/><br/>
-
-        請在輸入一次密碼: <input type="password" name="agree_us_password" value=""/>(請輸入8-15數字和英文)<br/><br/>
-
-        姓名: 
-        <?php
-          if(!empty($add_account)){           
-        ?>
-          <input type="text" name="us_name" value=""/><br/><br/>
-        <?php
-          }else{
-        ?>
-          <input type="text" name="us_name" value="<?php echo $us_name!="未填寫"?$us_name:"" ?>"/><br/><br/>
-        <?php
-          }
+            <input type="text" class="form-control" name="us_account" value=""/>
+          <?php
+            }else{
+              echo $us_account
           ?>
-
-        性別: <input type="radio" name="us_gender" value="R" checked>男&nbsp
-        <input type="radio" name="us_gender" value="S">女<br/><br/>
-        <input type="hidden" name="gender" value="<?php echo $us_gender!="未填寫"?$us_gender:"" ?>"/>
-
-        電子信箱: <input type="text" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>"/><br/><br/>
-
-        大頭照檔名: <p id="headshot_file"><?= $us_headshot_path ?></p>
+            <input type="hidden" class="form-control" name="us_account" value="<?= $us_account ?>"/>
+          <?php
+            }
+          ?>
+          </div>
+        </div>
+        <div class="form-group row us_password">
+          <label class="col-sm-2 control-label" for="us_password">密碼:</label>
+          <div class="col-sm-3">
+            <input type="password" class="form-control" name="us_password" value="">
+          </div>
+          <div class="col">
+            (請輸入8-15數字和英文)
+          </div>
+        </div>
+        <div class="form-group row agree_us_password">
+          <label class="col-sm-2 control-label" for="agree_us_password">請在輸入一次密碼:</label>
+          <div class="col-sm-3">
+            <input type="password" class="form-control" name="agree_us_password" value="">
+          </div>
+          <div class="col">
+            (請輸入8-15數字和英文)
+          </div>
+        </div>
+        <div class="form-group row us_name">
+          <label class="col-sm-2 control-label" for="us_name">姓名:</label>
+          <div class="col-sm-3">
+          <?php
+            if(!empty($add_account)){           
+          ?>
+            <input type="text" class="form-control" name="us_name" value=""/>
+          <?php
+            }else{
+          ?>
+            <input type="hidden" class="form-control" name="us_name" value="<?php echo $us_name!="未填寫"?$us_name:"" ?>"/>
+          <?php
+            }
+          ?>
+          </div>
+        </div>
+        <div class="form-group row us_gender">
+            <label class="col-sm-2 control-label" for="us_gender">性別:</label>
+            <div class="form-check form-check-inline">
+              <input type="radio" name="us_gender" value="R" checked>
+              <label class="form-check-label">男</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" name="us_gender" value="S">
+              <label class="form-check-label">女</label>
+            </div>
+            <input type="hidden" name="gender" value="<?php echo $us_gender!="未填寫"?$us_gender:"" ?>"/>
+        </div>
+        <div class="form-group row us_email">
+            <label class="col-sm-2 control-label" for="us_email">電子信箱:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>">
+            </div>
+        </div>
+        <div class="form-group row headshot_file">
+            <label class="col-sm-2 control-label">大頭照檔名:</label>
+            <div id="headshot_file" class="col">
+              <?= $us_headshot_path ?>
+            </div>
+        </div>
         <img src="<?=$headshot_path?>" alt="" class="img-thumbnail">
         <p><strong>建議圖片格式為長寬相同，副檔名為gif,jpg,png</strong></p>
 
         <input type="file" name="headshot_img" accept="image/gif, image/jpg, image/png">
         <br/><br/>
 
-        <p class="status" style="display:none;">狀態:
-          <input type="radio" name="us_status" value=1 checked>正常&nbsp
-          <input type="radio" name="us_status" value=2>停用<br/><br/>
-          <input type="hidden" name="status" value="<?php echo $us_status ?>"/>
-        </p>
+        <div class="form-group row status" style="display:none;">
+            <label class="col-sm-2 control-label" for="us_status">狀態:</label>
+            <div class="form-check form-check-inline">
+              <input type="radio" name="us_status" value=1 checked>
+              <label class="form-check-label">正常</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" name="us_status" value=2>
+              <label class="form-check-label">停用</label>
+            </div>
+            <input type="hidden" name="status" value="<?php echo $us_status ?>"/>
+        </div>
 
         <input type="button" class="btn btn-primary" value="確定" onClick="check()"/>
         <input type="hidden" name="update_user"/>
