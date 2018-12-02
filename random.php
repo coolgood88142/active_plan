@@ -164,7 +164,7 @@
         <div id="navbar"></div>
         <br/><br/>
         <p class="plan">行程名稱:<input type="text" name="plan_name" value=""/></p>
-        <p class="date">出發日期:<input type="text" name="plan_date" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>
+        <p class="date">出發日期:<input type="text" name="plan_date1" value="" data-provide="datepicker"/>(yyyy-mm-dd)</p>
         <p class="userlist">使用者名稱: 
         <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
         <?php 
@@ -320,7 +320,7 @@
         $(".date").hide();
         $(".time").hide();
         $(".userlist").hide();
-        openDate($("input[name='plan_date']"));
+        openDate($("input[name='plan_date1']"));
 
         if($("#is_query").val()=="true"){
             $('#example1_wrapper').show();
@@ -468,7 +468,7 @@
 
 
             var plan_name = $("input[name='plan_name']").val().trim();
-            var plan_date = $("input[name='plan_date']").val().trim();
+            var plan_date = $("input[name='plan_date1']").val().trim();
 
             if(plan_name==""){
                 return alert("請輸入行程名稱!");

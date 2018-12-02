@@ -40,7 +40,7 @@
             setcookie("us_id",$_SESSION['us_id'],time()+$year_hours);
             setcookie("us_name",$_SESSION['us_name'],time()+$year_hours);
             setcookie("us_admin",$_SESSION['us_admin'],time()+$year_hours);
-            setcookie("us_admin",$_SESSION['us_account'],time()+$year_hours);
+            setcookie("us_account",$_SESSION['us_account'],time()+$year_hours);
     
             $sql = "update user set us_last_login = '$datetime' where us_account='$us_account'"  ;
             $conn->exec($sql);

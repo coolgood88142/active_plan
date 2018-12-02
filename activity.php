@@ -42,7 +42,7 @@
 } */
  </style>
   <body>
-    <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
+    <div class="jumbotron bg-Light side-collapse-container-left">
         <div class="container">
             <div id="navbar"></div>
             <div id="title_div">
@@ -181,7 +181,7 @@
                         <?php
                             }
                         ?>
-                    </div><br/>
+                    </div>
                     <p class="drive" style="display:none;">車程(小時):
                         <input type="text" name="add_acdrive" value="" size="2"  
                         onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">小時<br/><br/>
