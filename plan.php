@@ -51,317 +51,328 @@
             background: url("./assets/images/background.png");
             color: white;
         }
+        .container{
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
     </style>
-   <div class="jumbotron bg-Light side-collapse-container-left">
-    <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>   
-    <form name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="navbar"></div> 
-        <br/><br/>
-        <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
-        <div style="text-align:right">
-            <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
-        </div>
-        <div class="form-group row plan" style="display:none;">
-            <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="plan_name" value="">
-            </div>
-        </div>
-        <div class="form-group row date" style="display:none;">
-            <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="plan_date" value="">
-            </div>
-            <div class="col">
-                (yyyy-mm-dd)
-            </div>
-        </div>
-        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-        <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-        <div class="form-group row userlist" style="display:none;">
-            <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
-            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
-                <?php
-                if($us_admin=='Y'){
-                    foreach($user as $key => $value){
-                ?>
-                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-                <?php
-                    }
-                }
-                ?>
-            </select>
-        </div>
-        <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
-        <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
-
-        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
-        <table id="example1" class="table table-striped table-bordered">
-	        <thead>
-                <tr>
-                    <td></td>
-                    <td>姓名</td>
-                    <td>行程數量</td>
-                    <td>編輯設定</td>
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                if($us_admin=='Y'){
-                    foreach ($plan_count as $key => $count) {
-                        if($count["pt_count"]>0){      
-                ?>
-                <tr>
-                    <td class=" details-control"></td>
-                    <td class="us_name">
-                        <?php echo $count["us_name"]?>
-                    </td>
-                    <td class="pt_count">
-                        <?php echo $count["pt_count"]?>
-                    </td>
-                    <td class="pt_plan">
-                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit_plan(this)"/>
-                    <?php
-                        foreach ($plan as $key => $value) {
-                            if($value["pt_usid"]==$count["us_id"]){
-                    ?>       
-                            <input type="hidden" name="pt_id" value="<?=$value["pt_id"]?>"/>
-                            <input type="hidden" name="pt_usid" value="<?=$value["pt_usid"]?>"/>
-                            <input type="hidden" name="pt_usname" value="<?=$value["pt_usname"]?>"/>
-                            <input type="hidden" name="pt_name" value="<?=$value["pt_name"]?>"/>
-                            <input type="hidden" name="pt_date" value="<?=$value["pt_date"]?>"/>
-                            <input type="hidden" name="pt_hours" value="<?=$value["pt_hours"]?>"/>
-                            <input type="hidden" name="pt_spend" value="<?=$value["pt_spend"]?>"/>
-                            <input type="hidden" name="pt_status" value="<?=$value["pt_status"]?>"/>
-
-                    <?php
-                                foreach ($plan_trip as $key => $trip) {
-                                    if($trip["pt_id"]==$value["pt_id"]){
-                    ?>
-                                <input type="hidden" name="pn_ptid" value="<?=$trip["pn_ptid"]?>"/>
-                                <input type="hidden" name="pn_id" value="<?=$trip["pn_id"]?>"/>
-                                <input type="hidden" name="pn_acname" value="<?=$trip["pn_acname"]?>"/>
-                                <input type="hidden" name="ac_type" value="<?=$trip["ac_type"]?>"/>
-                                <input type="hidden" name="ac_weather" value="<?=$trip["ac_weather"]?>"/>
-                                <input type="hidden" name="ac_drive" value="<?=$trip["ac_drive"]?>"/>
-                                <input type="hidden" name="ac_carry" value="<?=$trip["ac_carry"]?>"/>
-                                <input type="hidden" name="ac_spend" value="<?=$trip["ac_spend"]?>"/>
-                                <input type="hidden" name="ac_hours" value="<?=$trip["ac_hours"]?>"/>
-                                <input type="hidden" name="ac_id" value="<?=$trip["ac_id"]?>"/>
-                    <?php
-                                    }
+    <div id="navbar"></div>
+    <div class="jumbotron container bg-Light side-collapse-container-left">
+        <form name="showForm" method="post">
+            <div class="row">
+                <div class="col-md-12" style="top: 20px;">
+                    <h2 class="text-center text-dark font-weight-bold">行程列表</h2>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
+                    <div style="text-align:right">
+                        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+                    </div>
+                    <div class="form-group row plan" style="display:none;">
+                        <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="plan_name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row date" style="display:none;">
+                        <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="plan_date" value="">
+                        </div>
+                        <div class="col">
+                            (yyyy-mm-dd)
+                        </div>
+                    </div>
+                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                    <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                    <div class="form-group row userlist" style="display:none;">
+                        <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
+                        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
+                            <?php
+                            if($us_admin=='Y'){
+                                foreach($user as $key => $value){
+                            ?>
+                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                            <?php
                                 }
                             }
+                            ?>
+                        </select>
+                    </div>
+                    <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
+                    <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
+
+                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
+                    <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>姓名</td>
+                            <td>行程數量</td>
+                            <td>編輯設定</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if($us_admin=='Y'){
+                            foreach ($plan_count as $key => $count) {
+                                if($count["pt_count"]>0){      
+                        ?>
+                        <tr>
+                            <td class=" details-control"></td>
+                            <td class="us_name">
+                                <?php echo $count["us_name"]?>
+                            </td>
+                            <td class="pt_count">
+                                <?php echo $count["pt_count"]?>
+                            </td>
+                            <td class="pt_plan">
+                                <input type="button" class="btn btn-primary" value="編輯" onClick="edit_plan(this)"/>
+                            <?php
+                                foreach ($plan as $key => $value) {
+                                    if($value["pt_usid"]==$count["us_id"]){
+                            ?>       
+                                    <input type="hidden" name="pt_id" value="<?=$value["pt_id"]?>"/>
+                                    <input type="hidden" name="pt_usid" value="<?=$value["pt_usid"]?>"/>
+                                    <input type="hidden" name="pt_usname" value="<?=$value["pt_usname"]?>"/>
+                                    <input type="hidden" name="pt_name" value="<?=$value["pt_name"]?>"/>
+                                    <input type="hidden" name="pt_date" value="<?=$value["pt_date"]?>"/>
+                                    <input type="hidden" name="pt_hours" value="<?=$value["pt_hours"]?>"/>
+                                    <input type="hidden" name="pt_spend" value="<?=$value["pt_spend"]?>"/>
+                                    <input type="hidden" name="pt_status" value="<?=$value["pt_status"]?>"/>
+
+                            <?php
+                                        foreach ($plan_trip as $key => $trip) {
+                                            if($trip["pt_id"]==$value["pt_id"]){
+                            ?>
+                                        <input type="hidden" name="pn_ptid" value="<?=$trip["pn_ptid"]?>"/>
+                                        <input type="hidden" name="pn_id" value="<?=$trip["pn_id"]?>"/>
+                                        <input type="hidden" name="pn_acname" value="<?=$trip["pn_acname"]?>"/>
+                                        <input type="hidden" name="ac_type" value="<?=$trip["ac_type"]?>"/>
+                                        <input type="hidden" name="ac_weather" value="<?=$trip["ac_weather"]?>"/>
+                                        <input type="hidden" name="ac_drive" value="<?=$trip["ac_drive"]?>"/>
+                                        <input type="hidden" name="ac_carry" value="<?=$trip["ac_carry"]?>"/>
+                                        <input type="hidden" name="ac_spend" value="<?=$trip["ac_spend"]?>"/>
+                                        <input type="hidden" name="ac_hours" value="<?=$trip["ac_hours"]?>"/>
+                                        <input type="hidden" name="ac_id" value="<?=$trip["ac_id"]?>"/>
+                            <?php
+                                            }
+                                        }
+                                    }
+                                }
+                            ?>
+                            </td>
+                            
+                            <?php 
+                                }
+                            }
+                            ?>
+                        </tr>
+                        <?php
                         }
-                    ?>
-                    </td>
-                    
-                    <?php 
-                        }
-                    }
-                    ?>
-                </tr>
-                <?php
-                }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-        <table id="example4" class="table table-striped table-bordered">
-            <thead>
-                <tr>
+                        ?>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
+                <table id="example4" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <?php
+                                if($us_admin!='Y'){
+                            ?>
+                                <td></td>
+                                <td style="display:none;">user_id</td>
+                                <td style="display:none;">user_name</td>
+                            <?php
+                                }
+                            ?>
+                            <td style="display:none;">行程ID</td>
+                            <td>行程名稱</td>
+                            <td>出發日期</td>
+                            <td>時間(小時)</td>
+                            <td>花費</td>
+                            <td>已完成</td>
+                            <td>編輯設定</td>
+                        </tr>  
+                    </thead>
+                    <tbody>
                     <?php
                         if($us_admin!='Y'){
-                    ?>
-                        <td></td>
-                        <td style="display:none;">user_id</td>
-                        <td style="display:none;">user_name</td>
-                    <?php
-                        }
-                    ?>
-                    <td style="display:none;">行程ID</td>
-                    <td>行程名稱</td>
-                    <td>出發日期</td>
-                    <td>時間(小時)</td>
-                    <td>花費</td>
-                    <td>已完成</td>
-                    <td>編輯設定</td>
-                </tr>  
-            </thead>
-            <tbody>
-            <?php
-                if($us_admin!='Y'){
-                    foreach ($plan as $key => $value) {
-                ?>
-                <tr>
-                    <td class=" details-control"></td>
-                    <td class="pt_usid" style="display:none;">
-                        <?php echo $value["pt_usid"]?>
-                    </td>
-                    <td class="pt_usname" style="display:none;">
-                        <?php echo $value["pt_usname"]?>
-                    </td>
-                    <td class="pt_id" style="display:none;">
-                        <?php echo $value["pt_id"]?>
-                    </td>
-                    <td class="pt_name">
-                        <?php echo $value["pt_name"]?>
-                    </td>
-                    <td class="pt_date">
-                        <?php echo $value["pt_date"]?>
-                    </td>
-                    <td class="pt_hours">
-                        <?php echo $value["pt_hours"]?>
-                    </td>
-                    <td class="pt_spend">
-                        <?php echo $value["pt_spend"]?>元
-                    </td>
-                    <td class="pt_status">
-                        <?php 
-                            if($value["pt_status"]==2){
-                                echo "V";
-                            }
+                            foreach ($plan as $key => $value) {
                         ?>
-                    </td>
-                    
-                    <td>
-                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
-                    <?php
-                        foreach ($plan_trip as $key => $trip) {
-                            if($trip["pt_id"]==$value["pt_id"]){
-                    ?>
-                      
+                        <tr>
+                            <td class=" details-control"></td>
+                            <td class="pt_usid" style="display:none;">
+                                <?php echo $value["pt_usid"]?>
+                            </td>
+                            <td class="pt_usname" style="display:none;">
+                                <?php echo $value["pt_usname"]?>
+                            </td>
+                            <td class="pt_id" style="display:none;">
+                                <?php echo $value["pt_id"]?>
+                            </td>
+                            <td class="pt_name">
+                                <?php echo $value["pt_name"]?>
+                            </td>
+                            <td class="pt_date">
+                                <?php echo $value["pt_date"]?>
+                            </td>
+                            <td class="pt_hours">
+                                <?php echo $value["pt_hours"]?>
+                            </td>
+                            <td class="pt_spend">
+                                <?php echo $value["pt_spend"]?>元
+                            </td>
+                            <td class="pt_status">
+                                <?php 
+                                    if($value["pt_status"]==2){
+                                        echo "V";
+                                    }
+                                ?>
+                            </td>
+                            
+                            <td>
+                                <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
+                            <?php
+                                foreach ($plan_trip as $key => $trip) {
+                                    if($trip["pt_id"]==$value["pt_id"]){
+                            ?>
+                            
 
-                                <input type="hidden" name="pn_id" value="<?=$trip["pn_id"]?>"/>
-                                <input type="hidden" name="pn_acname" value="<?=$trip["pn_acname"]?>"/>
-                                <input type="hidden" name="ac_type" value="<?=$trip["ac_type"]?>"/>
-                                <input type="hidden" name="ac_weather" value="<?=$trip["ac_weather"]?>"/>
-                                <input type="hidden" name="ac_drive" value="<?=$trip["ac_drive"]?>"/>
-                                <input type="hidden" name="ac_carry" value="<?=$trip["ac_carry"]?>"/>
-                                <input type="hidden" name="ac_spend" value="<?=$trip["ac_spend"]?>"/>
-                                <input type="hidden" name="ac_hours" value="<?=$trip["ac_hours"]?>"/>
-                                <input type="hidden" name="ac_id" value="<?=$trip["ac_id"]?>"/>
-                    <?php
+                                        <input type="hidden" name="pn_id" value="<?=$trip["pn_id"]?>"/>
+                                        <input type="hidden" name="pn_acname" value="<?=$trip["pn_acname"]?>"/>
+                                        <input type="hidden" name="ac_type" value="<?=$trip["ac_type"]?>"/>
+                                        <input type="hidden" name="ac_weather" value="<?=$trip["ac_weather"]?>"/>
+                                        <input type="hidden" name="ac_drive" value="<?=$trip["ac_drive"]?>"/>
+                                        <input type="hidden" name="ac_carry" value="<?=$trip["ac_carry"]?>"/>
+                                        <input type="hidden" name="ac_spend" value="<?=$trip["ac_spend"]?>"/>
+                                        <input type="hidden" name="ac_hours" value="<?=$trip["ac_hours"]?>"/>
+                                        <input type="hidden" name="ac_id" value="<?=$trip["ac_id"]?>"/>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            </td>
+
+                            <?php 
                             }
+                            ?>
+                        </tr>
+                        <?php
                         }
-                    ?>
-                    </td>
+                        ?>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
 
+                <table id="example2" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>活動項目</td>
+                        <td>類型</td>
+                        <td>天氣</td>
+                        <td style="display:none;">天氣ID</td>
+                        <td>車程(小時)</td>
+                        <td>攜帶物品</td>
+                        <td>花費</td>
+                        <td>時間(小時)</td>
+                        <td>加入</td>
+                        <td style="display:none;">類型ID</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach ($active as $key => $value) {
+                    ?>
+                    <tr>
+                        <td class="ac_name">
+                                <?php echo $value["ac_name"]?>
+                        </td>
+                        <td class="type_name">
+                                <?php echo $value["type_name"]?>
+                        </td>
+                        <td class="weather_name">
+                            <?php 
+                                $acweather = $value["ac_weather"];
+                                $acweather = explode(",", $acweather);
+                                $wather_count = count($acweather);
+
+                                $wather_name = "";
+                                for($j=0;$j<$wather_count;$j++){
+                                    $aw_type = $acweather[$j];
+                                    $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                    $query = $conn->query($sql);
+                                    $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                    foreach($awname as $key => $name){
+                                        $wather_name = $wather_name . $name['aw_name'];                                  
+                                    }
+
+                                    if($j!=$wather_count-1){
+                                        $wather_name = $wather_name . "、";
+                                    }
+                                }
+                                echo $wather_name;
+                            ?>
+                        </td>
+                        <td class="ac_weather" style="display:none;">
+                            <?php echo $value["ac_weather"]?>
+                        </td>
+                        <td class="ac_drive">
+                            <?php echo $value["ac_drive"]?>
+                        </td>
+                        <td class="ac_carry">
+                            <?php echo $value["ac_carry"]?>
+                        </td>
+                        <td class="ac_spend">
+                            <?php echo $value["ac_spend"]?>元
+                        </td>
+                        <td class="ac_hours">
+                            <?php echo $value["ac_hours"]?>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="add" >
+                        </td>
+                        <td class="ac_id" style="display:none;">
+                            <?php echo $value["ac_id"]?>
+                        </td>
+                    </tr>
                     <?php 
-                    }
+                        }
                     ?>
-                </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-        <table id="example2" class="table table-striped table-bordered">
-	<thead>
-        <tr>
-            <td>活動項目</td>
-            <td>類型</td>
-            <td>天氣</td>
-            <td style="display:none;">天氣ID</td>
-            <td>車程(小時)</td>
-            <td>攜帶物品</td>
-            <td>花費</td>
-            <td>時間(小時)</td>
-            <td>加入</td>
-            <td style="display:none;">類型ID</td>
-        </tr>
-	</thead>
-	<tbody>
-        <?php
-            foreach ($active as $key => $value) {
-        ?>
-         <tr>
-            <td class="ac_name">
-                    <?php echo $value["ac_name"]?>
-            </td>
-            <td class="type_name">
-                    <?php echo $value["type_name"]?>
-            </td>
-            <td class="weather_name">
-                <?php 
-                    $acweather = $value["ac_weather"];
-                    $acweather = explode(",", $acweather);
-                    $wather_count = count($acweather);
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
 
-                    $wather_name = "";
-                    for($j=0;$j<$wather_count;$j++){
-                        $aw_type = $acweather[$j];
-                        $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
-                        $query = $conn->query($sql);
-                        $awname = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                        foreach($awname as $key => $name){
-                            $wather_name = $wather_name . $name['aw_name'];                                  
-                        }
-
-                        if($j!=$wather_count-1){
-                            $wather_name = $wather_name . "、";
-                        }
-                    }
-                     echo $wather_name;
-                ?>
-            </td>
-            <td class="ac_weather" style="display:none;">
-                <?php echo $value["ac_weather"]?>
-            </td>
-            <td class="ac_drive">
-                <?php echo $value["ac_drive"]?>
-            </td>
-            <td class="ac_carry">
-                <?php echo $value["ac_carry"]?>
-            </td>
-            <td class="ac_spend">
-                 <?php echo $value["ac_spend"]?>元
-            </td>
-            <td class="ac_hours">
-                <?php echo $value["ac_hours"]?>
-            </td>
-            <td>
-                <input type="checkbox" name="add" >
-            </td>
-            <td class="ac_id" style="display:none;">
-                <?php echo $value["ac_id"]?>
-            </td>
-        </tr>
-        <?php 
-            }
-        ?>
-	</tbody>
-  <tfoot>
-  </tfoot>
-</table>
-<table id="example3" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <td>活動項目</td>
-            <td>類型</td>
-            <td>天氣</td>
-            <td style="display:none;">天氣ID</td>
-            <td >車程(小時)</td>
-            <td>攜帶物品</td>
-            <td>花費</td>
-            <td>時間(小時)</td>
-            <td>動作</td>
-            <td style="display:none;">類型ID</td>
-        </tr>
-	</thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-    </tfoot>
-</table>
-        <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
-        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+            <table id="example3" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>活動項目</td>
+                        <td>類型</td>
+                        <td>天氣</td>
+                        <td style="display:none;">天氣ID</td>
+                        <td >車程(小時)</td>
+                        <td>攜帶物品</td>
+                        <td>花費</td>
+                        <td>時間(小時)</td>
+                        <td>動作</td>
+                        <td style="display:none;">類型ID</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
+            <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+            </div>
+        </div>
     </form>
     <form action="update_plan.php" name="updateForm" method="post">
         <input type="hidden" name="type" />
@@ -402,7 +413,6 @@
         <input type="hidden" name="ac_hours" />
         <input type="hidden" name="ac_id" />           
     </form>
-    </div>
   </div>
   </body>
   <script language="JavaScript">

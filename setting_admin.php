@@ -40,54 +40,62 @@
             background: url("./assets/images/background.png");
             color: white;
         }
+        .container{
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
     </style>
-   <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-   <div class="container">
-   <div id="navbar"></div>
-    <h2 id="title" class="text-center text-dark font-weight-bold">設定</h2>      
-    <form name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <br/><br/>
-        <div style="text-align:right">
-            <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
-        </div>
-        <table id="example" class="table table-striped table-bordered">
-	        <thead>
-                <tr>
-                    <td></td>
-                    <td>使用者名稱</td>
-                    <td>編輯設定</td>
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                    foreach ($setting as $key => $value) {
-                ?>
-                <tr>
-                    <td class=" details-control"></td>
-                    <td class="us_name">
-                        <?php echo $value["us_name"]?>
-                    </td>
-                    <td>
-                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
-                        <input type="hidden" name="us_name" value="<?=$value["us_name"]?>"/>
-                        <input type="hidden" name="us_account" value="<?=$value["us_account"]?>"/>
-                        <input type="hidden" name="us_gender" value="<?=$value["us_gender"]?>"/>
-                        <input type="hidden" name="us_email" value="<?=$value["us_email"]?>"/>
-                        <input type="hidden" name="us_status" value="<?=$value["us_status"]?>"/>
-                        <input type="hidden" name="us_headshot_path" value="<?=$value["us_headshot_path"]?>"/>
-                    </td>
-                </tr>
-                <?php 
-                    }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>   
-    </form>
+    <div id="navbar"></div>
+    <div class="jumbotron container bg-Light side-collapse-container-left"> 
+        <form name="showForm" method="post">
+            <div class="row">
+                <div class="col-md-12" style="top: 20px;">
+                    <h2 class="text-center text-dark font-weight-bold">設定</h2>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    
+                    <div style="text-align:right">
+                        <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
+                    </div>
+                    <table id="example" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>使用者名稱</td>
+                                <td>編輯設定</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                foreach ($setting as $key => $value) {
+                            ?>
+                            <tr>
+                                <td class=" details-control"></td>
+                                <td class="us_name">
+                                    <?php echo $value["us_name"]?>
+                                </td>
+                                <td>
+                                    <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
+                                    <input type="hidden" name="us_name" value="<?=$value["us_name"]?>"/>
+                                    <input type="hidden" name="us_account" value="<?=$value["us_account"]?>"/>
+                                    <input type="hidden" name="us_gender" value="<?=$value["us_gender"]?>"/>
+                                    <input type="hidden" name="us_email" value="<?=$value["us_email"]?>"/>
+                                    <input type="hidden" name="us_status" value="<?=$value["us_status"]?>"/>
+                                    <input type="hidden" name="us_headshot_path" value="<?=$value["us_headshot_path"]?>"/>
+                                </td>
+                            </tr>
+                            <?php 
+                                }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
     <form action="setting.php" name="submitForm" method="post">
         <input type="hidden" name="us_name" />            
         <input type="hidden" name="us_account" />

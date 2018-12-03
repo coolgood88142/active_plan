@@ -2,15 +2,8 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-
-<script src="./assets/js/jquery-3.3.1.js"></script>
-<link rel="stylesheet" href="./assets/css/bootstrap.css">
-<!-- <script src="./assets/js/jquery-3.3.1.min.js"></script> -->
-    <!-- <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <script type="text/javascript" src="./assets/js/gijgo.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" /> -->
+  <?php include("link.php");?>
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
-<script src="./assets/js/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 
@@ -54,62 +47,63 @@
   width:100%;
   font-family:'微軟正黑體';
 }
-
-/* #title_div{
-  position: fixed;
-  top: 100px;
-} */
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 </style>
   <body>
-  <div class="jumbotron vertical-center side-collapse-container-left">
-    <div class="container">
-      <div id="navbar"></div>
-      <div id="title_div">
+  <div id="navbar"></div>
+  <div class="jumbotron container bg-Light side-collapse-container-left">
         <form action="analysis.php" name="showForm" method="post">
-            <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
-            <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-            <div style="text-align:right">
-              <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
-              <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
-              <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
-            </div>
-            <br/><br/>
+            <div class="row">
+                <div class="col-md-12" style="top: 20px;">
+                    <h2 class="text-center text-dark font-weight-bold">分析表</h2>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    <div style="text-align:right">
+                      <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
+                      <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
+                      <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
+                    </div>
+                    <br/><br/>
 
-            <div id="select_date">
-              <div class="row justify-content-center align-items-center">
-                <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div class="input-group date">
-                      <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
-                        <span class="input-group-addon">
-                          <i class="glyphicon glyphicon-th"></i></span>  
+                    <div id="select_date">
+                      <div class="row justify-content-center align-items-center">
+                        <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="input-group date">
+                              <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
+                                <span class="input-group-addon">
+                                  <i class="glyphicon glyphicon-th"></i></span>  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-1"><h4 class="text-center">~</h4></div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="input-group date">
+                              <input type="text" class="form-control" name="end_date" data-provide="datepicker">
+                                <span class="input-group-addon">
+                                  <i class="glyphicon glyphicon-th"></i></span>  
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                          <input type="button" name="query_data" class="btn btn-info btn-sm" value="查詢" onClick="query_chart()">
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <br/>
+                    <input type="hidden" name="chart_type" value=""/>
+                    <div id="ac_name" style="display_none;"></div>
+                    <div id="ac_type" style="display_none;"></div>
+                    <div id="ty_type" style="display_none;"></div>
                 </div>
-                <div class="col-md-1"><h4 class="text-center">~</h4></div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div class="input-group date">
-                      <input type="text" class="form-control" name="end_date" data-provide="datepicker">
-                        <span class="input-group-addon">
-                          <i class="glyphicon glyphicon-th"></i></span>  
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-1">
-                  <input type="button" name="query_data" class="btn btn-info btn-sm" value="查詢" onClick="query_chart()">
-                </div>
-              </div>
             </div>
-            <br/>
-            <input type="hidden" name="chart_type" value=""/>
-            <div id="ac_name" style="display_none;"></div>
-            <div id="ac_type" style="display_none;"></div>
-            <div id="ty_type" style="display_none;"></div>
         </form>
-      </div>
-    </div>
   </div>
   </body>
   <script language="JavaScript">

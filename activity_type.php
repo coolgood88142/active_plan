@@ -36,18 +36,20 @@
   color: white;
 }
 
-/* #title_div{
-  position: fixed;
-  top: 100px;
-} */
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
  </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-    <div class="container">
-        <div id="navbar"></div>
-        <div id="title_div">
-            <form name="showForm" method="post">
-                <p class="h2 text-center text-dark font-weight-bold">活動類型</p>
+  <div id="navbar"></div>
+  <div class="jumbotron container bg-Light side-collapse-container-left">
+    <form name="showForm" method="post">
+        <div class="row">
+            <div class="col-md-12" style="top: 20px;">
+                <h2 class="text-center text-dark font-weight-bold">活動類型</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div style="text-align:right">
                     <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
@@ -109,10 +111,11 @@
                     <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
                     <input type="hidden" name="add_timetypes" />
                     <input type="hidden" name="up_timetypes" />
-                </div><br/>
-            </form> 
+                </div>
+            </div>
         </div>
-  </div> 
+    </form>
+  </div>
   </body>
   <script language="JavaScript">
     $(document).ready(function() {

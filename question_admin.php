@@ -32,89 +32,95 @@
     background: url("./assets/images/background.png");
     color: white;
   }
+  .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
  </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-    <div class="container">
-    <div id="navbar"></div>  
-    <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
+  <div id="navbar"></div>  
+  <div class="jumbotron container bg-Light side-collapse-container-left">
     <form action="question.php" name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        
-        <br/><br/>
+        <div class="row">
+            <div class="col-md-12" style="top: 20px;">
+                <h2 class="text-center text-dark font-weight-bold">Q&A</h2>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
 
-        <div style="text-align:right">
-              <input type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)" value="新增Q&A"/>
-              <input type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)" value="刪除"/>
-              <input type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()" value="排序"/>
-        </div>
+                <div style="text-align:right">
+                      <input type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)" value="新增Q&A"/>
+                      <input type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)" value="刪除"/>
+                      <input type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()" value="排序"/>
+                </div>
         
-        <br/><br/>
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-            <tr>
-              <td class="isorder" style="text-align:center; vertical-align:middle; width:50px;"></td>
-              <td style="text-align:center; vertical-align:middle; width:50px;">刪除</td>
-              <td style="text-align:center; vertical-align:middle;">問題</td>
-              <td style="text-align:center; vertical-align:middle; width:80px;">編輯</td>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach($quertsion as $key => $value){?>
-              <tr>
-                <td class="isorder" style="text-align:center; vertical-align:middle;">
-                  <img id="order_up" src="./assets/images/icons-up.png" style="width:30px; height:30px;" onClick="change_up(this)">
-                  <img id="order_down" src="./assets/images/icons-down.png" style="width:30px; height:30px;" onClick="change_down(this)">
-                </td>
-                <td style="text-align:center; vertical-align:middle;"><input type="checkbox" id="isDelete"></td>
-                <td>
-                  <div class="accordion" id="select_data">
-                    <div class="card">
-                      <div class="card-header" id="heading<?=$value['qu_id']?>">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                            <?=$value['qu_question']?>
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapse<?=$value['qu_id']?>" class="collapse" aria-labelledby="heading<?=$value['qu_id']?>" data-parent="#select_data">
-                        <div class="card-body" id="answer_data">
-                          <?=$value['qu_answer']?>
-                        </div>
-                      </div>
+                <br/><br/>
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <td class="isorder" style="text-align:center; vertical-align:middle; width:50px;"></td>
+                      <td style="text-align:center; vertical-align:middle; width:50px;">刪除</td>
+                      <td style="text-align:center; vertical-align:middle;">問題</td>
+                      <td style="text-align:center; vertical-align:middle; width:80px;">編輯</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach($quertsion as $key => $value){?>
+                      <tr>
+                        <td class="isorder" style="text-align:center; vertical-align:middle;">
+                          <img id="order_up" src="./assets/images/icons-up.png" style="width:30px; height:30px;" onClick="change_up(this)">
+                          <img id="order_down" src="./assets/images/icons-down.png" style="width:30px; height:30px;" onClick="change_down(this)">
+                        </td>
+                        <td style="text-align:center; vertical-align:middle;"><input type="checkbox" id="isDelete"></td>
+                        <td>
+                          <div class="accordion" id="select_data">
+                            <div class="card">
+                              <div class="card-header" id="heading<?=$value['qu_id']?>">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                                    <?=$value['qu_question']?>
+                                  </button>
+                                </h5>
+                              </div>
+                              <div id="collapse<?=$value['qu_id']?>" class="collapse" aria-labelledby="heading<?=$value['qu_id']?>" data-parent="#select_data">
+                                <div class="card-body" id="answer_data">
+                                  <?=$value['qu_answer']?>
+                                </div>
+                              </div>
+                            </div>
+                            <input type="hidden" id="order_data" value="<?=$value['qu_id']?>"> 
+                          </div>
+                          </td>
+                          <td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-primary" onClick="edit('update',this)">編輯</button></td>
+                      </tr>
+                    <?php }?>
+                  </tbody>
+                </table>
+
+                <button type="button" id="return" class="btn btn-primary" onClick="getSelectData()">返回</button>
+                <button type="button" id="storage" class="btn btn-primary" onClick="Data_Processing()">儲存</button><br/><br/>
+                <input type="hidden" id="isStatus" value="">
+                <div class="accordion" id="edit_data">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="qu_question">問題</span>
                     </div>
-                    <input type="hidden" id="order_data" value="<?=$value['qu_id']?>"> 
+                    <textarea id="question"  class="form-control" aria-label="question" aria-describedby="qu_question" rows="3"></textarea>
                   </div>
-                  </td>
-                  <td style="text-align:center; vertical-align:middle;"><button type="button" class="btn btn-primary" onClick="edit('update',this)">編輯</button></td>
-              </tr>
-            <?php }?>
-          </tbody>
-        </table>
-
-        <button type="button" id="return" class="btn btn-primary" onClick="getSelectData()">返回</button>
-        <button type="button" id="storage" class="btn btn-primary" onClick="Data_Processing()">儲存</button><br/><br/>
-        <input type="hidden" id="isStatus" value="">
-        <div class="accordion" id="edit_data">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="qu_question">問題</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="qu_answer">答案</span>
+                    </div>
+                    <textarea id="answer" class="form-control"  aria-label="answer" aria-describedby="qu_answer" rows="3"></textarea>
+                  </div>
+                  <input type="hidden" id="order" value=""> 
+                  <input type="hidden" id="last_order" value="">
+                  <input type="hidden" id="this_index" value=""> 
+                  <input type="hidden" id="last_index" value=""> 
+                </div>
             </div>
-            <textarea id="question"  class="form-control" aria-label="question" aria-describedby="qu_question" rows="3"></textarea>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="qu_answer">答案</span>
-            </div>
-            <textarea id="answer" class="form-control"  aria-label="answer" aria-describedby="qu_answer" rows="3"></textarea>
-          </div>
-          <input type="hidden" id="order" value=""> 
-          <input type="hidden" id="last_order" value="">
-          <input type="hidden" id="this_index" value=""> 
-          <input type="hidden" id="last_index" value=""> 
-        </div>   
+        </div>
     </form>
-    </div>
   </div> 
   </body>
   <script language="JavaScript">

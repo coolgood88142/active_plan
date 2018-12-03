@@ -31,45 +31,54 @@
     width:100%;
     font-family:'微軟正黑體';
   }
+  .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
   </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-    <div class="container">
-    <div id="navbar"></div>
-    <h2 id="title" class="text-center text-dark font-weight-bold">Q&A排序</h2>
+  <div id="navbar"></div>
+  <div class="jumbotron container bg-Light side-collapse-container-left">
     <form action="question.php" name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <br/><br/>
+        <div class="row">
+            <div class="col-md-12" style="top: 20px;">
+                <h2 class="text-center text-dark font-weight-bold">Q&A排序</h2>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
 
-        <ul class="nav justify-content-end">
-          <li><button type="button" id="btn_save" class="btn btn-primary" onClick="Save()">儲存</button></li>
-          <li><button type="button" id="btn_save" class="btn btn-primary" onClick="back()">返回</button></li>
-        </ul>
-        <br/><br/>
-                    <div id="sortable">
-                    <?php foreach($quertsion as $key => $value){?>
-                        <div class="accordion" id="select_data">
-                    <div class="card">
-                      <div class="card-header" id="heading-<?=$value['qu_id']?>">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                            <?=$value['qu_question']?>
-                          </button>
-                        </h5>
-                      </div>
+                 <div style="text-align:right">
+                      <input type="button" id="btn_save" class="btn btn-primary" onClick="Save()" value="儲存"/>
+                      <input type="button" id="btn_save" class="btn btn-primary" onClick="back()" value="返回"/>
+                </div>
+                <br/><br/>
+                <div id="sortable">
+                  <?php foreach($quertsion as $key => $value){
+                  ?>
+                    <div class="accordion" id="select_data">
+                      <div class="card">
+                        <div class="card-header" id="heading-<?=$value['qu_id']?>">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" type="button"  id="question_data" data-toggle="collapse" data-target="#collapse<?=$value['qu_id']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                              <?=$value['qu_question']?>
+                            </button>
+                          </h5>
+                        </div>
                       <div id="collapse<?=$value['qu_id']?>" class="collapse" aria-labelledby="heading-<?=$value['qu_id']?>" data-parent="#select_data">
                         <div class="card-body" id="answer_data">
                           <?=$value['qu_answer']?>
                         </div>
                       </div>
                     </div>
-                    <input type="hidden" name="orderid[]" value="<?=$value['qu_id']?>"> 
-                  </div>
-                    <?php }?>
+                      <input type="hidden" name="orderid[]" value="<?=$value['qu_id']?>"> 
                     </div>
-                
+                  <?php 
+                    }
+                  ?>
+                </div>
+            </div>
+        </div>       
     </form>
-    </div>
   </div>
   </body>
   <script language="JavaScript">

@@ -36,24 +36,26 @@
   color: white;
 }
 
-/* #title_div{
-  position: fixed;
-  top: 100px;
-} */
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
  </style>
   <body>
-    <div class="jumbotron bg-Light side-collapse-container-left">
-        <div class="container">
-            <div id="navbar"></div>
-            <div id="title_div">
-                <form id="showForm" name="showForm" method="post">
-                    <p class="h2 text-center text-dark font-weight-bold">活動列表</p>
+    <div id="navbar"></div>
+    <div class="jumbotron container bg-Light side-collapse-container-left row">
+        <form id="showForm" name="showForm" method="post">
+            <div class="row">
+                <div class="col-md-12" style="top: 20px;">
+                    <h2 class="text-center text-dark font-weight-bold">活動列表</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     <div style="text-align:right">
                         <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
                     </div>
                     <table id="example1" class="table table-striped table-bordered">
-            	        <thead>
+                        <thead>
                             <tr>
                                 <td>活動項目</td>
                                 <td style="display:none;">活動項目ID</td>
@@ -74,8 +76,8 @@
                                     }
                                 ?>
                             </tr>
-            	        </thead>
-            	        <tbody>
+                        </thead>
+                        <tbody>
                             <?php
                                 foreach ($active as $key => $value) {
                             ?>
@@ -147,7 +149,7 @@
                             <?php 
                                 }
                             ?>
-            	        </tbody>
+                        </tbody>
                         <tfoot>
                         </tfoot>
                     </table>
@@ -202,7 +204,7 @@
                         <label class="col-sm-2 control-label" for="add_acspend">花費:</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="add_acspend" value="0" 
-                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                         </div>
                         <div class="col">
                             元
@@ -212,7 +214,7 @@
                         <label class="col-sm-2 control-label" for="add_achours">時間:</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="add_achours" value="" size="2"
-                        onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                         </div>
                         <div class="col">
                             小時
@@ -235,9 +237,9 @@
                     <input type="button"class="btn btn-primary"  style="display:none;" name="up_submit" value="儲存" onClick="update()" />
                     <input type="hidden" name="add_activitys" />
                     <input type="hidden" name="up_activitys" />
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
   <script language="JavaScript">

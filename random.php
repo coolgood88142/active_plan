@@ -148,166 +148,175 @@
             background: url("./assets/images/background.png");
             color: white;
         }
+        .container{
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
     </style>
-  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-   <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">隨機行程</h2>   
-    <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
-        <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
-        <input type="hidden" id="is_query" value="<?=$is_query?>"/>
-        <input type="hidden" id="post_day" value="<?=$post_day?>"/>
-        <input type="hidden" id="post_typeid" value="<?=$post_typeid?>"/>
-        <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
-        <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
-        <div id="navbar"></div>
-        <div class="form-group row plan">
-            <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="plan_name" value="">
-            </div>
-        </div>
-        <div class="form-group row date">
-            <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="plan_date" value="" data-provide="datepicker"/>
-            </div>
-            <div class="col">
-                (yyyy-mm-dd)
-            </div>
-        </div>
-        <div class="form-group row userlist" style="display:none;">
-            <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
-            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
-            <?php 
-            if($us_admin=="Y"){
-                foreach($user as $key => $value){
-            ?>
-                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-            <?php
-                }
-            }
-           ?>
-            </select>
-        </div>
-        <div class="form-group row day">
-            <label class="col-sm-2 control-label" for="day">天數:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="day" value="" size="2">
-            </div>
-            <div class="col">
-                天
-            </div>
-        </div>
-        <div class="form-group row weather">
-            <label class="col-sm-2 control-label" for="typeid[]">類型:</label>
-            <?php 
-                foreach($types as $key => $value){
-                    $type_id = $value['type_id'];
-                    $name = $value['name'];
-            ?>
-                <div class="form-check form-check-inline">
-                    <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
-                    <label class="form-check-label"><?php echo $name ?></label>
+    <div id="navbar"></div>
+    <div class="jumbotron container bg-Light side-collapse-container-left">
+        <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
+            <div class="row">
+                <div class="col-md-12" style="top: 20px;">
+                    <h2 class="text-center text-dark font-weight-bold">隨機行程</h2>
+                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
+                    <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
+                    <input type="hidden" id="is_query" value="<?=$is_query?>"/>
+                    <input type="hidden" id="post_day" value="<?=$post_day?>"/>
+                    <input type="hidden" id="post_typeid" value="<?=$post_typeid?>"/>
+                    <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
+                    <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
+            
+                    <div class="form-group row plan">
+                        <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="plan_name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row date">
+                        <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="plan_date" value="" data-provide="datepicker"/>
+                        </div>
+                        <div class="col">
+                            (yyyy-mm-dd)
+                        </div>
+                    </div>
+                    <div class="form-group row userlist" style="display:none;">
+                        <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
+                        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
+                        <?php 
+                        if($us_admin=="Y"){
+                            foreach($user as $key => $value){
+                        ?>
+                            <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                        <?php
+                            }
+                        }
+                    ?>
+                        </select>
+                    </div>
+                    <div class="form-group row day">
+                        <label class="col-sm-2 control-label" for="day">天數:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="day" value="" size="2">
+                        </div>
+                        <div class="col">
+                            天
+                        </div>
+                    </div>
+                    <div class="form-group row weather">
+                        <label class="col-sm-2 control-label" for="typeid[]">類型:</label>
+                        <?php 
+                            foreach($types as $key => $value){
+                                $type_id = $value['type_id'];
+                                $name = $value['name'];
+                        ?>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
+                                <label class="form-check-label"><?php echo $name ?></label>
+                            </div>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                    <div class="form-group row day_time">
+                        <label class="col-sm-2 control-label" for="day_time">天數小時:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="day_time" value="">
+                            <input type="hidden" name="istime_type" value="" size="2"/>
+                        </div>
+                        <div class="col">
+                            小時
+                        </div>
+                    </div>
+                    <div class="form-group row time" style="display:none;">
+                        <label class="col-sm-2 control-label" for="time_type">時段選項:</label>
+                        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="time_type">
+                        <option value="*">全部</option>
+                        <?php 
+                            foreach($time as $key => $value){
+                                $ty_type = $value['ty_type'];
+                                $ty_name = $value['ty_name'];
+                        ?>
+                            <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                        <?php
+                            }
+                    ?>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
+                    <br/><br/>
+                    <table id="example1" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>天數排序</td>
+                                <td>活動項目</td>
+                                <td>類型</td>
+                                <td>天氣</td>
+                                <td>車程(小時)</td>
+                                <td>攜帶物品</td>
+                                <td>花費</td>
+                                <td>時間(小時)</td>
+                                <td style="display:none;">類型ID</td>
+                                <td>時段</td>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                if($count>0){
+                                    for($i=0 ; $i<$count ; $i++) {
+                            ?>
+                                <tr>
+                                    <td class="pn_orderby">
+                                        第<?php echo $post_pnorderby[$i]?>天
+                                    </td>
+                                    <td class="ac_name">
+                                        <?php echo $post_acname[$i]?>
+                                    </td>
+                                    <td class="type_name">
+                                        <?php echo $post_actype[$i]?>
+                                    </td>
+                                    <td class="ac_weather">
+                                        <?php echo $post_acname[$i]?>
+                                    </td>
+                                    <td class="ac_drive">
+                                        <?php echo $post_acdrive[$i]?>
+                                    </td>
+                                    <td class="ac_carry">
+                                        <?php echo $post_accarry[$i]?>
+                                    </td>
+                                    <td class="ac_spend">
+                                        <?php echo $post_acspend[$i]?>元
+                                    </td>
+                                    <td class="ac_hours">
+                                        <?php echo $post_achours[$i]?>
+                                    </td>
+                                    <td class="ac_id" style="display:none;">
+                                        <?php echo $post_acid[$i]?>
+                                    </td>
+                                    <td class="ac_timetype">
+                                        <?php echo $post_actimetype[$i]?>
+                                    </td>
+                                </tr>
+                            <?php
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                    <div style="text-align:right">
+                        <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+                    </div>
                 </div>
-            <?php
-                }
-            ?>
-        </div>
-        <div class="form-group row day_time">
-            <label class="col-sm-2 control-label" for="day_time">天數小時:</label>
-            <div class="col-sm-2">
-                <input type="text" class="form-control" name="day_time" value="">
-                <input type="hidden" name="istime_type" value="" size="2"/>
             </div>
-            <div class="col">
-                小時
-            </div>
-        </div>
-        <div class="form-group row time" style="display:none;">
-            <label class="col-sm-2 control-label" for="time_type">時段選項:</label>
-            <select class="custom-select mr-sm-2 col-md-2 mb-3" name="time_type">
-            <option value="*">全部</option>
-            <?php 
-                foreach($time as $key => $value){
-                    $ty_type = $value['ty_type'];
-                    $ty_name = $value['ty_name'];
-            ?>
-                <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
-            <?php
-                }
-           ?>
-            </select>
-        </div>
-        <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>  
-        <br/><br/> 
-        <table id="example1" class="table table-striped table-bordered">
-	        <thead>
-                <tr>
-                    <td>天數排序</td>
-                    <td>活動項目</td>
-                    <td>類型</td>
-                    <td>天氣</td>
-                    <td>車程(小時)</td>
-                    <td>攜帶物品</td>
-                    <td>花費</td>
-                    <td>時間(小時)</td>
-                    <td style="display:none;">類型ID</td>
-                    <td>時段</td>   
-                </tr>
-	        </thead>
-	        <tbody>
-                <?php
-                    if($count>0){
-                        for($i=0 ; $i<$count ; $i++) {
-                ?>
-                    <tr>
-                        <td class="pn_orderby">
-                            第<?php echo $post_pnorderby[$i]?>天
-                        </td>
-                        <td class="ac_name">
-                            <?php echo $post_acname[$i]?>
-                        </td>
-                        <td class="type_name">
-                            <?php echo $post_actype[$i]?>
-                        </td>
-                        <td class="ac_weather">
-                            <?php echo $post_acname[$i]?>
-                        </td>
-                        <td class="ac_drive">
-                            <?php echo $post_acdrive[$i]?>
-                        </td>
-                        <td class="ac_carry">
-                            <?php echo $post_accarry[$i]?>
-                        </td>
-                        <td class="ac_spend">
-                            <?php echo $post_acspend[$i]?>元
-                        </td>
-                        <td class="ac_hours">
-                            <?php echo $post_achours[$i]?>
-                        </td>
-                        <td class="ac_id" style="display:none;">
-                            <?php echo $post_acid[$i]?>
-                        </td>
-                        <td class="ac_timetype">
-                            <?php echo $post_actimetype[$i]?>
-                        </td>
-                    </tr>
-                <?php
-                         }
-                    }
-                ?>
-	        </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-        <div style="text-align:right">
-            <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
-        </div>
-    </form>
-   </div>
-  </div>
+        </form>
+    </div>
     <form action="update_plan.php" name="updateForm" method="post"> 
 
         <input type="hidden" name="ad_acname" />            

@@ -28,37 +28,46 @@
     width:100%;
     font-family:'微軟正黑體';
   }
+  .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
  </style>
   <body>
-  <div class="jumbotron vertical-center bg-Light side-collapse-container-left">
-    <div class="container">
-    <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
+  <div id="navbar"></div>
+  <div class="jumbotron container bg-Light side-collapse-container-left">
     <form action="question.php" name="showForm" method="post">
-        <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-        <div id="button"></div>
-        <br/><br/>
+        <div class="row">
+            <div class="col-md-12" style="top: 20px;">
+                <h2 class="text-center text-dark font-weight-bold">Q&A</h2>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                <div id="button"></div>
+                <br/><br/>
 
-        <div class="accordion" id="accordionExample">
-          <?php foreach($quertsion as $key => $value){?>
-          <div class="card">
-            <div class="card-header" id="heading<?=$value['qo_order']?>">
-              <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                  <?=$value['qu_question']?>
-                </button>
-              </h5>
-            </div>
+                <div class="accordion" id="accordionExample">
+                  <?php foreach($quertsion as $key => $value){?>
+                  <div class="card">
+                    <div class="card-header" id="heading<?=$value['qo_order']?>">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                          <?=$value['qu_question']?>
+                        </button>
+                      </h5>
+                    </div>
 
-            <div id="collapse<?=$value['qo_order']?>" class="collapse" aria-labelledby="heading<?=$value['qo_order']?>" data-parent="#accordionExample">
-              <div class="card-body">
-                <?=$value['qu_answer']?>
-              </div>
+                    <div id="collapse<?=$value['qo_order']?>" class="collapse" aria-labelledby="heading<?=$value['qo_order']?>" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <?=$value['qu_answer']?>
+                      </div>
+                    </div>
+                  </div>
+                  <?php }?>
+                </div>
             </div>
-          </div>
-          <?php }?>
-        </div>      
+        </div>
     </form> 
-    </div>
   </div>  
   </body>
   <script language="JavaScript">
