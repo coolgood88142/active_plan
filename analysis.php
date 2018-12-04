@@ -53,6 +53,14 @@
     margin-right: auto;
     margin-left: auto;
 }
+@media screen and (max-width: 768px) {
+    .jumbotron,.btn{
+      font-size:14px;
+    }
+    #title,#date{
+      font-size:28px;
+    }
+  }
 </style>
   <body>
   <div id="navbar"></div>
@@ -60,14 +68,14 @@
         <form action="analysis.php" name="showForm" method="post">
             <div class="row">
                 <div class="col-md-12" style="top: 20px;">
-                    <h2 class="text-center text-dark font-weight-bold">分析表</h2>
+                    <h2 id="title" class="text-center text-dark font-weight-bold">分析表</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     <div style="text-align:right">
                       <input type="button" class="btn btn-primary" name="acivity_name" value="活動項目統計表" onClick="show_chart('1')"/>
                       <input type="button" class="btn btn-primary" name="acivity_type" value="活動類型統計表" onClick="show_chart('2')"/>
                       <input type="button" class="btn btn-primary" name="time_type"value="時段統計表"  onClick="show_chart('3')"/>
                     </div>
-                    <br/><br/>
+                    <br/>
 
                     <div id="select_date">
                       <div class="row justify-content-center align-items-center">

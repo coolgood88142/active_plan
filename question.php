@@ -34,6 +34,14 @@
     margin-right: auto;
     margin-left: auto;
   }
+  @media screen and (max-width: 768px) {
+    .jumbotron,.btn{
+      font-size:14px;
+    }
+    #title{
+      font-size:28px;
+    }
+  }
  </style>
   <body>
   <div id="navbar"></div>
@@ -41,7 +49,7 @@
     <form action="question.php" name="showForm" method="post">
         <div class="row">
             <div class="col-md-12" style="top: 20px;">
-                <h2 class="text-center text-dark font-weight-bold">Q&A</h2>
+                <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div id="button"></div>
                 <br/><br/>

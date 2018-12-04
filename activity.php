@@ -42,14 +42,23 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+@media screen and (max-width: 768px) {
+    .jumbotron,.btn{
+        font-size:14px;
+    }
+    #title{
+        font-size:28px;
+    }
+}
  </style>
   <body>
     <div id="navbar"></div>
-    <div class="jumbotron container bg-Light side-collapse-container-left row">
+    <div class="jumbotron container bg-Light side-collapse-container-left">
         <form id="showForm" name="showForm" method="post">
             <div class="row">
                 <div class="col-md-12" style="top: 20px;">
-                    <h2 class="text-center text-dark font-weight-bold">活動列表</h2>
+                    <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     <div style="text-align:right">
                         <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
@@ -153,7 +162,9 @@
                         <tfoot>
                         </tfoot>
                     </table>
-                    <input type="button" class="btn btn-primary" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/><br/><br/>
+                    <div class="row">
+                        <input type="button" class="btn btn-primary" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
+                    </div><br/>
                     <div class="form-group row activity" style="display:none;">
                         <label class="col-sm-2 control-label" for="add_acname">活動項目:</label>
                         <div class="col-sm-2">

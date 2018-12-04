@@ -42,6 +42,15 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+@media screen and (max-width: 768px) {
+    .jumbotron,.btn{
+        font-size:14px;
+    }
+    #title{
+        font-size:28px;
+    }
+}
  </style>
   <body>
   <div id="navbar"></div>
@@ -49,7 +58,7 @@
     <form name="showForm" method="post">
         <div class="row">
             <div class="col-md-12" style="top: 20px;">
-                <h2 class="text-center text-dark font-weight-bold">活動類型</h2>
+                <h2 id="title" class="text-center text-dark font-weight-bold">活動類型</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div style="text-align:right">
                     <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>

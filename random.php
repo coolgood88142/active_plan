@@ -154,6 +154,14 @@
             margin-right: auto;
             margin-left: auto;
         }
+        @media screen and (max-width: 768px) {
+            .jumbotron,.btn{
+                font-size:14px;
+            }
+            #title{
+                font-size:28px;
+            }
+        }
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">

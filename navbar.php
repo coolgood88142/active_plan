@@ -54,22 +54,23 @@
       transition:left .4s;
     }
     .side-collapse-container-left.out{
-      left:70%;
+      left:30%;
     }
     .side-collapse-left {
        top:50px;
        bottom:0;
        left:0;
-       width:70%;
+       width:30%;
        position:fixed;
        overflow:hidden;
        transition:width .4s;
+       font-size:14px;
      }
       .side-collapse-right {
       top:50px;
       bottom:0;
       right:0;
-      width:70%;
+      width:30%;
       position:fixed;
       overflow:hidden;
       transition:width .4s;

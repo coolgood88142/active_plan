@@ -79,13 +79,21 @@
             background: url("./assets/images/background.png");
             color: white;
         }
+        @media screen and (max-width: 768px) {
+            .jumbotron,.btn{
+                font-size:14px;
+            }
+            #title{
+                font-size:28px;
+            }
+        }
     </style>
   <div id="navbar"></div>
   <div class="jumbotron container bg-Light side-collapse-container-left">
     <form name="showForm" method="post">
         <div class="row">
             <div class="col-md-12" style="top: 20px;">
-                <h2 class="text-center text-dark font-weight-bold">行程列表</h2>
+                <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" for="pt_name">行程名稱:</label>
