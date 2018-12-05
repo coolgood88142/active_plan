@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
+    .jumbotron,.btn,.form-control{
         font-size:14px;
     }
     #title{
@@ -56,124 +56,126 @@
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">
         <form id="showForm" name="showForm" method="post">
-            <div class="row">
-                <div class="col-md-12" style="top: 20px;">
-                    <h2 id="title" class="text-center text-dark font-weight-bold">活動列表</h2>
-                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                    <div style="text-align:right">
-                        <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
-                    </div>
-                    <table id="example1" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <td>活動項目</td>
-                                <td style="display:none;">活動項目ID</td>
-                                <td>類型</td>
-                                <td style="display:none;">類型ID</td>
-                                <td>天氣</td>
-                                <td style="display:none;">天氣ID</td>
-                                <td>車程(小時)</td>
-                                <td>攜帶物品</td>
-                                <td>花費</td>
-                                <td>時間(小時)</td>
-                                <td style="display:none;">時段</td>
-                                <?php
-                                    if($us_admin=='Y'){                
-                                ?>
-                                    <td>編輯設定</td>
-                                <?php
-                                    }
-                                ?>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="col-md-12" style="top: 20px;">
+                <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                <div style="text-align:right;">
+                    <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
+                </div><br/>
+                <table id="example1" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <td>活動項目</td>
+                            <td style="display:none;">活動項目ID</td>
+                            <td>類型</td>
+                            <td style="display:none;">類型ID</td>
+                            <td>天氣</td>
+                            <td style="display:none;">天氣ID</td>
+                            <td>車程(小時)</td>
+                            <td>攜帶物品</td>
+                            <td>花費</td>
+                            <td>時間(小時)</td>
+                            <td style="display:none;">時段</td>
                             <?php
-                                foreach ($active as $key => $value) {
+                                if($us_admin=='Y'){                
                             ?>
-                            <tr>
-                                <td class="ac_name">
-                                    <?php echo $value["ac_name"]?>
-                                </td>
-                                <td class="ac_id" style="display:none;">
-                                    <?php echo $value["ac_id"]?>
-                                </td>
-                                <td class="type_name">
-                                    <?php echo $value["type_name"]?>
-                                </td>
-                                <td class="ac_type" style="display:none;">
-                                    <?php echo $value["ac_type"]?>
-                                </td>
-                                <td class="weather_name">
-                                    <?php 
-                                        $acweather = $value["ac_weather"];
-                                        $acweather = explode(",", $acweather);
-                                        $wather_count = count($acweather);
-
-                                        $wather_name = "";
-                                        for($j=0;$j<$wather_count;$j++){
-                                            $aw_type = $acweather[$j];
-                                            $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
-                                            $query = $conn->query($sql);
-                                            $awname = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                                            foreach($awname as $key => $name){
-                                                $wather_name = $wather_name . $name['aw_name'];                                  
-                                            }
-
-                                            if($j!=$wather_count-1){
-                                                $wather_name = $wather_name . "、";
-                                            }
-                                        }
-                                        echo $wather_name;
-                                    ?>
-                                </td>
-                                <td class="ac_weather" style="display:none;">
-                                    <?php echo $value["ac_weather"]?>
-                                </td>
-                                <td class="ac_drive">
-                                    <?php echo $value["ac_drive"]?>
-                                </td>
-                                <td class="ac_carry">
-                                    <?php echo $value["ac_carry"]?>
-                                </td>
-                                <td class="ac_spend">
-                                    <?php echo $value["ac_spend"]?>元
-                                </td>
-                                <td class="ac_hours">
-                                    <?php echo $value["ac_hours"]?>
-                                </td>
-                                <td class="ac_timetype" style="display:none;">
-                                    <?php echo $value["ac_timetype"]?>
-                                </td>
-                                <?php
-                                    if($us_admin=='Y'){                
-                                ?>
-                                    <td class="ac_edit">
-                                        <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
-                                    </td>
-                                <?php
-                                    }
-                                ?>
-                            </tr>
-                            <?php 
+                                <td>編輯設定</td>
+                            <?php
                                 }
                             ?>
-                        </tbody>
-                        <tfoot>
-                        </tfoot>
-                    </table>
-                    <div class="row">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            foreach ($active as $key => $value) {
+                        ?>
+                        <tr>
+                            <td class="ac_name">
+                                <?php echo $value["ac_name"]?>
+                            </td>
+                            <td class="ac_id" style="display:none;">
+                                <?php echo $value["ac_id"]?>
+                            </td>
+                            <td class="type_name">
+                                <?php echo $value["type_name"]?>
+                            </td>
+                            <td class="ac_type" style="display:none;">
+                                <?php echo $value["ac_type"]?>
+                            </td>
+                            <td class="weather_name">
+                                <?php 
+                                    $acweather = $value["ac_weather"];
+                                    $acweather = explode(",", $acweather);
+                                    $wather_count = count($acweather);
+
+                                    $wather_name = "";
+                                    for($j=0;$j<$wather_count;$j++){
+                                        $aw_type = $acweather[$j];
+                                        $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                        $query = $conn->query($sql);
+                                        $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                        foreach($awname as $key => $name){
+                                            $wather_name = $wather_name . $name['aw_name'];                                  
+                                        }
+
+                                        if($j!=$wather_count-1){
+                                            $wather_name = $wather_name . "、";
+                                        }
+                                    }
+                                    echo $wather_name;
+                                ?>
+                            </td>
+                            <td class="ac_weather" style="display:none;">
+                                <?php echo $value["ac_weather"]?>
+                            </td>
+                            <td class="ac_drive">
+                                <?php echo $value["ac_drive"]?>
+                            </td>
+                            <td class="ac_carry">
+                                <?php echo $value["ac_carry"]?>
+                            </td>
+                            <td class="ac_spend">
+                                <?php echo $value["ac_spend"]?>元
+                            </td>
+                            <td class="ac_hours">
+                                <?php echo $value["ac_hours"]?>
+                            </td>
+                            <td class="ac_timetype" style="display:none;">
+                                <?php echo $value["ac_timetype"]?>
+                            </td>
+                            <?php
+                                if($us_admin=='Y'){                
+                            ?>
+                                <td class="ac_edit">
+                                    <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
+                                </td>
+                            <?php
+                                }
+                            ?>
+                        </tr>
+                        <?php 
+                            }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                <div class="row">
+                    <div class="col-sm-4 col-md-8">
                         <input type="button" class="btn btn-primary" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
-                    </div><br/>
-                    <div class="form-group row activity" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_acname">活動項目:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="add_acname" value="">
-                        </div>
                     </div>
-                    <div class="form-group row type" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_actype">類型:</label>
-                        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="add_actype">
+                </div><br/>
+                <div class="form-group row align-items-center activity" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_acname">活動項目:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <input type="text" class="form-control" name="add_acname" value="">
+                    </div>
+                </div>
+                <div class="form-group row align-items-center type" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_actype">類型:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <select class="custom-select" name="add_actype">
                         <?php
                             foreach ($active_type as $key => $type) {
                         ?>
@@ -181,10 +183,12 @@
                         <?php
                             }
                         ?>
-                        </select>
+                    </select>
                     </div>
-                    <div class="form-group row weather" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_acweather[]">天氣:</label>
+                </div>
+                <div class="form-group row align-items-center weather" style="display:none;">
+                    <label class="col-sm-4 col-md-1 control-label" for="add_acweather[]">天氣:</label>
+                    <div class="col">
                         <?php 
                             foreach($activity_weather as $key => $weather){
                         ?>
@@ -195,44 +199,46 @@
                             }
                         ?>
                     </div>
-                    <div class="form-group row drive" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_acdrive">活動項目:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
-                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                        </div>
-                        <div class="col">
-                            小時
-                        </div>
+                </div>
+                <div class="form-group row align-items-center drive" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_acdrive">活動項目:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
+                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
-                    <div class="form-group row carry" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_accarry">攜帶物品:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" name="add_accarry" value="無">
-                        </div>
+                    <div class="col">
+                        小時
                     </div>
-                    <div class="form-group row spend" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_acspend">花費:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="add_acspend" value="0" 
-                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                        </div>
-                        <div class="col">
-                            元
-                        </div>
+                </div>
+                    <div class="form-group row align-items-center carry" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_accarry">攜帶物品:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <input type="text" class="form-control" name="add_accarry" value="無">
                     </div>
-                    <div class="form-group row hours" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_achours">時間:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="add_achours" value="" size="2"
-                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                        </div>
-                        <div class="col">
-                            小時
-                        </div>
+                </div>
+                <div class="form-group row align-items-center spend" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_acspend">花費:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <input type="text" class="form-control" name="add_acspend" value="0" 
+                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
-                    <div class="form-group row timetype" style="display:none;">
-                        <label class="col-sm-2 control-label" for="add_actimetype[]">天氣:</label>
+                    <div class="col">
+                        元
+                    </div>
+                </div>
+                <div class="form-group row align-items-center hours" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="add_achours">時間:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <input type="text" class="form-control" name="add_achours" value="" size="2"
+                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    <div class="col">
+                        小時
+                    </div>
+                </div>
+                <div class="form-group row align-items-center timetype" style="display:none;">
+                    <label class="col-sm-4 col-md-1 control-label" for="add_actimetype[]">天氣:</label>
+                    <div class="col">
                         <?php 
                             foreach($timetypes as $key => $time){
                         ?>
@@ -243,12 +249,16 @@
                             }
                         ?>
                     </div>
-                    <input type="hidden" name="add_acid" value=""/>
-                    <input type="button" class="btn btn-primary" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-                    <input type="button"class="btn btn-primary"  style="display:none;" name="up_submit" value="儲存" onClick="update()" />
-                    <input type="hidden" name="add_activitys" />
-                    <input type="hidden" name="up_activitys" />
                 </div>
+                <div class="row">
+                    <div class="col-sm-4 col-md-8">
+                        <input type="button" class="btn btn-primary" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                        <input type="button" class="btn btn-primary" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
+                    </div>
+                </div>
+                <input type="hidden" name="add_acid" value=""/>
+                <input type="hidden" name="add_activitys" />
+                <input type="hidden" name="up_activitys" />
             </div>
         </form>
     </div>

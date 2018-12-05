@@ -65,7 +65,7 @@
                     
                     <div style="text-align:right">
                         <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
-                    </div>
+                    </div><br/>
                     <table id="example" class="table table-striped table-bordered">
                         <thead>
                             <tr>

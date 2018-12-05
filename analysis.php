@@ -54,7 +54,7 @@
     margin-left: auto;
 }
 @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
+    .jumbotron,.btn,.form-control{
       font-size:14px;
     }
     #title,#date{
@@ -100,7 +100,7 @@
                           </div>
                         </div>
                         <div class="col-md-1">
-                          <input type="button" name="query_data" class="btn btn-info btn-sm" value="查詢" onClick="query_chart()">
+                          <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>
                     </div>

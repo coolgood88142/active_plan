@@ -58,7 +58,7 @@
             margin-left: auto;
         }
         @media screen and (max-width: 768px) {
-            .jumbotron,.btn{
+            .jumbotron,.btn,.form-control{
                 font-size:14px;
             }
             #title{
@@ -69,34 +69,31 @@
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">
         <form name="showForm" method="post">
-            <div class="row">
-                <div class="col-md-12" style="top: 20px;">
-                    <h2 id="title" class="text-center text-dark font-weight-bold">行程列表</h2>
-                    <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                    <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
-                    <div style="text-align:right">
-                        <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+            <div class="col-md-12" style="top: 20px;">
+                <h2 id="title" class="text-center font-weight-bold">行程列表</h2>
+                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+                <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
+                <div style="text-align:right">
+                    <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+                </div><br/>
+                <div class="form-group row plan" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="plan_name">行程名稱:</label>
+                    <div class="col-sm-4 col-md-8 align-self-start">
+                        <input type="text" class="form-control" name="plan_name" value="">
                     </div>
-                    <div class="form-group row plan" style="display:none;">
-                        <label class="col-sm-2 control-label" for="plan_name">行程名稱:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="plan_name" value="">
-                        </div>
+                </div>
+                <div class="form-group row date" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="plan_date">出發日期:</label>
+                    <div class="col-sm-4 col-md-8 align-self-start">
+                        <input type="text" class="form-control" name="plan_date" value="">
                     </div>
-                    <div class="form-group row date" style="display:none;">
-                        <label class="col-sm-2 control-label" for="plan_date">出發日期:</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="plan_date" value="">
-                        </div>
-                        <div class="col">
-                            (yyyy-mm-dd)
-                        </div>
-                    </div>
-                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-                    <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-                    <div class="form-group row userlist" style="display:none;">
-                        <label class="col-sm-2 control-label" for="pt_userlist">使用者名稱:</label>
-                        <select class="custom-select mr-sm-2 col-md-2 mb-3" name="pt_userlist">
+                </div>
+                <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                <div class="form-group row userlist" style="display:none;">
+                    <label class="col-sm-4 col-md-8 control-label" for="pt_userlist">使用者名稱:</label>
+                    <div class="col-sm-4 col-md-8">
+                        <select class="custom-select align-self-start" name="pt_userlist">
                             <?php
                             if($us_admin=='Y'){
                                 foreach($user as $key => $value){
@@ -108,11 +105,12 @@
                             ?>
                         </select>
                     </div>
-                    <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
-                    <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
+                </div>
+                <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
+                <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
 
-                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
-                    <table id="example1" class="table table-striped table-bordered">
+                <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
+                <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <td></td>
@@ -171,7 +169,7 @@
                                 }
                             ?>
                             </td>
-                            
+
                             <?php 
                                 }
                             }
@@ -210,7 +208,7 @@
                     <?php
                         if($us_admin!='Y'){
                             foreach ($plan as $key => $value) {
-                        ?>
+                    ?>
                         <tr>
                             <td class=" details-control"></td>
                             <td class="pt_usid" style="display:none;">
@@ -241,14 +239,13 @@
                                     }
                                 ?>
                             </td>
-                            
+
                             <td>
                                 <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                             <?php
                                 foreach ($plan_trip as $key => $trip) {
                                     if($trip["pt_id"]==$value["pt_id"]){
                             ?>
-                            
 
                                         <input type="hidden" name="pn_id" value="<?=$trip["pn_id"]?>"/>
                                         <input type="hidden" name="pn_acname" value="<?=$trip["pn_acname"]?>"/>
@@ -265,13 +262,13 @@
                             ?>
                             </td>
 
-                            <?php 
+                        <?php 
                             }
-                            ?>
-                        </tr>
-                        <?php
-                        }
                         ?>
+                        </tr>
+                    <?php
+                        }
+                    ?>
                     </tbody>
                     <tfoot>
                     </tfoot>
@@ -298,10 +295,10 @@
                     ?>
                     <tr>
                         <td class="ac_name">
-                                <?php echo $value["ac_name"]?>
+                            <?php echo $value["ac_name"]?>
                         </td>
                         <td class="type_name">
-                                <?php echo $value["type_name"]?>
+                            <?php echo $value["type_name"]?>
                         </td>
                         <td class="weather_name">
                             <?php 
@@ -376,9 +373,10 @@
                 </tbody>
                 <tfoot>
                 </tfoot>
-            </table>
-            <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
-            <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+            </table><br/>
+            <div style="text-align:right">
+                <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
+                <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
             </div>
         </div>
     </form>

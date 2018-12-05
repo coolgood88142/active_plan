@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
+    .jumbotron,.btn,.form-control{
         font-size:14px;
     }
     #title{
@@ -56,72 +56,74 @@
   <div id="navbar"></div>
   <div class="jumbotron container bg-Light side-collapse-container-left">
     <form name="showForm" method="post">
-        <div class="row">
-            <div class="col-md-12" style="top: 20px;">
-                <h2 id="title" class="text-center text-dark font-weight-bold">活動類型</h2>
-                <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                <div style="text-align:right">
-                    <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
-                </div>
-                <table id="example2" class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <td>序號</td>
-                            <td>活動類型</td>
-                            <?php
-                                if($us_admin=='Y'){                
-                            ?>
-                                <td>編輯設定</td>
-                            <?php
-                                }
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div class="col-md-12" style="top: 20px;">
+            <h2 id="title" class="text-center font-weight-bold">活動類型</h2>
+            <input type="hidden" name="admin" value="<?=$us_admin?>"/>
+            <div style="text-align:right">
+                <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
+            </div><br/>
+            <table id="example2" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <td>序號</td>
+                        <td>活動類型</td>
                         <?php
-                            foreach ($active_type as $key => $type) {
+                            if($us_admin=='Y'){                
                         ?>
-                        <tr>
-                            <td class="type_id" >
-                                <?php echo $type["type_id"]?>
-                            </td>
-                            <td class="name" >
-                                <?php echo $type["name"]?>
-                            </td>
-                            <?php
-                                if($us_admin=='Y'){                
-                            ?>
-                                <td class="type_edit">
-                                    <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
-                                </td>
-                            <?php
-                                }
-                            ?>
-                        </tr>
-                        <?php 
+                            <td>編輯設定</td>
+                        <?php
                             }
                         ?>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
-                </table>
-                <div class="row">
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach ($active_type as $key => $type) {
+                    ?>
+                    <tr>
+                        <td class="type_id" >
+                            <?php echo $type["type_id"]?>
+                        </td>
+                        <td class="name" >
+                            <?php echo $type["name"]?>
+                        </td>
+                        <?php
+                            if($us_admin=='Y'){                
+                        ?>
+                            <td class="type_edit">
+                                <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
+                            </td>
+                        <?php
+                            }
+                        ?>
+                    </tr>
+                    <?php 
+                        }
+                    ?>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <div class="row">
+                <div class="col-sm-4 col-md-8">
                     <input type="button" style="display:none;" class="btn btn-primary" name="backtype" value="回上一頁" onClick="back_timetype()"/>
-                </div><br/>
-                <div class="form-group row timetypes" style="display:none;">
-                    <label class="col-sm-2 control-label" for="add_typename">活動類型:</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" name="add_typename" value="">
-                        <input type="hidden" name="add_typeid" value="" >
-                    </div>
                 </div>
-                <div class="row">
-                    <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />
-                    <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
-                    <input type="hidden" name="add_timetypes" />
-                    <input type="hidden" name="up_timetypes" />
+            </div><br/>
+            <div class="form-group row timetypes" style="display:none;">
+                <label class="col-sm-4 col-md-8 control-label" for="add_typename">活動類型:</label>
+                <div class="col-sm-4 col-md-8">
+                    <input type="text" class="form-control" name="add_typename" value="">
+                    <input type="hidden" name="add_typeid" value="" >
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-8">
+                    <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />
+                    <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
+                </div>
+            </div>
+            <input type="hidden" name="add_timetypes" />
+            <input type="hidden" name="up_timetypes" />
         </div>
     </form>
   </div>

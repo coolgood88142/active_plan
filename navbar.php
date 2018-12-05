@@ -64,7 +64,7 @@
        position:fixed;
        overflow:hidden;
        transition:width .4s;
-       font-size:14px;
+       font-size:20px;
      }
       .side-collapse-right {
       top:50px;

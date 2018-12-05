@@ -60,9 +60,8 @@
                       <input type="button" id="btn_insert" class="btn btn-primary" onClick="edit('insert',null)" value="新增Q&A"/>
                       <input type="button" id="btn_delete" class="btn btn-primary" onClick="edit('delete',null)" value="刪除"/>
                       <input type="button" id="btn_order" class="btn btn-primary" onClick="isOrder()" value="排序"/>
-                </div>
+                </div><br/>
         
-                <br/><br/>
                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
@@ -105,8 +104,11 @@
                   </tbody>
                 </table>
 
+                <div style="text-align:right">
                 <button type="button" id="return" class="btn btn-primary" onClick="getSelectData()">返回</button>
-                <button type="button" id="storage" class="btn btn-primary" onClick="Data_Processing()">儲存</button><br/><br/>
+                <button type="button" id="storage" class="btn btn-primary" onClick="Data_Processing()">儲存</button>
+                </div><br/>
+
                 <input type="hidden" id="isStatus" value="">
                 <div class="accordion" id="edit_data">
                   <div class="input-group mb-3">
