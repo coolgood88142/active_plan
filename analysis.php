@@ -79,27 +79,15 @@
 
                     <div id="select_date">
                       <div class="row justify-content-center align-items-center">
-                        <div class="col-md-2"><h4 class="text-center">起始日期:</h4></div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="input-group date">
-                              <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
-                                <span class="input-group-addon">
-                                  <i class="glyphicon glyphicon-th"></i></span>  
-                            </div>
-                          </div>
+                        <label class="col-sm-6 col-md-2 control-label h4">開始日期:</label>
+                        <div class="col-sm-6 col-md-2">
+                          <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         </div>
-                        <div class="col-md-1"><h4 class="text-center">~</h4></div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <div class="input-group date">
-                              <input type="text" class="form-control" name="end_date" data-provide="datepicker">
-                                <span class="input-group-addon">
-                                  <i class="glyphicon glyphicon-th"></i></span>  
-                            </div>
-                          </div>
+                        <label class="col-sm-6 col-md-2 control-label h4">結束日期:</label>
+                        <div class="col-sm-6 col-md-2">
+                          <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-sm-2">
                           <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>
