@@ -54,12 +54,13 @@
     margin-left: auto;
 }
 @media screen and (max-width: 768px) {
-    .jumbotron,.btn,.form-control{
+    .jumbotron,.btn,.form-control,#select_date{
       font-size:14px;
     }
-    #title,#date{
+    #title{
       font-size:28px;
     }
+
   }
 </style>
   <body>
@@ -79,15 +80,15 @@
 
                     <div id="select_date">
                       <div class="row justify-content-center align-items-center">
-                        <label class="col-sm-6 col-md-2 control-label h4">開始日期:</label>
-                        <div class="col-sm-6 col-md-2">
+                        <label class="col-sm-3 col-md-2 control-label h4">開始日期:</label>
+                        <div class="col-sm-3 col-md-2">
                           <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         </div>
-                        <label class="col-sm-6 col-md-2 control-label h4">結束日期:</label>
-                        <div class="col-sm-6 col-md-2">
+                        <label class="col-sm-3 col-md-2 control-label h4">結束日期:</label>
+                        <div class="col-sm-3 col-md-2">
                           <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>
-                        <div class="col-sm-2">
+                        <div id="query" class="col-sm-1 col-md-2">
                           <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>

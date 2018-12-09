@@ -100,8 +100,8 @@
                 <div class="form-group row headshot_file">
                     <label class="col-sm-2 control-label">絕對路徑:</label>
                     <div id="headshot_file" class="col">
-                      <img src="http://localhost/active_plan/assets/images/admin0000.png" alt="" class="img-thumbnail">
-                      <p><strong>路徑為：http://localhost/active_plan/assets/images/admin0000.png</strong></p>
+                      <img src="http://localhost:8088/active_plan/assets/images/admin0000.png" alt="" class="img-thumbnail">
+                      <p><strong>路徑為：http://localhost:8088/active_plan/assets/images/admin0000.png</strong></p>
                     </div>
                 </div>
                 <br/><br/>
