@@ -51,7 +51,7 @@
   <div class="jumbotron container bg-Light side-collapse-container-left">
     <form action="question.php" name="showForm" method="post">
         <div class="row">
-            <div class="col-md-12" style="top: 20px;">
+            <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center text-dark font-weight-bold">Q&A排序</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
 

@@ -91,24 +91,24 @@
   <div id="navbar"></div>
   <div class="jumbotron container bg-Light side-collapse-container-left">
     <form name="showForm" method="post">
-        <div class="col-md-12" style="top: 20px;">
+        <div class="col-md-12" style="top: 50px;">
             <h2 id="title" class="text-center font-weight-bold">行程列表</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             <div class="form-group row">
-                <label class="col-sm-4 col-md-8 control-label" for="pt_name">行程名稱:</label>
-                <div class="col-sm-4 col-md-8">
+                <label class="col-sm-4 col-md-2 control-label" for="pt_name">行程名稱:</label>
+                <div class="col-sm-4 col-md-4">
                     <input type="text" class="form-control" name="pt_name" value="<?=$pt_name?>">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-4 col-md-8 control-label" for="pt_date">出發日期:</label>
-                <div class="col-sm-4 col-md-8">
+                <label class="col-sm-4 col-md-2 control-label" for="pt_date">出發日期:</label>
+                <div class="col-sm-4 col-md-2">
                     <input type="text" class="form-control" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker">
                 </div>
-            </div>
-            <div style="text-align:right">
-                <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
-            </div>    
+                <div class="col" style="text-align:right">
+                    <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+                </div>
+            </div>   
             <br/>
             <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
             <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>

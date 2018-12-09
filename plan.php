@@ -57,6 +57,10 @@
             margin-right: auto;
             margin-left: auto;
         }
+        .img-thumbnail{
+            width:48px;
+            height:48px;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
@@ -64,35 +68,39 @@
             #title{
                 font-size:28px;
             }
+            #addplan{
+                display: none;
+            }
         }
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">
         <form name="showForm" method="post">
-            <div class="col-md-12" style="top: 20px;">
+            <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center font-weight-bold">行程列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
                 <div style="text-align:right">
-                    <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
-                </div><br/>
+                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_plan()">
+                    <input type="button" class="btn btn-primary" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
+                </div>
                 <div class="form-group row plan" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="plan_name">行程名稱:</label>
-                    <div class="col-sm-4 col-md-8 align-self-start">
+                    <label class="col-sm-4 col-md-2 control-label" for="plan_name">行程名稱:</label>
+                    <div class="col-sm-4 col-md-4 align-self-start">
                         <input type="text" class="form-control" name="plan_name" value="">
                     </div>
                 </div>
                 <div class="form-group row date" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="plan_date">出發日期:</label>
-                    <div class="col-sm-4 col-md-8 align-self-start">
+                    <label class="col-sm-4 col-md-2 control-label" for="plan_date">出發日期:</label>
+                    <div class="col-sm-4 col-md-2 align-self-start">
                         <input type="text" class="form-control" name="plan_date" value="">
                     </div>
                 </div>
                 <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
                 <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
                 <div class="form-group row userlist" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="pt_userlist">使用者名稱:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="pt_userlist">使用者名稱:</label>
+                    <div class="col-sm-4 col-md-2">
                         <select class="custom-select align-self-start" name="pt_userlist">
                             <?php
                             if($us_admin=='Y'){
@@ -379,6 +387,7 @@
                 <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
             </div>
         </div>
+        <input type="hidden" name="Responsive_Button" />
     </form>
     <form action="update_plan.php" name="updateForm" method="post">
         <input type="hidden" name="type" />
@@ -540,7 +549,6 @@
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();
-        $("input[name='addplan']").hide();
         $("input[name='goplan']").show();
         $(".plan").show();
         $("input[name='plan_name']").show();
@@ -552,6 +560,14 @@
         if($("input[name='admin']").val()=='Y'){
             $(".userlist").show(); 
             $("select[name='pt_userlist']").show();
+        }
+
+        if($("#addplan").is(":visible")){
+            $("#addplan").hide();
+            $("input[name='Responsive_Button']").val(false);
+        }else if($("#img").is(":visible")){
+            $("#img").css("display", "none");
+            $("input[name='Responsive_Button']").val(true);
         }
     }
     function add_activity(){

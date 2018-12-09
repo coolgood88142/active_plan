@@ -46,6 +46,10 @@
             margin-right: auto;
             margin-left: auto;
         }
+        .img-thumbnail{
+            width:48px;
+            height:48px;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn{
                 font-size:14px;
@@ -53,18 +57,22 @@
             #title{
                 font-size:28px;
             }
+            #addplans{
+                display: none;
+            }
         }
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left"> 
         <form name="showForm" method="post">
             <div class="row">
-                <div class="col-md-12" style="top: 20px;">
+                <div class="col-md-12" style="top: 50px;">
                     <h2 id="title" class="text-center text-dark font-weight-bold">設定</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     
                     <div style="text-align:right">
-                        <input type="button" class="btn btn-primary" name="addplans" value="新增" onClick="add_account()"/>
+                        <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_account()">
+                        <input type="button" class="btn btn-primary" id="addplans" name="addplans" value="新增" onClick="add_account()"/>
                     </div><br/>
                     <table id="example" class="table table-striped table-bordered">
                         <thead>

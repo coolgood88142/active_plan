@@ -53,8 +53,10 @@
     #title{
         font-size:28px;
     }
+}
+@media (max-width: 576px) {
     #add{
-        display: none;
+        display:none;
     }
 }
  </style>
@@ -62,13 +64,13 @@
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">
         <form id="showForm" name="showForm" method="post">
-            <div class="col-md-12" style="top: 20px;">
+            <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div style="text-align:right;">
-                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_activity()">
-                    <input type="button" class="btn btn-primary" style="display:none;" id="add" name="add" value="新增" onClick="add_activity()"/>
-                </div><br/>
+                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_activity()">
+                    <input type="button" class="btn btn-primary d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
+                </div>
                 <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -169,19 +171,19 @@
                     </tfoot>
                 </table>
                 <div class="row">
-                    <div class="col-sm-4 col-md-8">
-                        <input type="button" class="btn btn-primary" style="display:none;" name="backpage" value="回上一頁" onClick="back_activity()"/>
+                    <div class="col-sm-4 col-md-2">
+                        <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
                     </div>
-                </div><br/>
+                </div>
                 <div class="form-group row align-items-center activity" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_acname">活動項目:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_acname">活動項目:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="add_acname" value="">
                     </div>
                 </div>
                 <div class="form-group row align-items-center type" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_actype">類型:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_actype">類型:</label>
+                    <div class="col-sm-4 col-md-2">
                         <select class="custom-select" name="add_actype">
                         <?php
                             foreach ($active_type as $key => $type) {
@@ -194,7 +196,7 @@
                     </div>
                 </div>
                 <div class="form-group row align-items-center weather" style="display:none;">
-                    <label class="col-sm-4 col-md-1 control-label" for="add_acweather[]">天氣:</label>
+                    <label class="col-sm-4 col-md-2 control-label" for="add_acweather[]">天氣:</label>
                     <div class="col">
                         <?php 
                             foreach($activity_weather as $key => $weather){
@@ -208,8 +210,8 @@
                     </div>
                 </div>
                 <div class="form-group row align-items-center drive" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_acdrive">活動項目:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_acdrive">活動項目:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
@@ -218,14 +220,14 @@
                     </div>
                 </div>
                     <div class="form-group row align-items-center carry" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_accarry">攜帶物品:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_accarry">攜帶物品:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="add_accarry" value="無">
                     </div>
                 </div>
                 <div class="form-group row align-items-center spend" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_acspend">花費:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_acspend">花費:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="add_acspend" value="0" 
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
@@ -234,8 +236,8 @@
                     </div>
                 </div>
                 <div class="form-group row align-items-center hours" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="add_achours">時間:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="add_achours">時間:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="add_achours" value="" size="2"
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
@@ -244,7 +246,7 @@
                     </div>
                 </div>
                 <div class="form-group row align-items-center timetype" style="display:none;">
-                    <label class="col-sm-4 col-md-1 control-label" for="add_actimetype[]">天氣:</label>
+                    <label class="col-sm-4 col-md-2 control-label" for="add_actimetype[]">天氣:</label>
                     <div class="col">
                         <?php 
                             foreach($timetypes as $key => $time){
@@ -258,7 +260,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4 col-md-8">
+                    <div class="col-sm-4 col-md-2">
                         <input type="button" class="btn btn-primary" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
                         <input type="button" class="btn btn-primary" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
                     </div>

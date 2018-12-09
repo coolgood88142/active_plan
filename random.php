@@ -166,7 +166,7 @@
     <div id="navbar"></div>
     <div class="jumbotron container bg-Light side-collapse-container-left">
         <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
-            <div class="col-md-12" style="top: 20px;">
+            <div class="col-md-12" style="top: 50px;">
                 <h2 class="text-center font-weight-bold">隨機行程</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
@@ -178,20 +178,20 @@
                 <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
     
                 <div class="form-group row plan">
-                    <label class="col-sm-4 col-md-8 control-label" for="plan_name">行程名稱:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="plan_name">行程名稱:</label>
+                    <div class="col-sm-4 col-md-4">
                         <input type="text" class="form-control" name="plan_name" value="">
                     </div>
                 </div>
                 <div class="form-group row date">
-                    <label class="col-sm-4 col-md-8 control-label" for="plan_date">出發日期:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="plan_date">出發日期:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="plan_date" value="" data-provide="datepicker"/>
                     </div>
                 </div>
                 <div class="form-group row userlist" style="display:none;">
-                    <label class="col-sm-4 col-md-8 control-label" for="pt_userlist">使用者名稱:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="pt_userlist">使用者名稱:</label>
+                    <div class="col-sm-4 col-md-2">
                         <select class="custom-select" name="pt_userlist">
                         <?php 
                             if($us_admin=="Y"){
@@ -206,8 +206,8 @@
                     </div>
                 </div>
                 <div class="form-group row day">
-                    <label class="col-sm-4 col-md-8 control-label" for="day">天數:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2 control-label" for="day">天數:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="day" value="" size="2">
                     </div>
                     <div class="col">
@@ -232,8 +232,8 @@
                     </div>
                 </div>
                 <div class="form-group row day_time">
-                    <label class="col-sm-4 col-md-8" control-label" for="day_time">天數小時:</label>
-                    <div class="col-sm-4 col-md-8">
+                    <label class="col-sm-4 col-md-2" control-label" for="day_time">天數小時:</label>
+                    <div class="col-sm-4 col-md-2">
                         <input type="text" class="form-control" name="day_time" value="">
                         <input type="hidden" name="istime_type" value="" size="2"/>
                     </div>
@@ -242,9 +242,9 @@
                 </div>
             </div>
             <div class="form-group row time" style="display:none;">
-                <label class="col-sm-4 col-md-8 control-label" for="time_type">時段選項:</label>
-                <div class="col-sm-4 col-md-8">
-                    <select class="custom-select mr-sm-2 col-md-2 mb-3" name="time_type">
+                <label class="col-sm-4 col-md-2 control-label" for="time_type">時段選項:</label>
+                <div class="col-sm-4 col-md-2">
+                    <select class="custom-select" name="time_type">
                         <option value="*">全部</option>
                         <?php 
                             foreach($time as $key => $value){
@@ -258,8 +258,7 @@
                     </select>
                 </div>
             </div>
-            <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
-            <br/><br/>
+            <input type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="gorandom" value="執行"/>
                 <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -321,7 +320,7 @@
                      </tfoot>
                 </table>
                 <div style="text-align:right">
-                    <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
+                    <input type="button" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="goplan" value="送出" onClick="go_plan()"/>
                  </div>
             </div>
         </form>

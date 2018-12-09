@@ -53,22 +53,38 @@
     margin-right: auto;
     margin-left: auto;
 }
+#select_date{
+  font-size:24px;
+}
 @media screen and (max-width: 768px) {
-    .jumbotron,.btn,.form-control,#select_date{
+    .jumbotron,.btn,.form-control{
       font-size:14px;
     }
     #title{
       font-size:28px;
     }
-
-  }
+    #select_date{
+      font-size:20px;
+    }
+    #query{
+      margin-top:20px;
+    }
+}
+@media (max-width: 992px) {
+    #select_date{
+      font-size:20px;
+    }
+    #query{
+      margin-top:20px;
+    }
+}
 </style>
   <body>
   <div id="navbar"></div>
   <div class="jumbotron container bg-Light side-collapse-container-left">
         <form action="analysis.php" name="showForm" method="post">
             <div class="row">
-                <div class="col-md-12" style="top: 20px;">
+                <div id="data" class="col-md-12" style="top: 50px;">
                     <h2 id="title" class="text-center text-dark font-weight-bold">分析表</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     <div style="text-align:right">
@@ -80,15 +96,15 @@
 
                     <div id="select_date">
                       <div class="row justify-content-center align-items-center">
-                        <label class="col-sm-3 col-md-2 control-label h4">開始日期:</label>
-                        <div class="col-sm-3 col-md-2">
+                        <label class="col-sm-3 col-md-3 col-lg-2 control-label">開始日期:</label>
+                        <div class="col-sm-3 col-md-3 col-lg-2">
                           <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         </div>
-                        <label class="col-sm-3 col-md-2 control-label h4">結束日期:</label>
-                        <div class="col-sm-3 col-md-2">
+                        <label class="col-sm-3 col-md-3 col-lg-2 control-label">結束日期:</label>
+                        <div class="col-sm-3 col-md-3 col-lg-2">
                           <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>
-                        <div id="query" class="col-sm-1 col-md-2">
+                        <div id="query" class="col-sm-1 col-md-3 col-lg-2">
                           <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>

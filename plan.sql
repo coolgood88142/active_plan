@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: 127.0.0.1
--- 產生時間： 2018-11-02 12:37:50
+-- 產生時間： 2018-12-07 12:55:06
 -- 伺服器版本: 10.1.34-MariaDB
 -- PHP 版本： 7.2.7
 
@@ -57,7 +57,7 @@ INSERT INTO `activity` (`ac_id`, `ac_type`, `ac_name`, `ac_weather`, `ac_drive`,
 (9, 3, '故宮博物院', '1,2', 2, '毛巾、水瓶', 350, 2, '1,2', '2018-09-29 19:09:36'),
 (10, 3, '兒童樂園', '1,2', 2, '毛巾、水瓶', 200, 2, '1,2', '2018-09-29 19:09:33'),
 (11, 3, '貓空纜車', '1,2', 2, '毛巾、水瓶', 380, 3, '1,2', '2018-09-29 19:09:29'),
-(12, 2, '上課', '1,2,3', 2, '錢包、筆記型電腦', 1000, 2, '1,2,3', '2018-10-01 17:28:17'),
+(12, 2, '上課', '1,2,3', 2, '錢包、筆記型電腦', 1000, 2, '1,2,3', '2018-12-02 16:45:15'),
 (13, 1, '羽毛球', '1', 1, '羽毛球拍、羽毛球、毛巾、水瓶', 0, 1, '1,2,3', '2018-09-29 19:09:23'),
 (15, 2, '烤肉', '1,2', 1, '烤肉用具、食物蔬菜、飲料、水瓶', 300, 3, '1,2,3', '2018-09-29 19:09:07');
 
@@ -176,9 +176,36 @@ INSERT INTO `plan_acname` (`pn_id`, `pn_ptid`, `pn_acid`, `pn_acname`, `pn_achou
 (94, 92, 10, '兒童樂園', 2, 1, '2018-10-01 17:35:38'),
 (95, 92, 8, '動物園', 2, 1, '2018-10-01 17:35:38'),
 (97, 92, 6, '看電影', 3, 1, '2018-10-01 17:37:22'),
-(98, 93, 12, '上課', 2, 1, '2018-10-11 16:15:23'),
 (99, 93, 2, '保齡球', 3, 1, '2018-10-11 16:15:23'),
-(100, 93, 10, '兒童樂園', 2, 1, '2018-10-11 16:15:23');
+(101, 94, 12, '上課', 2, 1, '2018-11-09 19:04:17'),
+(102, 94, 2, '保齡球', 3, 1, '2018-11-09 19:04:17'),
+(103, 94, 5, '吃飯', 1, 1, '2018-11-09 19:04:17'),
+(104, 93, 15, '烤肉', 3, 1, '2018-11-10 17:34:27'),
+(105, 95, 12, '上課', 2, 1, '2018-11-10 19:46:48'),
+(106, 95, 8, '動物園', 2, 1, '2018-11-10 19:46:48'),
+(107, 95, 6, '看電影', 3, 1, '2018-11-10 19:46:48'),
+(108, 95, 1, '籃球', 2, 1, '2018-11-10 19:46:48'),
+(109, 96, 2, '保齡球', 3, 1, '2018-11-18 17:05:14'),
+(110, 96, 12, '上課', 2, 1, '2018-11-18 17:05:14'),
+(111, 93, 12, '上課', 2, 1, '2018-11-18 17:06:22'),
+(112, 97, 2, '保齡球', 3, 1, '2018-11-22 18:33:51'),
+(113, 97, 10, '兒童樂園', 2, 1, '2018-11-22 18:33:51'),
+(114, 97, 8, '動物園', 2, 1, '2018-11-22 18:33:51'),
+(117, 99, 1, '籃球', 2, 1, '2018-11-29 13:50:11'),
+(118, 99, 12, '上課', 2, 3, '2018-11-29 13:50:11'),
+(119, 99, 10, '兒童樂園', 2, 4, '2018-11-29 13:50:11'),
+(120, 99, 15, '烤肉', 3, 1, '2018-11-29 13:51:45'),
+(121, 100, 3, '騎腳踏車', 2, 1, '2018-12-01 16:46:13'),
+(122, 100, 6, '看電影', 3, 3, '2018-12-01 16:46:13'),
+(123, 100, 7, '戶外走走', 1, 3, '2018-12-01 16:46:13'),
+(124, 100, 10, '兒童樂園', 2, 4, '2018-12-01 16:46:13'),
+(125, 101, 12, '上課', 2, 1, '2018-12-01 17:10:37'),
+(126, 101, 1, '籃球', 2, 3, '2018-12-01 17:10:37'),
+(127, 101, 2, '保齡球', 3, 4, '2018-12-01 17:10:37'),
+(128, 101, 13, '羽毛球', 1, 4, '2018-12-01 17:10:37'),
+(129, 101, 15, '烤肉', 3, 1, '2018-12-01 17:57:21'),
+(130, 101, 5, '吃飯', 1, 4, '2018-12-01 17:57:21'),
+(131, 101, 7, '戶外走走', 1, 4, '2018-12-01 17:57:21');
 
 -- --------------------------------------------------------
 
@@ -225,7 +252,14 @@ INSERT INTO `plan_trip` (`pt_id`, `pt_name`, `pt_hours`, `pt_spend`, `pt_date`, 
 (90, '新增132', 14, 1270, '2018-09-23', 10, '測試人員11', 2, '2018-09-25 15:46:28'),
 (91, '測試新增0920', 9, 1200, '2018-09-30', 2, 'test1234', 2, '2018-09-30 16:34:17'),
 (92, '測試新增123', 7, 530, '2018-10-07', 8, '使用者', 2, '2018-10-07 17:50:54'),
-(93, '測試新增1012', 7, 1500, '2018-11-30', 2, 'test1234', 1, '2018-10-11 16:15:23');
+(93, '測試新增1012', 8, 1600, '2018-11-30', 2, 'test1234', 2, '2018-11-30 19:14:20'),
+(94, '測試1110', 6, 1800, '2018-11-30', 8, '使用者', 2, '2018-11-30 19:14:20'),
+(95, '新增11光棍節', 9, 1330, '2018-11-28', 6, '王小明', 2, '2018-11-28 17:53:54'),
+(96, '1122123', 5, 1300, '2018-11-16', 2, 'test1234', 2, '2018-11-18 17:05:15'),
+(97, '1123', 7, 560, '2018-11-23', 8, '使用者', 2, '2018-11-25 17:49:43'),
+(99, '使用者測試新增1', 9, 1500, '2018-12-30', 8, '使用者', 1, '2018-12-01 17:59:12'),
+(100, '2021', 8, 670, '2018-12-31', 2, 'test1234', 1, '2018-12-01 16:46:13'),
+(101, '1231232', 8, 1300, '2018-12-30', 8, '使用者', 1, '2018-12-01 17:57:41');
 
 -- --------------------------------------------------------
 
@@ -267,9 +301,33 @@ CREATE TABLE `question_order` (
 --
 
 INSERT INTO `question_order` (`qo_id`, `qo_order`, `qo_quid`, `qo_updatedate`) VALUES
-(1, 3, 2, '2018-10-31 13:27:01'),
-(2, 1, 1, '2018-10-31 16:20:52'),
-(3, 2, 3, '2018-10-31 16:20:52');
+(1, 3, 2, '2018-11-07 13:48:38'),
+(2, 2, 1, '2018-11-07 13:48:38'),
+(3, 1, 3, '2018-11-07 13:48:38');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `test_score`
+--
+
+CREATE TABLE `test_score` (
+  `ts_id` int(6) UNSIGNED NOT NULL,
+  `ts_no` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `ts_name` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `ts_grade` int(6) NOT NULL,
+  `ts_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 資料表的匯出資料 `test_score`
+--
+
+INSERT INTO `test_score` (`ts_id`, `ts_no`, `ts_name`, `ts_grade`, `ts_updatedate`) VALUES
+(1, 'A0001', '測試人1', 100, '2018-11-13 13:48:16'),
+(2, 'A0002', '測試人2', 95, '2018-11-13 14:06:46'),
+(3, 'A0003', '測試人3', 99, '2018-11-13 14:06:21'),
+(4, 'A0004', '測試人4', 100, '2018-11-13 13:35:51');
 
 -- --------------------------------------------------------
 
@@ -309,7 +367,7 @@ CREATE TABLE `user` (
   `us_status` int(11) NOT NULL,
   `us_email` varchar(30) CHARACTER SET utf8 NOT NULL,
   `us_last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `us_headshot_path` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `us_headshot_path` varchar(255) CHARACTER SET utf8 NOT NULL,
   `us_updatedate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -318,18 +376,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`us_id`, `us_account`, `us_password`, `us_name`, `us_gender`, `us_admin`, `us_status`, `us_email`, `us_last_login`, `us_headshot_path`, `us_updatedate`) VALUES
-(1, 'admin0000', '$2y$10$L7eoYt3kc0IEJ1OnCojiuOliijTd2JnI07IOr9lg7OXlUGa2J6rSm', '系統管理員', '', 'Y', 1, '', '2018-11-01 19:13:03', './assets/images/admin0000.png', '2018-11-01 19:13:03'),
-(2, 'tset1234', '$2y$10$61w3T1WGXb5XuBZ6qsF8Te9Wy1b/Ea/3a/tjZbtIBRvdkKcve/PfK', 'test1234', '', 'N', 1, '', '0000-00-00 00:00:00', '', '2018-08-29 15:05:50'),
-(4, 'asd123', '$2y$10$p5FduvHXiZUWFcu9Bd0.seaMEhHCFI0lR3e29719Jf.Ty0K3U25uK', 'asd123', '', 'N', 1, '', '2018-08-21 16:45:49', '', '2018-08-29 15:06:18'),
+(1, 'admin0000', '$2y$10$L7eoYt3kc0IEJ1OnCojiuOliijTd2JnI07IOr9lg7OXlUGa2J6rSm', '系統管理員', '', 'Y', 1, '', '2018-12-06 17:01:25', 'assets/images/admin0000.png', '2018-12-06 17:01:25'),
+(2, 'tset1234', '$2y$10$jmDqu8YKQV0/B1/yvpM6cuwEnZAOQYe3gQSebBGBPX0BUl6Et7L5e', 'test1234', 'R', 'N', 1, '', '0000-00-00 00:00:00', '', '2018-12-05 14:34:05'),
+(4, 'asd123', '$2y$10$fOMGJbty24kTtOY7uaStT.HG/m7jcA/abb3/meLDULOc3uyNr3oJ.', 'asd123', 'R', 'N', 1, '', '2018-08-21 16:45:49', '', '2018-12-05 14:09:05'),
 (5, 'testas123', '$2y$10$/i8wtXjE.gFU7R/sddVOleWyefQpAx/r03I9Ey9dC0EcMb9f1VSWW', 'testas123', 'R', 'N', 1, '', '2018-08-22 15:48:38', '', '2018-10-16 16:54:35'),
 (6, 'test0823', '$2y$10$ebQu3oY6QDpCSaoXJwqsGu0aSmLJBCIsxuryIRrGoLuuMSFV7mhmS', '王小明', 'R', 'N', 1, 'ming@yahoo.com.tw', '2018-08-23 15:39:51', '', '2018-10-12 18:17:09'),
-(7, 'test0000', '$2y$10$ZdSm7YNZn9XeyJ2ecC2cZOaduSUdcV/JPWRmGDEBa78hLIsEr6uwe', '測試人員', 'S', 'N', 1, 'test0110@yahoo.com.tw', '2018-10-16 15:05:38', '', '2018-10-16 15:05:38'),
-(8, 'user0000', '$2y$10$HHm/U3zjZQHjvtQayOaXrObmJagGNhAACZO/3eaPrx1SFupPNOWW6', '使用者', 'R', 'N', 1, 'abc23411324@gmail.com', '2018-11-01 18:30:36', './assets/images/user0000.png', '2018-11-01 18:30:36'),
+(7, 'test0000', '$2y$10$pWzut15ryi8klVDOdlAW2.gKJDj6vA4B7fMQEgS3euicY2MP6mNGq', '測試人員', 'S', 'N', 1, 'test0110@yahoo.com.tw', '2018-10-16 15:05:38', '', '2018-12-05 14:00:04'),
+(8, 'user0000', '$2y$10$empMWXJCizkll3a8J/tZi.mLNhVES0FYXBJadq.6EJKPDw4L.GBjW', '使用者', 'R', 'N', 1, 'abc23411324@gmail.com', '2018-12-05 14:04:21', 'assets/images/upload_file/20181116194043.jpg', '2018-12-05 14:04:21'),
 (9, 'test0831', '$2y$10$MjhumnQuKvXZFq1aQAknteJ6fNdpt/fnKasw3HC5Cd2u5nIxF4HPa', 'test0831', '', 'N', 1, '', '2018-08-31 13:17:12', '', '2018-08-31 13:17:13'),
 (10, 'user111222', '$2y$10$nX9S2I6cBcL5Xc7ttuRkf.Q7rlkDvM.T4kV7fzsgAaS4pngkXtQLe', '測試人員11', 'R', 'N', 1, 'work12@yahoo.com.tw', '2018-08-31 14:07:01', '', '2018-08-31 16:26:09'),
 (12, 'peter', '$2y$10$nThXAOkA.wkk8Ak/343u5.jiVm6XWwPsEr7lxMi8FFf9gdvO7sXS2', 'fuck', 'S', 'N', 1, 'peter@yahoo.com.ee', '2018-08-31 14:35:26', '', '2018-08-31 14:40:43'),
 (13, 'test123456', '$2y$10$koV6c1.un2vO9J.MdxIBVOkSiwGBnMsQT5azFfvPr/ik4Qd0z8bLq', 'test123456', 'R', 'N', 2, 'tset123456@yahoo.com.tw', '2018-08-31 16:16:21', '', '2018-09-06 17:52:47'),
-(16, 'eric123456', '$2y$10$nOAPiZAqwA4PMk2YR8rQ7OSXhxtYjZR7lggTcqwZqywXoLT3DDh.W', '測試員', 'R', 'N', 1, 'eric123456@gmail.com', '2018-11-01 18:28:33', '', '2018-11-01 18:28:33'),
+(16, 'eric123456', '$2y$10$nOAPiZAqwA4PMk2YR8rQ7OSXhxtYjZR7lggTcqwZqywXoLT3DDh.W', '測試員', 'R', 'N', 1, 'eric123456@gmail.com', '2018-11-08 18:57:44', 'assets/images/upload_file/20181109025731.png', '2018-11-13 16:12:32'),
 (17, 'test0904', '$2y$10$IYpV.q0siF77IxpM4bSRgO16Yv9ALK8ZwashRHkt6Q185bnCPWi72', 'test0904', '', 'N', 1, '', '2018-09-03 16:37:50', '', '2018-09-03 16:37:51'),
 (18, 'test123', '$2y$10$IS7pnlvg1XpL03qZSCwXKORpKbgHv.25cTBVT9ziWFXO.qtJLyRrm', 'test123', '', 'N', 1, '', '2018-09-03 16:43:40', '', '2018-09-03 16:43:40'),
 (19, 'testadd123', '$2y$10$uKiAGzv6tLkF.d0/OKZf8OgUOuL7RjIQG2A7vgf18BzLKSbOjA5IC', '測試新增停用', 'S', 'N', 2, 'testadd123@yahoo.com.tw', '2018-09-04 13:50:44', '', '2018-09-04 13:50:44'),
@@ -384,6 +442,12 @@ ALTER TABLE `question_order`
   ADD PRIMARY KEY (`qo_id`);
 
 --
+-- 資料表索引 `test_score`
+--
+ALTER TABLE `test_score`
+  ADD PRIMARY KEY (`ts_id`);
+
+--
 -- 資料表索引 `time_types`
 --
 ALTER TABLE `time_types`
@@ -421,13 +485,13 @@ ALTER TABLE `activity_weather`
 -- 使用資料表 AUTO_INCREMENT `plan_acname`
 --
 ALTER TABLE `plan_acname`
-  MODIFY `pn_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `pn_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- 使用資料表 AUTO_INCREMENT `plan_trip`
 --
 ALTER TABLE `plan_trip`
-  MODIFY `pt_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `pt_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- 使用資料表 AUTO_INCREMENT `question`
@@ -440,6 +504,12 @@ ALTER TABLE `question`
 --
 ALTER TABLE `question_order`
   MODIFY `qo_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- 使用資料表 AUTO_INCREMENT `test_score`
+--
+ALTER TABLE `test_score`
+  MODIFY `ts_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- 使用資料表 AUTO_INCREMENT `time_types`

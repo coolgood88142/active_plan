@@ -43,6 +43,11 @@
     margin-left: auto;
 }
 
+.img-thumbnail{
+    width:48px;
+    height:48px;
+}
+
 @media screen and (max-width: 768px) {
     .jumbotron,.btn,.form-control{
         font-size:14px;
@@ -51,17 +56,24 @@
         font-size:28px;
     }
 }
+
+@media (max-width: 576px) {
+    #add_type{
+        display:none;
+    }
+}
  </style>
   <body>
   <div id="navbar"></div>
   <div class="jumbotron container bg-Light side-collapse-container-left">
     <form name="showForm" method="post">
-        <div class="col-md-12" style="top: 20px;">
+        <div class="col-md-12" style="top: 50px;">
             <h2 id="title" class="text-center font-weight-bold">活動類型</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             <div style="text-align:right">
-                <input type="button" style="display:none;" class="btn btn-primary" name="add_type" value="新增" onClick="add_timetype()"/>
-            </div><br/>
+                <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_timetype()">
+                <input type="button" class="btn btn-primary d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add_type" name="add_type" value="新增" onClick="add_timetype()"/>
+            </div>
             <table id="example2" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -105,25 +117,26 @@
                 </tfoot>
             </table>
             <div class="row">
-                <div class="col-sm-4 col-md-8">
+                <div class="col-sm-4 col-md-2">
                     <input type="button" style="display:none;" class="btn btn-primary" name="backtype" value="回上一頁" onClick="back_timetype()"/>
                 </div>
             </div><br/>
             <div class="form-group row timetypes" style="display:none;">
-                <label class="col-sm-4 col-md-8 control-label" for="add_typename">活動類型:</label>
-                <div class="col-sm-4 col-md-8">
+                <label class="col-sm-4 col-md-2 control-label" for="add_typename">活動類型:</label>
+                <div class="col-sm-4 col-md-2">
                     <input type="text" class="form-control" name="add_typename" value="">
                     <input type="hidden" name="add_typeid" value="" >
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-md-8">
+                <div class="col-sm-4 col-md-2">
                     <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />
                     <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
                 </div>
             </div>
             <input type="hidden" name="add_timetypes" />
             <input type="hidden" name="up_timetypes" />
+            <input type="hidden" name="Responsive_Button" />
         </div>
     </form>
   </div>
@@ -138,32 +151,8 @@
         }
     } );
 
-    function go_plan(){
-        var objName = "",objType = "",objHour = "",objSpend = "";
-        $("input[name='add']:checked").each(function(){
-            var obj = $(this).closest("tr");
-            objName = objName + obj.find(".ac_name").text().trim() + ",";
-            objType = objType + obj.find(".ac_type").text().trim() + ",";
-            objHour = objHour + obj.find("select[name='hour']").val() + ",";
-            objSpend = objSpend + obj.find("input[name='spend']").val() + ","; 
-        });
-        objName = objName.substring(0, objName.length-1);
-        objType = objType.substring(0, objType.length-1);
-        objHour = objHour.substring(0, objHour.length-1);
-        objSpend = objSpend.substring(0, objSpend.length-1);
-
-        $("input[name='objName']").val(objName);
-        $("input[name='objType']").val(objType);
-        $("input[name='objHour']").val(objHour);
-        $("input[name='objSpend']").val(objSpend);
-
-        document.showForm.action="plan.php"; 
-        document.showForm.submit();
-    }
-
     function add_timetype(){
         $('#example2_wrapper').hide()
-        $("input[name='add']").hide();
         $("input[name='show_addtype']").hide();
         $("input[name='add_type']").hide();
         $("input[name='show_add']").hide();
@@ -171,11 +160,18 @@
         $(".timetypes").show();
         $("input[name='add_typename']").show();
         $("input[name='addactivity']").show();
+
+        if($("#add_type").is(":visible")){
+            $("#add_type").hide();
+            $("input[name='Responsive_Button']").val(false);
+        }else if($("#img").is(":visible")){
+            $("#img").css("display", "none");
+            $("input[name='Responsive_Button']").val(true);
+        }
     }
 
     function back_timetype(){
         $('#example2_wrapper').show()
-        $("input[name='add_type']").show();
         $("input[name='show_add']").show();
         $("input[name='backpage']").hide();
         $("input[name='backtype']").hide();
@@ -183,6 +179,13 @@
         $("input[name='addactivity']").hide();
         $("input[name='up_submit']").hide();
         $("input[name='add_typename']").val('');
+
+        var Responsive_Button = $("input[name='Responsive_Button']").val();
+        if(Responsive_Button == "true"){
+            $("#img").show();
+        }else{
+            $("#add_type").show();
+        }
     }
 
     function insert(){
