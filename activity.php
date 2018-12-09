@@ -42,7 +42,10 @@
     margin-right: auto;
     margin-left: auto;
 }
-
+.img-thumbnail{
+    width:48px;
+    height:48px;
+  }
 @media screen and (max-width: 768px) {
     .jumbotron,.btn,.form-control{
         font-size:14px;
@@ -50,6 +53,10 @@
     #title{
         font-size:28px;
     }
+    #add{
+        display: none;
+    }
+
 }
  </style>
   <body>
@@ -60,7 +67,8 @@
                 <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div style="text-align:right;">
-                    <input type="button" class="btn btn-primary" style="display:none;" name="add" value="新增" onClick="add_activity()"/>
+                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_activity()">
+                    <input type="button" class="btn btn-primary" style="display:none;" id="add" name="add" value="新增" onClick="add_activity()"/>
                 </div><br/>
                 <table id="example1" class="table table-striped table-bordered">
                     <thead>
@@ -259,6 +267,7 @@
                 <input type="hidden" name="add_acid" value=""/>
                 <input type="hidden" name="add_activitys" />
                 <input type="hidden" name="up_activitys" />
+                <input type="hidden" name="Responsive_Button" />
             </div>
         </form>
     </div>
@@ -301,7 +310,6 @@
 
     function add_activity(){
         $('#example1_wrapper').hide()
-        $("input[name='add']").hide();
         $("input[name='backpage']").show();
         $(".activity").show();
         $(".type").show();
@@ -312,11 +320,18 @@
         $(".hours").show();
         $(".timetype").show();
         $("input[name='addactivity']").show();
+
+        if($("#add").is(":visible")){
+            $("#add").hide();
+            $("input[name='Responsive_Button']").val(false);
+        }else if($("#img").is(":visible")){
+            $("#img").css("display", "none");
+            $("input[name='Responsive_Button']").val(true);
+        }
     }
 
     function back_activity(){
         $('#example1_wrapper').show()
-        $("input[name='add']").show();
         $("input[name='backpage']").hide();
         $(".activity").hide();
         $(".type").hide();
@@ -328,6 +343,13 @@
         $(".timetype").hide();
         $("input[name='addactivity']").hide();
         $("input[name='up_submit']").hide();
+
+        var Responsive_Button = $("input[name='Responsive_Button']").val();
+        if(Responsive_Button == "true"){
+            $("#img").show();
+        }else{
+            $("#add").show();
+        }
     }
 
     function insert(){

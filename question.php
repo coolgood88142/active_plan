@@ -42,6 +42,13 @@
       font-size:28px;
     }
   }
+  [data-toggle="collapse"] .fa:before {  
+  content: "\f139";
+}
+
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
+}
  </style>
   <body>
   <div id="navbar"></div>
@@ -60,6 +67,7 @@
                     <div class="card-header" id="heading<?=$value['qo_order']?>">
                       <h5 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                          <i class="fa" aria-hidden="true"></i>
                           <?=$value['qu_question']?>
                         </button>
                       </h5>
