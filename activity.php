@@ -3,6 +3,8 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -54,11 +56,8 @@
         font-size:28px;
     }
 }
-@media (max-width: 576px) {
-    #add{
-        display:none;
-    }
-}
+
+
  </style>
   <body>
     <div id="navbar"></div>
@@ -69,9 +68,9 @@
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div style="text-align:right;">
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_activity()">
-                    <input type="button" class="btn btn-primary d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
+                    <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
                 </div>
-                <table id="example1" class="table table-striped table-bordered">
+                <table id="example1" class="table table-striped table-bordered display nowrap">
                     <thead>
                         <tr>
                             <td>活動項目</td>
@@ -177,13 +176,13 @@
                 </div>
                 <div class="form-group row align-items-center activity" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_acname">活動項目:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_acname" value="">
                     </div>
                 </div>
                 <div class="form-group row align-items-center type" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_actype">類型:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <select class="custom-select" name="add_actype">
                         <?php
                             foreach ($active_type as $key => $type) {
@@ -211,7 +210,7 @@
                 </div>
                 <div class="form-group row align-items-center drive" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_acdrive">活動項目:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
@@ -221,13 +220,13 @@
                 </div>
                     <div class="form-group row align-items-center carry" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_accarry">攜帶物品:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_accarry" value="無">
                     </div>
                 </div>
                 <div class="form-group row align-items-center spend" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_acspend">花費:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_acspend" value="0" 
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
@@ -237,7 +236,7 @@
                 </div>
                 <div class="form-group row align-items-center hours" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_achours">時間:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_achours" value="" size="2"
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>

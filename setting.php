@@ -102,8 +102,8 @@
                 <input type="hidden" name="add_account" value="<?=$add_account?>"/>
 
                 <div class="form-group row us_account">
-                  <label class="col-sm-2 control-label" for="us_account">帳號:</label>
-                  <div class="col-sm-3">
+                  <label class="col-sm-4 col-md-2 control-label" for="us_account">帳號:</label>
+                  <div class="col-sm-4 col-md-34">
                   <?php
                     if(!empty($add_account)){           
                   ?>
@@ -119,8 +119,8 @@
                   </div>
                 </div>
                 <div class="form-group row us_password">
-                  <label class="col-sm-2 control-label" for="us_password">密碼:</label>
-                  <div class="col-sm-3">
+                  <label class="col-sm-4 col-md-2 control-label" for="us_password">密碼:</label>
+                  <div class="col-sm-4 col-md-4">
                     <input type="password" class="form-control" name="us_password" value="">
                   </div>
                   <div class="col">
@@ -128,8 +128,8 @@
                   </div>
                 </div>
                 <div class="form-group row agree_us_password">
-                  <label class="col-sm-2 control-label" for="agree_us_password">請在輸入一次密碼:</label>
-                  <div class="col-sm-3">
+                  <label class="col-sm-4 col-md-2 control-label" for="agree_us_password">請在輸入一次密碼:</label>
+                  <div class="col-sm-4 col-md-4">
                     <input type="password" class="form-control" name="agree_us_password" value="">
                   </div>
                   <div class="col">
@@ -137,8 +137,8 @@
                   </div>
                 </div>
                 <div class="form-group row us_name">
-                  <label class="col-sm-2 control-label" for="us_name">姓名:</label>
-                  <div class="col-sm-3">
+                  <label class="col-sm-4 col-md-2 control-label" for="us_name">姓名:</label>
+                  <div class="col-sm-4 col-md-4">
                   <?php
                     if(!empty($add_account)){           
                   ?>
@@ -153,25 +153,27 @@
                   </div>
                 </div>
                 <div class="form-group row us_gender">
-                    <label class="col-sm-2 control-label" for="us_gender">性別:</label>
-                    <div class="form-check form-check-inline">
-                      <input type="radio" name="us_gender" value="R" checked>
-                      <label class="form-check-label">男</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input type="radio" name="us_gender" value="S">
-                      <label class="form-check-label">女</label>
+                    <label class="col-sm-4 col-md-2 control-label" for="us_gender">性別:</label>
+                    <div class="col-sm-4 col-md-4">
+                      <div class="form-check form-check-inline">
+                        <input type="radio" name="us_gender" value="R" checked>
+                        <label class="form-check-label">男</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" name="us_gender" value="S">
+                        <label class="form-check-label">女</label>
+                      </div>
                     </div>
                     <input type="hidden" name="gender" value="<?php echo $us_gender!="未填寫"?$us_gender:"" ?>"/>
                 </div>
                 <div class="form-group row us_email">
-                    <label class="col-sm-2 control-label" for="us_email">電子信箱:</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-4 col-md-2 control-label" for="us_email">電子信箱:</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" name="us_email" value="<?php echo $us_email!="未填寫"?$us_email:"" ?>">
                     </div>
                 </div>
                 <div class="form-group row headshot_file">
-                    <label class="col-sm-2 control-label">大頭照檔名:</label>
+                    <label class="col-sm-4 control-label">大頭照檔名:</label>
                     <div id="headshot_file" class="col">
                       <?= $us_headshot_path ?>
                     </div>
@@ -183,7 +185,7 @@
                 <br/><br/>
 
                 <div class="form-group row status" style="display:none;">
-                    <label class="col-sm-2 control-label" for="us_status">狀態:</label>
+                    <label class="col-sm-4 col-md-4 control-label" for="us_status">狀態:</label>
                     <div class="form-check form-check-inline">
                       <input type="radio" name="us_status" value=1 checked>
                       <label class="form-check-label">正常</label>

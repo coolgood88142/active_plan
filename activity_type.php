@@ -56,12 +56,6 @@
         font-size:28px;
     }
 }
-
-@media (max-width: 576px) {
-    #add_type{
-        display:none;
-    }
-}
  </style>
   <body>
   <div id="navbar"></div>
@@ -72,7 +66,7 @@
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             <div style="text-align:right">
                 <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_timetype()">
-                <input type="button" class="btn btn-primary d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add_type" name="add_type" value="新增" onClick="add_timetype()"/>
+                <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add_type" name="add_type" value="新增" onClick="add_timetype()"/>
             </div>
             <table id="example2" class="table table-striped table-bordered">
                 <thead>
@@ -123,7 +117,7 @@
             </div><br/>
             <div class="form-group row timetypes" style="display:none;">
                 <label class="col-sm-4 col-md-2 control-label" for="add_typename">活動類型:</label>
-                <div class="col-sm-4 col-md-2">
+                <div class="col-sm-4 col-md-3">
                     <input type="text" class="form-control" name="add_typename" value="">
                     <input type="hidden" name="add_typeid" value="" >
                 </div>

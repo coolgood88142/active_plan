@@ -79,12 +79,19 @@
             background: url("./assets/images/background.png");
             color: white;
         }
+        .img-thumbnail{
+            width:48px;
+            height:48px;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
             }
             #title{
                 font-size:28px;
+            }
+            #img{
+                margin-bottom:0px;
             }
         }
     </style>
@@ -102,11 +109,12 @@
             </div>
             <div class="form-group row">
                 <label class="col-sm-4 col-md-2 control-label" for="pt_date">出發日期:</label>
-                <div class="col-sm-4 col-md-2">
+                <div class="col-sm-4 col-md-3">
                     <input type="text" class="form-control" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker">
                 </div>
-                <div class="col" style="text-align:right">
-                    <input type="button" class="btn btn-primary" name="addplan" value="新增" onClick="add_plan()"/>
+                <div class="col d-flex align-items-end flex-column" style="text-align:right">
+                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none"  onClick="add_plan()">
+                    <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
             </div>   
             <br/>
@@ -250,6 +258,7 @@
                 <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/> 
             </div>
         </div>
+        <input type="hidden" name="Responsive_Button" />
     </form>
   </div>
     <form action="update_plan.php" name="submitForm" method="post">
@@ -300,7 +309,14 @@
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();
-        $("input[name='addplan']").hide();
+
+        if($("#addplan").is(":visible")){
+            $("#addplan").hide();
+            $("input[name='Responsive_Button']").val(false);
+        }else if($("#img").is(":visible")){
+            $("#img").css("display", "none");
+            $("input[name='Responsive_Button']").val(true);
+        }
     }
 
     function go_plan(){

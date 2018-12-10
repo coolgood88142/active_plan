@@ -81,8 +81,8 @@
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
                 <div style="text-align:right">
-                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_plan()">
-                    <input type="button" class="btn btn-primary" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
+                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_plan()">
+                    <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
                 <div class="form-group row plan" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="plan_name">行程名稱:</label>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group row date" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="plan_date">出發日期:</label>
-                    <div class="col-sm-4 col-md-2 align-self-start">
+                    <div class="col-sm-4 col-md-3 align-self-start">
                         <input type="text" class="form-control" name="plan_date" value="">
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
                 <div class="form-group row userlist" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="pt_userlist">使用者名稱:</label>
-                    <div class="col-sm-4 col-md-2">
+                    <div class="col-sm-4 col-md-3">
                         <select class="custom-select align-self-start" name="pt_userlist">
                             <?php
                             if($us_admin=='Y'){
