@@ -3,7 +3,8 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <script src="./assets/js/popper.min.js"></script> 
+  <script src="./assets/js/popper.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -42,13 +43,15 @@
       font-size:28px;
     }
   }
-  [data-toggle="collapse"] .fa:before {  
-  content: "\f139";
-}
 
-[data-toggle="collapse"].collapsed .fa:before {
-  content: "\f13a";
-}
+  [data-toggle="collapse"] .fa:before {  
+    content: "\f068";
+  }
+
+  [data-toggle="collapse"].collapsed .fa:before {
+    content: "\f067";
+  }
+
  </style>
   <body>
   <div id="navbar"></div>
@@ -66,9 +69,8 @@
                   <div class="card">
                     <div class="card-header" id="heading<?=$value['qo_order']?>">
                       <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                          <i class="fa" aria-hidden="true"></i>
-                          <?=$value['qu_question']?>
+                        <button class="btn btn-light font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                          <i class="fa" aria-hidden="true"></i><?=$value['qu_question']?>
                         </button>
                       </h5>
                     </div>

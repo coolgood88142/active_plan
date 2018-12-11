@@ -70,20 +70,20 @@
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_activity()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
                 </div>
-                <table id="example1" class="table table-striped table-bordered display nowrap">
+                <table id="example1" class="table table-striped table-bordered display responsive">
                     <thead>
                         <tr>
                             <td>活動項目</td>
-                            <td style="display:none;">活動項目ID</td>
+                            <td class="none">活動項目ID</td>
                             <td>類型</td>
-                            <td style="display:none;">類型ID</td>
+                            <td class="none">類型ID</td>
                             <td>天氣</td>
-                            <td style="display:none;">天氣ID</td>
+                            <td class="none">天氣ID</td>
                             <td>車程(小時)</td>
                             <td>攜帶物品</td>
                             <td>花費</td>
                             <td>時間(小時)</td>
-                            <td style="display:none;">時段</td>
+                            <td class="none">時段</td>
                             <?php
                                 if($us_admin=='Y'){                
                             ?>
@@ -276,6 +276,19 @@
     $(document).ready(function() {
         $('#navbar').load('navbar.php');
         $('#example1').DataTable(datatable_language());
+        $('#example1').DataTable({
+            responsive: true,
+            columns: [
+                { responsivePriority: 6 },
+        { responsivePriority: 5 },
+        { responsivePriority: 4 },
+        { responsivePriority: 3 },
+        { responsivePriority: 2 },
+        { responsivePriority: 1 }
+            ]
+        });
+        
+    
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
         }

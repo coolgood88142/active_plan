@@ -21,12 +21,7 @@ function datatable_language(){
                 "sortDescending": ": 降冪排列"
             }
         },
-        "autoWidth": false,
-        "responsive": true,
-        "columnDefs": [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -2 }
-        ]
+        "autoWidth": false
     };
     return language;
 }
