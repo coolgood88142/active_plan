@@ -3,8 +3,11 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"> -->
+<link rel="stylesheet" href="./assets/css/buttons.dataTables.min.css">
+<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> -->
+<script src="./assets/js/dataTables.buttons.min.js"></script>
+<script src="./assets/js/buttons.colVis.min.js"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -20,13 +23,6 @@
     
  ?>
  <style>
-   .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-
-  display: flex;
-  align-items: center; 
-}
-
 .jumbotron{
   height:100%;
   width:100%;
@@ -56,7 +52,20 @@
         font-size:28px;
     }
 }
-
+.wrap-contact{
+    background: #3fa9dd;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 62px 55px 90px 55px;
+}
+.wrap-input{
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 30px 9px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    background-color: #f7f7f7;
+}
 
  </style>
   <body>
@@ -70,20 +79,20 @@
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_activity()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
                 </div>
-                <table id="example1" class="table table-striped table-bordered display responsive">
+                <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <td style="display:none;">活動項目ID</td>
+                            <td style="display:none;">類型ID</td>
+                            <td style="display:none;">天氣ID</td>
+                            <td style="display:none;">時段</td>
                             <td>活動項目</td>
-                            <td class="none">活動項目ID</td>
                             <td>類型</td>
-                            <td class="none">類型ID</td>
                             <td>天氣</td>
-                            <td class="none">天氣ID</td>
                             <td>車程(小時)</td>
                             <td>攜帶物品</td>
                             <td>花費</td>
                             <td>時間(小時)</td>
-                            <td class="none">時段</td>
                             <?php
                                 if($us_admin=='Y'){                
                             ?>
@@ -98,17 +107,24 @@
                             foreach ($active as $key => $value) {
                         ?>
                         <tr>
-                            <td class="ac_name">
-                                <?php echo $value["ac_name"]?>
-                            </td>
                             <td class="ac_id" style="display:none;">
                                 <?php echo $value["ac_id"]?>
                             </td>
-                            <td class="type_name">
-                                <?php echo $value["type_name"]?>
-                            </td>
                             <td class="ac_type" style="display:none;">
                                 <?php echo $value["ac_type"]?>
+                            </td>
+                            <td class="ac_weather" style="display:none;">
+                                <?php echo $value["ac_weather"]?>
+                            </td>
+                            <td class="ac_timetype" style="display:none;">
+                                <?php echo $value["ac_timetype"]?>
+                            </td>
+                            <td class="ac_name">
+                                <?php echo $value["ac_name"]?>
+                            </td>
+                            
+                            <td class="type_name">
+                                <?php echo $value["type_name"]?>
                             </td>
                             <td class="weather_name">
                                 <?php 
@@ -134,9 +150,6 @@
                                     echo $wather_name;
                                 ?>
                             </td>
-                            <td class="ac_weather" style="display:none;">
-                                <?php echo $value["ac_weather"]?>
-                            </td>
                             <td class="ac_drive">
                                 <?php echo $value["ac_drive"]?>
                             </td>
@@ -148,9 +161,6 @@
                             </td>
                             <td class="ac_hours">
                                 <?php echo $value["ac_hours"]?>
-                            </td>
-                            <td class="ac_timetype" style="display:none;">
-                                <?php echo $value["ac_timetype"]?>
                             </td>
                             <?php
                                 if($us_admin=='Y'){                
@@ -169,12 +179,13 @@
                     <tfoot>
                     </tfoot>
                 </table>
+                <div class="wrap-contact">
                 <div class="row">
                     <div class="col-sm-4 col-md-2">
                         <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
                     </div>
                 </div>
-                <div class="form-group row align-items-center activity" style="display:none;">
+                <div class="form-group row align-items-center activity wrap-input" style="display:none;">
                     <label class="col-sm-4 col-md-2 control-label" for="add_acname">活動項目:</label>
                     <div class="col-sm-4 col-md-3">
                         <input type="text" class="form-control" name="add_acname" value="">
@@ -268,6 +279,7 @@
                 <input type="hidden" name="add_activitys" />
                 <input type="hidden" name="up_activitys" />
                 <input type="hidden" name="Responsive_Button" />
+                </div>
             </div>
         </form>
     </div>
@@ -276,25 +288,17 @@
     $(document).ready(function() {
         $('#navbar').load('navbar.php');
         $('#example1').DataTable(datatable_language());
-        $('#example1').DataTable({
-            responsive: true,
-            columns: [
-                { responsivePriority: 6 },
-        { responsivePriority: 5 },
-        { responsivePriority: 4 },
-        { responsivePriority: 3 },
-        { responsivePriority: 2 },
-        { responsivePriority: 1 }
-            ]
-        });
+        // $('#example1').DataTable({
+        //     dom: 'Bfrtip',
+        //     buttons: [
+        //         'colvis'
+        //     ]
+        // });
         
     
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
         }
-        //可以重新定義datatable目前解析度縮放
-        // $('#example1').fnAdjustColumnSizing();
-        // $('#example1').fnDraw();
     } );
 
     function go_plan(){
@@ -505,14 +509,6 @@
         }
 
         document.showForm.action="update_activity.php"; 
-        document.showForm.submit();
-    }
-
-    function show(page){
-        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
-            page = page + "_admin";
-        }
-        document.showForm.action=page+".php"; 
         document.showForm.submit();
     }
   </script>

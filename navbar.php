@@ -78,20 +78,11 @@
      .side-collapse-left.in {
         width:0;
       }
-/*      .navbar-inverse{
-        background-color: #00BBFF;
-        border-radius-color: #00BBFF;
-      }*/
+
+     #navbarNav{
+        margin-top:20px;
+      }
     }
-    /* @media (max-width: 768px) and (max-width: 1024px) {
-      .navbar-toggler .pull-left{
-        display:none;
-      }
-      .side-collapse-left .in{
-
-      }
-
-    } */
       .navbar-light .navbar-nav .nav-link{
         color:#fff;
       }

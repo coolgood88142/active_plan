@@ -21,7 +21,16 @@ function datatable_language(){
                 "sortDescending": ": 降冪排列"
             }
         },
-        "autoWidth": false
+        "autoWidth": false,
+        "dom": 'Bfrtip',
+        "buttons": [
+            {   
+                text: '隱藏項目',
+                extend: 'colvis',
+                className: 'btn btn-primary',
+                columns: ':gt(3)'
+            }
+        ]
     };
     return language;
 }

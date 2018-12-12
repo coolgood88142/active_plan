@@ -17,14 +17,7 @@
     }
  ?>
   <style>
-   .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
-
-  display: flex;
-  align-items: center; 
-}
-
+  
 .jumbotron{
   height:100%;
   width:100%;
@@ -220,14 +213,6 @@
         }
 
         document.showForm.action="update_activity.php"; 
-        document.showForm.submit();
-    }
-
-    function show(page){
-        if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
-            page = page + "_admin";
-        }
-        document.showForm.action=page+".php"; 
         document.showForm.submit();
     }
   </script>
