@@ -8,6 +8,13 @@
 <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> -->
 <script src="./assets/js/dataTables.buttons.min.js"></script>
 <script src="./assets/js/buttons.colVis.min.js"></script>
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/select2.js"></script>
+<script src="./assets/js/select2.min.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/util.css">
+<link rel="stylesheet" href="./assets/css/select2.css">
+<link rel="stylesheet" href="./assets/css/select2.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -52,13 +59,10 @@
         font-size:28px;
     }
 }
-.wrap-contact{
+.wrap-contact100{
     background: #3fa9dd;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 62px 55px 90px 55px;
 }
-.wrap-input{
+.wrap-input100{
     border: 1px solid #e6e6e6;
     border-radius: 13px;
     padding: 10px 30px 9px 22px;
@@ -66,7 +70,9 @@
     position: relative;
     background-color: #f7f7f7;
 }
-
+.label-input100{
+    font-size: 15px;
+}
  </style>
   <body>
     <div id="navbar"></div>
@@ -179,35 +185,34 @@
                     <tfoot>
                     </tfoot>
                 </table>
-                <div class="wrap-contact">
+                <div class="wrap-contact100" style="display:none;">
                 <div class="row">
                     <div class="col-sm-4 col-md-2">
                         <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
                     </div>
                 </div>
-                <div class="form-group row align-items-center activity wrap-input" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_acname">活動項目:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" name="add_acname" value="">
+                <div class="wrap-input100 validate-input bg1 activity" style="display:none;">
+                    <span class="label-input100">活動項目：</span>
+                    <input class="input100" type="text" name="name" placeholder="輸入活動項目!">
+                </div>
+                <div class="wrap-input100 input100-select bg1 type" style="display:none;">
+                    <span class="label-input100">類型：</span>
+                    <div>
+                        <select class="js-select2" name="add_actype">
+                            <?php
+                                foreach ($active_type as $key => $type) {
+                            ?>
+                                <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
+                            <?php
+                                }
+                            ?>
+						</select>
+						<div class="dropDownSelect2"></div>
                     </div>
                 </div>
-                <div class="form-group row align-items-center type" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_actype">類型:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <select class="custom-select" name="add_actype">
-                        <?php
-                            foreach ($active_type as $key => $type) {
-                        ?>
-                            <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
-                        <?php
-                            }
-                        ?>
-                    </select>
-                    </div>
-                </div>
-                <div class="form-group row align-items-center weather" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_acweather[]">天氣:</label>
-                    <div class="col">
+                <div class="wrap-input100 validate-input bg1 weather" style="display:none;">
+                    <span class="label-input100">天氣：</span>
+                    <div class="col align-items-strat">
                         <?php 
                             foreach($activity_weather as $key => $weather){
                         ?>
@@ -219,45 +224,28 @@
                         ?>
                     </div>
                 </div>
-                <div class="form-group row align-items-center drive" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_acdrive">活動項目:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" name="add_acdrive" value="" size="2"  
+                <div class="wrap-input100 validate-input bg1 drive" style="display:none;">
+                    <span class="label-input100">車程(小時)：</span>
+                    <input class="input100" type="text" name="add_acdrive" placeholder="輸入車程!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                    </div>
-                    <div class="col">
-                        小時
-                    </div>
                 </div>
-                    <div class="form-group row align-items-center carry" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_accarry">攜帶物品:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" name="add_accarry" value="無">
-                    </div>
+                <div class="wrap-input100 validate-input bg1 carry" style="display:none;">
+                    <span class="label-input100">攜帶物品：</span>
+                    <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
                 </div>
-                <div class="form-group row align-items-center spend" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_acspend">花費:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" name="add_acspend" value="0" 
+                <div class="wrap-input100 validate-input bg1 spend" style="display:none;">
+                    <span class="label-input100">花費(元)：</span>
+                    <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                    </div>
-                    <div class="col">
-                        元
-                    </div>
                 </div>
-                <div class="form-group row align-items-center hours" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_achours">時間:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <input type="text" class="form-control" name="add_achours" value="" size="2"
+                <div class="wrap-input100 validate-input bg1 time" style="display:none;">
+                    <span class="label-input100">時間(小時)：</span>
+                    <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                    </div>
-                    <div class="col">
-                        小時
-                    </div>
                 </div>
-                <div class="form-group row align-items-center timetype" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="add_actimetype[]">天氣:</label>
-                    <div class="col">
+                <div class="wrap-input100 validate-input bg1 timetype" style="display:none;">
+                    <span class="label-input100">時段：</span>
+                    <div class="col align-items-strat">
                         <?php 
                             foreach($timetypes as $key => $time){
                         ?>
@@ -337,6 +325,7 @@
         $(".hours").show();
         $(".timetype").show();
         $("input[name='addactivity']").show();
+        $(".wrap-contact100").show();
 
         if($("#add").is(":visible")){
             $("#add").hide();
@@ -360,6 +349,8 @@
         $(".timetype").hide();
         $("input[name='addactivity']").hide();
         $("input[name='up_submit']").hide();
+        $(".wrap-contact100").hide();
+
 
         var Responsive_Button = $("input[name='Responsive_Button']").val();
         if(Responsive_Button == "true"){

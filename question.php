@@ -4,7 +4,7 @@
   </head>
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -44,12 +44,9 @@
     }
   }
 
-  [data-toggle="collapse"] .fa:before {  
-    content: "\f068";
-  }
-
-  [data-toggle="collapse"].collapsed .fa:before {
-    content: "\f067";
+  .more-less {
+		float: right;
+		color: #212121;
   }
 
  </style>
@@ -61,17 +58,22 @@
             <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                <div id="button"></div>
-                <br/><br/>
 
                 <div class="accordion" id="accordionExample">
                   <?php foreach($quertsion as $key => $value){?>
                   <div class="card">
                     <div class="card-header" id="heading<?=$value['qo_order']?>">
                       <h5 class="mb-0">
-                        <button class="btn btn-light font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                          <i class="fa" aria-hidden="true"></i><?=$value['qu_question']?>
-                        </button>
+                        <div class="row justify-content-center align-items-center">
+                          <div class="col">
+                              <button class="btn btn-light font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
+                                <?=$value['qu_question']?>
+                              </button>
+                          </div>
+                          <div class="col">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
+                          </div>
+                        </div>
                       </h5>
                     </div>
 
@@ -92,6 +94,15 @@
     $(document).ready(function() {
         $('#navbar').load('navbar.php');
     });
+
+    function toggleIcon(e) {
+      $(e.target).
+      prev('.card-header').
+      find(".more-less").
+      toggleClass('glyphicon-plus glyphicon-minus');
+    }
+    $('.accordion').on('hidden.bs.collapse', toggleIcon);
+    $('.accordion').on('shown.bs.collapse', toggleIcon);
 
     function show(page){
         if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){

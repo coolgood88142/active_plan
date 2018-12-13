@@ -63,17 +63,11 @@
     #title{
       font-size:28px;
     }
-    #select_date{
-      font-size:20px;
-    }
     #query{
       margin-top:20px;
     }
 }
 @media (max-width: 992px) {
-    #select_date{
-      font-size:20px;
-    }
     #query{
       margin-top:20px;
     }
