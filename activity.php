@@ -11,10 +11,12 @@
 <script src="./assets/js/main.js"></script>
 <script src="./assets/js/select2.js"></script>
 <script src="./assets/js/select2.min.js"></script>
+<script src="./assets/js/sweetalert.min.js"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/select2.css">
 <link rel="stylesheet" href="./assets/css/select2.min.css">
+<link rel="stylesheet" href="./assets/css/sweetalert.min.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -72,6 +74,17 @@
 }
 .label-input100{
     font-size: 15px;
+}
+.sweet-alert {
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 3px solid white;
+    font-family:'微軟正黑體';
+}
+.sweet-alert h2 {
+    color:white;
+}
+.nav-link{
+    font-size:1rem;
 }
  </style>
   <body>
@@ -185,7 +198,7 @@
                     <tfoot>
                     </tfoot>
                 </table>
-                <div class="wrap-contact100" style="display:none;">
+                <div class="wrap-contact100" style="display:none; width:100%;">
                 <div class="row">
                     <div class="col-sm-4 col-md-2">
                         <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
@@ -193,7 +206,7 @@
                 </div>
                 <div class="wrap-input100 validate-input bg1 activity" style="display:none;">
                     <span class="label-input100">活動項目：</span>
-                    <input class="input100" type="text" name="name" placeholder="輸入活動項目!">
+                    <input class="input100" type="text" name="add_acname" placeholder="輸入活動項目!">
                 </div>
                 <div class="wrap-input100 input100-select bg1 type" style="display:none;">
                     <span class="label-input100">類型：</span>
@@ -259,7 +272,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4 col-md-2">
-                        <input type="button" class="btn btn-primary" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                        <input type="button" class="btn btn-primary preview" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
                         <input type="button" class="btn btn-primary" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
                     </div>
                 </div>
@@ -288,6 +301,26 @@
             $("input[name='add']").show();
         }
     } );
+
+    $(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
 
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
@@ -371,35 +404,35 @@
 
         if($(".activity").is(":visible")){
             if(add_acname==""){
-                return alert("請輸入活動項目!");
+                return sweetAlert("請輸入活動項目!");
             }
 
             if(add_acweather==false){
-                return alert("請至少打勾一項天氣!");
+                return sweetAlert("請至少打勾一項天氣!");
             }
 
             if(add_acdrive==""){
-                return alert("請輸入車程欄位!");
+                return sweetAlert("請輸入車程欄位!");
             }else if(add_acdrive=="0"){
-                return alert("請至少輸入1小時!");
+                return sweetAlert("請至少輸入1小時!");
             }
 
             if(add_accarry==""){
-                return alert("請輸入攜帶物品!");
+                return sweetAlert("請輸入攜帶物品!");
             }
 
             if(add_acspend==""){
-                return alert("請輸入花費欄位!");
+                return sweetAlert("請輸入花費欄位!");
             }
 
             if(add_achours==""){
-                return alert("請輸入時間欄位!");
+                return sweetAlert("請輸入時間欄位!");
             }else if(add_achours=="0"){
-                return alert("請至少輸入1小時!");
+                return sweetAlert("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){
-                return alert("請至少打勾一項時段!");
+                return sweetAlert("請至少打勾一項時段!");
             }
 
             $("input[name='add_activitys']").val('Y');
@@ -467,35 +500,35 @@
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
-                return alert("請輸入活動項目!");
+                return sweetAlert("請輸入活動項目!");
             }
 
             if(add_acweather==false){
-                return alert("請至少打勾一項天氣!");
+                return sweetAlert("請至少打勾一項天氣!");
             }
 
             if(add_acdrive==""){
-                return alert("請輸入車程欄位!");
+                return sweetAlert("請輸入車程欄位!");
             }else if(add_acdrive=="0"){
-                return alert("請至少輸入1小時!");
+                return sweetAlert("請至少輸入1小時!");
             }
 
             if(add_accarry==""){
-                return alert("請輸入攜帶物品!");
+                return sweetAlert("請輸入攜帶物品!");
             }
 
             if(add_acspend==""){
-                return alert("請輸入花費欄位!");
+                return sweetAlert("請輸入花費欄位!");
             }
 
             if(add_achours==""){
-                return alert("請輸入時間欄位!");
+                return sweetAlert("請輸入時間欄位!");
             }else if(add_achours=="0"){
-                return alert("請至少輸入1小時!");
+                return sweetAlert("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){
-                return alert("請至少打勾一項時段!");
+                return sweetAlert("請至少打勾一項時段!");
             }
         }
 
