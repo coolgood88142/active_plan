@@ -86,11 +86,15 @@
 .nav-link{
     font-size:1rem;
 }
+button.dt-button{
+    color: white;
+    background-color: #923e3e !important;
+}
  </style>
   <body>
     <div id="navbar"></div>
-    <div class="jumbotron container bg-Light side-collapse-container-left">
-        <form id="showForm" name="showForm" method="post">
+    <div class="jumbotron container bg-Light side-collapse-container-left" style="background-color:white; border-color:white;">
+        <form id="showForm" name="showForm" method="post" style="background-color:white; border-color:white;">
             <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
@@ -404,7 +408,11 @@
 
         if($(".activity").is(":visible")){
             if(add_acname==""){
-                return sweetAlert("請輸入活動項目!");
+                return swal(
+                    "請輸入活動項目!",
+                {
+                  closeOnEsc: true,
+                });
             }
 
             if(add_acweather==false){
