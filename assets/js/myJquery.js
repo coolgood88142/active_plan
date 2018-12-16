@@ -51,3 +51,10 @@ $(function(){
           $(get_content).toggleClass('out');
        });
     });
+
+function SweetAlertMessage(message){
+    swal({
+        title: message,
+        showCloseButton: true
+    });
+}

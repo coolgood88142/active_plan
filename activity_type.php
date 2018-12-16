@@ -52,7 +52,7 @@
  </style>
   <body>
   <div id="navbar"></div>
-  <div class="jumbotron container bg-Light side-collapse-container-left">
+  <div class="jumbotron container bg-white side-collapse-container-left">
     <form name="showForm" method="post">
         <div class="col-md-12" style="top: 50px;">
             <h2 id="title" class="text-center font-weight-bold">活動類型</h2>

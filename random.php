@@ -164,7 +164,7 @@
         }
     </style>
     <div id="navbar"></div>
-    <div class="jumbotron container bg-Light side-collapse-container-left">
+    <div class="jumbotron container bg-white side-collapse-container-left">
         <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
             <div class="col-md-12" style="top: 50px;">
                 <h2 class="text-center font-weight-bold">隨機行程</h2>

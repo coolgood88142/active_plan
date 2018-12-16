@@ -75,7 +75,7 @@
 </style>
   <body>
   <div id="navbar"></div>
-  <div class="jumbotron container bg-Light side-collapse-container-left">
+  <div class="jumbotron container bg-white side-collapse-container-left">
         <form action="analysis.php" name="showForm" method="post">
             <div class="row">
                 <div id="data" class="col-md-12" style="top: 50px;">
@@ -94,7 +94,7 @@
                         <div class="col-sm-3 col-md-3 col-lg-2">
                           <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         </div>
-                        <label class="col-sm-3 col-md-3 col-lg-2 control-label">結束日期:</label>
+                        <label class="col-sm-3 col-md-3 col-lg-2 offset-lg-1 control-label">結束日期:</label>
                         <div class="col-sm-3 col-md-3 col-lg-2">
                           <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>

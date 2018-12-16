@@ -63,7 +63,7 @@
         }
     </style>
     <div id="navbar"></div>
-    <div class="jumbotron container bg-Light side-collapse-container-left"> 
+    <div class="jumbotron container bg-white side-collapse-container-left"> 
         <form name="showForm" method="post">
             <div class="row">
                 <div class="col-md-12" style="top: 50px;">

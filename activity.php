@@ -11,12 +11,12 @@
 <script src="./assets/js/main.js"></script>
 <script src="./assets/js/select2.js"></script>
 <script src="./assets/js/select2.min.js"></script>
-<script src="./assets/js/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/select2.css">
 <link rel="stylesheet" href="./assets/css/select2.min.css">
-<link rel="stylesheet" href="./assets/css/sweetalert.min.css">
+<link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -62,7 +62,7 @@
     }
 }
 .wrap-contact100{
-    background: #3fa9dd;
+    background: rgba(0,0,0,.05);
 }
 .wrap-input100{
     border: 1px solid #e6e6e6;
@@ -75,13 +75,13 @@
 .label-input100{
     font-size: 15px;
 }
-.sweet-alert {
+.swal2-modal {
     background-color: rgba(255, 0, 0, 0.6);
     border: 3px solid white;
     font-family:'微軟正黑體';
 }
-.sweet-alert h2 {
-    color:white;
+.swal2-actions {
+    display:none;
 }
 .nav-link{
     font-size:1rem;
@@ -93,8 +93,8 @@ button.dt-button{
  </style>
   <body>
     <div id="navbar"></div>
-    <div class="jumbotron container bg-Light side-collapse-container-left" style="background-color:white; border-color:white;">
-        <form id="showForm" name="showForm" method="post" style="background-color:white; border-color:white;">
+    <div class="jumbotron container bg-white side-collapse-container-left" style="background-color:white; border-color:white;">
+        <form class="contact100-form" id="showForm" name="showForm" method="post" style="background-color:white; border-color:white;">
             <div class="col-md-12" style="top: 50px;">
                 <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
@@ -203,12 +203,13 @@ button.dt-button{
                     </tfoot>
                 </table>
                 <div class="wrap-contact100" style="display:none; width:100%;">
+                <form class="contact100-form">
                 <div class="row">
                     <div class="col-sm-4 col-md-2">
                         <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
                     </div>
                 </div>
-                <div class="wrap-input100 validate-input bg1 activity" style="display:none;">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 activity" style="display:none;">
                     <span class="label-input100">*活動項目：</span>
                     <input class="input100" type="text" name="add_acname" placeholder="輸入活動項目!">
                 </div>
@@ -227,7 +228,7 @@ button.dt-button{
 						<div class="dropDownSelect2"></div>
                     </div>
                 </div>
-                <div class="wrap-input100 validate-input bg1 weather" style="display:none;">
+                <div class="wrap-input100 bg1 rs1-wrap-input100 weather" style="display:none;">
                     <span class="label-input100">*天氣：</span>
                     <div class="col align-items-strat">
                         <?php 
@@ -241,7 +242,7 @@ button.dt-button{
                         ?>
                     </div>
                 </div>
-                <div class="wrap-input100 validate-input bg1 drive" style="display:none;">
+                <div class="wrap-input100 bg1 rs1-wrap-input100 drive" style="display:none;">
                     <span class="label-input100">*車程(小時)：</span>
                     <input class="input100" type="text" name="add_acdrive" placeholder="輸入車程!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
@@ -250,17 +251,17 @@ button.dt-button{
                     <span class="label-input100">*攜帶物品：</span>
                     <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
                 </div>
-                <div class="wrap-input100 validate-input bg1 spend" style="display:none;">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 spend" style="display:none;">
                     <span class="label-input100">*花費(元)：</span>
                     <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
-                <div class="wrap-input100 validate-input bg1 time" style="display:none;">
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 time" style="display:none;">
                     <span class="label-input100">*時間(小時)：</span>
                     <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
                             onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                 </div>
-                <div class="wrap-input100 validate-input bg1 timetype" style="display:none;">
+                <div class="wrap-input100 validate-input rs1-wrap-input100 bg1 timetype" style="display:none;">
                     <span class="label-input100">*時段：</span>
                     <div class="col align-items-strat">
                         <?php 
@@ -408,11 +409,7 @@ button.dt-button{
 
         if($(".activity").is(":visible")){
             if(add_acname==""){
-                return swal(
-                    "請輸入活動項目!",
-                {
-                  closeOnEsc: true,
-                });
+                return SweetAlertMessage( "請輸入活動項目!");
             }
 
             if(add_acweather==false){
@@ -508,35 +505,35 @@ button.dt-button{
 
         if($("input[name='up_activitys']").val()=='Y'){
             if(add_acname==""){
-                return sweetAlert("請輸入活動項目!");
+                return SweetAlertMessage("請輸入活動項目!");
             }
 
             if(add_acweather==false){
-                return sweetAlert("請至少打勾一項天氣!");
+                return SweetAlertMessage("請至少打勾一項天氣!");
             }
 
             if(add_acdrive==""){
-                return sweetAlert("請輸入車程欄位!");
+                return SweetAlertMessage("請輸入車程欄位!");
             }else if(add_acdrive=="0"){
-                return sweetAlert("請至少輸入1小時!");
+                return SweetAlertMessage("請至少輸入1小時!");
             }
 
             if(add_accarry==""){
-                return sweetAlert("請輸入攜帶物品!");
+                return SweetAlertMessage("請輸入攜帶物品!");
             }
 
             if(add_acspend==""){
-                return sweetAlert("請輸入花費欄位!");
+                return SweetAlertMessage("請輸入花費欄位!");
             }
 
             if(add_achours==""){
-                return sweetAlert("請輸入時間欄位!");
+                return SweetAlertMessage("請輸入時間欄位!");
             }else if(add_achours=="0"){
-                return sweetAlert("請至少輸入1小時!");
+                return SweetAlertMessage("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){
-                return sweetAlert("請至少打勾一項時段!");
+                return SweetAlertMessage("請至少打勾一項時段!");
             }
         }
 
