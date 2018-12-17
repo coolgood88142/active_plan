@@ -62,7 +62,7 @@
     }
 }
 .wrap-contact100{
-    background: rgba(0,0,0,.05);
+    background: #3fa9dd;
 }
 .wrap-input100{
     border: 1px solid #e6e6e6;
@@ -70,7 +70,7 @@
     padding: 10px 30px 9px 22px;
     margin-bottom: 20px;
     position: relative;
-    background-color: #f7f7f7;
+    /* background: rgba(0,0,0,.05); */
 }
 .label-input100{
     font-size: 15px;
@@ -86,9 +86,15 @@
 .nav-link{
     font-size:1rem;
 }
-button.dt-button{
+
+button.dt-button.active {
     color: white;
-    background-color: #923e3e !important;
+    border-color: #007bff;
+    background: #007bff !important;
+    margin-bottom : 6px;
+}
+div.dt-button-collection button.dt-button{
+    margin-bottom : 6px;
 }
  </style>
   <body>
@@ -216,7 +222,7 @@ button.dt-button{
                 <div class="wrap-input100 input100-select bg1 type" style="display:none;">
                     <span class="label-input100">*類型：</span>
                     <div>
-                        <select class="js-select2" name="add_actype">
+                        <select class="custom-select" name="add_actype">
                             <?php
                                 foreach ($active_type as $key => $type) {
                             ?>

@@ -49,6 +49,41 @@
 		color: #212121;
   }
 
+  .panel-group .panel {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #EEEEEE;
+  }
+
+  .panel-default > .panel-heading {
+		padding: 0;
+		border-radius: 0;
+		color: #212121;
+		background-color: #FAFAFA;
+		border-color: #EEEEEE;
+	}
+
+  .panel-title {
+    background-color: #3fa9dd;
+		font-size: 20px;
+    font-family:'微軟正黑體';
+	}
+
+  .panel-body {
+		font-size: 16px;
+    font-family:'微軟正黑體';
+	}
+
+  .panel-title > a {
+		display: block;
+		padding: 15px;
+		text-decoration: none;
+	}
+
+  .panel-default > .panel-heading + .panel-collapse > .panel-body {
+		border-top-color: #EEEEEE;
+	}
+  
  </style>
   <body>
   <div id="navbar"></div>
@@ -59,29 +94,23 @@
                 <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
 
-                <div class="accordion" id="accordionExample">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   <?php foreach($quertsion as $key => $value){?>
-                  <div class="card">
-                    <div class="card-header" id="heading<?=$value['qo_order']?>">
-                      <h5 class="mb-0">
-                        <div class="row justify-content-center align-items-center">
-                          <div class="col">
-                              <button class="btn btn-light font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
-                                <?=$value['qu_question']?>
-                              </button>
-                          </div>
-                          <div class="col">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="heading<?=$value['qo_order']?>">
+                        <h4 class="panel-title font-weight-bold">
+                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$value['qo_order']?>" aria-expanded="true" aria-controls="collapse<?=$value['qo_order']?>">
                             <i class="more-less glyphicon glyphicon-plus"></i>
-                          </div>
-                        </div>
-                      </h5>
-                    </div>
-
-                    <div id="collapse<?=$value['qo_order']?>" class="collapse" aria-labelledby="heading<?=$value['qo_order']?>" data-parent="#accordionExample">
-                      <div class="card-body">
-                        <?=$value['qu_answer']?>
+                            <?=$value['qu_question']?>
+                          </a>
+                        </h4>
                       </div>
-                    </div>
+
+                      <div id="collapse<?=$value['qo_order']?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?=$value['qo_order']?>">
+                        <div class="panel-body font-weight-bold">
+                          <?=$value['qu_answer']?>
+                        </div>
+                      </div>
                   </div>
                   <?php }?>
                 </div>
@@ -96,13 +125,13 @@
     });
 
     function toggleIcon(e) {
-      $(e.target).
-      prev('.card-header').
-      find(".more-less").
-      toggleClass('glyphicon-plus glyphicon-minus');
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
     }
-    $('.accordion').on('hidden.bs.collapse', toggleIcon);
-    $('.accordion').on('shown.bs.collapse', toggleIcon);
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
 
     function show(page){
         if($("input[name='admin']").val()=="Y" && (page=="setting" || page=="question")){
