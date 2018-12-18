@@ -3,9 +3,7 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"> -->
 <link rel="stylesheet" href="./assets/css/buttons.dataTables.min.css">
-<!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> -->
 <script src="./assets/js/dataTables.buttons.min.js"></script>
 <script src="./assets/js/buttons.colVis.min.js"></script>
 <script src="./assets/js/main.js"></script>
@@ -63,6 +61,9 @@
 }
 .wrap-contact100{
     background: #3fa9dd;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .wrap-input100{
     border: 1px solid #e6e6e6;
@@ -80,8 +81,8 @@
     border: 3px solid white;
     font-family:'微軟正黑體';
 }
-.swal2-actions {
-    display:none;
+.swal2-popup .swal2-title{
+    color:white;
 }
 .nav-link{
     font-size:1rem;
@@ -96,15 +97,18 @@ button.dt-button.active {
 div.dt-button-collection button.dt-button{
     margin-bottom : 6px;
 }
+.container-contact100-form-btn{
+    justify-content:start;
+}
  </style>
   <body>
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left" style="background-color:white; border-color:white;">
         <form class="contact100-form" id="showForm" name="showForm" method="post" style="background-color:white; border-color:white;">
             <div class="col-md-12" style="top: 50px;">
-                <h2 id="title" class="text-center font-weight-bold">活動列表</h2>
+                <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-                <div style="text-align:right;">
+                <div id="addbutton" style="text-align:right;">
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_activity()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add" name="add" value="新增" onClick="add_activity()"/>
                 </div>
@@ -209,88 +213,91 @@ div.dt-button-collection button.dt-button{
                     </tfoot>
                 </table>
                 <div class="wrap-contact100" style="display:none; width:100%;">
-                <form class="contact100-form">
-                <div class="row">
-                    <div class="col-sm-4 col-md-2">
-                        <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
+                    <div class="container-contact100-form-btn">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-2">
+                                <input type="button" class="btn btn-primary" style="display:none; margin-bottom:20px;" name="backpage" value="回上一頁" onClick="back_activity()"/>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 activity" style="display:none;">
-                    <span class="label-input100">*活動項目：</span>
-                    <input class="input100" type="text" name="add_acname" placeholder="輸入活動項目!">
-                </div>
-                <div class="wrap-input100 input100-select bg1 type" style="display:none;">
-                    <span class="label-input100">*類型：</span>
-                    <div>
-                        <select class="custom-select" name="add_actype">
-                            <?php
-                                foreach ($active_type as $key => $type) {
+                    <div class="wrap-input100 validate-input bg1 activity" style="display:none;">
+                        <span class="label-input100">*活動項目：</span>
+                        <input class="input100" type="text" name="add_acname" placeholder="輸入活動項目!">
+                    </div>
+                    <div class="wrap-input100 input100-select bg1 type" style="display:none;">
+                        <span class="label-input100">*類型：</span>
+                        <div>
+                            <select class="custom-select" name="add_actype">
+                                <?php
+                                    foreach ($active_type as $key => $type) {
+                                ?>
+                                    <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 weather" style="display:none;">
+                        <span class="label-input100">*天氣：</span>
+                        <div class="col align-items-strat">
+                            <?php 
+                                foreach($activity_weather as $key => $weather){
                             ?>
-                                <option value="<?=$type['type_id']?>"><?=$type['name']?></option>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?>
+                                </div>
                             <?php
                                 }
                             ?>
-						</select>
-						<div class="dropDownSelect2"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="wrap-input100 bg1 rs1-wrap-input100 weather" style="display:none;">
-                    <span class="label-input100">*天氣：</span>
-                    <div class="col align-items-strat">
-                        <?php 
-                            foreach($activity_weather as $key => $weather){
-                        ?>
-                            <div class="form-check form-check-inline">
-                                <input type="checkbox" name="add_acweather[]" value="<?=$weather['aw_type']?>"><?=$weather['aw_name']?>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 drive" style="display:none;">
+                        <span class="label-input100">*車程(小時)：</span>
+                        <input class="input100" type="text" name="add_acdrive" placeholder="輸入車程!" value="" size="2"  
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    <div class="wrap-input100 validate-input bg1 carry" style="display:none;">
+                        <span class="label-input100">*攜帶物品：</span>
+                        <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
+                    </div>
+                    <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 spend" style="display:none;">
+                        <span class="label-input100">*花費(元)：</span>
+                        <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 time" style="display:none;">
+                        <span class="label-input100">*時間(小時)：</span>
+                        <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
+                                onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    <div class="wrap-input100 validate-input rs1-wrap-input100 bg1 timetype" style="display:none;">
+                        <span class="label-input100">*時段：</span>
+                        <div class="col align-items-strat">
+                            <?php 
+                                foreach($timetypes as $key => $time){
+                            ?>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?>
+                                </div>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-2">
+                                <input type="button" class="btn btn-primary preview" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
+                                <input type="button" class="btn btn-primary" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
                             </div>
-                        <?php
-                            }
-                        ?>
+                        </div>
                     </div>
-                </div>
-                <div class="wrap-input100 bg1 rs1-wrap-input100 drive" style="display:none;">
-                    <span class="label-input100">*車程(小時)：</span>
-                    <input class="input100" type="text" name="add_acdrive" placeholder="輸入車程!" value="" size="2"  
-                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                </div>
-                <div class="wrap-input100 validate-input bg1 carry" style="display:none;">
-                    <span class="label-input100">*攜帶物品：</span>
-                    <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
-                </div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 spend" style="display:none;">
-                    <span class="label-input100">*花費(元)：</span>
-                    <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
-                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                </div>
-                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 time" style="display:none;">
-                    <span class="label-input100">*時間(小時)：</span>
-                    <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
-                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-                </div>
-                <div class="wrap-input100 validate-input rs1-wrap-input100 bg1 timetype" style="display:none;">
-                    <span class="label-input100">*時段：</span>
-                    <div class="col align-items-strat">
-                        <?php 
-                            foreach($timetypes as $key => $time){
-                        ?>
-                            <div class="form-check form-check-inline">
-                                <input type="checkbox" name="add_actimetype[]" value="<?=$time['ty_type']?>"><?=$time['ty_name']?>
-                            </div>
-                        <?php
-                            }
-                        ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 col-md-2">
-                        <input type="button" class="btn btn-primary preview" style="display:none;" name="addactivity" value="新增" onClick="insert()" />
-                        <input type="button" class="btn btn-primary" style="display:none;" name="up_submit" value="儲存" onClick="update()" />
-                    </div>
-                </div>
-                <input type="hidden" name="add_acid" value=""/>
-                <input type="hidden" name="add_activitys" />
-                <input type="hidden" name="up_activitys" />
-                <input type="hidden" name="Responsive_Button" />
+                    <input type="hidden" name="add_acid" value=""/>
+                    <input type="hidden" name="add_activitys" />
+                    <input type="hidden" name="up_activitys" />
+                    <input type="hidden" name="Responsive_Button" />
                 </div>
             </div>
         </form>
@@ -367,12 +374,13 @@ div.dt-button-collection button.dt-button{
         $(".carry").show();
         $(".spend").show();
         $(".hours").show();
+        $(".time").show();
         $(".timetype").show();
         $("input[name='addactivity']").show();
         $(".wrap-contact100").show();
 
         if($("#add").is(":visible")){
-            $("#add").hide();
+            $("#addbutton").css("display", "none");
             $("input[name='Responsive_Button']").val(false);
         }else if($("#img").is(":visible")){
             $("#img").css("display", "none");
@@ -400,7 +408,7 @@ div.dt-button-collection button.dt-button{
         if(Responsive_Button == "true"){
             $("#img").show();
         }else{
-            $("#add").show();
+            $("#addbutton").show();
         }
     }
 
@@ -419,31 +427,31 @@ div.dt-button-collection button.dt-button{
             }
 
             if(add_acweather==false){
-                return sweetAlert("請至少打勾一項天氣!");
+                return SweetAlertMessage("請至少打勾一項天氣!");
             }
 
             if(add_acdrive==""){
-                return sweetAlert("請輸入車程欄位!");
+                return SweetAlertMessage("請輸入車程欄位!");
             }else if(add_acdrive=="0"){
-                return sweetAlert("請至少輸入1小時!");
+                return SweetAlertMessage("請至少輸入1小時!");
             }
 
             if(add_accarry==""){
-                return sweetAlert("請輸入攜帶物品!");
+                return SweetAlertMessage("請輸入攜帶物品!");
             }
 
             if(add_acspend==""){
-                return sweetAlert("請輸入花費欄位!");
+                return SweetAlertMessage("請輸入花費欄位!");
             }
 
             if(add_achours==""){
-                return sweetAlert("請輸入時間欄位!");
+                return SweetAlertMessage("請輸入時間欄位!");
             }else if(add_achours=="0"){
-                return sweetAlert("請至少輸入1小時!");
+                return SweetAlertMessage("請至少輸入1小時!");
             }
 
             if(add_actimetype==false){
-                return sweetAlert("請至少打勾一項時段!");
+                return SweetAlertMessage("請至少打勾一項時段!");
             }
 
             $("input[name='add_activitys']").val('Y');

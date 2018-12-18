@@ -27,7 +27,7 @@ function datatable_language(){
             {   
                 text: '隱藏項目',
                 extend: 'colvis',
-                className: 'colvisButton',
+                className: 'colvisButton btn btn-primary',
                 columns: ':gt(3)',
                 init: function(api, node, config) {
                    $(node).removeClass('dt-button')
