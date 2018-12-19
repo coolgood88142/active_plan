@@ -60,7 +60,7 @@
     }
 }
 .wrap-contact100{
-    background: #3fa9dd;
+    background: #DDDDDD;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -71,7 +71,7 @@
     padding: 10px 30px 9px 22px;
     margin-bottom: 20px;
     position: relative;
-    /* background: rgba(0,0,0,.05); */
+    font-family: '微軟正黑體';
 }
 .label-input100{
     font-size: 15px;
@@ -88,12 +88,18 @@
     font-size:1rem;
 }
 
-button.dt-button.active {
+button.dt-button,button.dt-button.active {
     color: white;
     border-color: #007bff;
     background: #007bff !important;
     margin-bottom : 6px;
 }
+
+div.dt-button-collection button.dt-button.active:not(.disabled){
+    box-shadow: inset 2px 2px 4px #000088;
+}
+
+
 div.dt-button-collection button.dt-button{
     margin-bottom : 6px;
 }
@@ -221,11 +227,15 @@ div.dt-button-collection button.dt-button{
                         </div>
                     </div>
                     <div class="wrap-input100 validate-input bg1 activity" style="display:none;">
-                        <span class="label-input100">*活動項目：</span>
+                        <span>
+                            <label style="color:red;">*</label>活動項目：
+                        </span>
                         <input class="input100" type="text" name="add_acname" placeholder="輸入活動項目!">
                     </div>
                     <div class="wrap-input100 input100-select bg1 type" style="display:none;">
-                        <span class="label-input100">*類型：</span>
+                        <span>
+                            <label style="color:red;">*</label>類型：
+                        </span>
                         <div>
                             <select class="custom-select" name="add_actype">
                                 <?php
@@ -240,7 +250,9 @@ div.dt-button-collection button.dt-button{
                         </div>
                     </div>
                     <div class="wrap-input100 bg1 rs1-wrap-input100 weather" style="display:none;">
-                        <span class="label-input100">*天氣：</span>
+                        <span>
+                            <label style="color:red;">*</label>天氣：
+                        </span>
                         <div class="col align-items-strat">
                             <?php 
                                 foreach($activity_weather as $key => $weather){
@@ -254,26 +266,36 @@ div.dt-button-collection button.dt-button{
                         </div>
                     </div>
                     <div class="wrap-input100 bg1 rs1-wrap-input100 drive" style="display:none;">
-                        <span class="label-input100">*車程(小時)：</span>
+                        <span>
+                            <label style="color:red;">*</label>車程(小時)：
+                        </span>
                         <input class="input100" type="text" name="add_acdrive" placeholder="輸入車程!" value="" size="2"  
                                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
                     <div class="wrap-input100 validate-input bg1 carry" style="display:none;">
-                        <span class="label-input100">*攜帶物品：</span>
+                        <span>
+                            <label style="color:red;">*</label>攜帶物品：
+                        </span>
                         <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
                     </div>
                     <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 spend" style="display:none;">
-                        <span class="label-input100">*花費(元)：</span>
+                        <span>
+                            <label style="color:red;">*</label>花費(元)：
+                        </span>
                         <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
                                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
                     <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 time" style="display:none;">
-                        <span class="label-input100">*時間(小時)：</span>
+                        <span>
+                            <label style="color:red;">*</label>時間(小時)：
+                        </span>
                         <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
                                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
                     <div class="wrap-input100 validate-input rs1-wrap-input100 bg1 timetype" style="display:none;">
-                        <span class="label-input100">*時段：</span>
+                        <span>
+                            <label style="color:red;">*</label>時段：
+                        </span>
                         <div class="col align-items-strat">
                             <?php 
                                 foreach($timetypes as $key => $time){

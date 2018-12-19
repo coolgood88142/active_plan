@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -83,6 +85,29 @@
             width:48px;
             height:48px;
         }
+        .wrap-contact100{
+            background: #DDDDDD;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .wrap-input100{
+            border: 1px solid #e6e6e6;
+            border-radius: 13px;
+            padding: 10px 30px 9px 22px;
+            margin-bottom: 20px;
+            position: relative;
+            font-family: '微軟正黑體';
+        }
+        .label-input100{
+            font-size: 15px;
+        }
+        .container-contact100-form-btn{
+            justify-content:start;
+        }
+        .nav-link{
+            font-size:1rem;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
@@ -99,22 +124,26 @@
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form name="showForm" method="post">
         <div class="col-md-12" style="top: 50px;">
-            <h2 id="title" class="text-center font-weight-bold">行程列表</h2>
+            <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-2 control-label" for="pt_name">行程名稱:</label>
-                <div class="col-sm-4 col-md-4">
-                    <input type="text" class="form-control" name="pt_name" value="<?=$pt_name?>">
+            <div class="wrap-contact100" style="width:100%;">
+                <div class="wrap-input100 validate-input bg1">
+                    <span>
+                        <label style="color:red;">*</label>行程名稱：
+                    </span>
+                    <input class="input100" type="text" name="pt_name" value="<?=$pt_name?>">
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-md-2 control-label" for="pt_date">出發日期:</label>
-                <div class="col-sm-4 col-md-3">
-                    <input type="text" class="form-control" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker">
+                <div class="wrap-input100 validate-input bg1">
+                    <span>
+                        <label style="color:red;">*</label>出發日期：
+                    </span>
+                    <input class="input100" type="text" name="pt_date" value="<?=$pt_date?>" data-provide="datepicker">
                 </div>
-                <div class="col d-flex align-items-end flex-column" style="text-align:right">
-                    <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none"  onClick="add_plan()">
-                    <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
+                <div class="container-contact100-form-btn">
+                    <div id="addbutton" class="col d-flex align-items-end flex-column" style="text-align:right">
+                        <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none"  onClick="add_plan()">
+                        <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
+                    </div>
                 </div>
             </div>   
             <br/>
@@ -309,9 +338,10 @@
     function add_plan(){
         $('#example1_wrapper').hide();
         $('#example2_wrapper').show();
+        $(".wrap-contact100").show();
 
         if($("#addplan").is(":visible")){
-            $("#addplan").hide();
+            $("#addbutton").css("display", "none");
             $("input[name='Responsive_Button']").val(false);
         }else if($("#img").is(":visible")){
             $("#img").css("display", "none");

@@ -3,6 +3,8 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -41,6 +43,30 @@
     height:48px;
 }
 
+.wrap-contact100{
+    background: #DDDDDD;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.wrap-input100{
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 30px 9px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: '微軟正黑體';
+}
+.label-input100{
+    font-size: 15px;
+}
+.container-contact100-form-btn{
+    justify-content:start;
+}
+.nav-link{
+    font-size:1rem;
+}
+
 @media screen and (max-width: 768px) {
     .jumbotron,.btn,.form-control{
         font-size:14px;
@@ -55,9 +81,9 @@
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form name="showForm" method="post">
         <div class="col-md-12" style="top: 50px;">
-            <h2 id="title" class="text-center font-weight-bold">活動類型</h2>
+            <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">活動類型</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
-            <div style="text-align:right">
+            <div id="addbutton" style="text-align:right">
                 <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" style="margin-bottom:20px;" onClick="add_timetype()">
                 <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="display:none; margin-bottom:20px;" id="add_type" name="add_type" value="新增" onClick="add_timetype()"/>
             </div>
@@ -103,22 +129,27 @@
                 <tfoot>
                 </tfoot>
             </table>
-            <div class="row">
-                <div class="col-sm-4 col-md-2">
-                    <input type="button" style="display:none;" class="btn btn-primary" name="backtype" value="回上一頁" onClick="back_timetype()"/>
+            <div class="wrap-contact100" style="display:none; width:100%;">
+                <div class="container-contact100-form-btn">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-2">
+                            <input type="button" style="display:none; margin-bottom:20px;" class="btn btn-primary" name="backtype" value="回上一頁" onClick="back_timetype()"/>
+                        </div>
+                    </div>
                 </div>
-            </div><br/>
-            <div class="form-group row timetypes" style="display:none;">
-                <label class="col-sm-4 col-md-2 control-label" for="add_typename">活動類型:</label>
-                <div class="col-sm-4 col-md-3">
-                    <input type="text" class="form-control" name="add_typename" value="">
-                    <input type="hidden" name="add_typeid" value="" >
+                <div class="wrap-input100 bg1 rs1-wrap-input100 timetypes" style="display:none;">
+                    <span>
+                        <label style="color:red;">*</label>活動類型：
+                    </span>
+                    <input class="input100" type="text" name="add_typeid" placeholder="輸入活動類型!">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 col-md-2">
-                    <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />
-                    <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
+                <div class="container-contact100-form-btn">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-2">
+                            <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />
+                            <input type="button" style="display:none;" class="btn btn-primary" name="up_submit" value="儲存" onClick="update()" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <input type="hidden" name="add_timetypes" />
@@ -147,9 +178,10 @@
         $(".timetypes").show();
         $("input[name='add_typename']").show();
         $("input[name='addactivity']").show();
+        $(".wrap-contact100").show();
 
         if($("#add_type").is(":visible")){
-            $("#add_type").hide();
+            $("#addbutton").css("display", "none");
             $("input[name='Responsive_Button']").val(false);
         }else if($("#img").is(":visible")){
             $("#img").css("display", "none");
@@ -166,6 +198,7 @@
         $("input[name='addactivity']").hide();
         $("input[name='up_submit']").hide();
         $("input[name='add_typename']").val('');
+        $(".wrap-contact100").hide();
 
         var Responsive_Button = $("input[name='Responsive_Button']").val();
         if(Responsive_Button == "true"){

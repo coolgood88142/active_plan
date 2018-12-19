@@ -22,6 +22,7 @@
 <style>
   .dropdown-menu li img.avatar{
     height:40px;
+    width:40px;
     border-radius: 50em;
     -webkit-border-radius: 50em;
     -moz-border-radius: 50em;

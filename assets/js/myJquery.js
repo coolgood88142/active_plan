@@ -27,11 +27,8 @@ function datatable_language(){
             {   
                 text: '隱藏項目',
                 extend: 'colvis',
-                className: 'colvisButton btn btn-primary',
-                columns: ':gt(3)',
-                init: function(api, node, config) {
-                   $(node).removeClass('dt-button')
-                }
+                className: 'colvisButton',
+                columns: ':gt(3)'
             }
         ]
     };
@@ -49,12 +46,13 @@ $(function(){
         sideslider.click(function(event){
           $(get_sidebar).toggleClass('in');
           $(get_content).toggleClass('out');
-       });
     });
+});
 
 function SweetAlertMessage(message){
     swal({
         title: message,
+        confirmButtonColor: "#DD6B55",
         showCloseButton: true
     });
 }

@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -61,6 +63,29 @@
             width:48px;
             height:48px;
         }
+        .wrap-contact100{
+            background: #DDDDDD;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .wrap-input100{
+            border: 1px solid #e6e6e6;
+            border-radius: 13px;
+            padding: 10px 30px 9px 22px;
+            margin-bottom: 20px;
+            position: relative;
+            font-family: '微軟正黑體';
+        }
+        .label-input100{
+            font-size: 15px;
+        }
+        .container-contact100-form-btn{
+            justify-content:start;
+        }
+        .nav-link{
+            font-size:1rem;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
@@ -77,45 +102,48 @@
     <div class="jumbotron container bg-white side-collapse-container-left">
         <form name="showForm" method="post">
             <div class="col-md-12" style="top: 50px;">
-                <h2 id="title" class="text-center font-weight-bold">行程列表</h2>
+                <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
-                <div style="text-align:right">
+                <div id="addbutton" style="text-align:right">
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_plan()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
-                <div class="form-group row plan" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="plan_name">行程名稱:</label>
-                    <div class="col-sm-4 col-md-4 align-self-start">
-                        <input type="text" class="form-control" name="plan_name" value="">
+                <div class="wrap-contact100" style="display:none; width:100%;">
+                    <div class="wrap-input100 validate-input bg1 plan" style="display:none;">
+                        <span>
+                            <label style="color:red;">*</label>行程名稱：
+                        </span>
+                        <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
                     </div>
-                </div>
-                <div class="form-group row date" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="plan_date">出發日期:</label>
-                    <div class="col-sm-4 col-md-3 align-self-start">
-                        <input type="text" class="form-control" name="plan_date" value="">
+                    <div class="wrap-input100 validate-input bg1 date" style="display:none;">
+                        <span>
+                            <label style="color:red;">*</label>出發日期：
+                        </span>
+                        <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
                     </div>
-                </div>
-                <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-                <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-                <div class="form-group row userlist" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="pt_userlist">使用者名稱:</label>
-                    <div class="col-sm-4 col-md-3">
-                        <select class="custom-select align-self-start" name="pt_userlist">
+                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                    <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                    <div class="wrap-input100 input100-select bg1 userlist" style="display:none;">
+                        <span>
+                            <label style="color:red;">*</label>使用者名稱：
+                        </span>
+                        <select class="custom-select" name="add_actype">
                             <?php
-                            if($us_admin=='Y'){
-                                foreach($user as $key => $value){
+                                if($us_admin=='Y'){
+                                    foreach($user as $key => $value){
                             ?>
-                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
                             <?php
                                 }
                             }
                             ?>
                         </select>
+                        <div class="dropDownSelect2"></div>
                     </div>
+                    <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
+                    <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
                 </div>
-                <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
-                <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
 
                 <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                 <table id="example1" class="table table-striped table-bordered">
@@ -557,13 +585,14 @@
         $("input[name='back']").show();
         $(".add_activityText").show();
         $('#example4_wrapper').hide();
+        $(".wrap-contact100").show();
         if($("input[name='admin']").val()=='Y'){
             $(".userlist").show(); 
             $("select[name='pt_userlist']").show();
         }
 
         if($("#addplan").is(":visible")){
-            $("#addplan").hide();
+            $("#addbutton").css("display", "none");
             $("input[name='Responsive_Button']").val(false);
         }else if($("#img").is(":visible")){
             $("#img").css("display", "none");
