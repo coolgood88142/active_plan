@@ -99,7 +99,9 @@ div.dt-button-collection button.dt-button.active:not(.disabled){
     box-shadow: inset 2px 2px 4px #000088;
 }
 
-
+.swal2-container.swal2-shown {
+    background-color: rgba(214, 0, 0, 0.4);
+}
 div.dt-button-collection button.dt-button{
     margin-bottom : 6px;
 }

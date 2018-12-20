@@ -109,43 +109,49 @@
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_plan()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
-                <div class="wrap-contact100" style="display:none; width:100%;">
-                    <div class="wrap-input100 validate-input bg1 plan" style="display:none;">
-                        <span>
-                            <label style="color:red;">*</label>行程名稱：
-                        </span>
-                        <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
+                <a id="showform" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    顯示表單
+                </a>
+                <div class="collapse show" id="collapseExample">
+                        <div class="wrap-contact100" style="display:none; width:100%;">
+                            <div class="wrap-input100 validate-input bg1 plan" style="display:none;">
+                                <span>
+                                    <label style="color:red;">*</label>行程名稱：
+                                </span>
+                                <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
+                            </div>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 date" style="display:none;">
+                                <span>
+                                    <label style="color:red;">*</label>出發日期：
+                                </span>
+                                <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
+                            </div>
+                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                            <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                            <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist" style="display:none;">
+                                <span>
+                                    <label style="color:red;">*</label>使用者名稱：
+                                </span>
+                                <select class="custom-select" name="add_actype">
+                                    <?php
+                                        if($us_admin=='Y'){
+                                            foreach($user as $key => $value){
+                                    ?>
+                                            <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
+                            <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
+                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                     </div>
-                    <div class="wrap-input100 validate-input bg1 date" style="display:none;">
-                        <span>
-                            <label style="color:red;">*</label>出發日期：
-                        </span>
-                        <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
-                    </div>
-                    <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-                    <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-                    <div class="wrap-input100 input100-select bg1 userlist" style="display:none;">
-                        <span>
-                            <label style="color:red;">*</label>使用者名稱：
-                        </span>
-                        <select class="custom-select" name="add_actype">
-                            <?php
-                                if($us_admin=='Y'){
-                                    foreach($user as $key => $value){
-                            ?>
-                                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-                    <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
-                    <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
                 </div>
+                <br/>
 
-                <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                 <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -479,6 +485,7 @@
         $("input[name='back']").hide();
         $(".add_activityText").hide();
         $(".check_activity").hide();
+        $("#showform").hide();
         openDate($("input[name='plan_date']"));
         
         $('#example1').DataTable(datatable_language());
@@ -586,6 +593,7 @@
         $(".add_activityText").show();
         $('#example4_wrapper').hide();
         $(".wrap-contact100").show();
+        $("#showform").show();
         if($("input[name='admin']").val()=='Y'){
             $(".userlist").show(); 
             $("select[name='pt_userlist']").show();

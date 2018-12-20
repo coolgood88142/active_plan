@@ -67,7 +67,7 @@
         <form name="showForm" method="post">
             <div class="row">
                 <div class="col-md-12" style="top: 50px;">
-                    <h2 id="title" class="text-center text-dark font-weight-bold">設定</h2>
+                    <h2 id="title" class="text-center text-dark font-weight-bold" style="margin-bottom:20px;">設定</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     
                     <div style="text-align:right">

@@ -52,7 +52,7 @@ $(function(){
 function SweetAlertMessage(message){
     swal({
         title: message,
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#e6b930",
         showCloseButton: true
     });
 }

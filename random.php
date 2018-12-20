@@ -3,6 +3,8 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -154,6 +156,29 @@
             margin-right: auto;
             margin-left: auto;
         }
+        .wrap-contact100{
+            background: #DDDDDD;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .wrap-input100{
+            border: 1px solid #e6e6e6;
+            border-radius: 13px;
+            padding: 10px 30px 9px 22px;
+            margin-bottom: 20px;
+            position: relative;
+            font-family: '微軟正黑體';
+        }
+        .label-input100{
+            font-size: 15px;
+        }
+        .container-contact100-form-btn{
+            justify-content:start;
+        }
+        .nav-link{
+            font-size:1rem;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn{
                 font-size:14px;
@@ -167,7 +192,7 @@
     <div class="jumbotron container bg-white side-collapse-container-left">
         <form name="showForm" action="<?php echo "select_random.php" ?>"method="post">
             <div class="col-md-12" style="top: 50px;">
-                <h2 class="text-center font-weight-bold">隨機行程</h2>
+                <h2 class="text-center font-weight-bold" style="margin-bottom:20px;">隨機行程</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                 <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>
@@ -177,88 +202,94 @@
                 <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
                 <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
     
-                <div class="form-group row plan">
-                    <label class="col-sm-4 col-md-2 control-label" for="plan_name">行程名稱:</label>
-                    <div class="col-sm-4 col-md-4">
-                        <input type="text" class="form-control" name="plan_name" value="">
+                <div class="wrap-contact100" style="width:100%;">
+                    <div class="wrap-input100 validate-input bg1 plan">
+                        <span>
+                            <label style="color:red;">*</label>行程名稱：
+                        </span>
+                        <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
                     </div>
-                </div>
-                <div class="form-group row date">
-                    <label class="col-sm-4 col-md-2 control-label" for="plan_date">出發日期:</label>
-                    <div class="col-sm-4 col-md-2">
-                        <input type="text" class="form-control" name="plan_date" value="" data-provide="datepicker"/>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 date">
+                        <span>
+                            <label style="color:red;">*</label>出發日期：
+                        </span>
+                        <input class="input100" type="text" name="plan_date" data-provide="datepicker">
                     </div>
-                </div>
-                <div class="form-group row userlist" style="display:none;">
-                    <label class="col-sm-4 col-md-2 control-label" for="pt_userlist">使用者名稱:</label>
-                    <div class="col-sm-4 col-md-2">
-                        <select class="custom-select" name="pt_userlist">
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
+                        <span>
+                            <label style="color:red;">*</label>類型：
+                        </span>
+                        <div class="col">
                         <?php 
-                            if($us_admin=="Y"){
-                                foreach($user as $key => $value){
+                            foreach($types as $key => $value){
+                                $type_id = $value['type_id'];
+                                $name = $value['name'];
                         ?>
-                            <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
+                                <label class="form-check-label"><?php echo $name ?></label>
+                            </div>
                         <?php
-                                }
                             }
-                        ?>                    
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row day">
-                    <label class="col-sm-4 col-md-2 control-label" for="day">天數:</label>
-                    <div class="col-sm-4 col-md-2">
-                        <input type="text" class="form-control" name="day" value="" size="2">
-                    </div>
-                    <div class="col">
-                        天
-                    </div>
-                </div>
-                <div class="form-group row weather">
-                    <label class="col-sm-4 col-md-2 control-label" for="typeid[]">類型:</label>
-                    <div class="col">
-                    <?php 
-                        foreach($types as $key => $value){
-                            $type_id = $value['type_id'];
-                            $name = $value['name'];
-                    ?>
-                        <div class="form-check form-check-inline">
-                            <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
-                            <label class="form-check-label"><?php echo $name ?></label>
+                        ?>
                         </div>
-                    <?php
-                        }
-                    ?>
                     </div>
-                </div>
-                <div class="form-group row day_time">
-                    <label class="col-sm-4 col-md-2" control-label" for="day_time">天數小時:</label>
-                    <div class="col-sm-4 col-md-2">
-                        <input type="text" class="form-control" name="day_time" value="">
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 day">
+                        <span>
+                            <label style="color:red;">*</label>天數：
+                        </span>
+                        <input class="input100" type="text" name="day" value="" size="2" placeholder="輸入天數!">
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 day_time">
+                        <span>
+                            <label style="color:red;">*</label>天數小時：
+                        </span>
+                        <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
                         <input type="hidden" name="istime_type" value="" size="2"/>
                     </div>
-                    <div class="col">
-                    小時
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
+                        <span>
+                            <label style="color:red;">*</label>使用者名稱：
+                        </span>
+                        <div>
+                            <select class="custom-select" name="pt_userlist">
+                            <?php 
+                                if($us_admin=="Y"){
+                                    foreach($user as $key => $value){
+                            ?>
+                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                            <?php
+                                    }
+                                }
+                            ?>                    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
+                        <span>
+                            <label style="color:red;">*</label>時段選項：
+                        </span>
+                        <div>
+                            <select class="custom-select" name="time_type">
+                                <option value="*">全部</option>
+                                <?php 
+                                    foreach($time as $key => $value){
+                                        $ty_type = $value['ty_type'];
+                                        $ty_name = $value['ty_name'];
+                                ?>
+                                    <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <input type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="gorandom" value="執行"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row time" style="display:none;">
-                <label class="col-sm-4 col-md-2 control-label" for="time_type">時段選項:</label>
-                <div class="col-sm-4 col-md-2">
-                    <select class="custom-select" name="time_type">
-                        <option value="*">全部</option>
-                        <?php 
-                            foreach($time as $key => $value){
-                                $ty_type = $value['ty_type'];
-                                $ty_name = $value['ty_name'];
-                        ?>
-                            <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
-                        <?php
-                            }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <input type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="gorandom" value="執行"/>
+                <br/>
                 <table id="example1" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -322,6 +353,7 @@
                 <div style="text-align:right">
                     <input type="button" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="goplan" value="送出" onClick="go_plan()"/>
                  </div>
+                </div>
             </div>
         </form>
     </div>
