@@ -1,0 +1,135 @@
+  .jumbotron{
+    height:100%;
+    width:100%;
+    font-family:'微軟正黑體';
+  }
+  
+  #example thead td,#example1 thead td,#example2 thead td,#example3 thead td,#example4 thead td {
+    background: url("./assets/images/background.png");
+    color: white;
+  }
+
+  td.details-control {
+    background: url('./assets/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+  }
+
+  tr.shown td.details-control {
+    background: url('./assets/images/details_close.png') no-repeat center center;
+  }
+
+  .container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .img-thumbnail{
+    width:48px;
+    height:48px;
+  }
+  
+  .wrap-contact100{
+    background: #DDDDDD;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .wrap-input100{
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 30px 9px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: '微軟正黑體';
+  }
+  .label-input100{
+    font-size: 15px;
+  }
+  .container-contact100-form-btn{
+    justify-content:start;
+  }
+  .nav-link{
+    font-size:1rem;
+  }
+
+  .swal2-modal {
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 3px solid white;
+    font-family:'微軟正黑體';
+  }
+  .swal2-popup .swal2-title{
+    color:white;
+  }
+
+  button.dt-button,button.dt-button.active {
+    color: white;
+    border-color: #007bff;
+    background: #007bff !important;
+    margin-bottom : 6px;
+  }
+    
+  div.dt-button-collection button.dt-button.active:not(.disabled){
+    box-shadow: inset 2px 2px 4px #000088;
+  }
+  
+  .swal2-container.swal2-shown {
+    background-color: rgba(214, 0, 0, 0.4);
+  }
+
+  div.dt-button-collection button.dt-button{
+    margin-bottom : 6px;
+  }
+
+  #sortable { list-style-type: none; margin: 0; padding: 0;}
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 14px; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+
+  .more-less {
+		float: right;
+		color: #212121;
+  }
+
+  .panel-group .panel {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #EEEEEE;
+  }
+
+  .panel-default > .panel-heading {
+	padding: 0;
+	border-radius: 0;
+	color: #212121;
+	background-color: #FAFAFA;
+	border-color: #EEEEEE;
+  }
+
+  a.titletext{
+    font-size: 18px;
+    font-family:'微軟正黑體';
+  }
+  
+  .panel-body {
+	font-size: 16px;
+    font-family:'微軟正黑體';
+  }
+
+  .panel-title > a {
+	display: block;
+	padding: 15px;
+	text-decoration: none;
+  }
+
+  .panel-default > .panel-heading + .panel-collapse > .panel-body {
+	border-top-color: #EEEEEE;
+  }
+
+    @media screen and (max-width: 768px) {
+        .jumbotron,.btn,.form-control{
+            font-size:14px;
+        }
+        #title{
+            font-size:28px;
+        }
+    }
