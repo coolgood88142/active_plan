@@ -114,7 +114,7 @@
                 </a>
                 <div class="collapse show" id="collapseExample">
                         <div class="wrap-contact100" style="display:none; width:100%;">
-                            <div class="wrap-input100 validate-input bg1 plan" style="display:none;">
+                            <div class="wrap-input100 validate-input bg1 plan" style="margin-top:30px; display:none;">
                                 <span>
                                     <label style="color:red;">*</label>行程名稱：
                                 </span>
@@ -145,8 +145,6 @@
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
-                            <p class="add_activityText" style="color:red;">請選擇活動項目勾選加入</p>
-                            <p class="check_activity" style="color:red;">確認好活動項目請按送出</p>
                             <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                     </div>
                 </div>

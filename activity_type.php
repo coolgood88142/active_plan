@@ -63,6 +63,9 @@
 .container-contact100-form-btn{
     justify-content:start;
 }
+.btn-end{
+    justify-content:flex-end;
+}
 .nav-link{
     font-size:1rem;
 }
@@ -137,13 +140,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrap-input100 bg1 rs1-wrap-input100 timetypes" style="display:none;">
+                <div class="wrap-input100 bg1 timetypes" style="display:none;">
                     <span>
                         <label style="color:red;">*</label>活動類型：
                     </span>
                     <input class="input100" type="text" name="add_typeid" placeholder="輸入活動類型!">
                 </div>
-                <div class="container-contact100-form-btn">
+                <div class="container-contact100-form-btn btn-end">
                     <div class="row">
                         <div class="col-sm-4 col-md-2">
                             <input type="button" style="display:none;" class="btn btn-primary" name="addactivity" value="新增" onClick="insert()" />

@@ -79,6 +79,15 @@
   }
 }
 
+@media (min-width: 768px) {
+  .col-md-3{
+    max-width:20%
+  }
+  #query{
+      margin-top:0px;
+    }
+}
+
 @media (min-width: 992px) {
   .datetext{
     max-width:14%

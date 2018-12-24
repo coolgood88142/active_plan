@@ -85,6 +85,9 @@
 		border-top-color: #EEEEEE;
 	}
   
+  .panel-group {
+    margin-bottom: -20px;
+  }
  </style>
   <body>
   <div id="navbar"></div>

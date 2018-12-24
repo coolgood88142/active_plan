@@ -77,9 +77,9 @@
                     <table id="example" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <td></td>
+                                <td style="width: 75px;"></td>
                                 <td>使用者名稱</td>
-                                <td>編輯設定</td>
+                                <td style="width:70px;">編輯設定</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,7 @@
                                 <td class="us_name">
                                     <?php echo $value["us_name"]?>
                                 </td>
-                                <td>
+                                <td style="text-align:center;">
                                     <input type="button" class="btn btn-primary" value="編輯" onClick="edit(this)"/>
                                     <input type="hidden" name="us_name" value="<?=$value["us_name"]?>"/>
                                     <input type="hidden" name="us_account" value="<?=$value["us_account"]?>"/>

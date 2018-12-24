@@ -58,6 +58,12 @@
     #title{
         font-size:28px;
     }
+    
+    /* #drive,.ac_drive{
+        display:none;
+    } */
+
+    /*測試用*/
 }
 .wrap-contact100{
     background: #DDDDDD;
@@ -72,6 +78,9 @@
     margin-bottom: 20px;
     position: relative;
     font-family: '微軟正黑體';
+}
+.rs3-wrap-input100{
+    width: calc((100% - 30px) / 3);
 }
 .label-input100{
     font-size: 15px;
@@ -108,6 +117,12 @@ div.dt-button-collection button.dt-button{
 .container-contact100-form-btn{
     justify-content:start;
 }
+.btn-end{
+    justify-content:flex-end;
+}
+.panel-group {
+    margin-bottom: -20px;
+  }
  </style>
   <body>
     <div id="navbar"></div>
@@ -130,7 +145,7 @@ div.dt-button-collection button.dt-button{
                             <td>活動項目</td>
                             <td>類型</td>
                             <td>天氣</td>
-                            <td>車程(小時)</td>
+                            <td id="drive">車程(小時)</td>
                             <td>攜帶物品</td>
                             <td>花費</td>
                             <td>時間(小時)</td>
@@ -280,21 +295,21 @@ div.dt-button-collection button.dt-button{
                         </span>
                         <input class="input100" type="text" name="add_accarry" placeholder="輸入攜帶物品!">
                     </div>
-                    <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 spend" style="display:none;">
+                    <div class="wrap-input100 validate-input bg1 rs3-wrap-input100 bg1 spend" style="display:none;">
                         <span>
                             <label style="color:red;">*</label>花費(元)：
                         </span>
                         <input class="input100" type="text" name="add_acspend" placeholder="輸入數字!" value="" size="2"  
                                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
-                    <div class="wrap-input100 validate-input bg1 rs1-wrap-input100 bg1 time" style="display:none;">
+                    <div class="wrap-input100 validate-input bg1 rs3-wrap-input100 bg1 time" style="display:none;">
                         <span>
                             <label style="color:red;">*</label>時間(小時)：
                         </span>
                         <input class="input100" type="text" name="add_achours" placeholder="輸入數字!" value="" size="2"  
                                 onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
                     </div>
-                    <div class="wrap-input100 validate-input rs1-wrap-input100 bg1 timetype" style="display:none;">
+                    <div class="wrap-input100 validate-input rs3-wrap-input100 bg1 timetype" style="display:none;">
                         <span>
                             <label style="color:red;">*</label>時段：
                         </span>
@@ -310,7 +325,7 @@ div.dt-button-collection button.dt-button{
                             ?>
                         </div>
                     </div>
-                    <div class="container-contact100-form-btn">
+                    <div class="container-contact100-form-btn btn-end">
                         <div class="row">
                             <div class="col-sm-4 col-md-2">
                                 <input type="button" class="btn btn-primary preview" style="display:none;" name="addactivity" value="新增" onClick="insert()" />

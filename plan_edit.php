@@ -127,7 +127,7 @@
             <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             <div class="wrap-contact100" style="width:100%;">
-                <div class="wrap-input100 validate-input bg1">
+                <div class="wrap-input100 validate-input bg1" style="margin-top:30px;">
                     <span>
                         <label style="color:red;">*</label>行程名稱：
                     </span>
