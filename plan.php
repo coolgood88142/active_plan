@@ -86,6 +86,12 @@
         .nav-link{
             font-size:1rem;
         }
+        #show_select{
+            background: #DDDDDD;
+        }
+        .titletext{
+            font-size: 18px;
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
@@ -109,9 +115,13 @@
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_plan()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
-                <a id="showform" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    顯示表單
-                </a>
+                <div class="card" id="show_select">
+                    <div class="card-header">
+                        <a class="titletext font-weight-bold text-dark" role="button" data-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            顯示表單
+                        </a>
+                    </div>
+                </div>
                 <div class="collapse show" id="collapseExample">
                         <div class="wrap-contact100" style="display:none; width:100%;">
                             <div class="wrap-input100 validate-input bg1 plan" style="margin-top:30px; display:none;">
@@ -483,7 +493,7 @@
         $("input[name='back']").hide();
         $(".add_activityText").hide();
         $(".check_activity").hide();
-        $("#showform").hide();
+        $("#show_select").hide();
         openDate($("input[name='plan_date']"));
         
         $('#example1').DataTable(datatable_language());
@@ -564,8 +574,21 @@
             }
             } );
         }
+
+        if($('.collapse show').is(':visible')){
+            $("#show_select").css()
+        }
         
     } );
+
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
 
     function openDate(name){
     $(name).datepicker({
@@ -591,7 +614,7 @@
         $(".add_activityText").show();
         $('#example4_wrapper').hide();
         $(".wrap-contact100").show();
-        $("#showform").show();
+        $("#show_select").show();
         if($("input[name='admin']").val()=='Y'){
             $(".userlist").show(); 
             $("select[name='pt_userlist']").show();

@@ -14,3 +14,6 @@
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 <script src="./assets/js/bootstrap.min.js"></script>
 <script src="./assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">

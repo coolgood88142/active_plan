@@ -179,6 +179,21 @@
         .nav-link{
             font-size:1rem;
         }
+        .plan,.date{
+            font-size:24px;
+            margin-top:30px;
+        }
+        .swal2-modal {
+            background-color: rgba(255, 0, 0, 0.6);
+            border: 3px solid white;
+            font-family:'微軟正黑體';
+        }
+        .swal2-popup .swal2-title{
+            color:white;
+        }
+        .swal2-container.swal2-shown {
+            background-color: rgba(214, 0, 0, 0.4);
+        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn{
                 font-size:14px;
@@ -186,7 +201,28 @@
             #title{
                 font-size:28px;
             }
+            .plan,.date{
+                font-size:20px;
+            }
         }
+        /* @media (min-width: 1200px){
+            .datetext{
+                max-width:12%
+            }
+        }
+
+        @media (min-width: 768px) {
+            .col-md-3{
+                max-width:25%
+            }
+        }
+
+        @media (min-width: 992px) {
+            .datetext{
+                max-width:14%
+            }
+        } */
+        
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left">
@@ -203,18 +239,6 @@
                 <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
     
                 <div class="wrap-contact100" style="width:100%;">
-                    <div class="wrap-input100 validate-input bg1 plan">
-                        <span>
-                            <label style="color:red;">*</label>行程名稱：
-                        </span>
-                        <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
-                    </div>
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 date">
-                        <span>
-                            <label style="color:red;">*</label>出發日期：
-                        </span>
-                        <input class="input100" type="text" name="plan_date" data-provide="datepicker">
-                    </div>
                     <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
                         <span>
                             <label style="color:red;">*</label>類型：
@@ -287,6 +311,22 @@
                     </div>
                     <div class="container-contact100-form-btn">
                         <input type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="gorandom" value="執行"/>
+                    </div>
+                </div>
+                <div class="plan">
+                    <div class="row justify-content-start align-items-start">
+                        <label class="col-sm-4 col-md-3 col-lg-2 datetext control-label">行程名稱：</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="plan_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="date">
+                    <div class="row justify-content-start align-items-start">
+                        <label class="col-sm-4 col-md-3 col-lg-2 datetext control-label">出發日期：</label>
+                        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2">
+                          <input type="text" class="form-control" name="plan_date" data-provide="datepicker">
+                        </div>
                     </div>
                 </div>
                 <br/>
@@ -535,19 +575,19 @@
             $(from).find("input[name='ad_pnorderby']").val(ad_pnorderby);
 
 
-            var plan_name = $("input[name='plan_name']").val().trim();
-            var plan_date = $("input[name='plan_date1']").val().trim();
+            var plan_name = $("input[name='plan_name']").val();
+            var plan_date = $("input[name='plan_date1']").val();
 
             if(plan_name==""){
-                return alert("請輸入行程名稱!");
+                return SweetAlertMessage("請輸入行程名稱!");
             }else if(plan_date==""){
-                return alert("請輸入出發日期!");
+                return SweetAlertMessage("請輸入出發日期!");
             }else if(!plan_date.match("^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02/(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$")){
-                return alert("出發日期格式錯誤!");
+                return SweetAlertMessage("出發日期格式錯誤!");
             }
 
-            var day = $("input[name='day']").val().trim();
-            var day_time = $("input[name='day_time']").val().trim();
+            var day = $("input[name='day']").val();
+            var day_time = $("input[name='day_time']").val();
             var max_dayhours = 0;
 
             if(day>0){
@@ -557,7 +597,7 @@
 
                 if(day_time>max_dayhours){
                     this.value = "";
-                    alert("請輸入天數適當的小時!");
+                    return SweetAlertMessage("請輸入天數適當的小時!");
                 }
             }
 
