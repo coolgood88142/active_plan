@@ -151,7 +151,7 @@
     <input type="hidden" name="post_pnorderby" value="<?=$orderby?>"/>
     <input type="hidden" name="is_query" value="<?=$is_submit?>" />
 </form>
-<?php include("link.php");?>
+<script src="./assets/js/jquery-3.3.1.js"></script>
 <script language="JavaScript">
     $(document).ready(function() {
         var from = $("form[name='submitForm']");

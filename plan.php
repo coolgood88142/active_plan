@@ -4,6 +4,7 @@
   </head>
 <?php include("link.php");?>
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <script src="./assets/js/main.js"></script>
@@ -86,12 +87,6 @@
         .nav-link{
             font-size:1rem;
         }
-        #show_select{
-            background: #DDDDDD;
-        }
-        .titletext{
-            font-size: 18px;
-        }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn,.form-control{
                 font-size:14px;
@@ -102,6 +97,27 @@
             #addplan{
                 display: none;
             }
+        }
+        .titletext{
+            font-size: 18px;
+        }
+        .accordion .card-header:after {
+            font-family: 'FontAwesome';  
+            content: "\f068";
+            float: right; 
+            font-size: 18px;
+        }
+        .accordion .card-header.collapsed:after {
+            /* symbol for "collapsed" panels */
+            content: "\f067"; 
+            font-size: 18px;
+        }
+        #show_select{
+            background: #DDDDDD;
+            border-color : #DDDDDD;
+        }
+        #show_select .card-header.collapsed {
+            background: #FFFFFF;
         }
     </style>
     <div id="navbar"></div>
@@ -115,47 +131,47 @@
                     <img src="./assets/images/add.png" alt="" id="img" name="img" class="img-thumbnail d-md-none" onClick="add_plan()">
                     <input type="button" class="btn btn-primary d-none d-md-inline d-sm-none" style="margin-bottom:20px;" id="addplan" name="addplan" value="新增" onClick="add_plan()"/>
                 </div>
-                <div class="card" id="show_select">
-                    <div class="card-header">
-                        <a class="titletext font-weight-bold text-dark" role="button" data-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            顯示表單
-                        </a>
+                <div id="accordion" class="accordion" style="display:none;">
+                    <div class="card mb-0" id="show_select">
+                        <div class="card-header" data-toggle="collapse" href="#collapseExample">
+                            <a class="titletext font-weight-bold text-dark card-title">
+                                顯示表單
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="collapse show" id="collapseExample">
-                        <div class="wrap-contact100" style="display:none; width:100%;">
-                            <div class="wrap-input100 validate-input bg1 plan" style="margin-top:30px; display:none;">
-                                <span>
-                                    <label style="color:red;">*</label>行程名稱：
-                                </span>
-                                <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
-                            </div>
-                            <div class="wrap-input100 bg1 rs1-wrap-input100 date" style="display:none;">
-                                <span>
-                                    <label style="color:red;">*</label>出發日期：
-                                </span>
-                                <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
-                            </div>
-                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-                            <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-                            <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist" style="display:none;">
-                                <span>
-                                    <label style="color:red;">*</label>使用者名稱：
-                                </span>
-                                <select class="custom-select" name="add_actype">
-                                    <?php
-                                        if($us_admin=='Y'){
-                                            foreach($user as $key => $value){
-                                    ?>
+                    <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
+                        <div class="wrap-input100 validate-input bg1 plan" style="margin-top:20px;">
+                            <span>
+                                <label style="color:red;">*</label>行程名稱：
+                            </span>
+                            <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 date">
+                            <span>
+                                 <label style="color:red;">*</label>出發日期：
+                            </span>
+                            <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
+                        </div>
+                        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                        <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                        <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist">
+                            <span>
+                                <label style="color:red;">*</label>使用者名稱：
+                            </span>
+                            <select class="custom-select" name="add_actype">
+                                <?php
+                                    if($us_admin=='Y'){
+                                        foreach($user as $key => $value){
+                                ?>
                                             <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-                                    <?php
+                                <?php
                                         }
                                     }
-                                    ?>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>
-                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
+                                ?>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                     </div>
                 </div>
                 <br/>
@@ -493,7 +509,7 @@
         $("input[name='back']").hide();
         $(".add_activityText").hide();
         $(".check_activity").hide();
-        $("#show_select").hide();
+        $("#accordion").hide();
         openDate($("input[name='plan_date']"));
         
         $('#example1').DataTable(datatable_language());
@@ -573,22 +589,8 @@
                 tr.addClass('shown');
             }
             } );
-        }
-
-        if($('.collapse show').is(':visible')){
-            $("#show_select").css()
-        }
-        
+        }       
     } );
-
-    function toggleIcon(e) {
-        $(e.target)
-            .prev('.panel-heading')
-            .find(".more-less")
-            .toggleClass('glyphicon-plus glyphicon-minus');
-    }
-    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
-    $('.panel-group').on('shown.bs.collapse', toggleIcon);
 
     function openDate(name){
     $(name).datepicker({
@@ -614,7 +616,7 @@
         $(".add_activityText").show();
         $('#example4_wrapper').hide();
         $(".wrap-contact100").show();
-        $("#show_select").show();
+        $("#accordion").show();
         if($("input[name='admin']").val()=='Y'){
             $(".userlist").show(); 
             $("select[name='pt_userlist']").show();
@@ -693,11 +695,11 @@
             var pt_usid = $("input[name='pt_usid']").val();
             var pt_usname = $("input[name='pt_usname']").val();
             if(plan_name==""){
-                return alert("請輸入行程名稱!");
+                return SweetAlertMessage("請輸入行程名稱!");
             }else if(plan_date==""){
-                return alert("請輸入出發日期!");
+                return SweetAlertMessage("請輸入出發日期!");
             }else if(!plan_date.match("^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02/(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$")){
-                return alert("出發日期格式錯誤!");
+                return SweetAlertMessage("出發日期格式錯誤!");
             }
             
             $(from).find("input[name='plan_name']").val(plan_name);

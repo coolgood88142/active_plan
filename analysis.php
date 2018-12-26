@@ -347,11 +347,11 @@
       }
       if(isPreset==false){
         if(begin_date=="" || end_date==""){
-          return alert("請輸入起始年月!");
+          return SweetAlertMessage("請輸入起始年月!");
         }else if(begin_day>end_day){
-          return alert("起始日期不可大於結束日期!");
+          return SweetAlertMessage("起始日期不可大於結束日期!");
         }else if(diff_momth>10000){
-          return alert("查詢日期不可以超過1年!");
+          return SweetAlertMessage("查詢日期不可以超過1年!");
         }
       }
       var data = {

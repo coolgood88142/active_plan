@@ -217,7 +217,7 @@
             $("#isStatus").val(status);
             Data_Processing();
           }else{
-            alert("請至少勾選一個刪除");
+            SweetAlertMessage("請至少勾選一個刪除");
           }
         }
     }

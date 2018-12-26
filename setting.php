@@ -305,7 +305,7 @@
       var us_gender = $("input[name='us_gender']:checked").val();
 
       if(us_account==""){
-        return alert("請輸入帳號!");
+        return SweetAlertMessage("請輸入帳號!");
       }
       // if(us_password==""){
       //   return alert("請輸入密碼!");
@@ -320,7 +320,7 @@
       //   return alert("密碼格式錯誤!");
       // }
       if(us_password!=agree_us_password){
-        return alert("請輸入密碼錯誤!");
+        return SweetAlertMessage("請輸入密碼錯誤!");
       }
       
       // if(us_name==""){

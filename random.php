@@ -2,9 +2,6 @@
   <head>
     <title>規劃行程系統</title>
   </head>
-<?php include("link.php");?>
-<script src="./assets/js/main.js"></script>
-<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -124,9 +121,13 @@
     }
 
  ?>
+ <?php include("link.php");?>
  <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
   <body>
     <style>
         td.details-control {
@@ -135,11 +136,6 @@
         }
         tr.shown td.details-control {
             background: url('./assets/images/details_close.png') no-repeat center center;
-        }
-        .vertical-center {
-            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-            display: flex;
-            align-items: center; 
         }
         .jumbotron{
             height:100%;
@@ -205,6 +201,25 @@
                 font-size:20px;
             }
         }
+        .titletext{
+            font-size: 18px;
+        }
+        .accordion .card-header:after {
+            font-family: 'FontAwesome';  
+            content: "\f068";
+            float: right; 
+        }
+        .accordion .card-header.collapsed:after {
+            /* symbol for "collapsed" panels */
+            content: "\f067"; 
+        }
+        #show_select{
+            background: #DDDDDD;
+            border-color : #DDDDDD;
+        }
+        #show_select .card-header.collapsed {
+            background: #FFFFFF;
+        }
         /* @media (min-width: 1200px){
             .datetext{
                 max-width:12%
@@ -238,79 +253,89 @@
                 <input type="hidden" id="post_daytime" value="<?=$post_daytime?>"/>
                 <input type="hidden" id="post_timetype" value="<?=$post_timetype?>"/>
     
-                <div class="wrap-contact100" style="width:100%;">
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
-                        <span>
-                            <label style="color:red;">*</label>類型：
-                        </span>
-                        <div class="col">
-                        <?php 
-                            foreach($types as $key => $value){
-                                $type_id = $value['type_id'];
-                                $name = $value['name'];
-                        ?>
-                            <div class="form-check form-check-inline">
-                                <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
-                                <label class="form-check-label"><?php echo $name ?></label>
-                            </div>
-                        <?php
-                            }
-                        ?>
+                <div id="accordion" class="accordion">
+                    <div class="card mb-0" id="show_select">
+                        <div class="card-header" data-toggle="collapse" href="#collapseExample">
+                            <a class="titletext font-weight-bold text-dark card-title">
+                                顯示表單
+                            </a>
                         </div>
                     </div>
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 day">
-                        <span>
-                            <label style="color:red;">*</label>天數：
-                        </span>
-                        <input class="input100" type="text" name="day" value="" size="2" placeholder="輸入天數!">
-                    </div>
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 day_time">
-                        <span>
-                            <label style="color:red;">*</label>天數小時：
-                        </span>
-                        <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
-                        <input type="hidden" name="istime_type" value="" size="2"/>
-                    </div>
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
-                        <span>
-                            <label style="color:red;">*</label>使用者名稱：
-                        </span>
-                        <div>
-                            <select class="custom-select" name="pt_userlist">
+
+                    <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
+                            <span>
+                                <label style="color:red;">*</label>類型：
+                            </span>
+                            <div class="col">
                             <?php 
-                                if($us_admin=="Y"){
-                                    foreach($user as $key => $value){
+                                foreach($types as $key => $value){
+                                    $type_id = $value['type_id'];
+                                    $name = $value['name'];
                             ?>
-                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
+                                    <label class="form-check-label"><?php echo $name ?></label>
+                                </div>
                             <?php
-                                    }
                                 }
-                            ?>                    
-                            </select>
+                            ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
-                        <span>
-                            <label style="color:red;">*</label>時段選項：
-                        </span>
-                        <div>
-                            <select class="custom-select" name="time_type">
-                                <option value="*">全部</option>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 day">
+                            <span>
+                                <label style="color:red;">*</label>天數：
+                            </span>
+                            <input class="input100" type="text" name="day" value="" size="2" placeholder="輸入天數!">
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 day_time">
+                            <span>
+                                <label style="color:red;">*</label>天數小時：
+                            </span>
+                            <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
+                            <input type="hidden" name="istime_type" value="" size="2"/>
+                        </div>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
+                            <span>
+                                <label style="color:red;">*</label>使用者名稱：
+                            </span>
+                            <div>
+                                <select class="custom-select" name="pt_userlist">
                                 <?php 
-                                    foreach($time as $key => $value){
-                                        $ty_type = $value['ty_type'];
-                                        $ty_name = $value['ty_name'];
+                                    if($us_admin=="Y"){
+                                        foreach($user as $key => $value){
                                 ?>
-                                    <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
                                 <?php
+                                        }
                                     }
-                                ?>
-                            </select>
-                            <div class="dropDownSelect2"></div>
+                                ?>                    
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="container-contact100-form-btn">
-                        <input type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="gorandom" value="執行"/>
+                        <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
+                            <span>
+                                <label style="color:red;">*</label>時段選項：
+                            </span>
+                            <div>
+                                <select class="custom-select" name="time_type">
+                                    <option value="*">全部</option>
+                                    <?php 
+                                        foreach($time as $key => $value){
+                                            $ty_type = $value['ty_type'];
+                                            $ty_name = $value['ty_name'];
+                                    ?>
+                                        <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                        <div class="container-contact100-form-btn">
+                            <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
+                        </div>
                     </div>
                 </div>
                 <div class="plan">
@@ -391,8 +416,7 @@
                      </tfoot>
                 </table>
                 <div style="text-align:right">
-                    <input type="button" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px;" name="goplan" value="送出" onClick="go_plan()"/>
-                 </div>
+                    <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
                 </div>
             </div>
         </form>
@@ -470,22 +494,22 @@
     $("input[name='day']").on('keyup', function() {
         if(this.value == "0"){
             this.value = "";
-            alert("請天數輸入0以上!");
+            SweetAlertMessage("請天數輸入0以上!");
         }
         if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
             this.value = this.value.replace(/[^0-9\.]/g, '');
-            alert("請天數輸入數字!");
+            SweetAlertMessage("請天數輸入數字!");
         }
     });
 
      $("input[name='day_time']").on('keyup', function() {
         if(this.value == "0"){
             this.value = "";
-            alert("請天數小時輸入0以上!");
+            SweetAlertMessage("請天數小時輸入0以上!");
         }
         if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
             this.value = this.value.replace(/[^0-9\.]/g, '');
-            alert("請天數小時輸入數字!");
+            SweetAlertMessage("請天數小時輸入數字!");
         }
 
         var day = $("input[name='day']").val();
@@ -499,7 +523,7 @@
 
             if(day_time>max_dayhours){
                 this.value = "";
-                alert("請輸入天數適當的小時!");
+                SweetAlertMessage("請輸入天數適當的小時!");
             }
         }
 

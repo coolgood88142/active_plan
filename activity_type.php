@@ -215,7 +215,7 @@
         var add_typename = $("input[name='add_typename']").val();
         if($(".timetypes").is(":visible")){
             if(add_typename==""){
-                return alert("請輸入活動類型!");
+                return SweetAlertMessage("請輸入活動類型!");
             }
             $("input[name='add_timetypes']").val('Y');
         }
@@ -244,7 +244,7 @@
         var add_typename = $("input[name='add_typename']");
         if($("input[name='up_timetypes']").val()=='Y'){
             if(add_typename==""){
-                return alert("請輸入活動類型!");
+                return SweetAlertMessage("請輸入活動類型!");
             }
         }
 
