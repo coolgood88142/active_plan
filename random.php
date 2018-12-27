@@ -153,7 +153,8 @@
             margin-left: auto;
         }
         .wrap-contact100{
-            background: #DDDDDD;
+            background: url("./assets/images/background.png");
+            border-color : url("./assets/images/background.png");
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -170,7 +171,7 @@
             font-size: 15px;
         }
         .container-contact100-form-btn{
-            justify-content:start;
+            /* justify-content:end; */
         }
         .nav-link{
             font-size:1rem;
@@ -214,11 +215,15 @@
             content: "\f067"; 
         }
         #show_select{
-            background: #DDDDDD;
-            border-color : #DDDDDD;
+            background: url("./assets/images/background.png");
+            border-color : url("./assets/images/background.png");
         }
-        #show_select .card-header.collapsed {
+        #show_select .card-header.collapsed{
             background: #FFFFFF;
+            color:#000000;
+        }
+        #show_select .card-header{
+            color:#FFFFFF;
         }
         /* @media (min-width: 1200px){
             .datetext{
@@ -230,11 +235,11 @@
             .col-md-3{
                 max-width:25%
             }
-        }
+        } */
 
-        @media (min-width: 992px) {
-            .datetext{
-                max-width:14%
+        /* @media (min-width: 992px) {
+            .col-lg-2{
+                max-width: 14.4%;
             }
         } */
         
@@ -256,7 +261,7 @@
                 <div id="accordion" class="accordion">
                     <div class="card mb-0" id="show_select">
                         <div class="card-header" data-toggle="collapse" href="#collapseExample">
-                            <a class="titletext font-weight-bold text-dark card-title">
+                            <a class="titletext font-weight-bold card-title">
                                 顯示表單
                             </a>
                         </div>
@@ -333,14 +338,14 @@
                                 <div class="dropDownSelect2"></div>
                             </div>
                         </div>
-                        <div class="container-contact100-form-btn">
+                        <div class="container-contact100-form-btn justify-content-end">
                             <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
                         </div>
                     </div>
                 </div>
                 <div class="plan">
                     <div class="row justify-content-start align-items-start">
-                        <label class="col-sm-4 col-md-3 col-lg-2 datetext control-label">行程名稱：</label>
+                        <label class="col-sm-3 col-md-3 col-lg-2 col-lg-2 datetext control-label">行程名稱：</label>
                         <div class="col">
                           <input type="text" class="form-control" name="plan_name">
                         </div>
@@ -348,8 +353,8 @@
                 </div>
                 <div class="date">
                     <div class="row justify-content-start align-items-start">
-                        <label class="col-sm-4 col-md-3 col-lg-2 datetext control-label">出發日期：</label>
-                        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2">
+                        <label class="col-sm-3 col-md-3 col-lg-2 datetext control-label">出發日期：</label>
+                        <div class="col">
                           <input type="text" class="form-control" name="plan_date" data-provide="datepicker">
                         </div>
                     </div>
@@ -600,7 +605,7 @@
 
 
             var plan_name = $("input[name='plan_name']").val();
-            var plan_date = $("input[name='plan_date1']").val();
+            var plan_date = $("input[name='plan_date']").val();
 
             if(plan_name==""){
                 return SweetAlertMessage("請輸入行程名稱!");

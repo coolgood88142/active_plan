@@ -65,8 +65,7 @@
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left"> 
         <form name="showForm" method="post">
-            <div class="row">
-                <div class="col-md-12" style="top: 50px;">
+                <div class="col-md-12" style="top: 50px; bottom:50px;">
                     <h2 id="title" class="text-center text-dark font-weight-bold" style="margin-bottom:20px;">設定</h2>
                     <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                     
@@ -109,7 +108,6 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
         </form>
     </div>
     <form action="setting.php" name="submitForm" method="post">

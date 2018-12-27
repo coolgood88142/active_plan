@@ -357,6 +357,14 @@ div.dt-button-collection button.dt-button{
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
         }
+
+        // if($(window).width() < 768){
+        //     $("#drive").hide();
+        //     $(".ac_drive").hide();
+        // }
+         
+
+
     } );
 
     $(".js-select2").each(function(){

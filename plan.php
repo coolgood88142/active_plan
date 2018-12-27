@@ -65,7 +65,8 @@
             height:48px;
         }
         .wrap-contact100{
-            background: #DDDDDD;
+            background: url("./assets/images/background.png");
+            border-color : url("./assets/images/background.png");
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -113,17 +114,21 @@
             font-size: 18px;
         }
         #show_select{
-            background: #DDDDDD;
-            border-color : #DDDDDD;
+            background: url("./assets/images/background.png");
+            border-color : url("./assets/images/background.png");
         }
-        #show_select .card-header.collapsed {
+        #show_select .card-header.collapsed{
             background: #FFFFFF;
+            color:#000000;
+        }
+        #show_select .card-header{
+            color:#FFFFFF;
         }
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left">
         <form name="showForm" method="post">
-            <div class="col-md-12" style="top: 50px;">
+            <div class="col-md-12" style="top: 50px; bottom:50px;">
                 <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
@@ -134,7 +139,7 @@
                 <div id="accordion" class="accordion" style="display:none;">
                     <div class="card mb-0" id="show_select">
                         <div class="card-header" data-toggle="collapse" href="#collapseExample">
-                            <a class="titletext font-weight-bold text-dark card-title">
+                            <a class="titletext font-weight-bold card-title">
                                 顯示表單
                             </a>
                         </div>
