@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
-<script src="./assets/js/main.js"></script>
-<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
