@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="./assets/css/select2.css">
 <link rel="stylesheet" href="./assets/css/select2.min.css">
 <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
+<link rel="stylesheet" href="./assets/fonts/icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="./assets/fonts/icon/fonts/fontawesome-webfont.woff2">
 <!-- <link rel="stylesheet" herf="./assets/css/activity.css"> -->
 <?php session_start();
     $islogin=false;$us_admin = "";
@@ -30,11 +32,103 @@
     }
     
  ?>
+ <style>
+.jumbotron{
+  height:100%;
+  width:100%;
+  font-family:'微軟正黑體';
+}
+.col-from{
+ padding: 50px 15px;
+}
+#example1 thead td {
+  background: url("./assets/images/background.png");
+  color: white;
+}
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.img-thumbnail{
+    width:48px;
+    height:48px;
+  }
+@media screen and (max-width: 768px) {
+    .jumbotron,.btn,.form-control{
+        font-size:14px;
+    }
+    #title{
+        font-size:28px;
+    }
+    
+    /* #drive,.ac_drive{
+        display:none;
+    } */
+    /*測試用*/
+}
+.wrap-contact100{
+    background: #DDDDDD;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.wrap-input100{
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 30px 9px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: '微軟正黑體';
+}
+.rs3-wrap-input100{
+    width: calc((100% - 30px) / 3);
+}
+.label-input100{
+    font-size: 15px;
+}
+.swal2-modal {
+    background-color: rgba(255, 0, 0, 0.6);
+    border: 3px solid white;
+    font-family:'微軟正黑體';
+}
+.swal2-popup .swal2-title{
+    color:white;
+}
+.nav-link{
+    font-size:1rem;
+}
+button.dt-button,button.dt-button.active {
+    color: white;
+    border-color: #007bff;
+    background: #007bff !important;
+    margin-bottom : 6px;
+}
+div.dt-button-collection button.dt-button.active:not(.disabled){
+    box-shadow: inset 2px 2px 4px #000088;
+}
+.swal2-container.swal2-shown {
+    background-color: rgba(214, 0, 0, 0.4);
+}
+div.dt-button-collection button.dt-button{
+    margin-bottom : 6px;
+}
+.container-contact100-form-btn{
+    justify-content:start;
+}
+.btn-end{
+    justify-content:flex-end;
+}
+.panel-group {
+    margin-bottom: -20px;
+  }
+ </style>
   <body>
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left" style="background-color:white; border-color:white;">
         <form class="contact100-form" id="showForm" name="showForm" method="post" style="background-color:white; border-color:white;">
-            <div class="col-md-12" style="top: 50px;">
+            <div class="col-md-12 col-from">
                 <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">活動列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <div id="addbutton" style="text-align:right;">
@@ -160,7 +254,7 @@
                             <label style="color:red;">*</label>類型：
                         </span>
                         <div>
-                            <select class="custom-select" name="add_actype">
+                            <select class="js-select2" name="add_actype">
                                 <?php
                                     foreach ($active_type as $key => $type) {
                                 ?>

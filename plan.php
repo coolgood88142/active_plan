@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
+<script src="./assets/js/main.js"></script>
+<link rel="stylesheet" href="./assets/css/main.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -48,8 +50,11 @@
             width:100%;
             font-family:'微軟正黑體';
         }
+        .col-from{
+            padding: 50px 15px;
+        }
         #example1 thead td,#example2 thead td,#example3 thead td,#example4 thead td {
-            background: url("./assets/images/background.png");
+            background-color: rgb(0,166,218);
             color: white;
         }
         .container{
@@ -63,14 +68,14 @@
             height:48px;
         }
         .wrap-contact100{
-            background: url("./assets/images/background.png");
-            border-color : url("./assets/images/background.png");
+            /*background: url("./assets/images/background.png");*/
+            border-color : rgb(0,166,218);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
         .wrap-input100{
-            border: 1px solid #e6e6e6;
+            border: 1px solid rgb(0,166,218);
             border-radius: 13px;
             padding: 10px 30px 9px 22px;
             margin-bottom: 20px;
@@ -122,11 +127,16 @@
         #show_select .card-header{
             color:#FFFFFF;
         }
+        .wrap-border{
+            border-radius: 10px;
+            background:rgb(0,166,218);
+            padding:1px;1px;1px;1px;
+        }
     </style>
     <div id="navbar"></div>
     <div class="jumbotron container bg-white side-collapse-container-left">
         <form name="showForm" method="post">
-            <div class="col-md-12" style="top: 50px; bottom:50px;">
+            <div class="col-md-12 col-from">
                 <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <!-- <input type="button" name="back" value="回上一頁" onClick="back_page()"/> -->
@@ -142,6 +152,7 @@
                             </a>
                         </div>
                     </div>
+                    <div class="wrap-border">
                     <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
                         <div class="wrap-input100 validate-input bg1 plan" style="margin-top:20px;">
                             <span>
@@ -176,6 +187,7 @@
                         </div>
                         <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                     </div>
+                </div>
                 </div>
                 <br/>
 

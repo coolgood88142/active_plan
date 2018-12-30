@@ -18,6 +18,62 @@
         exit;
     }
  ?>
+ <style>
+  
+.jumbotron{
+  height:100%;
+  width:100%;
+  font-family:'微軟正黑體';
+}
+#example2 thead td {
+  background: url("./assets/images/background.png");
+  color: white;
+}
+.container{
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.img-thumbnail{
+    width:48px;
+    height:48px;
+}
+.wrap-contact100{
+    background: #DDDDDD;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.wrap-input100{
+    border: 1px solid #e6e6e6;
+    border-radius: 13px;
+    padding: 10px 30px 9px 22px;
+    margin-bottom: 20px;
+    position: relative;
+    font-family: '微軟正黑體';
+}
+.label-input100{
+    font-size: 15px;
+}
+.container-contact100-form-btn{
+    justify-content:start;
+}
+.btn-end{
+    justify-content:flex-end;
+}
+.nav-link{
+    font-size:1rem;
+}
+@media screen and (max-width: 768px) {
+    .jumbotron,.btn,.form-control{
+        font-size:14px;
+    }
+    #title{
+        font-size:28px;
+    }
+}
+ </style>
   <body>
   <div id="navbar"></div>
   <div class="jumbotron container bg-white side-collapse-container-left">
