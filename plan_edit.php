@@ -77,6 +77,9 @@
             width:100%;
             font-family:'微軟正黑體';
         }
+        .col-from{
+            padding: 50px 15px;
+        }
         #example1 thead td,#example2 thead td{
             background: url("./assets/images/background.png");
             color: white;
@@ -123,7 +126,7 @@
   <div id="navbar"></div>
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form name="showForm" method="post">
-        <div class="col-md-12" style="top: 50px;">
+        <div class="col-md-12 col-from">
             <h2 id="title" class="text-center font-weight-bold" style="margin-bottom:20px;">行程列表</h2>
             <input type="hidden" name="admin" value="<?=$us_admin?>"/>
             <div class="wrap-contact100" style="width:100%;">

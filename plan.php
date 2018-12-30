@@ -153,41 +153,41 @@
                         </div>
                     </div>
                     <div class="wrap-border">
-                    <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
-                        <div class="wrap-input100 validate-input bg1 plan" style="margin-top:20px;">
-                            <span>
-                                <label style="color:red;">*</label>行程名稱：
-                            </span>
-                            <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
-                        </div>
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 date">
-                            <span>
-                                 <label style="color:red;">*</label>出發日期：
-                            </span>
-                            <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
-                        </div>
-                        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
-                        <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
-                        <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist">
-                            <span>
-                                <label style="color:red;">*</label>使用者名稱：
-                            </span>
-                            <select class="custom-select" name="add_actype">
-                                <?php
-                                    if($us_admin=='Y'){
-                                        foreach($user as $key => $value){
-                                ?>
-                                            <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
-                                <?php
+                        <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
+                            <div class="wrap-input100 validate-input bg1 plan" style="margin-top:20px;">
+                                <span>
+                                    <label style="color:red;">*</label>行程名稱：
+                                </span>
+                                <input class="input100" type="text" name="plan_name" placeholder="輸入行程名稱!">
+                            </div>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 date">
+                                <span>
+                                    <label style="color:red;">*</label>出發日期：
+                                </span>
+                                <input class="input100" type="text" name="plan_date" placeholder="輸入出發日期!">
+                            </div>
+                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/> 
+                            <input type="hidden" name="pt_usname" value="<?=$pt_usname?>"/>   
+                            <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist">
+                                <span>
+                                    <label style="color:red;">*</label>使用者名稱：
+                                </span>
+                                <select class="custom-select" name="add_actype">
+                                    <?php
+                                        if($us_admin=='Y'){
+                                            foreach($user as $key => $value){
+                                    ?>
+                                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                    <?php
+                                            }
                                         }
-                                    }
-                                ?>
-                            </select>
-                            <div class="dropDownSelect2"></div>
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                            <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                         </div>
-                        <input type="hidden" name="pt_usid" value="<?=$pt_usid?>"/>
                     </div>
-                </div>
                 </div>
                 <br/>
 

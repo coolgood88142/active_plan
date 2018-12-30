@@ -28,6 +28,9 @@
     width:100%;
     font-family:'微軟正黑體';
   }
+  .col-from{
+    padding: 50px 15px;
+  }
   #example thead td{
     background: url("./assets/images/background.png");
     color: white;
@@ -52,7 +55,7 @@
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form action="question.php" name="showForm" method="post">
         <div class="row">
-            <div class="col-md-12" style="top: 50px;">
+            <div class="col-md-12 col-from">
                 <h2 id="title" class="text-center text-dark font-weight-bold">Q&A</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
 

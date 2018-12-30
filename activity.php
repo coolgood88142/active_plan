@@ -4,6 +4,7 @@
   </head>
 <?php include("link.php");?>
 <link rel="stylesheet" href="./assets/css/buttons.dataTables.min.css">
+<!-- <script src="./assets/js/jquery-3.3.1.min.js"></script> -->
 <script src="./assets/js/dataTables.buttons.min.js"></script>
 <script src="./assets/js/buttons.colVis.min.js"></script>
 <script src="./assets/js/main.js"></script>
@@ -15,8 +16,12 @@
 <link rel="stylesheet" href="./assets/css/select2.css">
 <link rel="stylesheet" href="./assets/css/select2.min.css">
 <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
-<link rel="stylesheet" href="./assets/fonts/icon/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" href="./assets/fonts/icon/fonts/fontawesome-webfont.woff2">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/montserrat/Montserrat-SemiBold.ttf">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/montserrat/Montserrat-SemiBoldItalic.ttf">
+<!-- <link rel="stylesheet" href="./assets/fonts/icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="./assets/fonts/icon/fonts/fontawesome-webfont.woff2"> -->
 <!-- <link rel="stylesheet" herf="./assets/css/activity.css"> -->
 <?php session_start();
     $islogin=false;$us_admin = "";
@@ -361,6 +366,12 @@ div.dt-button-collection button.dt-button{
         // if($(window).width() < 768){
         //     $("#drive").hide();
         //     $(".ac_drive").hide();
+        //  寫remove 標籤
+        //  dt-button buttons-columnVisibility active 改成dt-button buttons-columnVisibility
+        //  就可以更換按鈕樣式
+        // }else{
+        //  寫append 標籤
+        // dt-button buttons-columnVisibility 改回 dt-button buttons-columnVisibility active
         // }
          
 

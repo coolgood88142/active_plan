@@ -78,6 +78,9 @@
     width:100%;
     font-family:'微軟正黑體';
   }
+  .col-from{
+    padding: 50px 15px;
+  }
   .container{
     padding-right: 15px;
     padding-left: 15px;
@@ -121,7 +124,7 @@
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form action="<?php echo "update.php" ?>" name="showForm" method="post" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-md-12" style="top: 50px;">
+            <div class="col-md-12 col-from">
                 <h2 id="title" class="text-center text-dark font-weight-bold" style="margin-bottom:20px;">帳號資料</h2>
                 <input type="hidden" name="admin" value="<?=$us_admin?>"/>
                 <input type="hidden" name="add_account" value="<?=$add_account?>"/>

@@ -153,14 +153,13 @@
             margin-left: auto;
         }
         .wrap-contact100{
-            background: url("./assets/images/background.png");
-            border-color : url("./assets/images/background.png");
+            border-color : rgb(0,166,218);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
         .wrap-input100{
-            border: 1px solid #e6e6e6;
+            border-color : rgb(0,166,218);
             border-radius: 13px;
             padding: 10px 30px 9px 22px;
             margin-bottom: 20px;
@@ -225,6 +224,11 @@
         #show_select .card-header{
             color:#FFFFFF;
         }
+        .wrap-border{
+            border-radius: 10px;
+            background:rgb(0,166,218);
+            padding:1px;1px;1px;1px;
+        }
         /* @media (min-width: 1200px){
             .datetext{
                 max-width:12%
@@ -267,79 +271,81 @@
                         </div>
                     </div>
 
-                    <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
-                            <span>
-                                <label style="color:red;">*</label>類型：
-                            </span>
-                            <div class="col">
-                            <?php 
-                                foreach($types as $key => $value){
-                                    $type_id = $value['type_id'];
-                                    $name = $value['name'];
-                            ?>
-                                <div class="form-check form-check-inline">
-                                    <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
-                                    <label class="form-check-label"><?php echo $name ?></label>
-                                </div>
-                            <?php
-                                }
-                            ?>
-                            </div>
-                        </div>
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 day">
-                            <span>
-                                <label style="color:red;">*</label>天數：
-                            </span>
-                            <input class="input100" type="text" name="day" value="" size="2" placeholder="輸入天數!">
-                        </div>
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 day_time">
-                            <span>
-                                <label style="color:red;">*</label>天數小時：
-                            </span>
-                            <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
-                            <input type="hidden" name="istime_type" value="" size="2"/>
-                        </div>
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
-                            <span>
-                                <label style="color:red;">*</label>使用者名稱：
-                            </span>
-                            <div>
-                                <select class="custom-select" name="pt_userlist">
+                    <div class="wrap-border">
+                        <div id="collapseExample" class="card-body collapse show wrap-contact100" data-parent="#accordion" style="width:100%">
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 weather">
+                                <span>
+                                    <label style="color:red;">*</label>類型：
+                                </span>
+                                <div class="col">
                                 <?php 
-                                    if($us_admin=="Y"){
-                                        foreach($user as $key => $value){
+                                    foreach($types as $key => $value){
+                                        $type_id = $value['type_id'];
+                                        $name = $value['name'];
                                 ?>
-                                    <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" name="typeid[]" value="<?=$type_id?>">
+                                        <label class="form-check-label"><?php echo $name ?></label>
+                                    </div>
                                 <?php
-                                        }
                                     }
-                                ?>                    
-                                </select>
+                                ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
-                            <span>
-                                <label style="color:red;">*</label>時段選項：
-                            </span>
-                            <div>
-                                <select class="custom-select" name="time_type">
-                                    <option value="*">全部</option>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 day">
+                                <span>
+                                    <label style="color:red;">*</label>天數：
+                                </span>
+                                <input class="input100" type="text" name="day" value="" size="2" placeholder="輸入天數!">
+                            </div>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 day_time">
+                                <span>
+                                    <label style="color:red;">*</label>天數小時：
+                                </span>
+                                <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
+                                <input type="hidden" name="istime_type" value="" size="2"/>
+                            </div>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
+                                <span>
+                                    <label style="color:red;">*</label>使用者名稱：
+                                </span>
+                                <div>
+                                    <select class="custom-select" name="pt_userlist">
                                     <?php 
-                                        foreach($time as $key => $value){
-                                            $ty_type = $value['ty_type'];
-                                            $ty_name = $value['ty_name'];
+                                        if($us_admin=="Y"){
+                                            foreach($user as $key => $value){
                                     ?>
-                                        <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                                        <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
                                     <?php
+                                            }
                                         }
-                                    ?>
-                                </select>
-                                <div class="dropDownSelect2"></div>
+                                    ?>                    
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="container-contact100-form-btn justify-content-end">
-                            <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
+                            <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
+                                <span>
+                                    <label style="color:red;">*</label>時段選項：
+                                </span>
+                                <div>
+                                    <select class="custom-select" name="time_type">
+                                        <option value="*">全部</option>
+                                        <?php 
+                                            foreach($time as $key => $value){
+                                                $ty_type = $value['ty_type'];
+                                                $ty_name = $value['ty_name'];
+                                        ?>
+                                            <option value="<?=$ty_type?>"><?php echo $ty_name ?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
+                                </div>
+                            </div>
+                            <div class="container-contact100-form-btn justify-content-end">
+                                <input type="submit" class="btn btn-primary" name="gorandom" value="執行"/>
+                            </div>
                         </div>
                     </div>
                 </div>
