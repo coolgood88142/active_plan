@@ -7,21 +7,15 @@
 <!-- <script src="./assets/js/jquery-3.3.1.min.js"></script> -->
 <script src="./assets/js/dataTables.buttons.min.js"></script>
 <script src="./assets/js/buttons.colVis.min.js"></script>
-<script src="./assets/js/main.js"></script>
-<script src="./assets/js/select2.js"></script>
-<script src="./assets/js/select2.min.js"></script>
+<script src="./vendor/select2/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="./assets/css/main.css">
-<link rel="stylesheet" href="./assets/css/util.css">
-<link rel="stylesheet" href="./assets/css/select2.css">
-<link rel="stylesheet" href="./assets/css/select2.min.css">
 <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
-<link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" type="text/css" href="./assets/fonts/montserrat/Montserrat-SemiBold.ttf">
-<link rel="stylesheet" type="text/css" href="./assets/fonts/montserrat/Montserrat-SemiBoldItalic.ttf">
-<!-- <link rel="stylesheet" href="./assets/fonts/icon/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" href="./assets/fonts/icon/fonts/fontawesome-webfont.woff2"> -->
+<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="./vendor/select2/select2.min.css">
+<link rel="stylesheet" href="./assets/css/util.css">
+<link rel="stylesheet" href="./assets/css/main.css">
+
 <!-- <link rel="stylesheet" herf="./assets/css/activity.css"> -->
 <?php session_start();
     $islogin=false;$us_admin = "";
@@ -152,8 +146,8 @@ div.dt-button-collection button.dt-button{
                             <td>天氣</td>
                             <td id="drive">車程(小時)</td>
                             <td>攜帶物品</td>
-                            <td>花費</td>
-                            <td>時間(小時)</td>
+                            <td id="spend">花費</td>
+                            <td id="time">時間(小時)</td>
                             <?php
                                 if($us_admin=='Y'){                
                             ?>
@@ -363,6 +357,12 @@ div.dt-button-collection button.dt-button{
             $("input[name='add']").show();
         }
 
+        var drive,spend,time;
+        drive = $("#drive").text();
+        spend = $("#spend").text();
+        time = $("#time").text();
+
+        var d = $("td .ac_drive").html();
         // if($(window).width() < 768){
         //     $("#drive").hide();
         //     $(".ac_drive").hide();
@@ -379,24 +379,23 @@ div.dt-button-collection button.dt-button{
     } );
 
     $(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
+		$(this).select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $(this).next('.dropDownSelect2')
+		});
 
 
-			$(".js-select2").each(function(){
-				$(this).on('select2:close', function (e){
-					if($(this).val() == "Please chooses") {
-						$('.js-show-service').slideUp();
-					}
-					else {
-						$('.js-show-service').slideUp();
-						$('.js-show-service').slideDown();
-					}
-				});
+		$(".js-select2").each(function(){
+			$(this).on('select2:close', function (e){
+				if($(this).val() == "Please chooses") {
+					$('.js-show-service').slideUp();
+				} else {
+					$('.js-show-service').slideUp();
+					$('.js-show-service').slideDown();
+				}
 			});
-		})
+		});
+	})
 
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";

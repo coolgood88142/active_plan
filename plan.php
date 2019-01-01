@@ -7,8 +7,13 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
-<script src="./assets/js/main.js"></script>
+<script src="./vendor/select2/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="./vendor/select2/select2.min.css">
+<link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
+
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -172,7 +177,7 @@
                                 <span>
                                     <label style="color:red;">*</label>使用者名稱：
                                 </span>
-                                <select class="custom-select" name="add_actype">
+                                <select class="js-select2" name="add_actype">
                                     <?php
                                         if($us_admin=='Y'){
                                             foreach($user as $key => $value){
@@ -604,7 +609,27 @@
                 tr.addClass('shown');
             }
             } );
-        }       
+        }
+        
+        $(".js-select2").each(function(){
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+
+
+            $(".js-select2").each(function(){
+                $(this).on('select2:close', function (e){
+                    if($(this).val() == "Please chooses") {
+                        $('.js-show-service').slideUp();
+                    } else {
+                        $('.js-show-service').slideUp();
+                        $('.js-show-service').slideDown();
+                    }
+                });
+            });
+        })
+        
     } );
 
     function openDate(name){

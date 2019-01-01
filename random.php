@@ -125,9 +125,12 @@
  <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
-<script src="./assets/js/main.js"></script>
+<script src="./vendor/select2/select2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="./vendor/select2/select2.min.css">
+<link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
   <body>
     <style>
         td.details-control {
@@ -305,30 +308,29 @@
                                 <input class="input100" type="text" name="day_time" value="" placeholder="輸入天數小時!">
                                 <input type="hidden" name="istime_type" value="" size="2"/>
                             </div>
-                            <div class="wrap-input100 bg1 rs1-wrap-input100 userlist" style="display:none;">
+                            <div class="wrap-input100 input100-select bg1 rs1-wrap-input100 userlist" style="display:none;">
                                 <span>
                                     <label style="color:red;">*</label>使用者名稱：
                                 </span>
-                                <div>
-                                    <select class="custom-select" name="pt_userlist">
-                                    <?php 
-                                        if($us_admin=="Y"){
+                                <select class="js-select2" name="add_actype">
+                                    <?php
+                                        if($us_admin=='Y'){
                                             foreach($user as $key => $value){
                                     ?>
-                                        <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
+                                                <option value='<?php echo $value["us_id"]?>'><?php echo $value["us_name"]?></option>
                                     <?php
                                             }
                                         }
-                                    ?>                    
-                                    </select>
-                                </div>
+                                    ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
                             </div>
                             <div class="wrap-input100 bg1 rs1-wrap-input100 time" style="display:none;">
                                 <span>
                                     <label style="color:red;">*</label>時段選項：
                                 </span>
                                 <div>
-                                    <select class="custom-select" name="time_type">
+                                    <select class="js-select2" name="time_type">
                                         <option value="*">全部</option>
                                         <?php 
                                             foreach($time as $key => $value){
@@ -500,6 +502,26 @@
         }else{
             $(".time").hide();
         }
+
+        $(".js-select2").each(function(){
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+
+
+            $(".js-select2").each(function(){
+                $(this).on('select2:close', function (e){
+                    if($(this).val() == "Please chooses") {
+                        $('.js-show-service').slideUp();
+                    } else {
+                        $('.js-show-service').slideUp();
+                        $('.js-show-service').slideDown();
+                    }
+                });
+            });
+        })
+
     } );
 
     $("input[name='day']").on('keyup', function() {
