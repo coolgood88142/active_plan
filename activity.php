@@ -10,8 +10,8 @@
 <script src="./vendor/select2/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
-<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
 <link rel="stylesheet" href="./vendor/select2/select2.min.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
@@ -62,10 +62,10 @@
         font-size:28px;
     }
     
-    /* #drive,.ac_drive{
+    #drive,#spend,#time,.ac_drive,.ac_spend,.ac_hours{
         display:none;
-    } */
-    /*測試用*/
+    }
+
 }
 .wrap-contact100{
     background: #DDDDDD;
@@ -363,6 +363,15 @@ div.dt-button-collection button.dt-button{
         time = $("#time").text();
 
         var d = $("td .ac_drive").html();
+
+        //必需要點開隱藏選項，才能取得項目按鈕元素
+        // if($(window).width() < 768){
+        //     $(".dt-button").each(function(index) { 
+        //         alert($(this).text());
+        //     });
+        // }
+
+
         // if($(window).width() < 768){
         //     $("#drive").hide();
         //     $(".ac_drive").hide();
