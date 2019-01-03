@@ -41,7 +41,7 @@
  padding: 50px 15px;
 }
 #example1 thead td {
-  background: url("./assets/images/background.png");
+  background: rgb(63,169,221);
   color: white;
 }
 .container{
@@ -72,6 +72,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-top:55px;
+    padding-bottom:55px;
 }
 .wrap-input100{
     border: 1px solid #e6e6e6;
@@ -121,7 +123,13 @@ div.dt-button-collection button.dt-button{
 }
 .panel-group {
     margin-bottom: -20px;
-  }
+}
+.container-contact100-form-btn{
+    padding-top:0px;
+}
+button.dt-button.buttons-collection.buttons-colvis.colvisButton{
+    padding: 0.32em 1em;
+}
  </style>
   <body>
     <div id="navbar"></div>

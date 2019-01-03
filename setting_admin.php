@@ -40,7 +40,7 @@
             padding: 50px 15px;
         }
         #example thead td{
-            background: url("./assets/images/background.png");
+            background: rgb(63,169,221);
             color: white;
         }
         .container{

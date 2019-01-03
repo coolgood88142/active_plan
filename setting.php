@@ -106,6 +106,7 @@
   }
   .container-contact100-form-btn{
     justify-content: flex-end;
+    padding-top: 0px;
   }
   .nav-link{
     font-size:1rem;
@@ -130,7 +131,7 @@
                 <input type="hidden" name="add_account" value="<?=$add_account?>"/>
 
                 <div class="wrap-contact100" style="width:100%;">
-                  <div class="wrap-input100 validate-input bg1 us_account" style="margin-top:30px;">
+                  <div class="wrap-input100 validate-input bg1 us_account">
                     <span>
                       <label style="color:red;">*</label>帳號：
                     </span>

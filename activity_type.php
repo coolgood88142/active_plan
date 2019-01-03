@@ -29,7 +29,7 @@
  padding: 50px 15px;
 }
 #example2 thead td {
-  background: url("./assets/images/background.png");
+  background: rgb(63,169,221);
   color: white;
 }
 .container{
@@ -47,6 +47,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-top: 55px;
+    padding-bottom: 55px;
 }
 .wrap-input100{
     border: 1px solid #e6e6e6;
@@ -75,6 +77,9 @@
     #title{
         font-size:28px;
     }
+}
+.container-contact100-form-btn {
+    padding-top:0px;
 }
  </style>
   <body>
@@ -206,7 +211,7 @@
         if(Responsive_Button == "true"){
             $("#img").show();
         }else{
-            $("#add_type").show();
+            $("#addbutton").show();
         }
     }
 

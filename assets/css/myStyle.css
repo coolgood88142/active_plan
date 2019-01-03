@@ -5,7 +5,7 @@
   }
   
   #example thead td,#example1 thead td,#example2 thead td,#example3 thead td,#example4 thead td {
-    background: url("./assets/images/background.png");
+    background: rgb(63,169,221);
     color: white;
   }
 

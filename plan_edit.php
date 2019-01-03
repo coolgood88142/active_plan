@@ -81,7 +81,7 @@
             padding: 50px 15px;
         }
         #example1 thead td,#example2 thead td{
-            background: url("./assets/images/background.png");
+            background: rgb(63,169,221);
             color: white;
         }
         .img-thumbnail{

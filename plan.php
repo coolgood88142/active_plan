@@ -8,8 +8,8 @@
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <script src="./vendor/select2/select2.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
 <link rel="stylesheet" href="./vendor/select2/select2.min.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
@@ -59,7 +59,7 @@
             padding: 50px 15px;
         }
         #example1 thead td,#example2 thead td,#example3 thead td,#example4 thead td {
-            background-color: rgb(0,166,218);
+            background-color: rgb(63,169,221);
             color: white;
         }
         .container{
@@ -73,14 +73,13 @@
             height:48px;
         }
         .wrap-contact100{
-            /*background: url("./assets/images/background.png");*/
-            border-color : rgb(0,166,218);
+            border-color : rgb(63,169,221);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
         .wrap-input100{
-            border: 1px solid rgb(0,166,218);
+            border: 1px solid rgb(63,169,221);
             border-radius: 13px;
             padding: 10px 30px 9px 22px;
             margin-bottom: 20px;
@@ -122,8 +121,8 @@
             font-size: 18px;
         }
         #show_select{
-            background: url("./assets/images/background.png");
-            border-color : url("./assets/images/background.png");
+            background: rgb(63,169,221);
+            border-color : rgb(63,169,221);
         }
         #show_select .card-header.collapsed{
             background: #FFFFFF;
@@ -134,8 +133,8 @@
         }
         .wrap-border{
             border-radius: 10px;
-            background:rgb(0,166,218);
-            padding:1px;1px;1px;1px;
+            background:rgb(63,169,221);
+            padding:1px;
         }
     </style>
     <div id="navbar"></div>
