@@ -12,11 +12,10 @@
 <link rel="stylesheet" herf="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.32.2/sweetalert2.css">
 <link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" href="./vendor/select2/select2.min.css">
+<!-- <link rel="stylesheet" href="./vendor/select2/select2.min.css"> -->
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
-
-<!-- <link rel="stylesheet" herf="./assets/css/activity.css"> -->
+<link rel="stylesheet" href="./assets/css/select.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
