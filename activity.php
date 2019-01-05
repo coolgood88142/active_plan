@@ -351,15 +351,42 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
   <script language="JavaScript">
     $(document).ready(function() {
         $('#navbar').load('navbar.php');
-        $('#example1').DataTable(datatable_language());
-        // $('#example1').DataTable({
-        //     dom: 'Bfrtip',
-        //     buttons: [
-        //         'colvis'
-        //     ]
-        // });
+        var table = $('#example1').DataTable(datatable_language());
+        var button = table.button();
+
+        $('#example1').on('click', '.colvisButton', function(e){
+            $("button.dt-button.buttons-columnVisibility.active").each(function(){
+                if($(this).text()=="車程(小時)"){
+                    $("#drive").show();
+                    $(".ac_drive").show();
+                }
+            });
+        });
         
-    
+        // $("button.dt-button.buttons-columnVisibility.active").each(function(){
+        //     $(this).toggle(
+        //         function(){
+        //             if($(this).text==="車程(小時)"){
+        //                 $("#drive").show();
+        //                 $(".ac_drive").show();
+        //             }
+        //         }
+        //     );
+        // });
+
+        // $("button.dt-button.buttons-collection.buttons-colvis.colvisButton").toggle(
+        //     function(){
+        //         $("button.dt-button.buttons-columnVisibility.active").each(function(){
+        //             if($(this).text==="車程(小時)"){
+        //                 $("#drive").show();
+        //                 $(".ac_drive").show();
+        //             }
+        //         });
+        //     }
+        // );
+
+
+
         if($("input[name='admin']").val()=="Y"){
             $("input[name='add']").show();
         }
@@ -393,6 +420,15 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
 
 
     } );
+
+    // $("button.dt-button.active").each(function(){
+    //     $(this).on('active:not(.disabled):hover:not(.disabled)', function(e){
+    //         if($(this).text() == "車程(小時)") {
+    //             $("#drive").show();
+    //             $(".ac_drive").show();
+    //         }
+    //     });
+    // });
 
     $(".js-select2").each(function(){
 		$(this).select2({
