@@ -354,14 +354,14 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
         var table = $('#example1').DataTable(datatable_language());
         var button = table.button();
 
-        $('#example1').on('click', '.colvisButton', function(e){
-            $("button.dt-button.buttons-columnVisibility.active").each(function(){
-                if($(this).text()=="車程(小時)"){
-                    $("#drive").show();
-                    $(".ac_drive").show();
-                }
-            });
-        });
+        // $('#example1').on('click', '.colvisButton', function(e){
+        //     $("button.dt-button.buttons-columnVisibility.active").each(function(){
+        //         if($(this).text()=="車程(小時)"){
+        //             $("#drive").show();
+        //             $(".ac_drive").show();
+        //         }
+        //     });
+        // });
         
         // $("button.dt-button.buttons-columnVisibility.active").each(function(){
         //     $(this).toggle(
