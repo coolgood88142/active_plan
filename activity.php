@@ -61,9 +61,9 @@
         font-size:28px;
     }
     
-    #drive,#spend,#time,.ac_drive,.ac_spend,.ac_hours{
+    /* #drive,#spend,#time,.ac_drive,.ac_spend,.ac_hours{
         display:none;
-    }
+    } */
 
 }
 .wrap-contact100{
@@ -353,6 +353,20 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
         $('#navbar').load('navbar.php');
         var table = $('#example1').DataTable(datatable_language());
         var button = table.button();
+        if($(window).width() <= 768){
+            reload_activity();
+        }
+
+        var isMobile = true;
+        $(window).resize(function() {
+            if($(window).width() <= 768 && isMoblie==true){
+                reload_activity();
+                isMoblie=false;
+            }else if($(window).width() > 768){
+                isMoblie=true;
+            }
+        });
+
 
         // $('#example1').on('click', '.colvisButton', function(e){
         //     $("button.dt-button.buttons-columnVisibility.active").each(function(){
@@ -421,6 +435,7 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
 
     } );
 
+
     // $("button.dt-button.active").each(function(){
     //     $(this).on('active:not(.disabled):hover:not(.disabled)', function(e){
     //         if($(this).text() == "車程(小時)") {
@@ -448,6 +463,16 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
 			});
 		});
 	})
+
+    function reload_activity(){
+        $("button.dt-button.buttons-collection.buttons-colvis.colvisButton").click();
+        $("button.dt-button.buttons-columnVisibility.active").each(function(){
+            if($(this).text()=="車程(小時)" || $(this).text()=="花費" || $(this).text()=="時間(小時)"){
+                $(this).click();
+            }
+        });
+        $(".dt-button-background").click();
+    }
 
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
