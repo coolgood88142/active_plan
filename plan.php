@@ -10,7 +10,6 @@
 <script src="./vendor/select2/select2.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="./assets/fonts/iconic/css/material-design-iconic-font.min.css">
-<link rel="stylesheet" href="./vendor/select2/select2.min.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
 

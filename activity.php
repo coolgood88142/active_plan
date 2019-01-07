@@ -15,7 +15,6 @@
 <!-- <link rel="stylesheet" href="./vendor/select2/select2.min.css"> -->
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
-<link rel="stylesheet" href="./assets/css/select.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -357,13 +356,9 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
             reload_activity();
         }
 
-        var isMobile = true;
         $(window).resize(function() {
-            if($(window).width() <= 768 && isMoblie==true){
+            if($(window).width() <= 768){
                 reload_activity();
-                isMoblie=false;
-            }else if($(window).width() > 768){
-                isMoblie=true;
             }
         });
 
@@ -471,8 +466,16 @@ button.dt-button.buttons-collection.buttons-colvis.colvisButton{
                 $(this).click();
             }
         });
+        $(".dt-button-background").click(
+            function(){
+                $(".dt-button-background").remove();
+                $(".dt-button-collection").hide();
+            }
+        );
+        
         $(".dt-button-background").click();
     }
+        
 
     function go_plan(){
         var objName = "",objType = "",objHour = "",objSpend = "";
