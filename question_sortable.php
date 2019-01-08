@@ -4,6 +4,7 @@
   </head>
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -17,38 +18,6 @@
         exit;
     }
  ?>
-   <style>
-  #sortable { list-style-type: none; margin: 0; padding: 0;}
-  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 14px; height: 18px; }
-  #sortable li span { position: absolute; margin-left: -1.3em; }
-  .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    display: flex;
-    align-items: center; 
-  }
-  .jumbotron{
-    height:100%;
-    width:100%;
-    font-family:'微軟正黑體';
-  }
-  .col-from{
-    padding: 50px 15px;
-  }
-  .container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
-      font-size:14px;
-    }
-    #title{
-      font-size:28px;
-    }
-  }
-  </style>
   <body>
   <div id="navbar"></div>
   <div class="jumbotron container bg-white side-collapse-container-left">

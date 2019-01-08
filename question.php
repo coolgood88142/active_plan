@@ -4,9 +4,9 @@
   </head>
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
-  <script src="./assets/js/main.js"></script>
   <link rel="stylesheet" href="./assets/css/main.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -21,75 +21,9 @@
     }
  ?>
  <style>
-  .jumbotron{
-    height:100%;
-    width:100%;
-    font-family:'微軟正黑體';
-  }
-  .col-from{
-    padding: 50px 15px;
-  }
-  .container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
-      font-size:14px;
-    }
-    #title{
-      font-size:28px;
-    }
-  }
-
-  .more-less {
-		float: right;
-		color: #212121;
-  }
-
-  .panel-group .panel {
-    border-radius: 0;
-    box-shadow: none;
-    border-color: #EEEEEE;
-  }
-
-  .panel-default > .panel-heading {
-		padding: 0;
-		border-radius: 0;
-		color: #212121;
-		background-color: #FAFAFA;
-		border-color: #EEEEEE;
-	}
-
   .wrap-contact100{
-      width:100%;
-      background: #DDDDDD;
-  }
-
-  a.titletext{
-    font-size: 18px;
-      font-family:'微軟正黑體';
-  }
-  
-  .panel-body {
-		font-size: 16px;
-    font-family:'微軟正黑體';
-	}
-
-  .panel-title > a {
-		display: block;
-		padding: 15px;
-		text-decoration: none;
-	}
-
-  .panel-default > .panel-heading + .panel-collapse > .panel-body {
-		border-top-color: #EEEEEE;
-	}
-  
-  .panel-group {
-    margin-bottom: -20px;
+    width: 100%;
+    display: block;
   }
  </style>
   <body>

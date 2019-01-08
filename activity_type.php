@@ -3,8 +3,8 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
-<script src="./assets/js/main.js"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -19,68 +19,9 @@
     }
  ?>
  <style>
-  
-.jumbotron{
-  height:100%;
-  width:100%;
-  font-family:'微軟正黑體';
-}
-.col-from{
- padding: 50px 15px;
-}
-#example2 thead td {
-  background: rgb(63,169,221);
-  color: white;
-}
-.container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.img-thumbnail{
-    width:48px;
-    height:48px;
-}
-.wrap-contact100{
-    background: #DDDDDD;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding-top: 55px;
-    padding-bottom: 55px;
-}
-.wrap-input100{
-    border: 1px solid #e6e6e6;
-    border-radius: 13px;
-    padding: 10px 30px 9px 22px;
-    margin-bottom: 20px;
-    position: relative;
-    font-family: '微軟正黑體';
-}
-.label-input100{
-    font-size: 15px;
-}
-.container-contact100-form-btn{
-    justify-content:start;
-}
-.btn-end{
-    justify-content:flex-end;
-}
-.nav-link{
-    font-size:1rem;
-}
-@media screen and (max-width: 768px) {
-    .jumbotron,.btn,.form-control{
-        font-size:14px;
+    .container-contact100-form-btn {
+        padding-top:0px;
     }
-    #title{
-        font-size:28px;
-    }
-}
-.container-contact100-form-btn {
-    padding-top:0px;
-}
  </style>
   <body>
   <div id="navbar"></div>
@@ -147,7 +88,7 @@
                     <span>
                         <label style="color:red;">*</label>活動類型：
                     </span>
-                    <input class="input100" type="text" name="add_typeid" placeholder="輸入活動類型!">
+                    <input class="input100" type="text" name="add_typename" placeholder="輸入活動類型!">
                     <input type="hidden" name="add_typeid" value="" >
                 </div>
                 <div class="container-contact100-form-btn btn-end">

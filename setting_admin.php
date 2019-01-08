@@ -3,6 +3,7 @@
     <title>規劃行程系統</title>
   </head>
 <?php include("link.php");?>
+<link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -25,33 +26,6 @@
         }
         tr.shown td.details-control {
             background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
-        }
-        .vertical-center {
-            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-            display: flex;
-            align-items: center; 
-        }
-        .jumbotron{
-            height:100%;
-            width:100%;
-            font-family:'微軟正黑體';
-        }
-        .col-from{
-            padding: 50px 15px;
-        }
-        #example thead td{
-            background: rgb(63,169,221);
-            color: white;
-        }
-        .container{
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .img-thumbnail{
-            width:48px;
-            height:48px;
         }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn{

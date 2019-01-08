@@ -6,14 +6,13 @@
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
-
-    
 <script src="./assets/js/highcharts.js"></script>
 <script src="./assets/js/highcharts-3d.js"></script>
 <script src="./assets/js/series-label.js"></script>
 <script src="./assets/js/exporting.js"></script>
 <script src="./assets/js/export-data.js"></script>
 <script src="./assets/js/wordcloud.js"></script>
+<link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -31,71 +30,60 @@
   min-width: 310px;
   margin: 0 auto
   }
+  
   tspan{
    font-size:20px;
   }
+
   .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
-
   display: flex;
   align-items: center; 
   }
 
-.jumbotron{
-  height:100%;
-  width:100%;
-  font-family:'微軟正黑體';
-}
-.col-from{
-  padding: 50px 15px;
-}
-.container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-#select_date{
-  font-size:24px;
-}
-@media screen and (max-width: 768px) {
-    .jumbotron,.btn,.form-control{
-      font-size:14px;
+  #select_date{
+    font-size:24px;
+  }
+
+  @media screen and (max-width: 768px) {
+      .jumbotron,.btn,.form-control{
+        font-size:14px;
+      }
+      #title{
+        font-size:28px;
+      }
+      #query{
+        margin-top:20px;
+      }
+  }
+
+  @media (max-width: 992px) {
+      #query{
+        margin-top:20px;
+      }
+  }
+
+  @media (min-width: 1200px){
+    .datetext{
+      max-width:12%
     }
-    #title{
-      font-size:28px;
+  }
+
+  @media (min-width: 768px) {
+    .col-md-3{
+      max-width:20%
     }
     #query{
-      margin-top:20px;
-    }
-}
-@media (max-width: 992px) {
-    #query{
-      margin-top:20px;
-    }
-}
-
-@media (min-width: 1200px){
-  .datetext{
-    max-width:12%
+        margin-top:0px;
+      }
   }
-}
 
-@media (min-width: 768px) {
-  .col-md-3{
-    max-width:20%
-  }
-  #query{
-      margin-top:0px;
+  @media (min-width: 992px) {
+    .datetext{
+      max-width:14%
     }
-}
-
-@media (min-width: 992px) {
-  .datetext{
-    max-width:14%
   }
-}
 </style>
   <body>
   <div id="navbar"></div>

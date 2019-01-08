@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="./assets/css/datepicker3.css"/>
 <script src="https://cdn.jsdelivr.net/bootstrap.datepicker-fork/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
-<script src="./assets/js/main.js"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -59,70 +59,6 @@
 
  ?>
   <body>
-    <style>
-        td.details-control {
-            background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
-            cursor: pointer;
-        }
-        tr.shown td.details-control {
-            background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
-        }
-        .vertical-center {
-            min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-            display: flex;
-            align-items: center; 
-        }
-        .jumbotron{
-            height:100%;
-            width:100%;
-            font-family:'微軟正黑體';
-        }
-        .col-from{
-            padding: 50px 15px;
-        }
-        #example1 thead td,#example2 thead td{
-            background: rgb(63,169,221);
-            color: white;
-        }
-        .img-thumbnail{
-            width:48px;
-            height:48px;
-        }
-        .wrap-contact100{
-            background: #DDDDDD;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .wrap-input100{
-            border: 1px solid #e6e6e6;
-            border-radius: 13px;
-            padding: 10px 30px 9px 22px;
-            margin-bottom: 20px;
-            position: relative;
-            font-family: '微軟正黑體';
-        }
-        .label-input100{
-            font-size: 15px;
-        }
-        .container-contact100-form-btn{
-            justify-content:start;
-        }
-        .nav-link{
-            font-size:1rem;
-        }
-        @media screen and (max-width: 768px) {
-            .jumbotron,.btn,.form-control{
-                font-size:14px;
-            }
-            #title{
-                font-size:28px;
-            }
-            #img{
-                margin-bottom:0px;
-            }
-        }
-    </style>
   <div id="navbar"></div>
   <div class="jumbotron container bg-white side-collapse-container-left">
     <form name="showForm" method="post">

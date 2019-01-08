@@ -4,6 +4,7 @@
   </head>
   <?php include("link.php");?>
   <script src="./assets/js/popper.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/myStyle.css">
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");
@@ -17,39 +18,6 @@
         exit;
     }
  ?>
-  <style>
-  .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    display: flex;
-    align-items: center; 
-  }
-  .jumbotron{
-    height:100%;
-    width:100%;
-    font-family:'微軟正黑體';
-  }
-  .col-from{
-    padding: 50px 15px;
-  }
-  #example thead td{
-    background: rgb(63,169,221);
-    color: white;
-  }
-  .container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media screen and (max-width: 768px) {
-    .jumbotron,.btn{
-      font-size:14px;
-    }
-    #title{
-      font-size:28px;
-    }
-  }
- </style>
   <body>
   <div id="navbar"></div>  
   <div class="jumbotron container bg-white side-collapse-container-left">

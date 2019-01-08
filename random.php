@@ -131,31 +131,11 @@
 <link rel="stylesheet" href="./vendor/select2/select2.min.css">
 <link rel="stylesheet" href="./assets/css/util.css">
 <link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/myStyle.css">
   <body>
     <style>
-        td.details-control {
-            background: url('./assets/images/details_open.png') no-repeat center center;
-            cursor: pointer;
-        }
-        tr.shown td.details-control {
-            background: url('./assets/images/details_close.png') no-repeat center center;
-        }
-        .jumbotron{
-            height:100%;
-            width:100%;
-            font-family:'微軟正黑體';
-        }
-        #example1 thead td{
-            background: rgb(63,169,221);
-            color: white;
-        }
-        .container{
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
         .wrap-contact100{
+            background : #ffffff;
             border-color : rgb(63,169,221);
             display: flex;
             flex-wrap: wrap;
@@ -169,29 +149,9 @@
             position: relative;
             font-family: '微軟正黑體';
         }
-        .label-input100{
-            font-size: 15px;
-        }
-        .container-contact100-form-btn{
-            /* justify-content:end; */
-        }
-        .nav-link{
-            font-size:1rem;
-        }
         .plan,.date{
             font-size:24px;
             margin-top:30px;
-        }
-        .swal2-modal {
-            background-color: rgba(255, 0, 0, 0.6);
-            border: 3px solid white;
-            font-family:'微軟正黑體';
-        }
-        .swal2-popup .swal2-title{
-            color:white;
-        }
-        .swal2-container.swal2-shown {
-            background-color: rgba(214, 0, 0, 0.4);
         }
         @media screen and (max-width: 768px) {
             .jumbotron,.btn{

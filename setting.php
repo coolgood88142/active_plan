@@ -3,8 +3,8 @@
     <title>規劃行程系統</title>
   </head>
   <?php include("link.php");?>
-  <script src="./assets/js/main.js"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/myStyle.css">
   <?php session_start();
         $islogin=false;$us_admin = "";$setting = "";
         include("checklogin.php");
@@ -68,48 +68,9 @@
     width:150px;
     height:150px;
   }
-  .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    display: flex;
-    align-items: center; 
-  }
-  .jumbotron{
-    height:100%;
-    width:100%;
-    font-family:'微軟正黑體';
-  }
-  .col-from{
-    padding: 50px 15px;
-  }
-  .container{
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .wrap-contact100{
-    background: #DDDDDD;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .wrap-input100{
-    border: 1px solid #e6e6e6;
-    border-radius: 13px;
-    padding: 10px 30px 9px 22px;
-    margin-bottom: 20px;
-    position: relative;
-    font-family: '微軟正黑體';
-  }
-  .label-input100{
-    font-size: 15px;
-  }
   .container-contact100-form-btn{
     justify-content: flex-end;
     padding-top: 0px;
-  }
-  .nav-link{
-    font-size:1rem;
   }
   @media screen and (max-width: 768px) {
     .jumbotron,.btn{
