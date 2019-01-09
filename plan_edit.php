@@ -8,6 +8,7 @@
 <script type="text/javascript" src="./assets/js/bootstrap-datetimepicker.zh-TW.js" charset="UTF-8"></script>
 <link rel="stylesheet" href="./assets/css/main.css">
 <link rel="stylesheet" href="./assets/css/myStyle.css">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE"></script>
 <?php session_start();
     $islogin=false;$us_admin = "";
     include("checklogin.php");

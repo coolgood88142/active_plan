@@ -110,7 +110,7 @@
                         <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2">
                           <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>
-                        <div id="query" class="col-sm-1 col-md-3 col-lg-2">
+                        <div id="query" class="col-sm-1 col-md-3 col-lg-2" style="text-align:right;">
                           <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>

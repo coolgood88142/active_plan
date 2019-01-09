@@ -388,14 +388,8 @@
                 $(this).click();
             }
         });
-        $(".dt-button-background").click(
-            function(){
-                $(".dt-button-background").remove();
-                $(".dt-button-collection").hide();
-            }
-        );
-        
-        $(".dt-button-background").click();
+        $(".dt-button-background").remove();
+        $(".dt-button-collection").hide();
     }
         
 
