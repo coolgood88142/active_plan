@@ -79,6 +79,7 @@
     ,(select ac_carry from activity  where pn_acid = ac_id ) as ac_carry 
     ,(select ac_spend from activity  where pn_acid = ac_id ) as ac_spend 
     ,(select ac_hours from activity  where pn_acid = ac_id ) as ac_hours 
+    ,pn_address
     FROM plan_acname,plan_trip
     WHERE pn_ptid = pt_id ";
 

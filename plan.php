@@ -305,6 +305,7 @@
                                         <input type="hidden" name="ac_spend" value="<?=$trip["ac_spend"]?>"/>
                                         <input type="hidden" name="ac_hours" value="<?=$trip["ac_hours"]?>"/>
                                         <input type="hidden" name="ac_id" value="<?=$trip["ac_id"]?>"/>
+                                        <input type="hidden" name="pn_address" value="<?=$trip["pn_address"]?>"/>
                             <?php
                                     }
                                 }
@@ -467,7 +468,8 @@
         <input type="hidden" name="ac_carry" />    
         <input type="hidden" name="ac_spend" />    
         <input type="hidden" name="ac_hours" />
-        <input type="hidden" name="ac_id" />           
+        <input type="hidden" name="ac_id" />
+        <input type="hidden" name="pn_address" />
     </form>
   </div>
   </body>
@@ -845,7 +847,7 @@
         var tr = $(obj).closest('tr');
         var pt_status = $(tr).find(".pt_status").text().trim();
         if(pt_status!="V"){
-            var pn_id = [],pn_acname = [],ac_type = [],ac_weather = [],ac_drive = [],ac_carry = [],ac_spend = [],ac_hours = [],ac_id = [];
+            var pn_id = [],pn_acname = [],ac_type = [],ac_weather = [],ac_drive = [],ac_carry = [],ac_spend = [],ac_hours = [],ac_id = [],pn_address = [];
             var pt_id = $(tr).find(".pt_id").text().trim();
             var pt_usid = $(tr).find(".pt_usid").text().trim();
             var pt_usname = $(tr).find(".pt_usname").text().trim();  
@@ -878,6 +880,9 @@
             $(tr).find("td input[name='ac_id']").each(function(){
                 ac_id.push($(this).val());
             })
+            $(tr).find("td input[name='pn_address']").each(function(){
+                pn_address.push($(this).val());
+            })
             // $(tr).find("td input[name='pt_usid']").each(function(){
             //     pt_usid.push($(this).val());
             // })
@@ -898,7 +903,8 @@
             $(from).find("input[name='ac_carry']").val(ac_carry);
             $(from).find("input[name='ac_spend']").val(ac_spend);
             $(from).find("input[name='ac_hours']").val(ac_hours);
-            $(from).find("input[name='ac_id']").val(ac_id);  
+            $(from).find("input[name='ac_id']").val(ac_id);
+            $(from).find("input[name='pn_address']").val(pn_address);  
             $(from).submit();
         }else{
             return alert("已完成不能編輯!");

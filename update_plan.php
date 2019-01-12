@@ -129,6 +129,7 @@
     $ad_hours = "";
     $ad_acid = "";
     $ad_pnorderby = "";
+    $pn_address = "";
 
     if(isset($_POST['us_id'])){
         $us_id = $_POST['us_id'];
@@ -156,6 +157,10 @@
     if(isset($_POST['ad_pnorderby'])){
         $ad_pnorderby = $_POST['ad_pnorderby'];
         $ad_pnorderby = explode(",", $ad_pnorderby);
+    }
+
+    if(isset($_POST['pn_address'])){
+        $pn_address = $_POST['pn_address'];
     }
 
     $newplan = "";
@@ -195,6 +200,7 @@
             $acname = $ad_acname[$i];
             $achours = $ad_hours[$i];
             $acid = $ad_acid[$i];
+            $address = $pn_address[$i];
             $pn_orderby = 1;
             if($ad_pnorderby!=""){
                 $pn_orderby = $ad_pnorderby[$i];
@@ -214,8 +220,8 @@
             $pt_id = $data['pt_id'];
 
             if($acid!="" && $acid!=null && $acname!="" && $acname!=null && $achours!="" && $achours!=null){
-                $sql = "INSERT INTO plan_acname (pn_ptid, pn_acid, pn_acname, pn_achours ,pn_orderby)
-                VALUES ($pt_id, $acid, '$acname', $achours, $pn_orderby)";
+                $sql = "INSERT INTO plan_acname (pn_ptid, pn_acid, pn_acname, pn_achours, pn_orderby, pn_address)
+                VALUES ($pt_id, $acid, '$acname', $achours, $pn_orderby, $address)";
                 $conn->exec($sql);
             }
         }
