@@ -415,6 +415,7 @@
                         <td>攜帶物品</td>
                         <td>花費</td>
                         <td>時間(小時)</td>
+                        <td>地址</td>
                         <td>動作</td>
                         <td style="display:none;">類型ID</td>
                     </tr>
@@ -449,6 +450,7 @@
         <input type="hidden" name="plan_date" />
         <input type="hidden" name="pt_usid" />
         <input type="hidden" name="pt_usname" />
+        <input type="hidden" name="pn_address" />
 
         <input type="hidden" name="us_id" />
         <input type="hidden" name="us_name" />
@@ -645,7 +647,7 @@
         function go_plan(){
         $("input[name='addactivity']").show();
         if($('#example3_wrapper').is(':visible')){
-            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="",
+            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="",pn_address="",
             isdelete="";
             var from = $("form[name='updateForm']");
             $("#example3 .ac_id").each(function(){

@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>規劃行程系統</title>
+    <meta name="viewport" content="width=device-width">
   </head>
 <?php include("link.php");?>
 <link rel="stylesheet" href="./assets/css/buttons.dataTables.min.css">
