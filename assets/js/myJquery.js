@@ -56,3 +56,9 @@ function SweetAlertMessage(message){
         showCloseButton: true
     });
 }
+
+$(window).resize(function() {
+    if($(window).width() <= 768){
+        $(".dataTables_filter").css("text-align", "right");
+    }
+});

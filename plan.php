@@ -533,6 +533,16 @@
                 tr.addClass('shown');
             }
         } );
+
+        $("#example2 tbody tr").click(function(){
+            var add = $(this).find("td input[name='add']");
+            if($(add).is(":checked")){
+                $(add).prop("checked",false);
+            }else{
+                $(add).prop("checked",true);
+            }
+        });
+
         if($("input[name='admin']").val()!='Y'){
             $('#example1_wrapper').hide();
             $('#example4_wrapper').show();
@@ -678,6 +688,7 @@
                 ad_achours = ad_achours + hours;
                 ad_hours = ad_hours + hours + ",";
                 ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
+                pn_address = pn_address + obj.find("input[name='address']").val().trim() + ",";
                 });
             }
             ad_acname = ad_acname.substring(0, ad_acname.length-1);
@@ -687,6 +698,7 @@
             ad_accarry = ad_accarry.substring(0, ad_accarry.length-1);
             ad_hours = ad_hours.substring(0, ad_hours.length-1);
             ad_acid = ad_acid.substring(0, ad_acid.length-1);
+            pn_address = pn_address.substring(0, pn_address.length-1);
             
             $(from).find("input[name='ad_acname']").val(ad_acname);
             $(from).find("input[name='ad_typename']").val(ad_typename);
@@ -697,6 +709,7 @@
             $(from).find("input[name='ad_achours']").val(ad_achours);
             $(from).find("input[name='ad_hours']").val(ad_hours);
             $(from).find("input[name='ad_acid']").val(ad_acid);
+            $(from).find("input[name='pn_address']").val(pn_address);
             var plan_name = $("input[name='plan_name']").val().trim();
             var plan_date = $("input[name='plan_date']").val().trim();
             var pt_usid = $("input[name='pt_usid']").val();
@@ -792,6 +805,10 @@
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_hours");
                 td.innerHTML = ac_hourss[i];
+
+                td = tr.insertCell(tr.cells.length);
+                td.setAttribute("class","pn_address");
+                td.innerHTML = '<input type="text" class="form-control" name="address"/>';
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");

@@ -116,9 +116,10 @@
                         <td class="ac_type">
                             <?php echo $ac_type[$i]?>
                         </td>
-                        <td class="weather_name" style="display:none;">
+                        <td class="weather_name">
                             <?php 
                                 $acweather = $ac_weather[$i];
+                                $acweather = explode(",", $acweather);
                                 $wather_count = count($acweather);
 
                                 $wather_name = "";
@@ -136,10 +137,10 @@
                                         $wather_name = $wather_name . "、";
                                     }
                                 }
-                                echo $ac_weather[$i];
+                                echo $wather_name;
                             ?>
                         </td>
-                        <td class="ac_weather" >
+                        <td class="ac_weather" style="display:none;">
                             <?php echo $ac_weather[$i]?>
                         </td>
                         <td class="ac_drive">
@@ -195,7 +196,28 @@
                             <?php echo $value["type_name"]?>
                         </td>
                         <td class="ac_weather">
-                            <?php echo $value["ac_weather"]?>
+                            <?php 
+                                $acweather = $value["ac_weather"];
+                                $acweather = explode(",", $acweather);
+                                $wather_count = count($acweather);
+
+                                $wather_name = "";
+                                for($j=0;$j<$wather_count;$j++){
+                                    $aw_type = $acweather[$j];
+                                    $sql = "SELECT aw_name FROM activity_weather where aw_type = $aw_type";
+                                    $query = $conn->query($sql);
+                                    $awname = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                    foreach($awname as $key => $name){
+                                        $wather_name = $wather_name . $name['aw_name'];                                  
+                                    }
+
+                                    if($j!=$wather_count-1){
+                                        $wather_name = $wather_name . "、";
+                                    }
+                                }
+                                echo $wather_name;
+                            ?>
                         </td>
                         <td class="ac_drive">
                             <?php echo $value["ac_drive"]?>
@@ -261,6 +283,15 @@
         $('#example2').DataTable(datatable_language());
         $('#example2_wrapper').hide();
         openDate($("input[name='pt_date']"));
+
+        $("#example2 tbody tr").click(function(){
+            var add = $(this).find("td input[name='add']");
+            if($(add).is(":checked")){
+                $(add).prop("checked",false);
+            }else{
+                $(add).prop("checked",true);
+            }
+        });
     } );
 
     function openDate(name){
@@ -445,7 +476,7 @@
                 td.innerHTML = ac_ids[i];
 
                 td = tr.insertCell(tr.cells.length);
-                td.innerHTML = '<input type="button" name="cancel" value="取消" onClick="Cancel(this)"/>';
+                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>';
                 }
             }
             

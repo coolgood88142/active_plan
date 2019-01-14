@@ -56,8 +56,11 @@
       #query{
         margin-top:20px;
       }
-      .col-min{
-
+      .col-min-text{
+        text-align:left;
+      }
+      .col-min-btn{
+        text-align:right;
       }
   }
 
@@ -105,15 +108,15 @@
 
                     <div id="select_date">
                       <div class="row justify-content-center align-items-center">
-                        <label class="col-sm-3 col-md-3 col-lg-2 datetext control-label">開始日期:</label>
-                        <div class="col-md-3 col-lg-2 col-xl-2">
+                        <label class="col-min-text col-md-3 col-lg-2 datetext control-label">開始日期:</label>
+                        <div class=" col-md-3 col-lg-2 col-xl-2">
                           <input type="text" class="form-control" name="begin_date" data-provide="datepicker">
                         </div>
-                        <label class="col-sm-3 col-md-3 col-lg-2 datetext control-label">結束日期:</label>
+                        <label class="col-min-text col-md-3 col-lg-2 datetext control-label">結束日期:</label>
                         <div class="col-md-3 col-lg-2 col-xl-2">
                           <input type="text" class="form-control" name="end_date" data-provide="datepicker">
                         </div>
-                        <div id="query" class="col-sm-1 col-md-3 col-lg-2" style="text-align:right;">
+                        <div id="query" class="col-min-btn col-md-3 col-lg-2" style="text-align:right;">
                           <input type="button" name="query_data" class="btn btn-primary" value="查詢" onClick="query_chart()">
                         </div>
                       </div>
