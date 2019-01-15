@@ -50,6 +50,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            overflow: inherit;
         }
         .wrap-input100{
             border: 1px solid rgb(63,169,221);
