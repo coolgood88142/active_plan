@@ -537,10 +537,13 @@
 
         $("#example2 tbody tr").click(function(){
             var add = $(this).find("td input[name='add']");
+            
             if($(add).is(":checked")){
                 $(add).prop("checked",false);
+                $(this).css("background","");
             }else{
                 $(add).prop("checked",true);
+                $(this).css("background","rgb(63,169,221)");
             }
         });
 

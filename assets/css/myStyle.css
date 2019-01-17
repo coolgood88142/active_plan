@@ -162,4 +162,7 @@
         #img{
           margin-bottom:0px;
         }
+        div.dataTables_wrapper div.dataTables_filter{
+          text-align:right;
+        }
     }

@@ -57,8 +57,8 @@ function SweetAlertMessage(message){
     });
 }
 
-$(window).resize(function() {
-    if($(window).width() <= 768){
-        $(".dataTables_filter").css("text-align", "right");
-    }
-});
+// $(window).resize(function() {
+//     if($(window).width() <= 768){
+//         $(".dataTables_filter").css("text-align", "right");
+//     }
+// });
