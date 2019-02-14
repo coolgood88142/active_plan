@@ -412,7 +412,7 @@
                         <td>類型</td>
                         <td>天氣</td>
                         <td style="display:none;">天氣ID</td>
-                        <td >車程(小時)</td>
+                        <td>車程(小時)</td>
                         <td>攜帶物品</td>
                         <td>花費</td>
                         <td>時間(小時)</td>
@@ -425,7 +425,27 @@
                 </tbody>
                 <tfoot>
                 </tfoot>
-            </table><br/>
+            </table>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-center font-weight-bold" id="myModalLabel">地址地圖</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" class="form-control" name="address" value=""/>
+                        <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
             <div style="text-align:right">
                 <input type="button" class="btn btn-primary" name="addactivity" value="新增" onClick="add_activity()"/>
                 <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
@@ -610,8 +630,24 @@
                 });
             });
         })
-        
+
+        $('#myModal').on('hidden.bs.modal', (function() {
+            //每關閉時清空
+            $("input[name='address']").val('');
+        }));
     } );
+
+    function openAddressMap(address){
+        $(".modal-body").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
+    }
+
+    function queryAddress(){
+        openAddressMap($("input[name='address']").val());
+    }
+
+    function saveAddress(obj){
+        var address = $("input[name='address']").val();
+    }
 
     function openDate(name){
     $(name).datepicker({
@@ -812,8 +848,8 @@
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","pn_address");
-                td.innerHTML = '<input type="text" class="form-control" name="address"/>';
-
+                td.innerHTML = '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onClick="openAddressMap('+"'"+ac_names[i].trim()+"'"+')"/>';
+                td.innerHTML = td.innerHTML + '<input type="text" style="display:none;" name="pn_address" value="">';
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
                 td.setAttribute("style","display:none;");
