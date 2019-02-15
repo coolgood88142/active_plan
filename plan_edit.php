@@ -35,6 +35,9 @@
     $pn_acname = $_POST['pn_acname'];
     $pn_acname = explode(",", $pn_acname);
 
+    $pn_address = $_POST['pn_address'];
+    $pn_address = explode(",", $pn_address);
+
     $ac_type = $_POST['ac_type'];
     $ac_type = explode(",", $ac_type);
 
@@ -101,6 +104,7 @@
                         <td>攜帶物品</td>
                         <td>花費</td>
                         <td>時間(小時)</td>
+                        <td>地址</td>
                         <td>動作</td>
                         <td style="display:none;">活動ID</td>
                     </tr>
@@ -155,6 +159,10 @@
                         <td class="ac_hours">
                             <?php echo $ac_hours[$i]?>
                         </td>
+                        <td class="pn_address">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onclick="openAddressMap('<?=$pn_acname[$i]?>','<?=$i?>')">
+                            <input type="text" style="display:none;" name="address_<?=$i?>" value="">
+                        </td>
                         <td>
                             <input type="checkbox" name="dalete" >刪除
                         </td>
@@ -169,6 +177,27 @@
                 <tfoot>
                 </tfoot>
             </table>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-center font-weight-bold" id="myModalLabel">地址地圖</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="text" class="form-control" name="address" value=""/>
+                        <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
+                    </div>
+                    </div>
+                </div>
+                <input type="text" name="no_address" style="display:none;" value="">
+            </div>
 
             <table id="example2" class="table table-striped table-bordered">
                 <thead>
@@ -294,6 +323,11 @@
                 $(this).css("background","rgb(63,169,221)");
             }
         });
+
+        $('#myModal').on('hidden.bs.modal', (function() {
+            //每關閉時清空
+            $("input[name='address']").val('');
+        }));
     } );
 
     function openDate(name){

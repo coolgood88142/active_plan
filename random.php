@@ -273,7 +273,7 @@
                                 <span>
                                     <label style="color:red;">*</label>使用者名稱：
                                 </span>
-                                <select class="js-select2" name="add_actype">
+                                <select class="js-select2" name="pt_userlist">
                                     <?php
                                         if($us_admin=='Y'){
                                             foreach($user as $key => $value){
@@ -340,6 +340,7 @@
                             <td>攜帶物品</td>
                             <td>花費</td>
                             <td>時間(小時)</td>
+                            <td>地址</td>
                             <td style="display:none;">類型ID</td>
                             <td>時段</td>   
                         </tr>
@@ -360,7 +361,7 @@
                                     <?php echo $post_actype[$i]?>
                                 </td>
                                 <td class="ac_weather">
-                                    <?php echo $post_acname[$i]?>
+                                    <?php echo $post_acweather[$i]?>
                                 </td>
                                 <td class="ac_drive">
                                     <?php echo $post_acdrive[$i]?>
@@ -373,6 +374,10 @@
                                 </td>
                                 <td class="ac_hours">
                                     <?php echo $post_achours[$i]?>
+                                </td>
+                                <td class="pn_address">
+                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onclick="openAddressMap('<?=$post_acname[$i]?>','<?=$i?>')">
+                                    <input type="text" style="display:none;" name="address_<?=$i?>" value="">
                                 </td>
                                 <td class="ac_id" style="display:none;">
                                     <?php echo $post_acid[$i]?>
@@ -389,6 +394,26 @@
                     <tfoot>
                      </tfoot>
                 </table>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center font-weight-bold" id="myModalLabel">地址地圖</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" class="form-control" name="address" value=""/>
+                            <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
+                        </div>
+                        </div>
+                    </div>
+                    <input type="text" name="no_address" style="display:none;" value="">
+                </div>
                 <div style="text-align:right">
                     <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>
                 </div>
@@ -407,6 +432,7 @@
         <input type="hidden" name="ad_hours" />
         <input type="hidden" name="ad_acid" />
         <input type="hidden" name="ad_pnorderby" />
+        <input type="hidden" name="pn_address" />
 
         <input type="hidden" name="plan_name" /> 
         <input type="hidden" name="plan_date" />
@@ -483,6 +509,11 @@
             });
         })
 
+        $('#myModal').on('hidden.bs.modal', (function() {
+            //每關閉時清空
+            $("input[name='address']").val('');
+        }));
+
     } );
 
     $("input[name='day']").on('keyup', function() {
@@ -544,31 +575,34 @@
 
     function go_plan(){
         if($('#example1_wrapper').is(':visible')){
-            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="",ad_pnorderby="";
+            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",ac_id="",ad_hours="",ad_pnorderby="",pn_address="";
             var from = $("form[name='updateForm']");
             var row = $("#example1 .ac_id");
             if(row.length>0){
+                var no = 0;
                 $(row).each(function() {
-                var obj = $(this).closest("tr");
-                ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
-                ad_typename = ad_typename + obj.find(".type_name").text().trim() + ",";
-                ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
-                ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
-                ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
+                    var obj = $(this).closest("tr");
+                    ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
+                    ad_typename = ad_typename + obj.find(".type_name").text().trim() + ",";
+                    ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
+                    ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
+                    ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
 
-                var pnorderby = obj.find(".pn_orderby").text().trim();
-                pnorderby = pnorderby.substring(1, pnorderby.length-1);
-                ad_pnorderby = ad_pnorderby + pnorderby + ",";
+                    var pnorderby = obj.find(".pn_orderby").text().trim();
+                    pnorderby = pnorderby.substring(1, pnorderby.length-1);
+                    ad_pnorderby = ad_pnorderby + pnorderby + ",";
 
-                var spend = obj.find(".ac_spend").text().trim();
-                spend = parseInt(spend.substring(0, spend.length-1));
-                ad_acspend = ad_acspend + spend;
+                    var spend = obj.find(".ac_spend").text().trim();
+                    spend = parseInt(spend.substring(0, spend.length-1));
+                    ad_acspend = ad_acspend + spend;
 
-                var hours = parseInt(obj.find(".ac_hours").text().trim());
-                ad_achours = ad_achours + hours;
-                ad_hours = ad_hours + hours + ",";
-                ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
+                    var hours = parseInt(obj.find(".ac_hours").text().trim());
+                    ad_achours = ad_achours + hours;
+                    ad_hours = ad_hours + hours + ",";
+                    ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
 
+                    pn_address = pn_address + obj.find(".pn_address input[name='address_"+no+"']").val().trim() + ",";
+                    no++;
                 });
             }
 
@@ -580,6 +614,7 @@
             ad_hours = ad_hours.substring(0, ad_hours.length-1);
             ad_acid = ad_acid.substring(0, ad_acid.length-1);
             ad_pnorderby = ad_pnorderby.substring(0, ad_pnorderby.length-1);
+            pn_address = pn_address.substring(0, pn_address.length-1);
 
             $(from).find("input[name='ad_acname']").val(ad_acname);
             $(from).find("input[name='ad_typename']").val(ad_typename);
@@ -591,7 +626,7 @@
             $(from).find("input[name='ad_hours']").val(ad_hours);
             $(from).find("input[name='ad_acid']").val(ad_acid);
             $(from).find("input[name='ad_pnorderby']").val(ad_pnorderby);
-
+            $(from).find("input[name='pn_address']").val(pn_address);
 
             var plan_name = $("input[name='plan_name']").val();
             var plan_date = $("input[name='plan_date']").val();

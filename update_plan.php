@@ -201,7 +201,7 @@
             $acname = $ad_acname[$i];
             $achours = $ad_hours[$i];
             $acid = $ad_acid[$i];
-            $address = "";
+            $address = $pn_address[$i];
             $pn_orderby = 1;
             if($ad_pnorderby!=""){
                 $pn_orderby = $ad_pnorderby[$i];
@@ -222,7 +222,7 @@
 
             if($acid!="" && $acid!=null && $acname!="" && $acname!=null && $achours!="" && $achours!=null){
                 $sql = "INSERT INTO plan_acname (pn_ptid, pn_acid, pn_acname, pn_achours, pn_orderby, pn_address)
-                VALUES ($pt_id, $acid, '$acname', $achours, $pn_orderby, '')";
+                VALUES ($pt_id, $acid, '$acname', $achours, $pn_orderby, '$address')";
                 $conn->exec($sql);
             }
         }

@@ -71,7 +71,7 @@
     $plan = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $sql = "SELECT pn_id,pn_ptid,pn_acname,pt_id,pt_usid 
+    $sql = "SELECT pn_id,pn_ptid,pn_acname,pn_address,pt_id,pt_usid 
 	,(select ac_id from activity where pn_acid = ac_id ) as ac_id 
 	,(select name from activity,activity_types where pn_acid = ac_id and ac_type = type_id) as ac_type 
 	,(select ac_weather from activity where pn_acid = ac_id ) as ac_weather 

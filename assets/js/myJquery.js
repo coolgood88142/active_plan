@@ -57,8 +57,17 @@ function SweetAlertMessage(message){
     });
 }
 
-// $(window).resize(function() {
-//     if($(window).width() <= 768){
-//         $(".dataTables_filter").css("text-align", "right");
-//     }
-// });
+function openAddressMap(address,number){
+    $(".modal-body").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
+    $("input[name='no_address']").val(number);    
+}
+
+function queryAddress(){
+    openAddressMap($("input[name='address']").val(),$("input[name='no_address']").val());
+}
+
+function saveAddress(){
+    var no = $("input[name='no_address']").val();
+    var address = $("input[name='address']").val();
+    $(".pn_address").find("input[name='address_"+no+"']").val(address);
+}
