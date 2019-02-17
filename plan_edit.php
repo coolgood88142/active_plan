@@ -160,11 +160,14 @@
                             <?php echo $ac_hours[$i]?>
                         </td>
                         <td class="pn_address">
-                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onclick="openAddressMap('<?=$pn_acname[$i]?>','<?=$i?>')">
-                            <input type="text" style="display:none;" name="address_<?=$i?>" value="">
+                            
                         </td>
                         <td>
-                            <input type="checkbox" name="dalete" >刪除
+                            <div style="text-align:center">
+                                <input type="checkbox" name="dalete" >刪除
+                                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$pn_acname[$i]?>','<?=$i?>')">
+                                <input type="text" style="display:none;" name="address_<?=$i?>" value="">
+                            </div>
                         </td>
                         <td class="pn_id" style="display:none;">
                             <?php echo $pn_id[$i]?>
