@@ -376,8 +376,11 @@
                                     <?php echo $post_achours[$i]?>
                                 </td>
                                 <td class="pn_address">
-                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onclick="openAddressMap('<?=$post_acname[$i]?>','<?=$i?>')">
-                                    <input type="text" style="display:none;" name="address_<?=$i?>" value="">
+                                    <div style="text-align:center">
+                                        <input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>&nbsp
+                                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\''+ac_names[i].trim()+"','"+i+'\')"/>
+                                        <input type="text" style="display:none;" name="address_'+i+'" value="">
+                                    </div>
                                 </td>
                                 <td class="ac_id" style="display:none;">
                                     <?php echo $post_acid[$i]?>

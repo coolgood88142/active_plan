@@ -846,8 +846,6 @@
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","pn_address");
-                td.innerHTML = '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="地圖" onClick="openAddressMap(\''+ac_names[i].trim()+"','"+i+'\')"/>';
-                td.innerHTML = td.innerHTML + '<input type="text" style="display:none;" name="address_'+i+'" value="">';
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
@@ -855,7 +853,12 @@
                 td.innerHTML = ac_ids[i];
 
                 td = tr.insertCell(tr.cells.length);
-                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>';  
+                td.innerHTML = '<div style="text-align:center">'
+                + '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
+                + '&nbsp'
+                + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\''+ac_names[i].trim()+"','"+i+'\')"/>'
+                + '<input type="text" style="display:none;" name="address_'+i+'" value="">'
+                + '</div>';
                     //預設有兩行，刪除文字行
                     if(num==2){
                         $("#example3").find(".odd").remove();
