@@ -130,6 +130,7 @@
     $ad_acid = "";
     $ad_pnorderby = "";
     $pn_address = "";
+    $up_address = "";
 
     if(isset($_POST['us_id'])){
         $us_id = $_POST['us_id'];
@@ -164,6 +165,10 @@
         $pn_address = explode(",", $pn_address);
     }
 
+    if(isset($_POST['up_address'])){
+        $up_address = $_POST['up_address'];
+    }
+
     $newplan = "";
     if(isset($_POST['newplan'])){
         $newplan = $_POST['newplan'];
@@ -189,6 +194,11 @@
                 $sql = "UPDATE plan_trip SET pt_spend = $ad_acspend,pt_hours = $ad_achours WHERE pt_name = '$pt_name' and pt_date = '$plan_date' and pt_usid = $pt_usid";
                 $conn->exec($sql);
             }
+
+            if(count($up_address) > 0){
+                $sql = "SELECT count()";
+            }
+            
         }
 
         if($newplan!=""){

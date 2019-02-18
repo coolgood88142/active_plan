@@ -719,7 +719,7 @@
                     ad_achours = ad_achours + hours;
                     ad_hours = ad_hours + hours + ",";
                     ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
-                    pn_address = pn_address + obj.find(".pn_address input[name='address_"+no+"']").val().trim() + ",";
+                    pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
                     no++;
                 });
             }
@@ -845,7 +845,7 @@
                 td.innerHTML = ac_hourss[i];
 
                 td = tr.insertCell(tr.cells.length);
-                td.setAttribute("class","pn_address");
+                td.setAttribute("class","pn_address"+i);
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
@@ -857,7 +857,6 @@
                 + '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
                 + '&nbsp'
                 + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\''+ac_names[i].trim()+"','"+i+'\')"/>'
-                + '<input type="text" style="display:none;" name="address_'+i+'" value="">'
                 + '</div>';
                     //預設有兩行，刪除文字行
                     if(num==2){

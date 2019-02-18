@@ -341,6 +341,7 @@
                             <td>花費</td>
                             <td>時間(小時)</td>
                             <td>地址</td>
+                            <td>動作</td>
                             <td style="display:none;">類型ID</td>
                             <td>時段</td>   
                         </tr>
@@ -375,11 +376,11 @@
                                 <td class="ac_hours">
                                     <?php echo $post_achours[$i]?>
                                 </td>
-                                <td class="pn_address">
-                                    <div style="text-align:center">
-                                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$post_acname[$i]?>','<?=$i?>')">
-                                        <input type="text" style="display:none;" name="address_<?=$i?>" value="">
-                                    </div>
+                                <td class="pn_address<?=$i?>">
+
+                                </td>
+                                <td class="address_map">
+                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$post_acname[$i]?>','<?=$i?>')">
                                 </td>
                                 <td class="ac_id" style="display:none;">
                                     <?php echo $post_acid[$i]?>
@@ -603,7 +604,7 @@
                     ad_hours = ad_hours + hours + ",";
                     ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
 
-                    pn_address = pn_address + obj.find(".pn_address input[name='address_"+no+"']").val().trim() + ",";
+                    pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
                     no++;
                 });
             }

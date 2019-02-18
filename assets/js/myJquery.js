@@ -69,5 +69,6 @@ function queryAddress(){
 function saveAddress(){
     var no = $("input[name='no_address']").val();
     var address = $("input[name='address']").val();
-    $(".pn_address").find("input[name='address_"+no+"']").val(address);
+    $(".pn_address"+no).text(address);
+    $("input[name='up_address']").val(address);
 }

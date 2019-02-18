@@ -159,14 +159,15 @@
                         <td class="ac_hours">
                             <?php echo $ac_hours[$i]?>
                         </td>
-                        <td class="pn_address">
-                            
+                        <td class="pn_address<?=$i?>">
+                            <?php echo $pn_address[$i]?>
+                            <input type="hidden" name="up_address" />
+                            <input type="hidden" name="up_pnid" />
                         </td>
                         <td>
                             <div style="text-align:center">
-                                <input type="checkbox" name="dalete" >刪除
+                                <input type="checkbox" name="dalete">刪除
                                 <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$pn_acname[$i]?>','<?=$i?>')">
-                                <input type="text" style="display:none;" name="address_<?=$i?>" value="">
                             </div>
                         </td>
                         <td class="pn_id" style="display:none;">
@@ -299,6 +300,8 @@
         <input type="hidden" name="ad_achours" />
         <input type="hidden" name="ad_hours" />
         <input type="hidden" name="ad_acid" />
+        <input type="hidden" name="pn_address" />
+        <input type="hidden" name="up_address" />
 
         <input type="hidden" name="plan_name" /> 
         <input type="hidden" name="plan_date" />
@@ -361,7 +364,7 @@
 
     function go_plan(){
         if($('#example1_wrapper').is(':visible')){
-            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",pn_id="",ad_hours= "",
+            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",pn_id="",ad_hours= "",pn_address="",up_address="",up_
             de_acspend=0,de_achours=0,isdelete="";
             var from = $("form[name='submitForm']");
 
@@ -390,23 +393,26 @@
 
             var cancel = $("#example1 input[name='cancel']");
             if(cancel.length>0){
+                var no = 0;
                 $(cancel).each(function() {
-                var obj = $(this).closest("tr");
-                ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
-                ad_typename = ad_typename + obj.find(".type_name").text().trim() + ",";
-                ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
-                ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
-                ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
+                    var obj = $(this).closest("tr");
+                    ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
+                    ad_typename = ad_typename + obj.find(".type_name").text().trim() + ",";
+                    ad_acweather = ad_acweather + obj.find(".ac_weather").text().trim() + ",";
+                    ad_acdrive = ad_acdrive + obj.find(".ac_drive").text().trim() + ",";
+                    ad_accarry = ad_accarry + obj.find(".ac_carry").text().trim() + ",";
 
-                var spend = obj.find(".ac_spend").text().trim();
-                spend = parseInt(spend.substring(0, spend.length-1));
-                ad_acspend = ad_acspend + spend;
+                    var spend = obj.find(".ac_spend").text().trim();
+                    spend = parseInt(spend.substring(0, spend.length-1));
+                    ad_acspend = ad_acspend + spend;
 
-                var hours = parseInt(obj.find(".ac_hours").text().trim());
-                ad_achours = ad_achours + hours;
-                ad_hours = ad_hours + hours + ",";
-                ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
-
+                    var hours = parseInt(obj.find(".ac_hours").text().trim());
+                    ad_achours = ad_achours + hours;
+                    ad_hours = ad_hours + hours + ",";
+                    ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
+                    pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
+                    up_address = up_address + obj.find(".pn_address"+no+" input[name='up_address']").val().trim() + ",";
+                    no++;
                 });
             }
 
@@ -417,7 +423,8 @@
             ad_accarry = ad_accarry.substring(0, ad_accarry.length-1);
             ad_hours = ad_hours.substring(0, ad_hours.length-1);
             ad_acid = ad_acid.substring(0, ad_acid.length-1);
-            
+            pn_address = pn_address.substring(0, pn_address.length-1);
+            up_address = up_address.substring(0, up_address.length-1);
 
             $(from).find("input[name='ad_acname']").val(ad_acname);
             $(from).find("input[name='ad_typename']").val(ad_typename);
@@ -428,7 +435,8 @@
             $(from).find("input[name='ad_achours']").val(ad_achours);
             $(from).find("input[name='ad_hours']").val(ad_hours);
             $(from).find("input[name='ad_acid']").val(ad_acid);
-
+            $(from).find("input[name='pn_address']").val(pn_address);
+            $(from).find("input[name='up_address']").val(up_address);
 
             var plan_name = $("input[name='pt_name']").val();
             var plan_date = $("input[name='pt_date']").val();
