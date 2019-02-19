@@ -36,7 +36,7 @@ $('#myModal').on('shown.bs.modal', (function() {
 
   return function() {
     if (!mapIsAdded) {
-      $('.modal-body').html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q=動物園" allowfullscreen></iframe>');
+      $('.modal-body').html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q=taiwan" allowfullscreen></iframe>');
 
       mapIsAdded = true;
     }    

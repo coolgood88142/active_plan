@@ -195,9 +195,9 @@
                 $conn->exec($sql);
             }
 
-            if(count($up_address) > 0){
-                $sql = "SELECT count()";
-            }
+            // if(count($up_address) > 0){
+            //     $sql = "SELECT count()";
+            // }
             
         }
 

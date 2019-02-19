@@ -152,6 +152,11 @@
     border-top-color: #EEEEEE;
   }
 
+  #magnifier{
+    width:36px;
+    height:36px;
+  }
+
     @media screen and (max-width: 768px) {
         .jumbotron,.btn,.form-control{
             font-size:14px;

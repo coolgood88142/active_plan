@@ -377,10 +377,11 @@
                                     <?php echo $post_achours[$i]?>
                                 </td>
                                 <td class="pn_address<?=$i?>">
-
+                                    
                                 </td>
-                                <td class="address_map">
-                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$post_acname[$i]?>','<?=$i?>')">
+                                <td class="run">
+                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('','<?=$i?>')">
+                                    <input type="hidden" name="in_address<?=$i?>" value="">
                                 </td>
                                 <td class="ac_id" style="display:none;">
                                     <?php echo $post_acid[$i]?>
@@ -604,7 +605,7 @@
                     ad_hours = ad_hours + hours + ",";
                     ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
 
-                    pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
+                    pn_address = pn_address + obj.find(".run input[name='in_address"+no+"']" ).val() + ",";
                     no++;
                 });
             }

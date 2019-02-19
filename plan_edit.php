@@ -105,6 +105,7 @@
                         <td>花費</td>
                         <td>時間(小時)</td>
                         <td>地址</td>
+                        <td style="display:none;">更新地址</td>
                         <td>動作</td>
                         <td style="display:none;">活動ID</td>
                     </tr>
@@ -160,9 +161,17 @@
                             <?php echo $ac_hours[$i]?>
                         </td>
                         <td class="pn_address<?=$i?>">
-                            <?php echo $pn_address[$i]?>
+                            <?php 
+                                if($pn_address[$i]!=''){
+                            ?>
+                                <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="<?=$pn_address[$i]?>"/>
+                            <?php
+                                }
+                            ?>
+                        </td>
+                        <td class="address<?=$i?>" style="display:none;">
                             <input type="hidden" name="up_address" />
-                            <input type="hidden" name="up_pnid" />
+                            <input type="hidden" name="up_no" />
                         </td>
                         <td>
                             <div style="text-align:center">
@@ -364,7 +373,7 @@
 
     function go_plan(){
         if($('#example1_wrapper').is(':visible')){
-            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",pn_id="",ad_hours= "",pn_address="",up_address="",up_
+            var ad_acname="",ad_typename="",ad_acweather="",ad_acdrive="",ad_accarry="",ad_acspend=0,ad_achours=0,ad_acid="",pn_id="",ad_hours= "",pn_address="",up_address="",up_pnid="",
             de_acspend=0,de_achours=0,isdelete="";
             var from = $("form[name='submitForm']");
 
@@ -411,7 +420,14 @@
                     ad_hours = ad_hours + hours + ",";
                     ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
                     pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
-                    up_address = up_address + obj.find(".pn_address"+no+" input[name='up_address']").val().trim() + ",";
+
+                    var address = obj.find(".pn_address"+no+" input[name='up_address']").val().trim();
+                    var address_no = up_address + obj.find(".pn_address"+no+" input[name='up_no']").val().trim() + ",";
+                    if(address!='' && address_no!=''){
+                        up_address = up_address + address + ",";
+                        up_pnid = up_pnid + address_no + ",";
+                    }
+                    
                     no++;
                 });
             }
