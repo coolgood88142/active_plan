@@ -170,14 +170,12 @@
                             ?>
                         </td>
                         <td class="address<?=$i?>" style="display:none;">
+                            <input type="hidden" name="pn_address" />
                             <input type="hidden" name="up_address" />
-                            <input type="hidden" name="up_no" />
                         </td>
                         <td>
-                            <div style="text-align:center">
-                                <input type="checkbox" name="dalete">刪除
-                                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$pn_acname[$i]?>','<?=$i?>')">
-                            </div>
+                            <input type="checkbox" name="dalete">刪除
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')">
                         </td>
                         <td class="pn_id" style="display:none;">
                             <?php echo $pn_id[$i]?>
@@ -311,6 +309,7 @@
         <input type="hidden" name="ad_acid" />
         <input type="hidden" name="pn_address" />
         <input type="hidden" name="up_address" />
+        <input type="hidden" name="up_pnid" />
 
         <input type="hidden" name="plan_name" /> 
         <input type="hidden" name="plan_date" />
@@ -392,6 +391,20 @@
 
             });
 
+            var dalete = $("#example1 input[name='dalete']");
+            if(dalete.length>0){
+                $(dalete).each(function() {
+                    var obj = $(this).closest("tr");
+                    var address = obj.find("input[name='up_address']").val();
+                    var address_no = obj.find(".pn_id").text().trim();
+                    if(address!='' && address_no!=''){
+                        up_address = up_address + address + ",";
+                        up_pnid = up_pnid + address_no + ",";
+                    }
+                });
+            }
+            
+
             isdelete = isdelete.substring(0, isdelete.length-1);
             pn_id = pn_id.substring(0, pn_id.length-1);
 
@@ -401,8 +414,8 @@
             $(from).find("input[name='de_achours']").val(de_achours);
 
             var cancel = $("#example1 input[name='cancel']");
+            var no = dalete.length;
             if(cancel.length>0){
-                var no = 0;
                 $(cancel).each(function() {
                     var obj = $(this).closest("tr");
                     ad_acname = ad_acname + obj.find(".ac_name").text().trim() + ",";
@@ -419,15 +432,7 @@
                     ad_achours = ad_achours + hours;
                     ad_hours = ad_hours + hours + ",";
                     ad_acid = ad_acid + obj.find(".ac_id").text().trim() + ",";
-                    pn_address = pn_address + obj.find(".pn_address"+no).text().trim() + ",";
-
-                    var address = obj.find(".pn_address"+no+" input[name='up_address']").val().trim();
-                    var address_no = up_address + obj.find(".pn_address"+no+" input[name='up_no']").val().trim() + ",";
-                    if(address!='' && address_no!=''){
-                        up_address = up_address + address + ",";
-                        up_pnid = up_pnid + address_no + ",";
-                    }
-                    
+                    pn_address = pn_address + obj.find("input[name='pn_address']").val().trim() + ",";
                     no++;
                 });
             }
@@ -441,6 +446,7 @@
             ad_acid = ad_acid.substring(0, ad_acid.length-1);
             pn_address = pn_address.substring(0, pn_address.length-1);
             up_address = up_address.substring(0, up_address.length-1);
+            up_pnid = up_pnid.substring(0, up_pnid.length-1);
 
             $(from).find("input[name='ad_acname']").val(ad_acname);
             $(from).find("input[name='ad_typename']").val(ad_typename);
@@ -453,6 +459,7 @@
             $(from).find("input[name='ad_acid']").val(ad_acid);
             $(from).find("input[name='pn_address']").val(pn_address);
             $(from).find("input[name='up_address']").val(up_address);
+            $(from).find("input[name='up_pnid']").val(up_pnid);
 
             var plan_name = $("input[name='pt_name']").val();
             var plan_date = $("input[name='pt_date']").val();
@@ -500,7 +507,6 @@
             var ac_hourss = ac_hours.split(",");
             var ac_ids = ac_id.split(",");
 
-
             if(ac_names!="" && ac_names!=null){
                 for(var i=0; i<ac_names.length; i++){
                 var num = document.getElementById("example1").rows.length;
@@ -533,13 +539,24 @@
                 td.setAttribute("class","ac_hours");
                 td.innerHTML = ac_hourss[i];
 
+                var no = num-1;
+                td = tr.insertCell(tr.cells.length);
+                td.setAttribute("class","pn_address"+no);
+
+                td = tr.insertCell(tr.cells.length);
+                td.setAttribute("class","address"+no);
+                td.setAttribute("style","display:none;");
+                td.innerHTML = '<input type="hidden" name="pn_address" />';
+
+                td = tr.insertCell(tr.cells.length);
+                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
+                + '&nbsp'
+                + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\'\',\''+no+'\')"/>'
+                
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
                 td.setAttribute("style","display:none;");
                 td.innerHTML = ac_ids[i];
-
-                td = tr.insertCell(tr.cells.length);
-                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>';
                 }
             }
             

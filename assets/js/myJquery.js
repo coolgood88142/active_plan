@@ -87,6 +87,7 @@ function saveAddress(){
     if(in_address==''){
         $("input[name='in_address"+no+"']").val(address);
     }else{
+        $(".address"+no).find("input[name='pn_address']").val(address);
         $(".address"+no).find("input[name='up_address']").val(address);
         $(".address"+no).find("input[name='up_no']").val(no);
     }
