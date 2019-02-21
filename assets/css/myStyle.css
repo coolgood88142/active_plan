@@ -152,7 +152,7 @@
     border-top-color: #EEEEEE;
   }
 
-  #magnifier{
+  #magnifier,#copy{
     width:36px;
     height:36px;
   }

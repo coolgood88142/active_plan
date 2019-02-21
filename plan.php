@@ -442,6 +442,7 @@
                         <input type="text" class="form-control" name="address" value=""/>
                         <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
+                        <img src="./assets/images/copy.png" alt="" id="copy" name="copy" class="img-thumbnail" data-toggle="tooltip" title="複製" onClick=""/>
                     </div>
                     </div>
                 </div>
@@ -846,6 +847,9 @@
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","pn_address"+i);
+                td.innerHTML = '<span data-toggle="modal" data-target="#myModal">'
+                +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="" onClick="openAddressMap(\'\',\''+i+'\')"/>'
+                +'</span>';
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
@@ -855,8 +859,6 @@
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","run");
                 td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
-                + '&nbsp'
-                + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\'\',\''+i+'\')"/>'
                 + '<input type="hidden" name="in_address'+i+'" value="">';
                     //預設有兩行，刪除文字行
                     if(num==2){

@@ -164,7 +164,9 @@
                             <?php 
                                 if($pn_address[$i]!=''){
                             ?>
-                                <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="<?=$pn_address[$i]?>"/>
+                                <span data-toggle="modal" data-target="#myModal">
+                                    <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
+                                </span>
                             <?php
                                 }
                             ?>
@@ -175,7 +177,6 @@
                         </td>
                         <td>
                             <input type="checkbox" name="dalete">刪除
-                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')">
                         </td>
                         <td class="pn_id" style="display:none;">
                             <?php echo $pn_id[$i]?>
@@ -204,6 +205,7 @@
                         <input type="text" class="form-control" name="address" value=""/>
                         <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
+                        <img src="./assets/images/copy.png" alt="" id="copy" name="copy" class="img-thumbnail" data-toggle="tooltip" title="複製" onClick="copyAddress()"/>
                     </div>
                     </div>
                 </div>

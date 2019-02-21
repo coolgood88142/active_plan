@@ -61,6 +61,8 @@ function openAddressMap(address,number){
     //新增項目時地圖預設顯是台灣
     if(address==''){
         address = "taiwan";
+    }else{
+        $("input[name='address']").val(address);
     }
     $(".modal-body").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);    
@@ -75,14 +77,9 @@ function saveAddress(){
     var address = $("input[name='address']").val();
     var in_address = $("input[name='in_address"+no+"']").val();
     var pn_address =  $(".pn_address"+no);
-    pn_address.html('<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="'+address+'"/>');
-    // $(".run"+no).html(
-    //     '<div style="text-align:center">'
-    //     + '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
-    //     + '&nbsp'
-    //     + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\''+address+"','"+no+'\')"/>'
-    //     + '</div>'
-    // );
+    pn_address.html('<span data-toggle="modal" data-target="#myModal">'
+    +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="'+address+'" onClick="openAddressMap(\''+address+'\',\''+no+'\')"/>'
+    +'</span>');
 
     if(in_address==''){
         $("input[name='in_address"+no+"']").val(address);
@@ -91,4 +88,9 @@ function saveAddress(){
         $(".address"+no).find("input[name='up_address']").val(address);
         $(".address"+no).find("input[name='up_no']").val(no);
     }
+}
+
+function copyAddress(){
+    var copy_address = $("div .modal fade show .modal-dialog modal-dialog-centered .modal-content .modal-body .place-card place-card-large .place-desc-large .address");
+    $("input[name='address']").val(copy_address);
 }

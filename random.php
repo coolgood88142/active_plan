@@ -341,7 +341,7 @@
                             <td>花費</td>
                             <td>時間(小時)</td>
                             <td>地址</td>
-                            <td>動作</td>
+                            <td style="display:none;">動作</td>
                             <td style="display:none;">類型ID</td>
                             <td>時段</td>   
                         </tr>
@@ -377,11 +377,12 @@
                                     <?php echo $post_achours[$i]?>
                                 </td>
                                 <td class="pn_address<?=$i?>">
-                                    
+                                    <span data-toggle="modal" data-target="#myModal">
+                                        <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="" onClick="openAddressMap('','<?=$i?>')"/>
+                                    </span>
                                 </td>
-                                <td class="run">
-                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onclick="openAddressMap('','<?=$i?>')">
-                                    <input type="hidden" name="in_address<?=$i?>" value="">
+                                <td class="run" style="display:none;">
+                                   <input type="hidden" name="in_address<?=$i?>" value="">
                                 </td>
                                 <td class="ac_id" style="display:none;">
                                     <?php echo $post_acid[$i]?>
