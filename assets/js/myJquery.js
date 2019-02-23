@@ -65,7 +65,32 @@ function openAddressMap(address,number){
         $("input[name='address']").val(address);
     }
     $(".modal-body").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
-    $("input[name='no_address']").val(number);    
+    $("input[name='no_address']").val(number);
+    // var autocomplete = new google.maps.places.Autocomplete(address,{types: ['geocode']});
+    // var place = autocomplete.getPlace();
+    // console.log(autocomplete);
+
+    // var map = new google.maps.Map(document.getElementById('map'));
+
+    // var request = {
+    //     placeId: 'AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE',
+    //     fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+    //   };
+      
+    //   service = new google.maps.places.PlacesService(map);
+    //   service.getDetails(request, function(place, status) {
+    //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+    //       var marker = new google.maps.Marker({
+    //         map: map,
+    //         position: place.geometry.location
+    //       });
+          
+    //       google.maps.event.addListener(marker, 'click', function() {
+    //           console.log(place.name);
+    //       });
+    //     }
+    //   });
+
 }
 
 function queryAddress(){
@@ -91,6 +116,6 @@ function saveAddress(){
 }
 
 function copyAddress(){
-    var copy_address = $("div .modal fade show .modal-dialog modal-dialog-centered .modal-content .modal-body .place-card place-card-large .place-desc-large .address");
+    var copy_address = $(".modal-body");
     $("input[name='address']").val(copy_address);
 }
