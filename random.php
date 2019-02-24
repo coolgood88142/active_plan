@@ -376,7 +376,7 @@
                                 <td class="ac_hours">
                                     <?php echo $post_achours[$i]?>
                                 </td>
-                                <td class="pn_address<?=$i?>">
+                                <td class="pn_address<?=$i?>" align="center">
                                     <span data-toggle="modal" data-target="#myModal">
                                         <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="" onClick="openAddressMap('','<?=$i?>')"/>
                                     </span>

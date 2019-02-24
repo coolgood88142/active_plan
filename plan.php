@@ -847,6 +847,7 @@
 
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","pn_address"+i);
+                td.setAttribute("align","center");
                 td.innerHTML = '<span data-toggle="modal" data-target="#myModal">'
                 +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="" onClick="openAddressMap(\'\',\''+i+'\')"/>'
                 +'</span>';

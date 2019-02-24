@@ -160,12 +160,12 @@
                         <td class="ac_hours">
                             <?php echo $ac_hours[$i]?>
                         </td>
-                        <td class="pn_address<?=$i?>">
+                        <td class="pn_address<?=$i?>" align="center">
                             <?php 
                                 if($pn_address[$i]!=''){
                             ?>
                                 <span data-toggle="modal" data-target="#myModal">
-                                    <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
+                                    <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
                                 </span>
                             <?php
                                 }
