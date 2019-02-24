@@ -64,7 +64,7 @@ function openAddressMap(address,number){
     }else{
         $("input[name='address']").val(address);
     }
-    $(".modal-body").html('<iframe id="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
+    $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);
     // var autocomplete = new google.maps.places.Autocomplete(address,{types: ['geocode']});
     // var place = autocomplete.getPlace();
@@ -116,20 +116,25 @@ function saveAddress(){
 }
 
 function copyAddress(){
-    var copy_address = document.getElementsByClassName("address");
+    var map = new google.maps.Map(document.getElementById("map"));
     
 
-    var inputs = copy_address;
-    var radios = [];
-console.log(copy_address);
+//     var inputs = copy_address;
+//     var radios = [];
+// console.log(copy_address);
 
-    //Loop and find only the Radios
-    for (var i = 0; i < inputs.length; ++i) {
-        if (inputs[i].class == 'address') {
-            radios.push(inputs[i]);
-        }
-    }
+//     //Loop and find only the Radios
+//     for (var i = 0; i < inputs.length; ++i) {
+//         if (inputs[i].class == 'address') {
+//             radios.push(inputs[i]);
+//         }
+//     }
 
     console.log(radios);
     $("input[name='address']").val($(copy_address).find(".address"));
 }
+
+$('#map').on('load', function() {
+    var map = document.getElementById('map').contentWindow;
+    console.log(map);
+});
