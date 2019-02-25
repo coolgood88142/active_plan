@@ -116,25 +116,27 @@ function saveAddress(){
 }
 
 function copyAddress(){
-    var map = new google.maps.Map(document.getElementById("map"));
+    //先取得地址欄位資料
+    var address = $("input[name='address']").val();
+    if(address==''){
+        SweetAlertMessage("請先查詢地點或地址");
+    }
     
-
-//     var inputs = copy_address;
-//     var radios = [];
-// console.log(copy_address);
-
-//     //Loop and find only the Radios
-//     for (var i = 0; i < inputs.length; ++i) {
-//         if (inputs[i].class == 'address') {
-//             radios.push(inputs[i]);
-//         }
-//     }
-
-    console.log(radios);
-    $("input[name='address']").val($(copy_address).find(".address"));
+    
+    var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                $("input[name='address']").val(results[0].formatted_address);
+                var marker = new google.maps.Marker({
+                    map:map,
+                    position:results[0].geometry.location
+                }); 
+            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                setTimeout(function() {
+                    copyAddress();
+                } , 5);
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
 }
-
-$('#map').on('load', function() {
-    var map = document.getElementById('map').contentWindow;
-    console.log(map);
-});
