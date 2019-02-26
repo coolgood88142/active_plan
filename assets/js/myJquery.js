@@ -57,6 +57,29 @@ function SweetAlertMessage(message){
     });
 }
 
+// function initMap(){
+//     var mapOptions = {
+//         zoom:17,
+//         mapTypeId:google.maps.MapTypeId.ROADMAP
+//     }
+//     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+//     var address = '台北101';
+//     var geocoder = new google.maps.Geocoder();
+//         geocoder.geocode( { 'address': address}, function(results, status) {
+//             if (status == 'OK') {
+//             map.setCenter(results[0].geometry.location);
+//             var marker = new google.maps.Marker({
+//                 map: map,
+//                 position: results[0].geometry.location
+//             });
+//             } else {
+//             console.log(status);
+//             }
+//         });
+// }
+
+
 function openAddressMap(address,number){
     //新增項目時地圖預設顯是台灣
     if(address==''){
@@ -66,31 +89,21 @@ function openAddressMap(address,number){
     }
     $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);
-    // var autocomplete = new google.maps.places.Autocomplete(address,{types: ['geocode']});
-    // var place = autocomplete.getPlace();
-    // console.log(autocomplete);
 
-    // var map = new google.maps.Map(document.getElementById('map'));
-
-    // var request = {
-    //     placeId: 'AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE',
-    //     fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
-    //   };
-      
-    //   service = new google.maps.places.PlacesService(map);
-    //   service.getDetails(request, function(place, status) {
-    //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-    //       var marker = new google.maps.Marker({
-    //         map: map,
-    //         position: place.geometry.location
-    //       });
-          
-    //       google.maps.event.addListener(marker, 'click', function() {
-    //           console.log(place.name);
-    //       });
-    //     }
-    //   });
-
+//     var geocoder = new google.maps.Geocoder();
+//         geocoder.geocode( { 'address': address}, function(results, status) {
+//             if (status == google.maps.GeocoderStatus.OK) {
+//                 $("input[name='address']").val(results[0].formatted_address);
+//                 var marker = new google.maps.Marker({
+//                     map: map,
+//                     position: results[0].geometry.location
+//                 });
+//             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+//                 SweetAlertMessage("每複製1次需要100秒之後在複製");
+//             } else {
+//                 alert("Geocode was not successful for the following reason: " + status);
+//             }
+//         });
 }
 
 function queryAddress(){
@@ -122,19 +135,19 @@ function copyAddress(){
         SweetAlertMessage("請先查詢地點或地址");
     }
     
+    //經緯度
+    // var lat,lng;
+    // navigator.geolocation.watchPosition((position) => {
+    //     lat = position.coords.latitude;
+    //     lng = position.coords.longitude;
+    // });
     
     var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 $("input[name='address']").val(results[0].formatted_address);
-                var marker = new google.maps.Marker({
-                    map:map,
-                    position:results[0].geometry.location
-                }); 
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                setTimeout(function() {
-                    copyAddress();
-                } , 5);
+                SweetAlertMessage("每複製1次需要100秒之後在複製");
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
