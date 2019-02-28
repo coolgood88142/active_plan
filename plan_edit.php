@@ -200,7 +200,6 @@
                             </button>
                         </div>
                     <div class="modal-body">
-                         <!-- <div id="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></div> -->
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>

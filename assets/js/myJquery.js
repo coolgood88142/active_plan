@@ -47,6 +47,12 @@ $(function(){
           $(get_sidebar).toggleClass('in');
           $(get_content).toggleClass('out');
     });
+
+
+    $("#map").on('load',function () {                        
+        var doc = frames["map"].document.body.innerHTML;
+        console.log(doc);
+    });
 });
 
 function SweetAlertMessage(message){
@@ -90,20 +96,20 @@ function openAddressMap(address,number){
     $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);
 
-//     var geocoder = new google.maps.Geocoder();
-//         geocoder.geocode( { 'address': address}, function(results, status) {
-//             if (status == google.maps.GeocoderStatus.OK) {
-//                 $("input[name='address']").val(results[0].formatted_address);
-//                 var marker = new google.maps.Marker({
-//                     map: map,
-//                     position: results[0].geometry.location
-//                 });
-//             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-//                 SweetAlertMessage("每複製1次需要100秒之後在複製");
-//             } else {
-//                 alert("Geocode was not successful for the following reason: " + status);
-//             }
-//         });
+    // var geocoder = new google.maps.Geocoder();
+    //     geocoder.geocode( { 'address': address}, function(results, status) {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             $("input[name='address']").val(results[0].formatted_address);
+    //             var marker = new google.maps.Marker({
+    //                 map: map,
+    //                 position: results[0].geometry.location
+    //             });
+    //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+    //             SweetAlertMessage("每複製1次需要100秒之後在複製");
+    //         } else {
+    //             alert("Geocode was not successful for the following reason: " + status);
+    //         }
+    //     });
 }
 
 function queryAddress(){
@@ -134,7 +140,11 @@ function copyAddress(){
     if(address==''){
         SweetAlertMessage("請先查詢地點或地址");
     }
-    
+
+    var map = $("#map").goMap();
+    console.log($(map));
+
+
     //經緯度
     // var lat,lng;
     // navigator.geolocation.watchPosition((position) => {
@@ -142,14 +152,14 @@ function copyAddress(){
     //     lng = position.coords.longitude;
     // });
     
-    var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                $("input[name='address']").val(results[0].formatted_address);
-            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                SweetAlertMessage("每複製1次需要100秒之後在複製");
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
-            }
-        });
+    // var geocoder = new google.maps.Geocoder();
+    //     geocoder.geocode( { 'address': address}, function(results, status) {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             $("input[name='address']").val(results[0].formatted_address);
+    //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+    //             SweetAlertMessage("每複製1次需要100秒之後在複製");
+    //         } else {
+    //             alert("Geocode was not successful for the following reason: " + status);
+    //         }
+    //     });
 }

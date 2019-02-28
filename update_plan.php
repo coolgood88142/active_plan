@@ -203,18 +203,21 @@
             }
         }
 
-        $up_address_count = count($up_address);
-        $up_pnid_count = count($up_pnid);
+        if($up_address!='' && $up_pnid!=''){
+            $up_address_count = count($up_address);
+            $up_pnid_count = count($up_pnid);
 
-        if($up_address_count>0 && $up_pnid_count>0){
-            for($j=0 ; $j<$up_address_count ; $j++){
-                $uppnid = $up_pnid[$j];
-                $upaddress = $up_address[$j];
+            if($up_address_count>0 && $up_pnid_count>0){
+                for($j=0 ; $j<$up_address_count ; $j++){
+                    $uppnid = $up_pnid[$j];
+                    $upaddress = $up_address[$j];
 
-                $sql = "UPDATE plan_acname SET pn_address = '$upaddress' WHERE pn_id = $uppnid";
-                $conn->exec($sql);
+                    $sql = "UPDATE plan_acname SET pn_address = '$upaddress' WHERE pn_id = $uppnid";
+                    $conn->exec($sql);
+                }
             }
         }
+        
 
         if($newplan!=""){
             $sql = "INSERT INTO plan_trip (pt_name, pt_hours, pt_spend, pt_date, pt_usid, pt_usname, pt_status)

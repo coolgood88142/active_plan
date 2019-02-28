@@ -1,46 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
+
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="author" content="oxxo.studio">
   <meta name="copyright" content="oxxo.studio">
-  <title>地址</title>
-  <?php include("link.php");?>
-</head>
-<?php session_start();
+  <title>Google Maps API - 地理編碼服務 ( 地址定位 ) demo 01 - OXXO.STUDIO</title>
+  <style>
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
   
-?>
+  #map {
+    height: 100%;
+    width: 100%;
+    background: #000;
+  }
+  </style>
+</head>
+
 <body>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Click For Map</button>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <div id="map"></div>
+  <script>
+  var map, geocoder;
+
+  function initMap() {
+    geocoder = new google.maps.Geocoder();
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 17
+    });
+
+    var address = '總統府';
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        console.log(status);
+      }
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&callback=initMap" async defer></script>
+
+  <style>
+  #info {
+    position: fixed;
+    z-index: 999;
+    bottom: 20px;
+    left: 0px;
+    background: #222;
+    padding: 20px 30px;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, .5) 0 0 10px;
+    border-radius: 0 5px 5px 0;
+  }
+  
+  #info a {
+    color: #0bf;
+    transition: .2s;
+  }
+  
+  #info a:hover {
+    color: #6df;
+  }
+  </style>
+  <div id="info">相關參考：<a id="infoLink" href="#" target="_blank"></a></div>
+  <!-- <script>
+  var href = location.href;
+  var page = href.split("demo/");
+  var name = page[1].split("-demo")[0];
+  var title = document.querySelector('title').innerHTML;
+  document.getElementById('infoLink').setAttribute('href', '/articles/' + name + '.html');
+  document.getElementById('infoLink').innerHTML = title.split("demo")[0];
+  </script> -->
 </body>
 
-<script language="JavaScript">
-$('#myModal').on('shown.bs.modal', (function() {
-  var mapIsAdded = false;
-
-  return function() {
-    if (!mapIsAdded) {
-      $('.modal-body').html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q=taiwan" allowfullscreen></iframe>');
-
-      mapIsAdded = true;
-    }    
-  };
-})());
-</script>
 </html>
