@@ -93,7 +93,7 @@ function openAddressMap(address,number){
     }else{
         $("input[name='address']").val(address);
     }
-    $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
+    $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAo5H0Uv3lvuQKHA-VLh0lw8SPjxfGwLEc&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);
 
     // var geocoder = new google.maps.Geocoder();
@@ -141,8 +141,8 @@ function copyAddress(){
         SweetAlertMessage("請先查詢地點或地址");
     }
 
-    var map = $("#map").goMap();
-    console.log($(map));
+    // var map = $("#map").goMap();
+    // console.log($(map));
 
 
     //經緯度
@@ -152,14 +152,15 @@ function copyAddress(){
     //     lng = position.coords.longitude;
     // });
     
-    // var geocoder = new google.maps.Geocoder();
-    //     geocoder.geocode( { 'address': address}, function(results, status) {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             $("input[name='address']").val(results[0].formatted_address);
-    //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-    //             SweetAlertMessage("每複製1次需要100秒之後在複製");
-    //         } else {
-    //             alert("Geocode was not successful for the following reason: " + status);
-    //         }
-    //     });
+    var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                $("input[name='address']").val(results[0].formatted_address);
+                console.log(results[0].formatted_address);
+            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                SweetAlertMessage("每複製1次需要100秒之後在複製");
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
 }
