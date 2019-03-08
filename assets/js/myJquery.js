@@ -47,12 +47,6 @@ $(function(){
           $(get_sidebar).toggleClass('in');
           $(get_content).toggleClass('out');
     });
-
-
-    $("#map").on('load',function () {                        
-        var doc = frames["map"].document.body.innerHTML;
-        console.log(doc);
-    });
 });
 
 function SweetAlertMessage(message){
@@ -62,31 +56,6 @@ function SweetAlertMessage(message){
         showCloseButton: true
     });
 }
-
-// function initMap() {
-//     geocoder = new google.maps.Geocoder();
-//     map = new google.maps.Map(document.getElementById('map'), {
-//       zoom: 17
-//     });
-
-//     var address = $("input[name='address']").val();
-//     if(address==''){
-//         address = '台北101';
-//     }
-
-//     geocoder.geocode( { 'address': address}, function(results, status) {
-//       if (status == 'OK') {
-//         map.setCenter(results[0].geometry.location);
-//         var marker = new google.maps.Marker({
-//             map: map,
-//             position: results[0].geometry.location
-//         });
-//       } else {
-//         console.log(status);
-//       }
-//     });
-//   }
-
 
 function openAddressMap(address,number){
     //新增項目時地圖預設顯是台灣
@@ -98,6 +67,7 @@ function openAddressMap(address,number){
     $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     $("input[name='no_address']").val(number);
 
+    initAddress(address);
 }
 
 function queryAddress(){
@@ -124,26 +94,19 @@ function saveAddress(){
 
 function copyAddress(){
     //先取得地址欄位資料
-    var address = $("input[name='address']").val();
+    var address = $("input[name='copy_address']").val();
     if(address==''){
         SweetAlertMessage("請先查詢地點或地址");
+    }else{
+        $("input[name='address']").val(address);
     }
+}
 
-    // var map = $("#map").goMap();
-    // console.log($(map));
-
-
-    //經緯度
-    // var lat,lng;
-    // navigator.geolocation.watchPosition((position) => {
-    //     lat = position.coords.latitude;
-    //     lng = position.coords.longitude;
-    // });
-    
+function initAddress(address) {
     var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                $("input[name='address']").val(results[0].formatted_address);
+                $("input[name='copy_address']").val(results[0].formatted_address);
                 console.log(results[0].formatted_address);
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
                 // setTimeout(copyAddress(), 10000);
@@ -151,30 +114,4 @@ function copyAddress(){
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
-}
-
-
-// function initMap() {
-//     var address = $("input[name='address']").val();
-//     geocoder = new google.maps.Geocoder();
-//     map = new google.maps.Map(document.getElementById('map'), {
-//       zoom: 17
-//     });
-
-//         geocoder = new google.maps.Geocoder();
-//         geocoder.geocode( { 'address': address}, function(results, status) {
-//             if (status == 'OK') {
-//                 $("input[name='address']").val(results[0].formatted_address);
-//                 map.setCenter(results[0].geometry.location);
-//                 var marker = new google.maps.Marker({
-//                     map: map,
-//                     position: results[0].geometry.location
-//                 });
-//             } else if(status == 'OVER_QUERY_LIMIT'){
-//                 setTimeout("wait = true", 2000);
-//             } else {
-//               console.log(status);
-//             }
-//           });
-
-//   }
+  }

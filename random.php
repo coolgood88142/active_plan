@@ -418,6 +418,7 @@
                         </div>
                     </div>
                     <input type="text" name="no_address" style="display:none;" value="">
+                    <input type="text" name="copy_address" style="display:none;" value="">
                 </div>
                 <div style="text-align:right">
                     <input type="button" class="btn btn-primary" name="goplan" value="送出" onClick="go_plan()"/>

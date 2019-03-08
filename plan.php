@@ -447,6 +447,7 @@
                     </div>
                 </div>
                 <input type="text" name="no_address" style="display:none;" value="">
+                <input type="text" name="copy_address" style="display:none;" value="">
             </div>
             <br/>
             <div style="text-align:right">

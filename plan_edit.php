@@ -209,6 +209,7 @@
                     </div>
                 </div>
                 <input type="text" name="no_address" style="display:none;" value="">
+                <input type="text" name="copy_address" style="display:none;" value="">
             </div>
 
             <table id="example2" class="table table-striped table-bordered">
