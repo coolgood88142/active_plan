@@ -163,9 +163,9 @@
                             <?php 
                                 if($pn_address[$i]!=''){
                             ?>
-                                <span data-toggle="modal" data-target="#myModal">
+                                <!-- <span data-toggle="modal" data-target="#myModal"> -->
                                     <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
-                                </span>
+                                <!-- </span> -->
                             <?php
                                 }
                             ?>
@@ -188,6 +188,7 @@
                 <tfoot>
                 </tfoot>
             </table>
+            <div id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -199,6 +200,7 @@
                             </button>
                         </div>
                     <div class="modal-body">
+                        
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>

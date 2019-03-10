@@ -59,19 +59,49 @@ function SweetAlertMessage(message){
 
 function openAddressMap(address,number){
     //新增項目時地圖預設顯是台灣
-    if(address==''){
+    if(address!='' && address!=undefined){
+        $("input[name='address']").val(address);
+    }else if(address==''){
         address = "taiwan";
     }else{
-        $("input[name='address']").val(address);
+        address = $("input[name='address']").val();
     }
-    $(".modal-body").html('<iframe id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
-    $("input[name='no_address']").val(number);
+    
+    if($("input[name='address']").val()==''){
+        $("input[name='no_address']").val(number);
+    }
 
-    initAddress(address);
-}
+    var geocoder = new google.maps.Geocoder(); 
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+                
+                var mapOptions = {
+                    zoom:7,
+                    center:new google.maps.LatLng(latitude,longitude),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
 
-function queryAddress(){
-    openAddressMap($("input[name='address']").val(),$("input[name='no_address']").val());
+                var map = new google.maps.Map(document.getElementById('map'),mapOptions);     
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+
+                $("input[name='copy_address']").val(results[0].formatted_address);
+
+                console.log(results[0].formatted_address);
+
+                google.maps.event.addListener(marker, 'mouseup', function() {
+                    LatLng = marker.getPosition();
+                });
+            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                // setTimeout(copyAddress(), 10000);
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
+        });
 }
 
 function saveAddress(){
@@ -102,17 +132,16 @@ function copyAddress(){
     }
 }
 
-function initAddress(address) {
-    //只用Geocoder API
-    var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                $("input[name='copy_address']").val(results[0].formatted_address);
-                console.log(results[0].formatted_address);
-            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                // setTimeout(copyAddress(), 10000);
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
-            }
-        });
-  }
+// function initAddress() {
+//     var geocoder = new google.maps.Geocoder();
+//         geocoder.geocode( { 'address': address}, function(results, status) {
+//             if (status == google.maps.GeocoderStatus.OK) {
+//                 $("input[name='copy_address']").val(results[0].formatted_address);
+//                 console.log(results[0].formatted_address);
+//             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+//                 // setTimeout(copyAddress(), 10000);
+//             } else {
+//                 alert("Geocode was not successful for the following reason: " + status);
+//             }
+//         });
+//   }

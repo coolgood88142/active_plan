@@ -440,7 +440,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>
-                        <button type="button" class="btn btn-primary" onClick="queryAddress()">查詢</button>
+                        <button type="button" class="btn btn-primary" onClick="openAddressMap()">查詢</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="saveAddress()">儲存後關閉</button>
                         <img src="./assets/images/copy.png" alt="" id="copy" name="copy" class="img-thumbnail" data-toggle="tooltip" title="複製" onClick="copyAddress()"/>
                     </div>

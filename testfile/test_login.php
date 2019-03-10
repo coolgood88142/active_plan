@@ -59,8 +59,11 @@
        },
        error:function(xhr, status, error){
          var text = xhr.responseText;
-         text = text.substr(text.indexOf("</span>")+7,(text.length)-1);
-         alert(text.substr(0,text.indexOf("</i>")+4));
+		 var regex = '/Notice+/'
+		 var span = '</span>';
+		 var i = '</i>';
+         text = text.substr(text.indexOf(span)+span.length,(text.length)-1);
+         alert(text.substr(0,text.indexOf(i)+i.length));
        }
      });
    }
