@@ -71,36 +71,39 @@ function openAddressMap(address,number){
         $("input[name='no_address']").val(number);
     }
 
-    var geocoder = new google.maps.Geocoder(); 
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var latitude = results[0].geometry.location.lat();
-                var longitude = results[0].geometry.location.lng();
-                
-                var mapOptions = {
-                    zoom:7,
-                    center:new google.maps.LatLng(latitude,longitude),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
+    var map=null,Latlng=new google.maps.LatLng('21.03', '105.85');;
+    // var geocoder = new google.maps.Geocoder(); 
+    //     geocoder.geocode( { 'address': address}, function(results, status) {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             var latitude = results[0].geometry.location.lat();
+    //             var longitude = results[0].geometry.location.lng();
+    //             Latlng = new google.maps.LatLng(latitude,longitude);
+    //             $("input[name='copy_address']").val(results[0].formatted_address);
 
-                var map = new google.maps.Map(document.getElementById('map'),mapOptions);     
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
+    //             console.log(results[0].formatted_address);
+    //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+    //             // setTimeout(copyAddress(), 10000);
+    //         } else {
+    //             alert("Geocode was not successful for the following reason: " + status);
+    //         }
+    //     });
 
-                $("input[name='copy_address']").val(results[0].formatted_address);
+        var mapOptions = {
+            zoom:7,
+            zoomControl:true,
+            center:Latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
 
-                console.log(results[0].formatted_address);
+        map = new google.maps.Map(document.getElementById('map'),mapOptions);     
+        var marker = new google.maps.Marker({
+            position: Latlng
+        });
+        marker.setMap(map);
 
-                google.maps.event.addListener(marker, 'mouseup', function() {
-                    LatLng = marker.getPosition();
-                });
-            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                // setTimeout(copyAddress(), 10000);
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
-            }
+        $('#myModal').on('shown.bs.modal', function() {
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(Latlng);
         });
 }
 

@@ -163,12 +163,13 @@
                             <?php 
                                 if($pn_address[$i]!=''){
                             ?>
-                                <!-- <span data-toggle="modal" data-target="#myModal"> -->
-                                    <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
-                                <!-- </span> -->
+                                <span data-toggle="modal" data-target="#myModal">
+                                    <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>"/>
+                                </span>
                             <?php
                                 }
                             ?>
+                            <input type="hidden" name="modal_address" value="<?=$pn_address[$i]?>"/>
                         </td>
                         <td class="address<?=$i?>" style="display:none;">
                             <input type="hidden" name="pn_address" />
@@ -188,7 +189,6 @@
                 <tfoot>
                 </tfoot>
             </table>
-            <div id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></div>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -200,7 +200,7 @@
                             </button>
                         </div>
                     <div class="modal-body">
-                        
+                        <div id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></div>
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>
@@ -342,11 +342,46 @@
             }
         });
 
+            // var dalete = $("#example1 input[name='dalete']");
+            // if(dalete.length>0){
+            //     var i = 0;
+            //     $(dalete).each(function() {
+            //         var obj = $(this).closest("tr");
+            //         var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
+            //         $('#myModal').on('shown.bs.modal', function() {
+            //             openAddressMap(address,i);
+            //         });
+            //     });
+            // }
+
         $('#myModal').on('hidden.bs.modal', (function() {
             //每關閉時清空
             $("input[name='address']").val('');
         }));
     } );
+
+    var map, geocoder;
+
+function initMap() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 17
+  });
+
+  var address = '總統府';
+
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      console.log(status);
+    }
+  });
+}
 
     function openDate(name){
     $(name).datepicker({
