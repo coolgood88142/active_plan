@@ -200,7 +200,17 @@
                             </button>
                         </div>
                     <div class="modal-body">
-                        <div id="map" name="map" width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>地址:</h6>
+                                <input type="text" name="copy_address" value="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="map" name="map"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>
@@ -211,7 +221,6 @@
                     </div>
                 </div>
                 <input type="text" name="no_address" style="display:none;" value="">
-                <input type="text" name="copy_address" style="display:none;" value="">
             </div>
 
             <table id="example2" class="table table-striped table-bordered">
@@ -342,46 +351,23 @@
             }
         });
 
-            // var dalete = $("#example1 input[name='dalete']");
-            // if(dalete.length>0){
-            //     var i = 0;
-            //     $(dalete).each(function() {
-            //         var obj = $(this).closest("tr");
-            //         var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
-            //         $('#myModal').on('shown.bs.modal', function() {
-            //             openAddressMap(address,i);
-            //         });
-            //     });
-            // }
+        var ac_type = $("#example1 .ac_type");
+            if(ac_type.length>0){
+                var i = 0;
+                $(ac_type).each(function() {
+                    var obj = $(this).closest("tr");
+                    var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
+                    $('#myModal').on('shown.bs.modal', function() {
+                        openAddressMap(address,i);
+                    });
+                });
+            }
 
         $('#myModal').on('hidden.bs.modal', (function() {
             //每關閉時清空
             $("input[name='address']").val('');
         }));
     } );
-
-    var map, geocoder;
-
-function initMap() {
-  geocoder = new google.maps.Geocoder();
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 17
-  });
-
-  var address = '總統府';
-
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      console.log(status);
-    }
-  });
-}
 
     function openDate(name){
     $(name).datepicker({

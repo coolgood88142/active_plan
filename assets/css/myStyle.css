@@ -4,6 +4,10 @@
     font-family:'微軟正黑體';
   }
 
+  #map{
+    width:465px;
+    height:300px;
+  }
   .col-from{
     padding: 50px 15px;
   }

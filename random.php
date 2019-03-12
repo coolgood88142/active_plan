@@ -378,8 +378,9 @@
                                 </td>
                                 <td class="pn_address<?=$i?>" align="center">
                                     <span data-toggle="modal" data-target="#myModal">
-                                        <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip" title="" onClick="openAddressMap('','<?=$i?>')"/>
+                                        <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="<?=$pn_address[$i]?>"/>
                                     </span>
+                                    <input type="hidden" name="modal_address" value="<?=$pn_address[$i]?>"/>
                                 </td>
                                 <td class="run" style="display:none;">
                                    <input type="hidden" name="in_address<?=$i?>" value="">
@@ -514,6 +515,19 @@
                 });
             });
         })
+
+        var ac_name = $("#example1 .ac_name");
+            if(ac_name.length>0){
+                var i = 0;
+                $(ac_name).each(function() {
+                    var obj = $(this).closest("tr");
+                    var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
+                    $('#myModal').on('shown.bs.modal', function() {
+                        openAddressMap(address,i);
+                    });
+                });
+            }
+
 
         $('#myModal').on('hidden.bs.modal', (function() {
             //每關閉時清空

@@ -71,7 +71,8 @@ function openAddressMap(address,number){
         $("input[name='no_address']").val(number);
     }
 
-    var map=null,Latlng=new google.maps.LatLng('21.03', '105.85');;
+    var map=null,Latlng=null;
+    Latlng = new google.maps.LatLng('21.03','105.85');
     // var geocoder = new google.maps.Geocoder(); 
     //     geocoder.geocode( { 'address': address}, function(results, status) {
     //         if (status == google.maps.GeocoderStatus.OK) {
@@ -79,6 +80,18 @@ function openAddressMap(address,number){
     //             var longitude = results[0].geometry.location.lng();
     //             Latlng = new google.maps.LatLng(latitude,longitude);
     //             $("input[name='copy_address']").val(results[0].formatted_address);
+    //             var infowindow = new google.maps.InfoWindow({
+    //                 content: results[0].formatted_address
+    //               });
+
+    //               marker.addListener('click',function(){
+    //                 a = a * -1;
+    //                 if(a > 0){
+    //                   infowindow.open(map, marker);
+    //                 }else{
+    //                   infowindow.close();
+    //                 }
+    //               });  
 
     //             console.log(results[0].formatted_address);
     //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
@@ -89,7 +102,7 @@ function openAddressMap(address,number){
     //     });
 
         var mapOptions = {
-            zoom:7,
+            zoom:17,
             zoomControl:true,
             center:Latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
