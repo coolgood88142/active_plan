@@ -8,6 +8,11 @@
     width:465px;
     height:300px;
   }
+
+  .copy_address{
+    width:100%;
+  }
+  
   .col-from{
     padding: 50px 15px;
   }

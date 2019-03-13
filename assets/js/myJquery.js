@@ -67,57 +67,55 @@ function openAddressMap(address,number){
         address = $("input[name='address']").val();
     }
     
-    if($("input[name='address']").val()==''){
-        $("input[name='no_address']").val(number);
-    }
+    $("input[name='no_address']").val(number);
 
     var map=null,Latlng=null;
-    Latlng = new google.maps.LatLng('21.03','105.85');
-    // var geocoder = new google.maps.Geocoder(); 
-    //     geocoder.geocode( { 'address': address}, function(results, status) {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             var latitude = results[0].geometry.location.lat();
-    //             var longitude = results[0].geometry.location.lng();
-    //             Latlng = new google.maps.LatLng(latitude,longitude);
-    //             $("input[name='copy_address']").val(results[0].formatted_address);
-    //             var infowindow = new google.maps.InfoWindow({
-    //                 content: results[0].formatted_address
-    //               });
+    // Latlng = new google.maps.LatLng('10.85', '106.62');
+    var geocoder = new google.maps.Geocoder(); 
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+                Latlng = new google.maps.LatLng(latitude,longitude);
+                $("input[name='copy_address']").val(results[0].formatted_address);
+                // var infowindow = new google.maps.InfoWindow({
+                //     content: results[0].formatted_address
+                //   });
 
-    //               marker.addListener('click',function(){
-    //                 a = a * -1;
-    //                 if(a > 0){
-    //                   infowindow.open(map, marker);
-    //                 }else{
-    //                   infowindow.close();
-    //                 }
-    //               });  
-
-    //             console.log(results[0].formatted_address);
-    //         } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-    //             // setTimeout(copyAddress(), 10000);
-    //         } else {
-    //             alert("Geocode was not successful for the following reason: " + status);
-    //         }
-    //     });
-
-        var mapOptions = {
-            zoom:17,
-            zoomControl:true,
-            center:Latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-
-        map = new google.maps.Map(document.getElementById('map'),mapOptions);     
-        var marker = new google.maps.Marker({
-            position: Latlng
+                //   marker.addListener('click',function(){
+                //     a = a * -1;
+                //     if(a > 0){
+                //       infowindow.open(map, marker);
+                //     }else{
+                //       infowindow.close();
+                //     }
+                //   });  
+                  var mapOptions = {
+                    zoom:17,
+                    zoomControl:true,
+                    center:Latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+        
+                map = new google.maps.Map(document.getElementById('map'),mapOptions);     
+                var marker = new google.maps.Marker({
+                    position: Latlng
+                });
+                marker.setMap(map);
+                console.log(results[0].formatted_address);
+            } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
+                // setTimeout(copyAddress(), 10000);
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
         });
-        marker.setMap(map);
 
-        $('#myModal').on('shown.bs.modal', function() {
-            google.maps.event.trigger(map, "resize");
-            map.setCenter(Latlng);
-        });
+        
+
+        // $('#myModal').on('shown.bs.modal', function() {
+        //     google.maps.event.trigger(map, "resize");
+        //     map.setCenter(Latlng);
+        // });
 }
 
 function saveAddress(){
@@ -141,6 +139,7 @@ function saveAddress(){
 function copyAddress(){
     //先取得地址欄位資料
     var address = $("input[name='copy_address']").val();
+    $("input[name='copy_address']").val(address);
     if(address==''){
         SweetAlertMessage("請先查詢地點或地址");
     }else{

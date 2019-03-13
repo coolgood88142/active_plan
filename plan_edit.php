@@ -202,8 +202,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12">
-                                <h6>地址:</h6>
-                                <input type="text" name="copy_address" value="">
+                                <h6>地址:</h6><input type="text" class="copy_address" name="copy_address" value="">
                             </div>
                         </div>
                         <div class="row">

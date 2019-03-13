@@ -437,6 +437,16 @@
                             </button>
                         </div>
                     <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>地址:</h6><input type="text" class="copy_address" name="copy_address" value="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="map" name="map"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="text" class="form-control" name="address" value=""/>
@@ -447,7 +457,6 @@
                     </div>
                 </div>
                 <input type="text" name="no_address" style="display:none;" value="">
-                <input type="text" name="copy_address" style="display:none;" value="">
             </div>
             <br/>
             <div style="text-align:right">
@@ -634,18 +643,6 @@
                 });
             });
         })
-
-        var ac_name = $("#example3 .ac_name");
-            if(ac_name.length>0){
-                var i = 0;
-                $(ac_name).each(function() {
-                    var obj = $(this).closest("tr");
-                    var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
-                    $('#myModal').on('shown.bs.modal', function() {
-                        openAddressMap(address,i);
-                    });
-                });
-            }
 
         $('#myModal').on('hidden.bs.modal', (function() {
             //每關閉時清空
@@ -862,7 +859,7 @@
                 td.setAttribute("class","pn_address"+i);
                 td.setAttribute("align","center");
                 td.innerHTML = '<span data-toggle="modal" data-target="#myModal">'
-                +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title=""/>'
+                +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="" onClick="openAddressMap(\'\',\''+i+'\')"/>'
                 +'<input type="hidden" name="modal_address" value="">'
                 +'</span>';
 
