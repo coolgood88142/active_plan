@@ -378,9 +378,8 @@
                                 </td>
                                 <td class="pn_address<?=$i?>" align="center">
                                     <span data-toggle="modal" data-target="#myModal">
-                                        <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
+                                        <img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="" onClick="openAddressMap('','<?=$i?>')"/>
                                     </span>
-                                    <input type="hidden" name="modal_address" value="<?=$pn_address[$i]?>"/>
                                 </td>
                                 <td class="run" style="display:none;">
                                    <input type="hidden" name="in_address<?=$i?>" value="">
@@ -418,6 +417,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div id="map" name="map"></div>
+                                    <div id="copy_map" name="copy_map" style="display:none;"></div>
                                 </div>
                             </div>
                         </div>

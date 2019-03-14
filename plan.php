@@ -445,6 +445,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div id="map" name="map"></div>
+                                <div id="copy_map" name="copy_map" style="display:none;"></div>
                             </div>
                         </div>
                     </div>
@@ -860,7 +861,6 @@
                 td.setAttribute("align","center");
                 td.innerHTML = '<span data-toggle="modal" data-target="#myModal">'
                 +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="" onClick="openAddressMap(\'\',\''+i+'\')"/>'
-                +'<input type="hidden" name="modal_address" value="">'
                 +'</span>';
 
                 td = tr.insertCell(tr.cells.length);

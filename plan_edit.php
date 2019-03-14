@@ -164,12 +164,11 @@
                                 if($pn_address[$i]!=''){
                             ?>
                                 <span data-toggle="modal" data-target="#myModal">
-                                    <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>"/>
+                                    <img src="./assets/images/magnifier.png" class="img-thumbnail" alt="" id="magnifier" name="magnifier"  data-toggle="tooltip" title="<?=$pn_address[$i]?>" onClick="openAddressMap('<?=$pn_address[$i]?>','<?=$i?>')"/>
                                 </span>
                             <?php
                                 }
                             ?>
-                            <input type="hidden" name="modal_address" value="<?=$pn_address[$i]?>"/>
                         </td>
                         <td class="address<?=$i?>" style="display:none;">
                             <input type="hidden" name="pn_address" />
@@ -208,6 +207,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div id="map" name="map"></div>
+                                <div id="copy_map" name="copy_map" style="display:none;"></div>
                             </div>
                         </div>
                     </div>
@@ -349,18 +349,6 @@
                 $(this).css("background","rgb(63,169,221)");
             }
         });
-
-        var ac_type = $("#example1 .ac_type");
-            if(ac_type.length>0){
-                var i = 0;
-                $(ac_type).each(function() {
-                    var obj = $(this).closest("tr");
-                    var address = obj.find(".pn_address"+i+" input[name='modal_address']").val();
-                    $('#myModal').on('shown.bs.modal', function() {
-                        openAddressMap(address,i);
-                    });
-                });
-            }
 
         $('#myModal').on('hidden.bs.modal', (function() {
             //每關閉時清空

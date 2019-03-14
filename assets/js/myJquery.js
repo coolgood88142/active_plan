@@ -67,7 +67,12 @@ function openAddressMap(address,number){
         address = $("input[name='address']").val();
     }
     
-    $("input[name='no_address']").val(number);
+    if(number == undefined){
+        number = $("input[name='no_address']").val();
+    }else{
+        $("input[name='no_address']").val(number);
+    }
+    
 
     var map=null,Latlng=null;
     // Latlng = new google.maps.LatLng('10.85', '106.62');
@@ -97,14 +102,19 @@ function openAddressMap(address,number){
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
         
-                map = new google.maps.Map(document.getElementById('map'),mapOptions);     
+                map = new google.maps.Map(document.getElementById('map'),mapOptions);
+                var copy_map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
                 var marker = new google.maps.Marker({
                     position: Latlng
                 });
                 marker.setMap(map);
+                marker.setMap(copy_map);
+                $("#map").show();
+                $("#copy_map").hide();
                 console.log(results[0].formatted_address);
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                // setTimeout(copyAddress(), 10000);
+                $("#map").hide();
+                $("#copy_map").show();
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
@@ -139,7 +149,6 @@ function saveAddress(){
 function copyAddress(){
     //先取得地址欄位資料
     var address = $("input[name='copy_address']").val();
-    $("input[name='copy_address']").val(address);
     if(address==''){
         SweetAlertMessage("請先查詢地點或地址");
     }else{
