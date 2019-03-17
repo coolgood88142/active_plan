@@ -58,11 +58,12 @@ function SweetAlertMessage(message){
 }
 
 function openAddressMap(address,number){
-    //新增項目時地圖預設顯是台灣
+    var Latlng=null;isGetGeocoder = true;
+    //新增項目時地圖預設顯是台北101
     if(address!='' && address!=undefined){
         $("input[name='address']").val(address);
     }else if(address==''){
-        address = "taiwan";
+        isGetGeocoder = false;
     }else{
         address = $("input[name='address']").val();
     }
@@ -73,10 +74,9 @@ function openAddressMap(address,number){
         $("input[name='no_address']").val(number);
     }
     
-
-    var map=null,Latlng=null;
-    // Latlng = new google.maps.LatLng('10.85', '106.62');
-    var geocoder = new google.maps.Geocoder(); 
+    if(isGetGeocoder){
+        // Latlng = new google.maps.LatLng('10.85', '106.62');
+        var geocoder = new google.maps.Geocoder(); 
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var latitude = results[0].geometry.location.lat();
@@ -95,20 +95,8 @@ function openAddressMap(address,number){
                 //       infowindow.close();
                 //     }
                 //   });  
-                  var mapOptions = {
-                    zoom:17,
-                    zoomControl:true,
-                    center:Latlng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-        
-                map = new google.maps.Map(document.getElementById('map'),mapOptions);
-                var copy_map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
-                var marker = new google.maps.Marker({
-                    position: Latlng
-                });
-                marker.setMap(map);
-                marker.setMap(copy_map);
+
+                setMarker(Latlng);
                 $("#map").show();
                 $("#copy_map").hide();
                 console.log(results[0].formatted_address);
@@ -119,13 +107,34 @@ function openAddressMap(address,number){
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
-
-        
+    }else{
+        address = "台北101";
+        Latlng = new google.maps.LatLng(25.034129,121.564998);
+        setMarker(Latlng);
+        $("input[name='copy_address']").val(address);
+    }
 
         // $('#myModal').on('shown.bs.modal', function() {
         //     google.maps.event.trigger(map, "resize");
         //     map.setCenter(Latlng);
         // });
+}
+
+function setMarker(Latlng){
+    var mapOptions = {
+        zoom:17,
+        zoomControl:true,
+        center:Latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+    var copy_map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
+    var marker = new google.maps.Marker({
+        position: Latlng
+    });
+    marker.setMap(map);
+    marker.setMap(copy_map);
 }
 
 function saveAddress(){
