@@ -59,7 +59,6 @@ function SweetAlertMessage(message){
 
 function openAddressMap(address,number){
     var Latlng=null;isGetGeocoder = true;
-    //新增項目時地圖預設顯是台北101
     if(address!='' && address!=undefined){
         $("input[name='address']").val(address);
     }else if(address==''){
@@ -94,24 +93,20 @@ function openAddressMap(address,number){
                 //     }else{
                 //       infowindow.close();
                 //     }
-                //   });  
+                //   });
 
-                setMarker(Latlng);
-                $("#map").show();
-                $("#copy_map").hide();
+                setMarker(Latlng,17,false);
                 console.log(results[0].formatted_address);
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                $("#map").hide();
-                $("#copy_map").show();
+                setMarker(Latlng,17,true);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
     }else{
-        address = "台北101";
-        Latlng = new google.maps.LatLng(25.034129,121.564998);
-        setMarker(Latlng);
-        $("input[name='copy_address']").val(address);
+        //以這個經緯度當台灣地圖23.821159,120.965093，將地圖比例放大
+        Latlng = new google.maps.LatLng(23.821159,120.965093);
+        setMarker(Latlng,6,false);
     }
 
         // $('#myModal').on('shown.bs.modal', function() {
@@ -120,21 +115,31 @@ function openAddressMap(address,number){
         // });
 }
 
-function setMarker(Latlng){
+function setMarker(Latlng,scale,isCopyMap){
     var mapOptions = {
-        zoom:17,
+        zoom:scale,
         zoomControl:true,
         center:Latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
-    var copy_map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
+    var map;
+    if(isCopyMap){
+        map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
+        $("#map").hide();
+        $("#copy_map").show();
+    }else{
+        map = new google.maps.Map(document.getElementById('map'),mapOptions);
+        $("#map").show();
+        $("#copy_map").hide();
+    }
+
     var marker = new google.maps.Marker({
-        position: Latlng
+        position: Latlng,
+        map:map
     });
-    marker.setMap(map);
-    marker.setMap(copy_map);
+    // marker.setMap(map);
+    // marker.setMap(copy_map);
 }
 
 function saveAddress(){
