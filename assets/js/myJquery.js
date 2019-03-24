@@ -95,10 +95,10 @@ function openAddressMap(address,number){
                 //     }
                 //   });
 
-                setMarker(Latlng,17,false);
+                setMarker(Latlng,17,false,address);
                 console.log(results[0].formatted_address);
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                setMarker(Latlng,17,true);
+                setMarker(Latlng,17,true,address);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
@@ -106,7 +106,7 @@ function openAddressMap(address,number){
     }else{
         //以這個經緯度當台灣地圖23.821159,120.965093，將地圖比例放大
         Latlng = new google.maps.LatLng(23.821159,120.965093);
-        setMarker(Latlng,6,false);
+        setMarker(Latlng,6,false,address);
     }
 
         // $('#myModal').on('shown.bs.modal', function() {
@@ -115,7 +115,7 @@ function openAddressMap(address,number){
         // });
 }
 
-function setMarker(Latlng,scale,isCopyMap){
+function setMarker(Latlng,scale,isCopyMap,address){
     var mapOptions = {
         zoom:scale,
         zoomControl:true,
@@ -123,23 +123,21 @@ function setMarker(Latlng,scale,isCopyMap){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    var map;
+    var map,copy_map;
     if(isCopyMap){
-        map = new google.maps.Map(document.getElementById('copy_map'),mapOptions);
         $("#map").hide();
         $("#copy_map").show();
     }else{
         map = new google.maps.Map(document.getElementById('map'),mapOptions);
         $("#map").show();
         $("#copy_map").hide();
+        $("#copy_map").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
     }
 
     var marker = new google.maps.Marker({
         position: Latlng,
         map:map
     });
-    // marker.setMap(map);
-    // marker.setMap(copy_map);
 }
 
 function saveAddress(){
