@@ -553,22 +553,20 @@
 
                 var no = num-1;
                 td = tr.insertCell(tr.cells.length);
-                td.setAttribute("class","pn_address"+no);
+                td.setAttribute("class","pn_address"+i);
+                td.setAttribute("align","center");
+                td.innerHTML = '<span data-toggle="modal" data-target="#myModal">'
+                +'<img src="./assets/images/magnifier.png" alt="" id="magnifier" name="magnifier" class="img-thumbnail" data-toggle="tooltip"  title="" onClick="openAddressMap(\'\',\''+i+'\')"/>'
+                +'</span>';
 
-                td = tr.insertCell(tr.cells.length);
-                td.setAttribute("class","address"+no);
-                td.setAttribute("style","display:none;");
-                td.innerHTML = '<input type="hidden" name="pn_address" />';
-
-                td = tr.insertCell(tr.cells.length);
-                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>'
-                + '&nbsp'
-                + '<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="查詢地址" onClick="openAddressMap(\'\',\''+no+'\')"/>'
-                
                 td = tr.insertCell(tr.cells.length);
                 td.setAttribute("class","ac_id");
                 td.setAttribute("style","display:none;");
                 td.innerHTML = ac_ids[i];
+
+
+                td = tr.insertCell(tr.cells.length);
+                td.innerHTML = '<input type="button" class="btn btn-primary" name="cancel" value="取消" onClick="Cancel(this)"/>';
                 }
             }
             

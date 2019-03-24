@@ -131,7 +131,14 @@ function setMarker(Latlng,scale,isCopyMap,address){
         map = new google.maps.Map(document.getElementById('map'),mapOptions);
         $("#map").show();
         $("#copy_map").hide();
-        $("#copy_map").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+'" allowfullscreen></iframe>');
+
+        var src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+"'";
+        if(address==''){
+            //當預設值帶台灣時先用寫死
+            src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1872006.6619859105!2d119.89614287127868!3d23.59489858710433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ed5cb2b61c3a5%3A0xcf20ddb042be7fa0!2z6Ie654Gj!5e0!3m2!1szh-TW!2stw!4v1553445703414';
+        }
+        $("#copy_map").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src='+src+' allowfullscreen></iframe>');
+       
     }
 
     var marker = new google.maps.Marker({
