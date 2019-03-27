@@ -58,12 +58,11 @@ function SweetAlertMessage(message){
 }
 
 function openAddressMap(address,number){
-    var Latlng=null;isGetGeocoder = true;
+    var Latlng=null;isGetGeocoder = false;
     if(address!='' && address!=undefined){
         $("input[name='address']").val(address);
-    }else if(address==''){
-        isGetGeocoder = false;
-    }else{
+    }else if(address==undefined){
+        isGetGeocoder = true;
         address = $("input[name='address']").val();
     }
     
@@ -71,6 +70,11 @@ function openAddressMap(address,number){
         number = $("input[name='no_address']").val();
     }else{
         $("input[name='no_address']").val(number);
+    }
+
+    var src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+"'";
+    if(address==''){
+        src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1872006.6619859105!2d119.89614287127868!3d23.59489858710433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ed5cb2b61c3a5%3A0xcf20ddb042be7fa0!2z6Ie654Gj!5e0!3m2!1szh-TW!2stw!4v1553445703414';
     }
     
     if(isGetGeocoder){
@@ -82,65 +86,32 @@ function openAddressMap(address,number){
                 var longitude = results[0].geometry.location.lng();
                 Latlng = new google.maps.LatLng(latitude,longitude);
                 $("input[name='copy_address']").val(results[0].formatted_address);
-                // var infowindow = new google.maps.InfoWindow({
-                //     content: results[0].formatted_address
-                //   });
-
-                //   marker.addListener('click',function(){
-                //     a = a * -1;
-                //     if(a > 0){
-                //       infowindow.open(map, marker);
-                //     }else{
-                //       infowindow.close();
-                //     }
-                //   });
-
-                setMarker(Latlng,17,false,address);
+                setMarker(Latlng);
                 console.log(results[0].formatted_address);
             } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                setMarker(Latlng,17,true,address);
+                setTaiwanMap(src);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
         });
     }else{
-        //以這個經緯度當台灣地圖23.821159,120.965093，將地圖比例放大
-        Latlng = new google.maps.LatLng(23.821159,120.965093);
-        setMarker(Latlng,6,false,address);
+        setTaiwanMap(src);
     }
-
-        // $('#myModal').on('shown.bs.modal', function() {
-        //     google.maps.event.trigger(map, "resize");
-        //     map.setCenter(Latlng);
-        // });
 }
 
-function setMarker(Latlng,scale,isCopyMap,address){
+function setTaiwanMap(src){
+    $("#map").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src='+src+' allowfullscreen></iframe>');
+}
+
+function setMarker(Latlng){
     var mapOptions = {
-        zoom:scale,
+        zoom:17,
         zoomControl:true,
         center:Latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    var map,copy_map;
-    if(isCopyMap){
-        $("#map").hide();
-        $("#copy_map").show();
-    }else{
-        map = new google.maps.Map(document.getElementById('map'),mapOptions);
-        $("#map").show();
-        $("#copy_map").hide();
-
-        var src = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBXjRJwCEvqKgxCnUsI-kGALYnJx0InesE&q='+address+"'";
-        if(address==''){
-            //當預設值帶台灣時先用寫死
-            src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1872006.6619859105!2d119.89614287127868!3d23.59489858710433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ed5cb2b61c3a5%3A0xcf20ddb042be7fa0!2z6Ie654Gj!5e0!3m2!1szh-TW!2stw!4v1553445703414';
-        }
-        $("#copy_map").html('<iframe width="465" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src='+src+' allowfullscreen></iframe>');
-       
-    }
-
+    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
     var marker = new google.maps.Marker({
         position: Latlng,
         map:map

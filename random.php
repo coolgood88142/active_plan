@@ -417,7 +417,6 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div id="map" name="map"></div>
-                                    <div id="copy_map" name="copy_map" style="display:none;"></div>
                                 </div>
                             </div>
                         </div>
